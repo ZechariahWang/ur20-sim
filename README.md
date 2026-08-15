@@ -22,13 +22,13 @@ source install/setup.bash
 
 ## Run
 
-Terminal 1 — bring up the simulated robot (driver with fake hardware, MoveIt, RViz):
+Terminal 1
 
 ```bash
 ros2 launch robim_ur20_sim sim.launch.py
 ```
 
-Terminal 2 — move through the waypoints defined in `config/waypoints.yaml`:
+Terminal 2
 
 ```bash
 ros2 launch robim_ur20_sim move_waypoints.launch.py
@@ -75,7 +75,7 @@ effect on next run without rebuilding.
 
 ## Moving to URSim or a real UR20
 
-The stack is identical — only the hardware endpoint changes:
+The stack is identical, only the hardware endpoint changes:
 
 ```bash
 ros2 launch robim_ur20_sim sim.launch.py use_fake_hardware:=false robot_ip:=<ip>
