@@ -1,0 +1,55 @@
+[0.006s] Invoking command in '/home/zech/robim_ur20_sim/build/robim_ur20_sim': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/zech/exia_ws/install/exia_driver:/home/zech/exia_ws/install/exia_control:/opt/ros/humble /usr/bin/cmake /home/zech/robim_ur20_sim/src/robim_ur20_sim -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/zech/robim_ur20_sim/install/robim_ur20_sim
+[0.015s] -- Found ament_cmake: 1.3.14 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.085s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[0.088s] -- Found rclcpp: 16.0.19 (/opt/ros/humble/share/rclcpp/cmake)
+[0.104s] -- Found rosidl_generator_c: 3.1.9 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[0.105s] -- Found rosidl_adapter: 3.1.9 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[0.108s] -- Found rosidl_generator_cpp: 3.1.9 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[0.113s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.119s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.135s] -- Found rmw_implementation_cmake: 6.1.3 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[0.136s] -- Found rmw_fastrtps_cpp: 6.2.10 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[0.207s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[0.236s] -- Found moveit_ros_planning_interface: 2.5.9 (/opt/ros/humble/share/moveit_ros_planning_interface/cmake)
+[0.242s] -- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.74.0/BoostConfig.cmake (found version "1.74.0") found components: date_time filesystem program_options system thread 
+[0.327s] -- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.74.0/BoostConfig.cmake (found version "1.74.0") found components: chrono date_time filesystem iostreams program_options regex serialization system thread 
+[0.340s] -- Found parameter_traits: 0.7.5 (/opt/ros/humble/share/parameter_traits/cmake)
+[0.344s] -- Found rclcpp_lifecycle: 16.0.19 (/opt/ros/humble/share/rclcpp_lifecycle/cmake)
+[0.376s] -- library: /usr/lib/x86_64-linux-gnu/libcurl.so
+[0.393s] -- Ensuring Eigen3 include directory is part of orocos-kdl CMake target
+[0.453s] -- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.74.0/BoostConfig.cmake (found version "1.74.0") found components: system filesystem date_time program_options thread chrono 
+[0.469s] -- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.74.0/BoostConfig.cmake (found version "1.74.0") found components: thread system filesystem regex date_time program_options 
+[0.480s] -- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.74.0/BoostConfig.cmake (found version "1.74.0") found components: system filesystem date_time program_options thread 
+[0.547s] -- Configuring done
+[0.560s] -- Generating done
+[0.563s] -- Build files have been written to: /home/zech/robim_ur20_sim/build/robim_ur20_sim
+[0.571s] Invoked command in '/home/zech/robim_ur20_sim/build/robim_ur20_sim' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/zech/exia_ws/install/exia_driver:/home/zech/exia_ws/install/exia_control:/opt/ros/humble /usr/bin/cmake /home/zech/robim_ur20_sim/src/robim_ur20_sim -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/zech/robim_ur20_sim/install/robim_ur20_sim
+[0.572s] Invoking command in '/home/zech/robim_ur20_sim/build/robim_ur20_sim': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/zech/exia_ws/install/exia_driver:/home/zech/exia_ws/install/exia_control:/opt/ros/humble /usr/bin/cmake --build /home/zech/robim_ur20_sim/build/robim_ur20_sim -- -j20 -l20
+[0.611s] Consolidate compiler generated dependencies of target sweep_mover
+[0.632s] [ 50%] Building CXX object CMakeFiles/sweep_mover.dir/src/sweep_mover.cpp.o
+[4.659s] [100%] Linking CXX executable sweep_mover
+[4.834s] [100%] Built target sweep_mover
+[4.841s] Invoked command in '/home/zech/robim_ur20_sim/build/robim_ur20_sim' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/zech/exia_ws/install/exia_driver:/home/zech/exia_ws/install/exia_control:/opt/ros/humble /usr/bin/cmake --build /home/zech/robim_ur20_sim/build/robim_ur20_sim -- -j20 -l20
+[4.847s] Invoking command in '/home/zech/robim_ur20_sim/build/robim_ur20_sim': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/zech/exia_ws/install/exia_driver:/home/zech/exia_ws/install/exia_control:/opt/ros/humble /usr/bin/cmake --install /home/zech/robim_ur20_sim/build/robim_ur20_sim
+[4.852s] -- Install configuration: ""
+[4.852s] -- Execute custom install script
+[4.852s] -- Up-to-date symlink: /home/zech/robim_ur20_sim/install/robim_ur20_sim/lib/robim_ur20_sim/sweep_mover
+[4.852s] -- Up-to-date symlink: /home/zech/robim_ur20_sim/install/robim_ur20_sim/share/robim_ur20_sim/launch/sim.launch.py
+[4.852s] -- Up-to-date symlink: /home/zech/robim_ur20_sim/install/robim_ur20_sim/share/robim_ur20_sim/launch/sweep.launch.py
+[4.853s] -- Up-to-date symlink: /home/zech/robim_ur20_sim/install/robim_ur20_sim/share/robim_ur20_sim/config/sweep.yaml
+[4.853s] -- Up-to-date symlink: /home/zech/robim_ur20_sim/install/robim_ur20_sim/share/ament_index/resource_index/package_run_dependencies/robim_ur20_sim
+[4.853s] -- Up-to-date symlink: /home/zech/robim_ur20_sim/install/robim_ur20_sim/share/ament_index/resource_index/parent_prefix_path/robim_ur20_sim
+[4.853s] -- Up-to-date symlink: /home/zech/robim_ur20_sim/install/robim_ur20_sim/share/robim_ur20_sim/environment/ament_prefix_path.sh
+[4.853s] -- Up-to-date symlink: /home/zech/robim_ur20_sim/install/robim_ur20_sim/share/robim_ur20_sim/environment/ament_prefix_path.dsv
+[4.853s] -- Up-to-date symlink: /home/zech/robim_ur20_sim/install/robim_ur20_sim/share/robim_ur20_sim/environment/path.sh
+[4.853s] -- Up-to-date symlink: /home/zech/robim_ur20_sim/install/robim_ur20_sim/share/robim_ur20_sim/environment/path.dsv
+[4.853s] -- Up-to-date symlink: /home/zech/robim_ur20_sim/install/robim_ur20_sim/share/robim_ur20_sim/local_setup.bash
+[4.853s] -- Up-to-date symlink: /home/zech/robim_ur20_sim/install/robim_ur20_sim/share/robim_ur20_sim/local_setup.sh
+[4.853s] -- Up-to-date symlink: /home/zech/robim_ur20_sim/install/robim_ur20_sim/share/robim_ur20_sim/local_setup.zsh
+[4.853s] -- Up-to-date symlink: /home/zech/robim_ur20_sim/install/robim_ur20_sim/share/robim_ur20_sim/local_setup.dsv
+[4.853s] -- Symlinking: /home/zech/robim_ur20_sim/install/robim_ur20_sim/share/robim_ur20_sim/package.dsv
+[4.859s] -- Up-to-date symlink: /home/zech/robim_ur20_sim/install/robim_ur20_sim/share/ament_index/resource_index/packages/robim_ur20_sim
+[4.859s] -- Up-to-date symlink: /home/zech/robim_ur20_sim/install/robim_ur20_sim/share/robim_ur20_sim/cmake/robim_ur20_simConfig.cmake
+[4.859s] -- Up-to-date symlink: /home/zech/robim_ur20_sim/install/robim_ur20_sim/share/robim_ur20_sim/cmake/robim_ur20_simConfig-version.cmake
+[4.859s] -- Up-to-date symlink: /home/zech/robim_ur20_sim/install/robim_ur20_sim/share/robim_ur20_sim/package.xml
+[4.860s] Invoked command in '/home/zech/robim_ur20_sim/build/robim_ur20_sim' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/zech/exia_ws/install/exia_driver:/home/zech/exia_ws/install/exia_control:/opt/ros/humble /usr/bin/cmake --install /home/zech/robim_ur20_sim/build/robim_ur20_sim

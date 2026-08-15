@@ -18,8 +18,7 @@
 					[
 						0,
 						1,
-						2,
-						3
+						2
 					]
 				}
 			],
@@ -36,8 +35,7 @@
 					[
 						0,
 						1,
-						2,
-						3
+						2
 					]
 				}
 			],
@@ -53,7 +51,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "sweep_mover::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-sweep_mover-6008ee8f6abc4fc936fa.json",
+					"jsonFile" : "target-sweep_mover-d4798a10a7f4627910a4.json",
 					"name" : "sweep_mover",
 					"projectIndex" : 0
 				},
@@ -62,13 +60,6 @@
 					"id" : "uninstall::@6890427a1f51a3e7e1df",
 					"jsonFile" : "target-uninstall-7cec6f020ff423dedea5.json",
 					"name" : "uninstall",
-					"projectIndex" : 0
-				},
-				{
-					"directoryIndex" : 0,
-					"id" : "waypoint_mover::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-waypoint_mover-63a59c10010d2716bd48.json",
-					"name" : "waypoint_mover",
 					"projectIndex" : 0
 				}
 			]

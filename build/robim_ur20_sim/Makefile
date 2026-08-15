@@ -198,19 +198,6 @@ robim_ur20_sim_uninstall/fast:
 .PHONY : robim_ur20_sim_uninstall/fast
 
 #=============================================================================
-# Target rules for targets named waypoint_mover
-
-# Build rule for target.
-waypoint_mover: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 waypoint_mover
-.PHONY : waypoint_mover
-
-# fast build rule for target.
-waypoint_mover/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/waypoint_mover.dir/build.make CMakeFiles/waypoint_mover.dir/build
-.PHONY : waypoint_mover/fast
-
-#=============================================================================
 # Target rules for targets named sweep_mover
 
 # Build rule for target.
@@ -247,30 +234,6 @@ src/sweep_mover.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sweep_mover.dir/build.make CMakeFiles/sweep_mover.dir/src/sweep_mover.cpp.s
 .PHONY : src/sweep_mover.cpp.s
 
-src/waypoint_mover.o: src/waypoint_mover.cpp.o
-.PHONY : src/waypoint_mover.o
-
-# target to build an object file
-src/waypoint_mover.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/waypoint_mover.dir/build.make CMakeFiles/waypoint_mover.dir/src/waypoint_mover.cpp.o
-.PHONY : src/waypoint_mover.cpp.o
-
-src/waypoint_mover.i: src/waypoint_mover.cpp.i
-.PHONY : src/waypoint_mover.i
-
-# target to preprocess a source file
-src/waypoint_mover.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/waypoint_mover.dir/build.make CMakeFiles/waypoint_mover.dir/src/waypoint_mover.cpp.i
-.PHONY : src/waypoint_mover.cpp.i
-
-src/waypoint_mover.s: src/waypoint_mover.cpp.s
-.PHONY : src/waypoint_mover.s
-
-# target to generate assembly for a file
-src/waypoint_mover.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/waypoint_mover.dir/build.make CMakeFiles/waypoint_mover.dir/src/waypoint_mover.cpp.s
-.PHONY : src/waypoint_mover.cpp.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -287,13 +250,9 @@ help:
 	@echo "... robim_ur20_sim_uninstall"
 	@echo "... uninstall"
 	@echo "... sweep_mover"
-	@echo "... waypoint_mover"
 	@echo "... src/sweep_mover.o"
 	@echo "... src/sweep_mover.i"
 	@echo "... src/sweep_mover.s"
-	@echo "... src/waypoint_mover.o"
-	@echo "... src/waypoint_mover.i"
-	@echo "... src/waypoint_mover.s"
 .PHONY : help
 
 

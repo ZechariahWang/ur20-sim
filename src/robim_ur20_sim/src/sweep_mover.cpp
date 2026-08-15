@@ -79,7 +79,13 @@ class SweepMover : public rclcpp::Node {
 
     bool moveToPose(const geometry_msgs::msg::Pose &pose, const std::string &label) {
 
-      move_group_->setPoseTarget(pose);
+      // Solve IK seeded from the current state (nearest joint configuration),
+      // then plan in joint space. A pose target instead lets the planner pick
+      // any IK solution, which causes wild reconfiguration swings.
+      if (!move_group_->setJointValueTarget(pose)) {
+        RCLCPP_ERROR(get_logger(), "No reachable IK solution: %s", label.c_str());
+        return false;
+      }
       moveit::planning_interface::MoveGroupInterface::Plan plan;
 
       if (move_group_->plan(plan) != moveit::core::MoveItErrorCode::SUCCESS) {

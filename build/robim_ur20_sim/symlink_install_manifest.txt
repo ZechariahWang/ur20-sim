@@ -1,10 +1,7 @@
-/home/zech/robim_ur20_sim/install/robim_ur20_sim/lib/robim_ur20_sim/waypoint_mover
 /home/zech/robim_ur20_sim/install/robim_ur20_sim/lib/robim_ur20_sim/sweep_mover
-/home/zech/robim_ur20_sim/install/robim_ur20_sim/share/robim_ur20_sim/launch/move_waypoints.launch.py
 /home/zech/robim_ur20_sim/install/robim_ur20_sim/share/robim_ur20_sim/launch/sim.launch.py
 /home/zech/robim_ur20_sim/install/robim_ur20_sim/share/robim_ur20_sim/launch/sweep.launch.py
 /home/zech/robim_ur20_sim/install/robim_ur20_sim/share/robim_ur20_sim/config/sweep.yaml
-/home/zech/robim_ur20_sim/install/robim_ur20_sim/share/robim_ur20_sim/config/waypoints.yaml
 /home/zech/robim_ur20_sim/install/robim_ur20_sim/share/ament_index/resource_index/package_run_dependencies/robim_ur20_sim
 /home/zech/robim_ur20_sim/install/robim_ur20_sim/share/ament_index/resource_index/parent_prefix_path/robim_ur20_sim
 /home/zech/robim_ur20_sim/install/robim_ur20_sim/share/robim_ur20_sim/environment/ament_prefix_path.sh
