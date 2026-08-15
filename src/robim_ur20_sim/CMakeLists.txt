@@ -12,7 +12,10 @@ find_package(moveit_ros_planning_interface REQUIRED)
 add_executable(waypoint_mover src/waypoint_mover.cpp)
 ament_target_dependencies(waypoint_mover rclcpp moveit_ros_planning_interface)
 
-install(TARGETS waypoint_mover
+add_executable(sweep_mover src/sweep_mover.cpp)
+ament_target_dependencies(sweep_mover rclcpp moveit_ros_planning_interface)
+
+install(TARGETS waypoint_mover sweep_mover
   DESTINATION lib/${PROJECT_NAME})
 
 install(DIRECTORY launch config

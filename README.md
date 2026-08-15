@@ -37,6 +37,25 @@ ros2 launch robim_ur20_sim move_waypoints.launch.py
 You can also drag the interactive marker in RViz and use MoveIt's
 "Plan & Execute" directly.
 
+## Linear sweep (scanning motion)
+
+`sweep_mover` sweeps the TCP in a straight Cartesian line across the
+workspace in three views:
+
+1. along the line with the TCP pointing straight down at the ground,
+2. back along the same line with the TCP pitched 90°, pointing away from
+   the robot,
+3. a final move to an oblique (45°) view at the line's midpoint.
+
+```bash
+ros2 launch robim_ur20_sim sweep.launch.py
+```
+
+Line geometry (x/z height, y extent) and speeds are in `config/sweep.yaml`.
+Keep the line's radial distance `sqrt(x² + y²)` well inside the UR20's
+1.75 m reach but not too close in — very close-in lines make the down-view
+sweep fail partway (the arm folds into itself).
+
 ## Viewing in Foxglove
 
 `sim.launch.py` also starts `foxglove_bridge` (disable with

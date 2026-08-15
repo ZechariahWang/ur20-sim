@@ -18,7 +18,8 @@
 					[
 						0,
 						1,
-						2
+						2,
+						3
 					]
 				}
 			],
@@ -35,7 +36,8 @@
 					[
 						0,
 						1,
-						2
+						2,
+						3
 					]
 				}
 			],
@@ -46,6 +48,13 @@
 					"id" : "robim_ur20_sim_uninstall::@6890427a1f51a3e7e1df",
 					"jsonFile" : "target-robim_ur20_sim_uninstall-7d872d563898fd469682.json",
 					"name" : "robim_ur20_sim_uninstall",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "sweep_mover::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-sweep_mover-6008ee8f6abc4fc936fa.json",
+					"name" : "sweep_mover",
 					"projectIndex" : 0
 				},
 				{

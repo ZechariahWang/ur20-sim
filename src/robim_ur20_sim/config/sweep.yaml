@@ -1,0 +1,16 @@
+sweep_mover:
+  ros__parameters:
+    planning_group: ur_manipulator
+    velocity_scaling: 0.3
+    acceleration_scaling: 0.3
+
+    # The sweep line runs parallel to the base Y axis at fixed x/z (meters,
+    # in the robot base frame). UR20 reach is 1.75 m; keep
+    # sqrt(x^2 + y^2) comfortably inside that.
+    sweep_x: 1.0
+    sweep_z: 0.35
+    sweep_y_min: -0.9
+    sweep_y_max: 0.9
+
+    # Cartesian interpolation step along the line (m)
+    eef_step: 0.01

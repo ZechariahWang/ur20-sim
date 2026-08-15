@@ -210,6 +210,43 @@ waypoint_mover/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/waypoint_mover.dir/build.make CMakeFiles/waypoint_mover.dir/build
 .PHONY : waypoint_mover/fast
 
+#=============================================================================
+# Target rules for targets named sweep_mover
+
+# Build rule for target.
+sweep_mover: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 sweep_mover
+.PHONY : sweep_mover
+
+# fast build rule for target.
+sweep_mover/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sweep_mover.dir/build.make CMakeFiles/sweep_mover.dir/build
+.PHONY : sweep_mover/fast
+
+src/sweep_mover.o: src/sweep_mover.cpp.o
+.PHONY : src/sweep_mover.o
+
+# target to build an object file
+src/sweep_mover.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sweep_mover.dir/build.make CMakeFiles/sweep_mover.dir/src/sweep_mover.cpp.o
+.PHONY : src/sweep_mover.cpp.o
+
+src/sweep_mover.i: src/sweep_mover.cpp.i
+.PHONY : src/sweep_mover.i
+
+# target to preprocess a source file
+src/sweep_mover.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sweep_mover.dir/build.make CMakeFiles/sweep_mover.dir/src/sweep_mover.cpp.i
+.PHONY : src/sweep_mover.cpp.i
+
+src/sweep_mover.s: src/sweep_mover.cpp.s
+.PHONY : src/sweep_mover.s
+
+# target to generate assembly for a file
+src/sweep_mover.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sweep_mover.dir/build.make CMakeFiles/sweep_mover.dir/src/sweep_mover.cpp.s
+.PHONY : src/sweep_mover.cpp.s
+
 src/waypoint_mover.o: src/waypoint_mover.cpp.o
 .PHONY : src/waypoint_mover.o
 
@@ -249,7 +286,11 @@ help:
 	@echo "... test"
 	@echo "... robim_ur20_sim_uninstall"
 	@echo "... uninstall"
+	@echo "... sweep_mover"
 	@echo "... waypoint_mover"
+	@echo "... src/sweep_mover.o"
+	@echo "... src/sweep_mover.i"
+	@echo "... src/sweep_mover.s"
 	@echo "... src/waypoint_mover.o"
 	@echo "... src/waypoint_mover.i"
 	@echo "... src/waypoint_mover.s"
