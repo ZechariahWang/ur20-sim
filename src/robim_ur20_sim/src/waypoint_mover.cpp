@@ -41,11 +41,19 @@ public:
       {"shoulder_pan_joint", "shoulder_lift_joint", "elbow_joint",
        "wrist_1_joint", "wrist_2_joint", "wrist_3_joint"});
 
-    std::vector<std::string> waypoint_names;
-    if (!get_parameter("waypoint_names", waypoint_names) || waypoint_names.empty()) {
-      RCLCPP_ERROR(get_logger(), "No 'waypoint_names' parameter set — nothing to do.");
+    // One flat array; every joint_names.size() values form one waypoint.
+    std::vector<double> flat;
+    if (!get_parameter("waypoints", flat) || flat.empty()) {
+      RCLCPP_ERROR(get_logger(), "No 'waypoints' parameter set — nothing to do.");
       return false;
     }
+    if (flat.size() % joint_names_.size() != 0) {
+      RCLCPP_ERROR(
+        get_logger(), "'waypoints' has %zu values, expected a multiple of %zu.",
+        flat.size(), joint_names_.size());
+      return false;
+    }
+    const size_t num_waypoints = flat.size() / joint_names_.size();
 
     moveit::planning_interface::MoveGroupInterface move_group(
       shared_from_this(), planning_group);
@@ -56,15 +64,17 @@ public:
 
     RCLCPP_INFO(
       get_logger(), "Planning group '%s' ready. Visiting %zu waypoint(s)%s.",
-      planning_group.c_str(), waypoint_names.size(), cycle ? " in a loop" : "");
+      planning_group.c_str(), num_waypoints, cycle ? " in a loop" : "");
 
     bool all_ok = true;
     do {
-      for (const auto & name : waypoint_names) {
+      for (size_t i = 0; i < num_waypoints; ++i) {
         if (!rclcpp::ok()) {
           break;
         }
-        all_ok = moveToWaypoint(move_group, name) && all_ok;
+        const auto first = flat.begin() + i * joint_names_.size();
+        const std::vector<double> positions(first, first + joint_names_.size());
+        all_ok = moveToWaypoint(move_group, i, positions) && all_ok;
       }
     } while (cycle && rclcpp::ok());
 
@@ -73,24 +83,11 @@ public:
   }
 
 private:
-  // Plans and executes a single named waypoint from the parameter file.
+  // Plans and executes a single waypoint.
   bool moveToWaypoint(
     moveit::planning_interface::MoveGroupInterface & move_group,
-    const std::string & name)
+    size_t index, const std::vector<double> & positions)
   {
-    std::vector<double> positions;
-    if (!get_parameter("waypoints." + name, positions)) {
-      RCLCPP_ERROR(
-        get_logger(), "Waypoint '%s' listed but not defined under 'waypoints.'", name.c_str());
-      return false;
-    }
-    if (positions.size() != joint_names_.size()) {
-      RCLCPP_ERROR(
-        get_logger(), "Waypoint '%s' has %zu values, expected %zu.",
-        name.c_str(), positions.size(), joint_names_.size());
-      return false;
-    }
-
     std::map<std::string, double> target;
     for (size_t i = 0; i < joint_names_.size(); ++i) {
       target[joint_names_[i]] = positions[i];
@@ -99,16 +96,16 @@ private:
 
     moveit::planning_interface::MoveGroupInterface::Plan plan;
     if (move_group.plan(plan) != moveit::core::MoveItErrorCode::SUCCESS) {
-      RCLCPP_ERROR(get_logger(), "Planning to waypoint '%s' failed.", name.c_str());
+      RCLCPP_ERROR(get_logger(), "Planning to waypoint %zu failed.", index);
       return false;
     }
 
-    RCLCPP_INFO(get_logger(), "Moving to waypoint '%s'...", name.c_str());
+    RCLCPP_INFO(get_logger(), "Moving to waypoint %zu...", index);
     if (move_group.execute(plan) != moveit::core::MoveItErrorCode::SUCCESS) {
-      RCLCPP_ERROR(get_logger(), "Execution of waypoint '%s' failed.", name.c_str());
+      RCLCPP_ERROR(get_logger(), "Execution of waypoint %zu failed.", index);
       return false;
     }
-    RCLCPP_INFO(get_logger(), "Reached waypoint '%s'.", name.c_str());
+    RCLCPP_INFO(get_logger(), "Reached waypoint %zu.", index);
     return true;
   }
 

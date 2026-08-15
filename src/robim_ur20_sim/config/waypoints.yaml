@@ -15,11 +15,11 @@ waypoint_mover:
       - wrist_2_joint
       - wrist_3_joint
 
-    # Visit order
-    waypoint_names: [home, pick, place, home]
-
-    # Joint positions in radians
-    waypoints:
-      home:  [0.0, -1.57, 0.0, -1.57, 0.0, 0.0]
-      pick:  [0.8, -1.1, 1.4, -1.9, -1.57, 0.0]
-      place: [-0.8, -1.1, 1.4, -1.9, -1.57, 0.0]
+    # Waypoints, visited top to bottom. Each row is one waypoint:
+    # joint positions in radians, in the joint_names order above.
+    waypoints: [
+       0.0, -1.57, 0.0, -1.57,  0.0,  0.0,
+       0.8, -1.1,  1.4, -1.9,  -1.57, 0.0,
+      -0.8, -1.1,  1.4, -1.9,  -1.57, 0.0,
+       0.0, -1.57, 0.0, -1.57,  0.0,  0.0,
+    ]

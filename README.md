@@ -53,11 +53,11 @@ RViz at the same time, launch with `launch_rviz:=false`.
 
 ## Editing waypoints
 
-`src/robim_ur20_sim/config/waypoints.yaml` defines named joint-space waypoints
-(radians, in the order shoulder_pan, shoulder_lift, elbow, wrist_1, wrist_2,
-wrist_3) and the visit order in `waypoint_names`. Set `cycle: true` to loop
-forever. With `--symlink-install`, YAML edits take effect on next run without
-rebuilding.
+`src/robim_ur20_sim/config/waypoints.yaml` holds one flat `waypoints` list;
+each row of 6 values is one waypoint (radians, in the order shoulder_pan,
+shoulder_lift, elbow, wrist_1, wrist_2, wrist_3), visited top to bottom.
+Set `cycle: true` to loop forever. With `--symlink-install`, YAML edits take
+effect on next run without rebuilding.
 
 ## Moving to URSim or a real UR20
 
