@@ -6,8 +6,10 @@ and robot_ip:=<robot ip>.
 
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
+from launch.conditions import IfCondition
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
+from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
 
 
@@ -32,6 +34,11 @@ def generate_launch_description():
             description="MoveIt sends trajectories to this controller (its default).",
         ),
         DeclareLaunchArgument("launch_rviz", default_value="true"),
+        DeclareLaunchArgument(
+            "launch_foxglove",
+            default_value="true",
+            description="Start foxglove_bridge (connect Foxglove Studio to ws://localhost:8765).",
+        ),
     ]
 
     ur_control = IncludeLaunchDescription(
@@ -61,4 +68,12 @@ def generate_launch_description():
         }.items(),
     )
 
-    return LaunchDescription(declared_args + [ur_control, moveit])
+    foxglove_bridge = Node(
+        package="foxglove_bridge",
+        executable="foxglove_bridge",
+        output="screen",
+        parameters=[{"port": 8765}],
+        condition=IfCondition(LaunchConfiguration("launch_foxglove")),
+    )
+
+    return LaunchDescription(declared_args + [ur_control, moveit, foxglove_bridge])

@@ -37,6 +37,20 @@ ros2 launch robim_ur20_sim move_waypoints.launch.py
 You can also drag the interactive marker in RViz and use MoveIt's
 "Plan & Execute" directly.
 
+## Viewing in Foxglove
+
+`sim.launch.py` also starts `foxglove_bridge` (disable with
+`launch_foxglove:=false`). To view:
+
+1. Open Foxglove Studio (`foxglove-studio`).
+2. "Open connection" → Foxglove WebSocket → `ws://localhost:8765`.
+3. Add a **3D** panel. In the panel settings, enable the robot model under
+   **Topics → /robot_description** (meshes are fetched through the bridge).
+
+The arm will animate live as trajectories execute. Add a **Plot** panel on
+`/joint_states.position[0]` etc. to graph joint motion. If you don't want
+RViz at the same time, launch with `launch_rviz:=false`.
+
 ## Editing waypoints
 
 `src/robim_ur20_sim/config/waypoints.yaml` defines named joint-space waypoints
