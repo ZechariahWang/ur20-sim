@@ -37,15 +37,10 @@ ros2 launch robim_ur20_sim move_waypoints.launch.py
 You can also drag the interactive marker in RViz and use MoveIt's
 "Plan & Execute" directly.
 
-## Linear sweep (scanning motion)
+## Linear sweep
 
-`sweep_mover` sweeps the TCP in a straight Cartesian line across the
-workspace in three views:
-
-1. along the line with the TCP pointing straight down at the ground,
-2. back along the same line with the TCP pitched 90°, pointing away from
-   the robot,
-3. a final move to an oblique (45°) view at the line's midpoint.
+`sweep_mover` moves to one end of a line, then sweeps the TCP in a straight
+Cartesian line across the workspace with the TCP pointing down at the ground.
 
 ```bash
 ros2 launch robim_ur20_sim sweep.launch.py

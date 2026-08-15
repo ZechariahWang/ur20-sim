@@ -52,12 +52,8 @@ def generate_launch_description():
         value_type=str,
     )
 
-    kinematics_yaml = PathJoinSubstitution(
-        [FindPackageShare("ur_moveit_config"), "config", "kinematics.yaml"]
-    )
-    sweep_yaml = PathJoinSubstitution(
-        [FindPackageShare("robim_ur20_sim"), "config", "sweep.yaml"]
-    )
+    kinematics_yaml = PathJoinSubstitution([FindPackageShare("ur_moveit_config"), "config", "kinematics.yaml"])
+    sweep_yaml = PathJoinSubstitution([FindPackageShare("robim_ur20_sim"), "config", "sweep.yaml"])
 
     sweep_mover = Node(
         package="robim_ur20_sim",
