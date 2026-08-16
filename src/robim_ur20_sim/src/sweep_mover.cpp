@@ -56,32 +56,39 @@ class SweepMover : public rclcpp::Node {
       return true;
     }
 
+    // One entry in the movement script. MOVE = free repositioning move
+    // (shortest joint path), SWEEP = straight Cartesian line from wherever
+    // the TCP currently is to the given pose.
+    struct Step {
+      enum Type { MOVE, SWEEP } type;
+      geometry_msgs::msg::Pose pose;
+      std::string label;
+    };
+
     bool doMovement() {
 
-      const auto down = pitchQuaternion(M_PI); // TCP pointing straight down at the ground (180 deg pitch about the base Y axis).
-      const auto side = pitchQuaternion(M_PI / 2.0); // TCP horizontal, pointing away from the robot (90 deg pitch).
+      const auto down = pitchQuaternion(M_PI); // TCP pointing straight down at the ground.
+      const auto side = pitchQuaternion(M_PI / 2.0); // TCP horizontal, pointing away from the robot.
+      const auto oblique = rollQuaternion(3.0 * M_PI / 4.0); // TCP looking 45 deg down along the line.
 
-      // move to the start end of the line.
-      const auto start_down = makePose(sweep_x_, sweep_y_start_, sweep_z_, down);
-      if (!moveToPose(start_down, "sweep start")) { return false; }
+      const double x = sweep_x_, z = sweep_z_;
+      const double start = sweep_y_start_, end = sweep_y_end_;
 
-      // top sweep: start to end, TCP down.
-      const auto end_down = makePose(sweep_x_, sweep_y_end_, sweep_z_, down);
-      if (!sweepTo(end_down, "top sweep")) { return false; }
+      // The movement script: edit/add lines here to change the routine.
+      const std::vector<Step> script = {
+          {Step::MOVE,  makePose(x, start, z, down),          "sweep start"},
+          {Step::SWEEP, makePose(x, end,   z, down),          "top sweep"},
+          {Step::MOVE,  makePose(x, start, z, side),          "return to start (side view)"},
+          {Step::SWEEP, makePose(x, end,   z, side),          "side sweep"},
+          {Step::MOVE,  makePose(x, start, z + 0.3, oblique), "oblique view"},
+      };
 
-      // move back to the start end, now in the side view.
-      const auto start_side = makePose(sweep_x_, sweep_y_start_, sweep_z_, side);
-      if (!moveToPose(start_side, "return to start (side view)")) { return false; }
-
-      // side sweep: start to end again, TCP sideways.
-      const auto end_side = makePose(sweep_x_, sweep_y_end_, sweep_z_, side);
-      if (!sweepTo(end_side, "side sweep")) { return false; }
-
-      // finish above the start (left) end, looking down along the line at
-      // 45 deg — an oblique view of the line just traced.
-      const auto oblique = rollQuaternion(3.0 * M_PI / 4.0);
-      const auto oblique_pose = makePose(sweep_x_, sweep_y_start_, sweep_z_ + 0.3, oblique);
-      return moveToPose(oblique_pose, "oblique view");
+      for (const auto &step : script) {
+        const bool ok = (step.type == Step::MOVE) ? moveToPose(step.pose, step.label)
+                                                  : sweepTo(step.pose, step.label);
+        if (!ok) { return false; }
+      }
+      return true;
     }
 
     bool moveToPose(const geometry_msgs::msg::Pose &pose, const std::string &label) {
