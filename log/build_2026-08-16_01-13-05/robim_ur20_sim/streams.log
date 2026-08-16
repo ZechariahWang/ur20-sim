@@ -1,0 +1,29 @@
+[0.007s] Invoking command in '/home/zech/robim_ur20_sim/build/robim_ur20_sim': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/zech/exia_ws/install/exia_driver:/home/zech/exia_ws/install/exia_control:/opt/ros/humble /usr/bin/cmake --build /home/zech/robim_ur20_sim/build/robim_ur20_sim -- -j20 -l20
+[0.051s] Consolidate compiler generated dependencies of target sweep_mover
+[0.072s] [ 50%] Building CXX object CMakeFiles/sweep_mover.dir/src/sweep_mover.cpp.o
+[4.422s] [100%] Linking CXX executable sweep_mover
+[4.591s] [100%] Built target sweep_mover
+[4.600s] Invoked command in '/home/zech/robim_ur20_sim/build/robim_ur20_sim' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/zech/exia_ws/install/exia_driver:/home/zech/exia_ws/install/exia_control:/opt/ros/humble /usr/bin/cmake --build /home/zech/robim_ur20_sim/build/robim_ur20_sim -- -j20 -l20
+[4.609s] Invoking command in '/home/zech/robim_ur20_sim/build/robim_ur20_sim': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/zech/exia_ws/install/exia_driver:/home/zech/exia_ws/install/exia_control:/opt/ros/humble /usr/bin/cmake --install /home/zech/robim_ur20_sim/build/robim_ur20_sim
+[4.618s] -- Install configuration: ""
+[4.619s] -- Execute custom install script
+[4.619s] -- Up-to-date symlink: /home/zech/robim_ur20_sim/install/robim_ur20_sim/lib/robim_ur20_sim/sweep_mover
+[4.619s] -- Up-to-date symlink: /home/zech/robim_ur20_sim/install/robim_ur20_sim/share/robim_ur20_sim/launch/sim.launch.py
+[4.619s] -- Up-to-date symlink: /home/zech/robim_ur20_sim/install/robim_ur20_sim/share/robim_ur20_sim/launch/sweep.launch.py
+[4.619s] -- Up-to-date symlink: /home/zech/robim_ur20_sim/install/robim_ur20_sim/share/robim_ur20_sim/config/sweep.yaml
+[4.620s] -- Up-to-date symlink: /home/zech/robim_ur20_sim/install/robim_ur20_sim/share/ament_index/resource_index/package_run_dependencies/robim_ur20_sim
+[4.620s] -- Up-to-date symlink: /home/zech/robim_ur20_sim/install/robim_ur20_sim/share/ament_index/resource_index/parent_prefix_path/robim_ur20_sim
+[4.620s] -- Up-to-date symlink: /home/zech/robim_ur20_sim/install/robim_ur20_sim/share/robim_ur20_sim/environment/ament_prefix_path.sh
+[4.620s] -- Up-to-date symlink: /home/zech/robim_ur20_sim/install/robim_ur20_sim/share/robim_ur20_sim/environment/ament_prefix_path.dsv
+[4.620s] -- Up-to-date symlink: /home/zech/robim_ur20_sim/install/robim_ur20_sim/share/robim_ur20_sim/environment/path.sh
+[4.620s] -- Up-to-date symlink: /home/zech/robim_ur20_sim/install/robim_ur20_sim/share/robim_ur20_sim/environment/path.dsv
+[4.620s] -- Up-to-date symlink: /home/zech/robim_ur20_sim/install/robim_ur20_sim/share/robim_ur20_sim/local_setup.bash
+[4.620s] -- Up-to-date symlink: /home/zech/robim_ur20_sim/install/robim_ur20_sim/share/robim_ur20_sim/local_setup.sh
+[4.620s] -- Up-to-date symlink: /home/zech/robim_ur20_sim/install/robim_ur20_sim/share/robim_ur20_sim/local_setup.zsh
+[4.620s] -- Up-to-date symlink: /home/zech/robim_ur20_sim/install/robim_ur20_sim/share/robim_ur20_sim/local_setup.dsv
+[4.620s] -- Symlinking: /home/zech/robim_ur20_sim/install/robim_ur20_sim/share/robim_ur20_sim/package.dsv
+[4.628s] -- Up-to-date symlink: /home/zech/robim_ur20_sim/install/robim_ur20_sim/share/ament_index/resource_index/packages/robim_ur20_sim
+[4.628s] -- Up-to-date symlink: /home/zech/robim_ur20_sim/install/robim_ur20_sim/share/robim_ur20_sim/cmake/robim_ur20_simConfig.cmake
+[4.628s] -- Up-to-date symlink: /home/zech/robim_ur20_sim/install/robim_ur20_sim/share/robim_ur20_sim/cmake/robim_ur20_simConfig-version.cmake
+[4.628s] -- Up-to-date symlink: /home/zech/robim_ur20_sim/install/robim_ur20_sim/share/robim_ur20_sim/package.xml
+[4.629s] Invoked command in '/home/zech/robim_ur20_sim/build/robim_ur20_sim' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/zech/exia_ws/install/exia_driver:/home/zech/exia_ws/install/exia_control:/opt/ros/humble /usr/bin/cmake --install /home/zech/robim_ur20_sim/build/robim_ur20_sim

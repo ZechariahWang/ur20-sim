@@ -48,7 +48,7 @@ ros2 launch robim_ur20_sim sweep.launch.py
 
 Line geometry (x/z height, y extent) and speeds are in `config/sweep.yaml`.
 Keep the line's radial distance `sqrt(x² + y²)` well inside the UR20's
-1.75 m reach but not too close in — very close-in lines make the down-view
+1.75 m reach but not too close in: very close-in lines make the down-view
 sweep fail partway (the arm folds into itself).
 
 ## Viewing in Foxglove
