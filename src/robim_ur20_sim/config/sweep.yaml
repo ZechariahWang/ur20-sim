@@ -9,8 +9,10 @@ sweep_mover:
     # sqrt(x^2 + y^2) comfortably inside that.
     sweep_x: 1.0
     sweep_z: 0.35
-    sweep_y_min: -0.9
-    sweep_y_max: 0.9
+    # Both sweeps travel from sweep_y_start to sweep_y_end; swap the two
+    # values to flip the sweep direction.
+    sweep_y_start: 0.9
+    sweep_y_end: -0.9
 
     # Cartesian interpolation step along the line (m)
     eef_step: 0.01

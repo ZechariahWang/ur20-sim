@@ -37,8 +37,8 @@ class SweepMover : public rclcpp::Node {
       acceleration_scaling_ = get_parameter_or<double>("acceleration_scaling", 0.3);
       sweep_x_ = get_parameter_or<double>("sweep_x", 1.0);
       sweep_z_ = get_parameter_or<double>("sweep_z", 0.35);
-      sweep_y_min_ = get_parameter_or<double>("sweep_y_min", -0.9);
-      sweep_y_max_ = get_parameter_or<double>("sweep_y_max", 0.9);
+      sweep_y_start_ = get_parameter_or<double>("sweep_y_start", 0.9);
+      sweep_y_end_ = get_parameter_or<double>("sweep_y_end", -0.9);
       eef_step_ = get_parameter_or<double>("eef_step", 0.01);
     }
 
@@ -61,21 +61,21 @@ class SweepMover : public rclcpp::Node {
       const auto down = pitchQuaternion(M_PI); // TCP pointing straight down at the ground (180 deg pitch about the base Y axis).
       const auto side = pitchQuaternion(M_PI / 2.0); // TCP horizontal, pointing away from the robot (90 deg pitch).
 
-      // move to the left end of the line.
-      const auto left_down = makePose(sweep_x_, sweep_y_min_, sweep_z_, down);
-      if (!moveToPose(left_down, "sweep start")) { return false; }
+      // move to the start end of the line.
+      const auto start_down = makePose(sweep_x_, sweep_y_start_, sweep_z_, down);
+      if (!moveToPose(start_down, "sweep start")) { return false; }
 
-      // top sweep: left to right, TCP down.
-      const auto right_down = makePose(sweep_x_, sweep_y_max_, sweep_z_, down);
-      if (!sweepTo(right_down, "top sweep")) { return false; }
+      // top sweep: start to end, TCP down.
+      const auto end_down = makePose(sweep_x_, sweep_y_end_, sweep_z_, down);
+      if (!sweepTo(end_down, "top sweep")) { return false; }
 
-      // move back to the left end, now in the side view.
-      const auto left_side = makePose(sweep_x_, sweep_y_min_, sweep_z_, side);
-      if (!moveToPose(left_side, "return to start (side view)")) { return false; }
+      // move back to the start end, now in the side view.
+      const auto start_side = makePose(sweep_x_, sweep_y_start_, sweep_z_, side);
+      if (!moveToPose(start_side, "return to start (side view)")) { return false; }
 
-      // side sweep: left to right again, TCP sideways.
-      const auto right_side = makePose(sweep_x_, sweep_y_max_, sweep_z_, side);
-      return sweepTo(right_side, "side sweep");
+      // side sweep: start to end again, TCP sideways.
+      const auto end_side = makePose(sweep_x_, sweep_y_end_, sweep_z_, side);
+      return sweepTo(end_side, "side sweep");
     }
 
     bool moveToPose(const geometry_msgs::msg::Pose &pose, const std::string &label) {
@@ -203,8 +203,8 @@ class SweepMover : public rclcpp::Node {
     double acceleration_scaling_{0.3};
     double sweep_x_{1.0};
     double sweep_z_{0.35};
-    double sweep_y_min_{-0.9};
-    double sweep_y_max_{0.9};
+    double sweep_y_start_{0.9};
+    double sweep_y_end_{-0.9};
     double eef_step_{0.01};
 };
 
