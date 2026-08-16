@@ -255,11 +255,13 @@ class SweepMover : public rclcpp::Node {
       // TCP orientations.
       geometry_msgs::msg::Quaternion down = pitchQuaternion(M_PI);            
       geometry_msgs::msg::Quaternion side = pitchQuaternion(M_PI / 2.0);      
-      // Roll about the base X axis tilts the view within the vertical plane
-      // of the sweep line: -pi/2 = horizontal toward the start, -3*pi/4 =
-      // 45 deg oblique, -pi = straight down. Note -3*pi/3 equals -pi, so this
-      // currently looks straight down, not oblique.
-      geometry_msgs::msg::Quaternion oblique = rollQuaternion(-3.0 * M_PI / 3.0);
+
+      // Negative roll tilts left (toward the start), positive tilts right.
+      // -2.0 * M_PI / 3.0 (-120 deg) = shallower, 30 down / 60 left
+      // -3.0 * M_PI / 4.0 (-135 deg) = even split, down and left
+      // +3.0 * M_PI / 4.0 (+135 deg) = current: even split, down and right
+      // -5.0 * M_PI / 6.0 (-150 deg) = steeper, 60 down / 30 left
+      geometry_msgs::msg::Quaternion oblique = rollQuaternion(3.0 * M_PI / 4.0);
 
       double x = sweep_x_;
       double z = sweep_z_;
