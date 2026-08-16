@@ -1,6 +1,7 @@
 /home/zech/robim_ur20_sim/build/robim_ur20_sim/CMakeFiles/uninstall.dir
 /home/zech/robim_ur20_sim/build/robim_ur20_sim/CMakeFiles/robim_ur20_sim_uninstall.dir
 /home/zech/robim_ur20_sim/build/robim_ur20_sim/CMakeFiles/sweep_mover.dir
+/home/zech/robim_ur20_sim/build/robim_ur20_sim/CMakeFiles/room_publisher.dir
 /home/zech/robim_ur20_sim/build/robim_ur20_sim/CMakeFiles/test.dir
 /home/zech/robim_ur20_sim/build/robim_ur20_sim/CMakeFiles/edit_cache.dir
 /home/zech/robim_ur20_sim/build/robim_ur20_sim/CMakeFiles/rebuild_cache.dir

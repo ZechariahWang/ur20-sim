@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <cmath>
 #include <limits>
 #include <memory>
@@ -73,7 +74,7 @@ class SweepMover : public rclcpp::Node {
 
     std::string planning_group_;
     double velocity_scaling_{0.3};
-    double acceleration_scaling_{0.3};
+    double acceleration_scaling_{0.2};
     double sweep_x_{1.0};
     double sweep_z_{0.35};
     double sweep_y_start_{0.9};
@@ -97,8 +98,8 @@ class SweepMover : public rclcpp::Node {
     }
 
     bool setup() {
-      // MoveGroupInterface needs the node spinning in the background
-      // for its action clients and TF lookups.
+
+      // MoveGroupInterface needs the node spinning in the background for its action clients and TF lookups.
       executor_.add_node(shared_from_this());
       spinner_ = std::thread([this]() { executor_.spin(); });
 
@@ -110,43 +111,19 @@ class SweepMover : public rclcpp::Node {
       std::string tcp_link = move_group_->getEndEffectorLink();
       RCLCPP_INFO(get_logger(), "Sweeping in frame '%s' with TCP link '%s'.", frame.c_str(), tcp_link.c_str());
 
-      // Give DDS discovery a moment to connect, otherwise the first
-      // planning request can be lost.
+      // Give DDS discovery a moment to connect, otherwise the first planning request can be lost.
       rclcpp::sleep_for(std::chrono::seconds(1));
       return true;
     }
 
-    bool doMovement() {
+    // One IK solution and how far its joints are from the current joints.
+    struct IkCandidate {
+      double distance;
+      std::vector<double> joints;
+    };
 
-      // TCP orientations.
-      geometry_msgs::msg::Quaternion down = pitchQuaternion(M_PI);            // pointing straight down at the ground
-      geometry_msgs::msg::Quaternion side = pitchQuaternion(M_PI / 2.0);      // horizontal, pointing away from the robot
-      geometry_msgs::msg::Quaternion oblique = rollQuaternion(3.0 * M_PI / 4.0); // looking 45 deg down along the line
-
-      double x = sweep_x_;
-      double z = sweep_z_;
-      double start = sweep_y_start_;
-      double end = sweep_y_end_;
-
-      // The movement script: edit/add lines here to change the routine.
-      std::vector<Step> script;
-      script.push_back({Step::MOVE,  makePose(x, start, z, down),          "sweep start"});
-      script.push_back({Step::SWEEP, makePose(x, end,   z, down),          "top sweep"});
-      script.push_back({Step::MOVE,  makePose(x, start, z, side),          "return to start (side view)"});
-      script.push_back({Step::SWEEP, makePose(x, end,   z, side),          "side sweep"});
-      script.push_back({Step::MOVE,  makePose(x, start, z + 0.3, oblique), "oblique view"});
-
-      for (size_t i = 0; i < script.size(); i++) {
-        Step step = script[i];
-        bool ok = false;
-        if (step.type == Step::MOVE) {
-          ok = moveToPose(step.pose, step.label);
-        } else {
-          ok = sweepTo(step.pose, step.label);
-        }
-        if (!ok) { return false; }
-      }
-      return true;
+    static bool closerCandidate(const IkCandidate &a, const IkCandidate &b) {
+      return a.distance < b.distance;
     }
 
     bool moveToPose(const geometry_msgs::msg::Pose &pose, const std::string &label) {
@@ -157,52 +134,66 @@ class SweepMover : public rclcpp::Node {
       std::vector<double> current_joints;
       current->copyJointGroupPositions(group, current_joints);
 
-      // Solve IK several times and keep the solution closest to the
-      // current joints, so the move is the shortest one that works.
-      std::vector<double> best;
-      double best_distance = std::numeric_limits<double>::infinity();
-      moveit::core::RobotState candidate(*current);
+      std::vector<IkCandidate> candidates;
+      moveit::core::RobotState state(*current);
       for (int attempt = 0; attempt < 20; attempt++) {
         if (attempt > 0) {
-          candidate.setToRandomPositions(group);
+          state.setToRandomPositions(group);
         }
-        bool found = candidate.setFromIK(group, pose, 0.1);
+        bool found = state.setFromIK(group, pose, 0.1);
         if (!found) { continue; }
 
         std::vector<double> solution;
-        candidate.copyJointGroupPositions(group, solution);
+        state.copyJointGroupPositions(group, solution);
         wrapToNearest(solution, current_joints, group);
 
         double distance = 0.0;
         for (size_t i = 0; i < solution.size(); i++) {
           distance = distance + std::abs(solution[i] - current_joints[i]);
         }
-        if (distance < best_distance) {
-          best_distance = distance;
-          best = solution;
-        }
+        if (isDuplicate(solution, candidates)) { continue; }
+        candidates.push_back({distance, solution});
       }
-      if (best.empty()) {
+      if (candidates.empty()) {
         RCLCPP_ERROR(get_logger(), "No reachable IK solution: %s", label.c_str());
         return false;
       }
 
-      // Plan to the chosen joint configuration and execute.
-      move_group_->setJointValueTarget(best);
-      moveit::planning_interface::MoveGroupInterface::Plan plan;
-      bool planned = (move_group_->plan(plan) == moveit::core::MoveItErrorCode::SUCCESS);
-      if (!planned) {
-        RCLCPP_ERROR(get_logger(), "Planning failed: %s", label.c_str());
-        return false;
+      // Try the closest solution first
+      std::sort(candidates.begin(), candidates.end(), closerCandidate);
+      for (size_t i = 0; i < candidates.size(); i++) {
+        IkCandidate candidate = candidates[i];
+        move_group_->setJointValueTarget(candidate.joints);
+        moveit::planning_interface::MoveGroupInterface::Plan plan;
+        bool planned = (move_group_->plan(plan) == moveit::core::MoveItErrorCode::SUCCESS);
+        if (!planned) {
+          RCLCPP_WARN(get_logger(), "Candidate %zu rejected for %s, trying next.", i, label.c_str());
+          continue;
+        }
+
+        RCLCPP_INFO(get_logger(), "Moving: %s (joint distance %.2f rad)...", label.c_str(), candidate.distance);
+        bool executed = (move_group_->execute(plan) == moveit::core::MoveItErrorCode::SUCCESS);
+        if (!executed) {
+          RCLCPP_ERROR(get_logger(), "Execution failed: %s", label.c_str());
+          return false;
+        }
+        return true;
       }
 
-      RCLCPP_INFO(get_logger(), "Moving: %s (joint distance %.2f rad)...", label.c_str(), best_distance);
-      bool executed = (move_group_->execute(plan) == moveit::core::MoveItErrorCode::SUCCESS);
-      if (!executed) {
-        RCLCPP_ERROR(get_logger(), "Execution failed: %s", label.c_str());
-        return false;
+      RCLCPP_ERROR(get_logger(), "Planning failed for every IK solution: %s", label.c_str());
+      return false;
+    }
+
+    // True if this solution is nearly identical to one already collected.
+    static bool isDuplicate(const std::vector<double> &solution, const std::vector<IkCandidate> &candidates) {
+      for (size_t i = 0; i < candidates.size(); i++) {
+        double difference = 0.0;
+        for (size_t j = 0; j < solution.size(); j++) {
+          difference = difference + std::abs(solution[j] - candidates[i].joints[j]);
+        }
+        if (difference < 0.01) { return true; }
       }
-      return true;
+      return false;
     }
 
     bool sweepTo(const geometry_msgs::msg::Pose &pose, const std::string &label) {
@@ -218,8 +209,7 @@ class SweepMover : public rclcpp::Node {
         return false;
       }
 
-      // The path comes back timed at full speed, slow it down to the
-      // configured velocity and acceleration scaling.
+      // slow it down to the configured velocity and acceleration scaling.
       robot_trajectory::RobotTrajectory retimed(move_group_->getRobotModel(), move_group_->getName());
       moveit::core::RobotStatePtr current = move_group_->getCurrentState(10.0);
       retimed.setRobotTrajectoryMsg(*current, trajectory);
@@ -240,8 +230,7 @@ class SweepMover : public rclcpp::Node {
       return true;
     }
 
-    // Shift each joint by a multiple of 2*pi so it lands on the equivalent
-    // angle closest to its current value, staying inside the joint limits.
+    // Shift each joint by a multiple of 2*pi
     static void wrapToNearest(std::vector<double> &solution, const std::vector<double> &current, const moveit::core::JointModelGroup *group) {
       const std::vector<const moveit::core::JointModel::Bounds *> &all_bounds = group->getActiveJointModelsBounds();
       for (size_t i = 0; i < solution.size(); i++) {
@@ -259,6 +248,42 @@ class SweepMover : public rclcpp::Node {
         }
         solution[i] = best;
       }
+    }
+
+    bool doMovement() {
+
+      // TCP orientations.
+      geometry_msgs::msg::Quaternion down = pitchQuaternion(M_PI);            
+      geometry_msgs::msg::Quaternion side = pitchQuaternion(M_PI / 2.0);      
+      // Roll about the base X axis tilts the view within the vertical plane
+      // of the sweep line: -pi/2 = horizontal toward the start, -3*pi/4 =
+      // 45 deg oblique, -pi = straight down. Note -3*pi/3 equals -pi, so this
+      // currently looks straight down, not oblique.
+      geometry_msgs::msg::Quaternion oblique = rollQuaternion(-3.0 * M_PI / 3.0);
+
+      double x = sweep_x_;
+      double z = sweep_z_;
+      double start = sweep_y_start_;
+      double end = sweep_y_end_;
+
+      std::vector<Step> script;
+      script.push_back({Step::MOVE,  makePose(x, start, z, down),          "sweep start"});
+      script.push_back({Step::SWEEP, makePose(x, end,   z, down),          "top sweep"});
+      script.push_back({Step::MOVE,  makePose(x-0.1, start, z, side),          "return to start (side view)"});
+      script.push_back({Step::SWEEP, makePose(x-0.1, end,   z, side),          "side sweep"});
+      script.push_back({Step::MOVE,  makePose(x-0.2, end,   z + 0.3, oblique), "oblique view"});
+
+      for (size_t i = 0; i < script.size(); i++) {
+        Step step = script[i];
+        bool ok = false;
+        if (step.type == Step::MOVE) {
+          ok = moveToPose(step.pose, step.label);
+        } else {
+          ok = sweepTo(step.pose, step.label);
+        }
+        if (!ok) { return false; }
+      }
+      return true;
     }
 
 };

@@ -1,0 +1,12 @@
+room_publisher:
+  ros__parameters:
+    frame_id: world
+    # Top surface of the floor (m). Slightly below zero so the robot base,
+    # which sits at z = 0, does not touch it and count as a collision.
+    floor_z: -0.01
+    # Bottom surface of the ceiling (m).
+    ceiling_z: 2.5
+    # Square room footprint, centered on the robot base (m).
+    room_size: 4.0
+    # Thickness of the floor, ceiling, and wall slabs (m).
+    thickness: 0.1

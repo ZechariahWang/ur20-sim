@@ -11,6 +11,7 @@
 
   <depend>rclcpp</depend>
   <depend>moveit_ros_planning_interface</depend>
+  <depend>visualization_msgs</depend>
 
   <exec_depend>ur_robot_driver</exec_depend>
   <exec_depend>ur_moveit_config</exec_depend>

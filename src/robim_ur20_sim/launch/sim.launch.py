@@ -1,9 +1,3 @@
-"""Bring up a simulated UR20: UR driver with fake hardware + MoveIt 2 + RViz.
-
-The same stack works against URSim or a real robot: set use_fake_hardware:=false
-and robot_ip:=<robot ip>.
-"""
-
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
 from launch.conditions import IfCondition
@@ -11,7 +5,6 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
-
 
 def generate_launch_description():
     ur_type = LaunchConfiguration("ur_type")
@@ -76,4 +69,14 @@ def generate_launch_description():
         condition=IfCondition(LaunchConfiguration("launch_foxglove")),
     )
 
-    return LaunchDescription(declared_args + [ur_control, moveit, foxglove_bridge])
+    room_config = PathJoinSubstitution(
+        [FindPackageShare("robim_ur20_sim"), "config", "room.yaml"]
+    )
+    room_publisher = Node(
+        package="robim_ur20_sim",
+        executable="room_publisher",
+        output="screen",
+        parameters=[room_config],
+    )
+
+    return LaunchDescription(declared_args + [ur_control, moveit, foxglove_bridge, room_publisher])

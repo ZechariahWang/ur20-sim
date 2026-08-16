@@ -2,7 +2,7 @@ sweep_mover:
   ros__parameters:
     planning_group: ur_manipulator
     velocity_scaling: 0.3
-    acceleration_scaling: 0.3
+    acceleration_scaling: 0.1
 
     # The sweep line runs parallel to the base Y axis at fixed x/z (meters,
     # in the robot base frame). UR20 reach is 1.75 m; keep

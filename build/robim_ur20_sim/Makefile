@@ -210,6 +210,43 @@ sweep_mover/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sweep_mover.dir/build.make CMakeFiles/sweep_mover.dir/build
 .PHONY : sweep_mover/fast
 
+#=============================================================================
+# Target rules for targets named room_publisher
+
+# Build rule for target.
+room_publisher: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 room_publisher
+.PHONY : room_publisher
+
+# fast build rule for target.
+room_publisher/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/room_publisher.dir/build.make CMakeFiles/room_publisher.dir/build
+.PHONY : room_publisher/fast
+
+src/room_publisher.o: src/room_publisher.cpp.o
+.PHONY : src/room_publisher.o
+
+# target to build an object file
+src/room_publisher.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/room_publisher.dir/build.make CMakeFiles/room_publisher.dir/src/room_publisher.cpp.o
+.PHONY : src/room_publisher.cpp.o
+
+src/room_publisher.i: src/room_publisher.cpp.i
+.PHONY : src/room_publisher.i
+
+# target to preprocess a source file
+src/room_publisher.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/room_publisher.dir/build.make CMakeFiles/room_publisher.dir/src/room_publisher.cpp.i
+.PHONY : src/room_publisher.cpp.i
+
+src/room_publisher.s: src/room_publisher.cpp.s
+.PHONY : src/room_publisher.s
+
+# target to generate assembly for a file
+src/room_publisher.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/room_publisher.dir/build.make CMakeFiles/room_publisher.dir/src/room_publisher.cpp.s
+.PHONY : src/room_publisher.cpp.s
+
 src/sweep_mover.o: src/sweep_mover.cpp.o
 .PHONY : src/sweep_mover.o
 
@@ -249,7 +286,11 @@ help:
 	@echo "... test"
 	@echo "... robim_ur20_sim_uninstall"
 	@echo "... uninstall"
+	@echo "... room_publisher"
 	@echo "... sweep_mover"
+	@echo "... src/room_publisher.o"
+	@echo "... src/room_publisher.i"
+	@echo "... src/room_publisher.s"
 	@echo "... src/sweep_mover.o"
 	@echo "... src/sweep_mover.i"
 	@echo "... src/sweep_mover.s"

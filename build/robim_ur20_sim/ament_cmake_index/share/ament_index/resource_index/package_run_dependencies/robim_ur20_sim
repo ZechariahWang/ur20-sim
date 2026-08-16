@@ -1,1 +1,1 @@
-rclcpp;moveit_ros_planning_interface;ur_robot_driver;ur_moveit_config;ur_description;xacro;foxglove_bridge
+rclcpp;moveit_ros_planning_interface;visualization_msgs;ur_robot_driver;ur_moveit_config;ur_description;xacro;foxglove_bridge

@@ -8,11 +8,15 @@ endif()
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(moveit_ros_planning_interface REQUIRED)
+find_package(visualization_msgs REQUIRED)
 
 add_executable(sweep_mover src/sweep_mover.cpp)
 ament_target_dependencies(sweep_mover rclcpp moveit_ros_planning_interface)
 
-install(TARGETS sweep_mover
+add_executable(room_publisher src/room_publisher.cpp)
+ament_target_dependencies(room_publisher rclcpp moveit_ros_planning_interface visualization_msgs)
+
+install(TARGETS sweep_mover room_publisher
   DESTINATION lib/${PROJECT_NAME})
 
 install(DIRECTORY launch config

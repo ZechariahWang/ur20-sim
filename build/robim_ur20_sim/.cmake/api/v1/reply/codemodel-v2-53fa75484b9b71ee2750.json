@@ -18,7 +18,8 @@
 					[
 						0,
 						1,
-						2
+						2,
+						3
 					]
 				}
 			],
@@ -35,7 +36,8 @@
 					[
 						0,
 						1,
-						2
+						2,
+						3
 					]
 				}
 			],
@@ -50,8 +52,15 @@
 				},
 				{
 					"directoryIndex" : 0,
+					"id" : "room_publisher::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-room_publisher-b682174484489b3f196a.json",
+					"name" : "room_publisher",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
 					"id" : "sweep_mover::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-sweep_mover-d4798a10a7f4627910a4.json",
+					"jsonFile" : "target-sweep_mover-ca72fb3056a4ae26907e.json",
 					"name" : "sweep_mover",
 					"projectIndex" : 0
 				},
