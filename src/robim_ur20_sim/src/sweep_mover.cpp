@@ -1,4 +1,5 @@
 #include <cmath>
+#include <limits>
 #include <memory>
 #include <string>
 #include <thread>
@@ -78,22 +79,45 @@ class SweepMover : public rclcpp::Node {
     }
 
     bool moveToPose(const geometry_msgs::msg::Pose &pose, const std::string &label) {
+      
+      const auto current = move_group_->getCurrentState(10.0);
+      const auto *group = current->getJointModelGroup(planning_group_);
+      std::vector<double> current_joints;
+      current->copyJointGroupPositions(group, current_joints);
 
-      // Solve IK seeded from the current state (nearest joint configuration),
-      // then plan in joint space. A pose target instead lets the planner pick
-      // any IK solution, which causes wild reconfiguration swings.
-      if (!move_group_->setJointValueTarget(pose)) {
+      std::vector<double> best;
+      double best_distance = std::numeric_limits<double>::infinity();
+      moveit::core::RobotState candidate(*current);
+      for (int attempt = 0; attempt < 20; ++attempt) {
+        if (attempt > 0) { candidate.setToRandomPositions(group); }
+        if (!candidate.setFromIK(group, pose, 0.1)) { continue; }
+
+        std::vector<double> solution;
+        candidate.copyJointGroupPositions(group, solution);
+        wrapToNearest(solution, current_joints, group);
+
+        double distance = 0.0;
+        for (size_t i = 0; i < solution.size(); ++i) {
+          distance += std::abs(solution[i] - current_joints[i]);
+        }
+        if (distance < best_distance) {
+          best_distance = distance;
+          best = solution;
+        }
+      }
+      if (best.empty()) {
         RCLCPP_ERROR(get_logger(), "No reachable IK solution: %s", label.c_str());
         return false;
       }
+
+      move_group_->setJointValueTarget(best);
       moveit::planning_interface::MoveGroupInterface::Plan plan;
 
       if (move_group_->plan(plan) != moveit::core::MoveItErrorCode::SUCCESS) {
         RCLCPP_ERROR(get_logger(), "Planning failed: %s", label.c_str());
         return false;
       }
-
-      RCLCPP_INFO(get_logger(), "Moving: %s...", label.c_str());
+      RCLCPP_INFO(get_logger(), "Moving: %s (joint distance %.2f rad)...", label.c_str(), best_distance);
       if (move_group_->execute(plan) != moveit::core::MoveItErrorCode::SUCCESS) {
         RCLCPP_ERROR(get_logger(), "Execution failed: %s", label.c_str());
         return false;
@@ -129,6 +153,22 @@ class SweepMover : public rclcpp::Node {
       }
 
       return true;
+    }
+
+    // Shift each joint by multiples of 2*pi to the equivalent angle closest to
+    // its current value, staying inside the joint's limits.
+    static void wrapToNearest(std::vector<double> &solution, const std::vector<double> &current, const moveit::core::JointModelGroup *group) {
+      const auto &bounds = group->getActiveJointModelsBounds();
+      for (size_t i = 0; i < solution.size(); ++i) {
+        const auto &b = (*bounds[i])[0];
+        double best = solution[i];
+        for (int k = -2; k <= 2; ++k) {
+          const double v = solution[i] + k * 2.0 * M_PI;
+          if (v < b.min_position_ || v > b.max_position_) { continue; }
+          if (std::abs(v - current[i]) < std::abs(best - current[i])) { best = v; }
+        }
+        solution[i] = best;
+      }
     }
 
     static geometry_msgs::msg::Quaternion pitchQuaternion(double pitch) {
