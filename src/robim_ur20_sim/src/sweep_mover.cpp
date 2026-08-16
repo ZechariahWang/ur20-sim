@@ -75,7 +75,13 @@ class SweepMover : public rclcpp::Node {
 
       // side sweep: start to end again, TCP sideways.
       const auto end_side = makePose(sweep_x_, sweep_y_end_, sweep_z_, side);
-      return sweepTo(end_side, "side sweep");
+      if (!sweepTo(end_side, "side sweep")) { return false; }
+
+      // finish above the start (left) end, looking down along the line at
+      // 45 deg — an oblique view of the line just traced.
+      const auto oblique = rollQuaternion(3.0 * M_PI / 4.0);
+      const auto oblique_pose = makePose(sweep_x_, sweep_y_start_, sweep_z_ + 0.3, oblique);
+      return moveToPose(oblique_pose, "oblique view");
     }
 
     bool moveToPose(const geometry_msgs::msg::Pose &pose, const std::string &label) {
@@ -175,6 +181,13 @@ class SweepMover : public rclcpp::Node {
       geometry_msgs::msg::Quaternion q;
       q.y = std::sin(pitch / 2.0);
       q.w = std::cos(pitch / 2.0);
+      return q;
+    }
+
+    static geometry_msgs::msg::Quaternion rollQuaternion(double roll) {
+      geometry_msgs::msg::Quaternion q;
+      q.x = std::sin(roll / 2.0);
+      q.w = std::cos(roll / 2.0);
       return q;
     }
 
