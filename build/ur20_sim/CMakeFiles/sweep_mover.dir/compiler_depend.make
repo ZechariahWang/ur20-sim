@@ -3,8 +3,8 @@
 
 CMakeFiles/sweep_mover.dir/src/sweep_mover.cpp.o: /home/zech/robim_ur20_sim/src/ur20_sim/src/sweep_mover.cpp \
   /usr/include/stdc-predef.h \
-  /usr/include/c++/11/algorithm \
-  /usr/include/c++/11/utility \
+  /home/zech/robim_ur20_sim/src/ur20_sim/include/sweep_mover.hpp \
+  /usr/include/c++/11/string \
   /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
   /usr/include/x86_64-linux-gnu/c++/11/bits/os_defines.h \
   /usr/include/features.h \
@@ -17,17 +17,18 @@ CMakeFiles/sweep_mover.dir/src/sweep_mover.cpp.o: /home/zech/robim_ur20_sim/src/
   /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
   /usr/include/x86_64-linux-gnu/c++/11/bits/cpu_defines.h \
   /usr/include/c++/11/pstl/pstl_config.h \
-  /usr/include/c++/11/bits/stl_relops.h \
-  /usr/include/c++/11/bits/stl_pair.h \
-  /usr/include/c++/11/bits/move.h \
-  /usr/include/c++/11/type_traits \
-  /usr/include/c++/11/initializer_list \
+  /usr/include/c++/11/bits/stringfwd.h \
+  /usr/include/c++/11/bits/memoryfwd.h \
+  /usr/include/c++/11/bits/char_traits.h \
   /usr/include/c++/11/bits/stl_algobase.h \
   /usr/include/c++/11/bits/functexcept.h \
   /usr/include/c++/11/bits/exception_defines.h \
   /usr/include/c++/11/bits/cpp_type_traits.h \
   /usr/include/c++/11/ext/type_traits.h \
   /usr/include/c++/11/ext/numeric_traits.h \
+  /usr/include/c++/11/bits/stl_pair.h \
+  /usr/include/c++/11/bits/move.h \
+  /usr/include/c++/11/type_traits \
   /usr/include/c++/11/bits/stl_iterator_base_types.h \
   /usr/include/c++/11/bits/stl_iterator_base_funcs.h \
   /usr/include/c++/11/bits/concept_check.h \
@@ -36,179 +37,105 @@ CMakeFiles/sweep_mover.dir/src/sweep_mover.cpp.o: /home/zech/robim_ur20_sim/src/
   /usr/include/c++/11/bits/ptr_traits.h \
   /usr/include/c++/11/debug/debug.h \
   /usr/include/c++/11/bits/predefined_ops.h \
-  /usr/include/c++/11/bits/stl_algo.h \
-  /usr/include/c++/11/cstdlib \
-  /usr/include/stdlib.h \
-  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
-  /usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h \
-  /usr/include/x86_64-linux-gnu/bits/waitflags.h \
-  /usr/include/x86_64-linux-gnu/bits/waitstatus.h \
-  /usr/include/x86_64-linux-gnu/bits/floatn.h \
-  /usr/include/x86_64-linux-gnu/bits/floatn-common.h \
-  /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
-  /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
-  /usr/include/x86_64-linux-gnu/sys/types.h \
-  /usr/include/x86_64-linux-gnu/bits/types.h \
-  /usr/include/x86_64-linux-gnu/bits/typesizes.h \
-  /usr/include/x86_64-linux-gnu/bits/time64.h \
-  /usr/include/x86_64-linux-gnu/bits/types/clock_t.h \
-  /usr/include/x86_64-linux-gnu/bits/types/clockid_t.h \
-  /usr/include/x86_64-linux-gnu/bits/types/time_t.h \
-  /usr/include/x86_64-linux-gnu/bits/types/timer_t.h \
-  /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
-  /usr/include/endian.h \
-  /usr/include/x86_64-linux-gnu/bits/endian.h \
-  /usr/include/x86_64-linux-gnu/bits/endianness.h \
-  /usr/include/x86_64-linux-gnu/bits/byteswap.h \
-  /usr/include/x86_64-linux-gnu/bits/uintn-identity.h \
-  /usr/include/x86_64-linux-gnu/sys/select.h \
-  /usr/include/x86_64-linux-gnu/bits/select.h \
-  /usr/include/x86_64-linux-gnu/bits/types/sigset_t.h \
-  /usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h \
-  /usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h \
-  /usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h \
-  /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h \
-  /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h \
-  /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h \
-  /usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h \
-  /usr/include/x86_64-linux-gnu/bits/struct_mutex.h \
-  /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h \
-  /usr/include/alloca.h \
-  /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
-  /usr/include/c++/11/bits/std_abs.h \
-  /usr/include/c++/11/bits/algorithmfwd.h \
-  /usr/include/c++/11/bits/stl_heap.h \
-  /usr/include/c++/11/bits/stl_tempbuf.h \
-  /usr/include/c++/11/bits/stl_construct.h \
-  /usr/include/c++/11/new \
-  /usr/include/c++/11/bits/exception.h \
-  /usr/include/c++/11/bits/uniform_int_dist.h \
-  /usr/include/c++/11/pstl/glue_algorithm_defs.h \
-  /usr/include/c++/11/functional \
-  /usr/include/c++/11/bits/stl_function.h \
-  /usr/include/c++/11/backward/binders.h \
-  /usr/include/c++/11/tuple \
-  /usr/include/c++/11/array \
-  /usr/include/c++/11/bits/range_access.h \
-  /usr/include/c++/11/bits/uses_allocator.h \
-  /usr/include/c++/11/bits/invoke.h \
-  /usr/include/c++/11/bits/functional_hash.h \
-  /usr/include/c++/11/bits/hash_bytes.h \
-  /usr/include/c++/11/bits/refwrap.h \
-  /usr/include/c++/11/bits/std_function.h \
-  /usr/include/c++/11/typeinfo \
-  /usr/include/c++/11/unordered_map \
-  /usr/include/c++/11/bits/allocator.h \
-  /usr/include/x86_64-linux-gnu/c++/11/bits/c++allocator.h \
-  /usr/include/c++/11/ext/new_allocator.h \
-  /usr/include/c++/11/bits/memoryfwd.h \
-  /usr/include/c++/11/ext/alloc_traits.h \
-  /usr/include/c++/11/bits/alloc_traits.h \
-  /usr/include/c++/11/ext/aligned_buffer.h \
-  /usr/include/c++/11/bits/hashtable.h \
-  /usr/include/c++/11/bits/hashtable_policy.h \
-  /usr/include/c++/11/bits/enable_special_members.h \
-  /usr/include/c++/11/bits/node_handle.h \
-  /usr/include/c++/11/bits/unordered_map.h \
-  /usr/include/c++/11/bits/erase_if.h \
-  /usr/include/c++/11/vector \
-  /usr/include/c++/11/bits/stl_uninitialized.h \
-  /usr/include/c++/11/bits/stl_vector.h \
-  /usr/include/c++/11/bits/stl_bvector.h \
-  /usr/include/c++/11/bits/vector.tcc \
-  /usr/include/c++/11/pstl/execution_defs.h \
-  /usr/include/c++/11/cmath \
-  /usr/include/math.h \
-  /usr/include/x86_64-linux-gnu/bits/math-vector.h \
-  /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
-  /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \
-  /usr/include/x86_64-linux-gnu/bits/fp-logb.h \
-  /usr/include/x86_64-linux-gnu/bits/fp-fast.h \
-  /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h \
-  /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
-  /usr/include/x86_64-linux-gnu/bits/mathcalls-narrow.h \
-  /usr/include/x86_64-linux-gnu/bits/iscanonical.h \
-  /usr/include/c++/11/bits/specfun.h \
-  /usr/include/c++/11/limits \
-  /usr/include/c++/11/tr1/gamma.tcc \
-  /usr/include/c++/11/tr1/special_function_util.h \
-  /usr/include/c++/11/tr1/bessel_function.tcc \
-  /usr/include/c++/11/tr1/beta_function.tcc \
-  /usr/include/c++/11/tr1/ell_integral.tcc \
-  /usr/include/c++/11/tr1/exp_integral.tcc \
-  /usr/include/c++/11/tr1/hypergeometric.tcc \
-  /usr/include/c++/11/tr1/legendre_function.tcc \
-  /usr/include/c++/11/tr1/modified_bessel_func.tcc \
-  /usr/include/c++/11/tr1/poly_hermite.tcc \
-  /usr/include/c++/11/tr1/poly_laguerre.tcc \
-  /usr/include/c++/11/tr1/riemann_zeta.tcc \
-  /usr/include/c++/11/memory \
-  /usr/include/c++/11/bits/stl_raw_storage_iter.h \
-  /usr/include/c++/11/bits/align.h \
-  /usr/include/c++/11/bit \
-  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h \
-  /usr/include/stdint.h \
-  /usr/include/x86_64-linux-gnu/bits/wchar.h \
-  /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
-  /usr/include/c++/11/bits/unique_ptr.h \
-  /usr/include/c++/11/bits/shared_ptr.h \
-  /usr/include/c++/11/iosfwd \
-  /usr/include/c++/11/bits/stringfwd.h \
   /usr/include/c++/11/bits/postypes.h \
   /usr/include/c++/11/cwchar \
   /usr/include/wchar.h \
+  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
+  /usr/include/x86_64-linux-gnu/bits/floatn.h \
+  /usr/include/x86_64-linux-gnu/bits/floatn-common.h \
+  /usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h \
   /usr/lib/gcc/x86_64-linux-gnu/11/include/stdarg.h \
+  /usr/include/x86_64-linux-gnu/bits/wchar.h \
   /usr/include/x86_64-linux-gnu/bits/types/wint_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/mbstate_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/__FILE.h \
   /usr/include/x86_64-linux-gnu/bits/types/FILE.h \
-  /usr/include/c++/11/bits/shared_ptr_base.h \
-  /usr/include/c++/11/bits/allocated_ptr.h \
+  /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
+  /usr/include/c++/11/cstdint \
+  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h \
+  /usr/include/stdint.h \
+  /usr/include/x86_64-linux-gnu/bits/types.h \
+  /usr/include/x86_64-linux-gnu/bits/typesizes.h \
+  /usr/include/x86_64-linux-gnu/bits/time64.h \
+  /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
+  /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
+  /usr/include/c++/11/bits/allocator.h \
+  /usr/include/x86_64-linux-gnu/c++/11/bits/c++allocator.h \
+  /usr/include/c++/11/ext/new_allocator.h \
+  /usr/include/c++/11/new \
+  /usr/include/c++/11/bits/exception.h \
+  /usr/include/c++/11/bits/localefwd.h \
+  /usr/include/x86_64-linux-gnu/c++/11/bits/c++locale.h \
+  /usr/include/c++/11/clocale \
+  /usr/include/locale.h \
+  /usr/include/x86_64-linux-gnu/bits/locale.h \
+  /usr/include/c++/11/iosfwd \
+  /usr/include/c++/11/cctype \
+  /usr/include/ctype.h \
+  /usr/include/x86_64-linux-gnu/bits/endian.h \
+  /usr/include/x86_64-linux-gnu/bits/endianness.h \
+  /usr/include/c++/11/bits/ostream_insert.h \
+  /usr/include/c++/11/bits/cxxabi_forced.h \
+  /usr/include/c++/11/bits/stl_function.h \
+  /usr/include/c++/11/backward/binders.h \
+  /usr/include/c++/11/bits/range_access.h \
+  /usr/include/c++/11/initializer_list \
+  /usr/include/c++/11/bits/basic_string.h \
   /usr/include/c++/11/ext/atomicity.h \
   /usr/include/x86_64-linux-gnu/c++/11/bits/gthr.h \
   /usr/include/x86_64-linux-gnu/c++/11/bits/gthr-default.h \
   /usr/include/pthread.h \
   /usr/include/sched.h \
+  /usr/include/x86_64-linux-gnu/bits/types/time_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h \
   /usr/include/x86_64-linux-gnu/bits/sched.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_sched_param.h \
   /usr/include/x86_64-linux-gnu/bits/cpu-set.h \
   /usr/include/time.h \
   /usr/include/x86_64-linux-gnu/bits/time.h \
   /usr/include/x86_64-linux-gnu/bits/timex.h \
+  /usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h \
+  /usr/include/x86_64-linux-gnu/bits/types/clock_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_tm.h \
+  /usr/include/x86_64-linux-gnu/bits/types/clockid_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/timer_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h \
+  /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h \
+  /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h \
+  /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h \
+  /usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h \
+  /usr/include/x86_64-linux-gnu/bits/struct_mutex.h \
+  /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h \
   /usr/include/x86_64-linux-gnu/bits/setjmp.h \
+  /usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct___jmp_buf_tag.h \
   /usr/include/x86_64-linux-gnu/bits/pthread_stack_min-dynamic.h \
   /usr/include/x86_64-linux-gnu/c++/11/bits/atomic_word.h \
   /usr/include/x86_64-linux-gnu/sys/single_threaded.h \
-  /usr/include/c++/11/ext/concurrence.h \
-  /usr/include/c++/11/exception \
-  /usr/include/c++/11/bits/exception_ptr.h \
-  /usr/include/c++/11/bits/cxxabi_init_exception.h \
-  /usr/include/c++/11/bits/nested_exception.h \
-  /usr/include/c++/11/bits/shared_ptr_atomic.h \
-  /usr/include/c++/11/bits/atomic_base.h \
-  /usr/include/c++/11/bits/atomic_lockfree_defines.h \
-  /usr/include/c++/11/backward/auto_ptr.h \
-  /usr/include/c++/11/pstl/glue_memory_defs.h \
-  /usr/include/c++/11/string \
-  /usr/include/c++/11/bits/char_traits.h \
-  /usr/include/c++/11/cstdint \
-  /usr/include/c++/11/bits/localefwd.h \
-  /usr/include/x86_64-linux-gnu/c++/11/bits/c++locale.h \
-  /usr/include/c++/11/clocale \
-  /usr/include/locale.h \
-  /usr/include/x86_64-linux-gnu/bits/locale.h \
-  /usr/include/c++/11/cctype \
-  /usr/include/ctype.h \
-  /usr/include/c++/11/bits/ostream_insert.h \
-  /usr/include/c++/11/bits/cxxabi_forced.h \
-  /usr/include/c++/11/bits/basic_string.h \
+  /usr/include/c++/11/ext/alloc_traits.h \
+  /usr/include/c++/11/bits/alloc_traits.h \
+  /usr/include/c++/11/bits/stl_construct.h \
   /usr/include/c++/11/string_view \
+  /usr/include/c++/11/bits/functional_hash.h \
+  /usr/include/c++/11/bits/hash_bytes.h \
   /usr/include/c++/11/bits/string_view.tcc \
   /usr/include/c++/11/ext/string_conversions.h \
+  /usr/include/c++/11/cstdlib \
+  /usr/include/stdlib.h \
+  /usr/include/x86_64-linux-gnu/bits/waitflags.h \
+  /usr/include/x86_64-linux-gnu/bits/waitstatus.h \
+  /usr/include/x86_64-linux-gnu/sys/types.h \
+  /usr/include/endian.h \
+  /usr/include/x86_64-linux-gnu/bits/byteswap.h \
+  /usr/include/x86_64-linux-gnu/bits/uintn-identity.h \
+  /usr/include/x86_64-linux-gnu/sys/select.h \
+  /usr/include/x86_64-linux-gnu/bits/select.h \
+  /usr/include/x86_64-linux-gnu/bits/types/sigset_t.h \
+  /usr/include/alloca.h \
+  /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
+  /usr/include/c++/11/bits/std_abs.h \
   /usr/include/c++/11/cstdio \
   /usr/include/stdio.h \
   /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h \
@@ -228,13 +155,63 @@ CMakeFiles/sweep_mover.dir/src/sweep_mover.cpp.o: /home/zech/robim_ur20_sim/src/
   /usr/include/c++/11/bits/basic_string.tcc \
   /usr/include/c++/11/thread \
   /usr/include/c++/11/bits/std_thread.h \
+  /usr/include/c++/11/exception \
+  /usr/include/c++/11/bits/exception_ptr.h \
+  /usr/include/c++/11/bits/cxxabi_init_exception.h \
+  /usr/include/c++/11/typeinfo \
+  /usr/include/c++/11/bits/nested_exception.h \
+  /usr/include/c++/11/tuple \
+  /usr/include/c++/11/utility \
+  /usr/include/c++/11/bits/stl_relops.h \
+  /usr/include/c++/11/array \
+  /usr/include/c++/11/bits/uses_allocator.h \
+  /usr/include/c++/11/bits/invoke.h \
+  /usr/include/c++/11/bits/refwrap.h \
+  /usr/include/c++/11/bits/unique_ptr.h \
   /usr/include/c++/11/bits/this_thread_sleep.h \
   /usr/include/c++/11/chrono \
   /usr/include/c++/11/ratio \
+  /usr/include/c++/11/limits \
   /usr/include/c++/11/ctime \
   /usr/include/c++/11/bits/parse_numbers.h \
+  /usr/include/c++/11/vector \
+  /usr/include/c++/11/bits/stl_uninitialized.h \
+  /usr/include/c++/11/bits/stl_vector.h \
+  /usr/include/c++/11/bits/stl_bvector.h \
+  /usr/include/c++/11/bits/vector.tcc \
   /opt/ros/humble/include/geometry_msgs/geometry_msgs/msg/pose.hpp \
   /opt/ros/humble/include/geometry_msgs/geometry_msgs/msg/detail/pose__struct.hpp \
+  /usr/include/c++/11/algorithm \
+  /usr/include/c++/11/bits/stl_algo.h \
+  /usr/include/c++/11/bits/algorithmfwd.h \
+  /usr/include/c++/11/bits/stl_heap.h \
+  /usr/include/c++/11/bits/stl_tempbuf.h \
+  /usr/include/c++/11/bits/uniform_int_dist.h \
+  /usr/include/c++/11/pstl/glue_algorithm_defs.h \
+  /usr/include/c++/11/functional \
+  /usr/include/c++/11/bits/std_function.h \
+  /usr/include/c++/11/unordered_map \
+  /usr/include/c++/11/ext/aligned_buffer.h \
+  /usr/include/c++/11/bits/hashtable.h \
+  /usr/include/c++/11/bits/hashtable_policy.h \
+  /usr/include/c++/11/bits/enable_special_members.h \
+  /usr/include/c++/11/bits/node_handle.h \
+  /usr/include/c++/11/bits/unordered_map.h \
+  /usr/include/c++/11/bits/erase_if.h \
+  /usr/include/c++/11/pstl/execution_defs.h \
+  /usr/include/c++/11/memory \
+  /usr/include/c++/11/bits/stl_raw_storage_iter.h \
+  /usr/include/c++/11/bits/align.h \
+  /usr/include/c++/11/bit \
+  /usr/include/c++/11/bits/shared_ptr.h \
+  /usr/include/c++/11/bits/shared_ptr_base.h \
+  /usr/include/c++/11/bits/allocated_ptr.h \
+  /usr/include/c++/11/ext/concurrence.h \
+  /usr/include/c++/11/bits/shared_ptr_atomic.h \
+  /usr/include/c++/11/bits/atomic_base.h \
+  /usr/include/c++/11/bits/atomic_lockfree_defines.h \
+  /usr/include/c++/11/backward/auto_ptr.h \
+  /usr/include/c++/11/pstl/glue_memory_defs.h \
   /opt/ros/humble/include/rosidl_runtime_cpp/rosidl_runtime_cpp/bounded_vector.hpp \
   /usr/include/c++/11/stdexcept \
   /opt/ros/humble/include/rosidl_runtime_cpp/rosidl_runtime_cpp/message_initialization.hpp \
@@ -317,6 +294,30 @@ CMakeFiles/sweep_mover.dir/src/sweep_mover.cpp.o: /home/zech/robim_ur20_sim/src/
   /opt/ros/humble/include/urdfdom_headers/urdf_model/link.h \
   /opt/ros/humble/include/urdfdom_headers/urdf_model/joint.h \
   /opt/ros/humble/include/urdfdom_headers/urdf_model/pose.h \
+  /usr/include/c++/11/cmath \
+  /usr/include/math.h \
+  /usr/include/x86_64-linux-gnu/bits/math-vector.h \
+  /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
+  /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \
+  /usr/include/x86_64-linux-gnu/bits/fp-logb.h \
+  /usr/include/x86_64-linux-gnu/bits/fp-fast.h \
+  /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h \
+  /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
+  /usr/include/x86_64-linux-gnu/bits/mathcalls-narrow.h \
+  /usr/include/x86_64-linux-gnu/bits/iscanonical.h \
+  /usr/include/c++/11/bits/specfun.h \
+  /usr/include/c++/11/tr1/gamma.tcc \
+  /usr/include/c++/11/tr1/special_function_util.h \
+  /usr/include/c++/11/tr1/bessel_function.tcc \
+  /usr/include/c++/11/tr1/beta_function.tcc \
+  /usr/include/c++/11/tr1/ell_integral.tcc \
+  /usr/include/c++/11/tr1/exp_integral.tcc \
+  /usr/include/c++/11/tr1/hypergeometric.tcc \
+  /usr/include/c++/11/tr1/legendre_function.tcc \
+  /usr/include/c++/11/tr1/modified_bessel_func.tcc \
+  /usr/include/c++/11/tr1/poly_hermite.tcc \
+  /usr/include/c++/11/tr1/poly_laguerre.tcc \
+  /usr/include/c++/11/tr1/riemann_zeta.tcc \
   /opt/ros/humble/include/urdfdom_headers/urdf_exception/exception.h \
   /opt/ros/humble/include/urdfdom_headers/urdf_model/utils.h \
   /opt/ros/humble/include/urdfdom_headers/urdf_model/types.h \
@@ -1684,9 +1685,7 @@ CMakeFiles/sweep_mover.dir/src/sweep_mover.cpp.o: /home/zech/robim_ur20_sim/src/
 
 /opt/ros/humble/include/moveit_msgs/moveit_msgs/msg/detail/visibility_constraint__traits.hpp:
 
-/usr/include/eigen3/Eigen/src/Core/functors/UnaryFunctors.h:
-
-/usr/include/boost/preprocessor/punctuation/comma_if.hpp:
+/opt/ros/humble/include/moveit_msgs/moveit_msgs/msg/detail/orientation_constraint__traits.hpp:
 
 /opt/ros/humble/include/moveit_msgs/moveit_msgs/action/detail/execute_trajectory__type_support.hpp:
 
@@ -1782,9 +1781,9 @@ CMakeFiles/sweep_mover.dir/src/sweep_mover.cpp.o: /home/zech/robim_ur20_sim/src/
 
 /usr/include/eigen3/Eigen/src/Geometry/Scaling.h:
 
-/usr/include/c++/11/bits/std_function.h:
-
 /usr/include/x86_64-linux-gnu/bits/types/timer_t.h:
+
+/usr/include/c++/11/bits/std_function.h:
 
 /usr/include/boost/preprocessor/list/detail/fold_left.hpp:
 
@@ -1838,9 +1837,9 @@ CMakeFiles/sweep_mover.dir/src/sweep_mover.cpp.o: /home/zech/robim_ur20_sim/src/
 
 /usr/include/c++/11/bits/enable_special_members.h:
 
-/usr/include/c++/11/bits/streambuf.tcc:
-
 /usr/include/c++/11/bits/stl_iterator_base_funcs.h:
+
+/usr/include/c++/11/bits/streambuf.tcc:
 
 /usr/include/boost/preprocessor/comma_if.hpp:
 
@@ -2086,7 +2085,55 @@ CMakeFiles/sweep_mover.dir/src/sweep_mover.cpp.o: /home/zech/robim_ur20_sim/src/
 
 /usr/include/c++/11/bits/std_mutex.h:
 
+/opt/ros/humble/include/builtin_interfaces/builtin_interfaces/msg/time.hpp:
+
+/opt/ros/humble/include/geometry_msgs/geometry_msgs/msg/detail/twist__struct.hpp:
+
+/opt/ros/humble/include/rclcpp/rclcpp/node_interfaces/get_node_parameters_interface.hpp:
+
+/usr/include/boost/mpl/aux_/config/adl.hpp:
+
+/usr/include/c++/11/tr1/hypergeometric.tcc:
+
+/usr/include/boost/preprocessor/list/reverse.hpp:
+
+/usr/include/eigen3/Eigen/src/Core/Transpositions.h:
+
+/opt/ros/humble/include/rclcpp/rclcpp/subscription_content_filter_options.hpp:
+
+/usr/include/c++/11/tr1/exp_integral.tcc:
+
+/usr/include/boost/mpl/bool.hpp:
+
+/opt/ros/humble/include/moveit_msgs/moveit_msgs/msg/detail/joint_constraint__traits.hpp:
+
+/usr/include/c++/11/tr1/special_function_util.h:
+
+/opt/ros/humble/include/std_msgs/std_msgs/msg/detail/header__struct.hpp:
+
+/opt/ros/humble/include/moveit_msgs/moveit_msgs/msg/rosidl_generator_cpp__visibility_control.hpp:
+
+/opt/ros/humble/include/sensor_msgs/sensor_msgs/msg/detail/joint_state__traits.hpp:
+
+/usr/include/x86_64-linux-gnu/bits/mathcalls.h:
+
+/usr/include/x86_64-linux-gnu/bits/endian.h:
+
+/usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h:
+
+/usr/include/x86_64-linux-gnu/bits/fp-logb.h:
+
+/usr/include/x86_64-linux-gnu/bits/flt-eval-method.h:
+
+/usr/include/x86_64-linux-gnu/bits/math-vector.h:
+
+/opt/ros/humble/include/moveit_msgs/moveit_msgs/msg/detail/joint_constraint__struct.hpp:
+
 /opt/ros/humble/include/urdfdom_headers/urdf_model/joint.h:
+
+/usr/include/boost/preprocessor/punctuation/comma_if.hpp:
+
+/usr/include/eigen3/Eigen/src/Core/functors/UnaryFunctors.h:
 
 /usr/include/x86_64-linux-gnu/bits/xopen_lim.h:
 
@@ -2140,6 +2187,10 @@ CMakeFiles/sweep_mover.dir/src/sweep_mover.cpp.o: /home/zech/robim_ur20_sim/src/
 
 /usr/include/eigen3/Eigen/src/Core/util/ReenableStupidWarnings.h:
 
+/usr/include/boost/preprocessor/facilities/identity.hpp:
+
+/usr/include/eigen3/Eigen/src/Core/NestByValue.h:
+
 /usr/include/x86_64-linux-gnu/bits/siginfo-consts-arch.h:
 
 /opt/ros/humble/include/moveit/robot_model/robot_model.h:
@@ -2166,89 +2217,9 @@ CMakeFiles/sweep_mover.dir/src/sweep_mover.cpp.o: /home/zech/robim_ur20_sim/src/
 
 /usr/include/eigen3/Eigen/src/misc/Kernel.h:
 
-/opt/ros/humble/include/moveit/move_group_interface/move_group_interface.h:
+/usr/include/boost/preprocessor/cat.hpp:
 
-/opt/ros/humble/include/geometry_msgs/geometry_msgs/msg/detail/quaternion__traits.hpp:
-
-/usr/include/c++/11/bits/quoted_string.h:
-
-/opt/ros/humble/include/moveit_msgs/moveit_msgs/msg/detail/planning_scene_world__struct.hpp:
-
-/usr/include/boost/config/platform/linux.hpp:
-
-/usr/include/c++/11/bits/locale_conv.h:
-
-/usr/include/eigen3/Eigen/src/Core/Random.h:
-
-/usr/include/x86_64-linux-gnu/bits/thread-shared-types.h:
-
-/usr/include/c++/11/bits/basic_ios.h:
-
-/usr/include/boost/random/uniform_01.hpp:
-
-/usr/include/boost/preprocessor/list/fold_right.hpp:
-
-/opt/ros/humble/include/trajectory_msgs/trajectory_msgs/msg/detail/multi_dof_joint_trajectory__struct.hpp:
-
-/opt/ros/humble/include/tf2_ros/tf2_ros/visibility_control.hpp:
-
-/usr/include/x86_64-linux-gnu/c++/11/bits/time_members.h:
-
-/usr/include/c++/11/bits/locale_facets_nonio.h:
-
-/usr/include/boost/mpl/aux_/template_arity_fwd.hpp:
-
-/usr/include/eigen3/Eigen/src/Core/StlIterators.h:
-
-/opt/ros/humble/include/moveit_msgs/moveit_msgs/msg/detail/link_padding__traits.hpp:
-
-/usr/include/c++/11/ostream:
-
-/usr/include/boost/random/detail/ptr_helper.hpp:
-
-/usr/include/c++/11/bits/streambuf_iterator.h:
-
-/usr/include/x86_64-linux-gnu/c++/11/bits/ctype_base.h:
-
-/opt/ros/humble/include/moveit_msgs/moveit_msgs/action/detail/move_group__builder.hpp:
-
-/usr/include/c++/11/math.h:
-
-/opt/ros/humble/include/rcutils/rcutils/types/string_map.h:
-
-/opt/ros/humble/include/moveit_msgs/moveit_msgs/msg/rosidl_generator_cpp__visibility_control.hpp:
-
-/usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/error_t.h:
-
-/usr/include/x86_64-linux-gnu/bits/flt-eval-method.h:
-
-/opt/ros/humble/include/moveit_msgs/moveit_msgs/msg/detail/constraints__traits.hpp:
-
-/usr/include/x86_64-linux-gnu/c++/11/bits/c++allocator.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h:
-
-/opt/ros/humble/include/rcl_interfaces/rcl_interfaces/srv/detail/describe_parameters__traits.hpp:
-
-/usr/include/math.h:
-
-/usr/include/c++/11/bits/exception_ptr.h:
-
-/usr/include/c++/11/bits/hashtable.h:
-
-/opt/ros/humble/include/geometry_msgs/geometry_msgs/msg/detail/point__struct.hpp:
-
-/opt/ros/humble/include/moveit/macros/declare_ptr.h:
-
-/opt/ros/humble/include/octomap_msgs/octomap_msgs/msg/detail/octomap__traits.hpp:
-
-/usr/include/c++/11/bits/cxxabi_forced.h:
-
-/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:
-
-/usr/include/c++/11/cctype:
+/usr/include/stdlib.h:
 
 /usr/include/c++/11/bits/string_view.tcc:
 
@@ -2256,37 +2227,421 @@ CMakeFiles/sweep_mover.dir/src/sweep_mover.cpp.o: /home/zech/robim_ur20_sim/src/
 
 /opt/ros/humble/include/moveit/robot_model/prismatic_joint_model.h:
 
-/usr/include/c++/11/backward/binders.h:
+/opt/ros/humble/include/octomap_msgs/octomap_msgs/msg/detail/octomap__traits.hpp:
 
-/usr/include/boost/preprocessor/list/reverse.hpp:
+/usr/include/c++/11/bits/cxxabi_forced.h:
 
-/usr/include/eigen3/Eigen/src/Core/Transpositions.h:
+/usr/include/boost/random/detail/seed_impl.hpp:
 
-/opt/ros/humble/include/rclcpp/rclcpp/subscription_content_filter_options.hpp:
+/opt/ros/humble/include/rcl_interfaces/rcl_interfaces/srv/detail/set_parameters__struct.hpp:
 
-/usr/include/c++/11/tr1/exp_integral.tcc:
+/usr/include/c++/11/bits/hash_bytes.h:
 
-/usr/include/c++/11/bits/this_thread_sleep.h:
+/opt/ros/humble/include/moveit_msgs/moveit_msgs/msg/detail/motion_plan_request__type_support.hpp:
 
-/usr/include/c++/11/typeinfo:
+/opt/ros/humble/include/urdf/urdf/urdfdom_compatibility.h:
 
-/usr/include/boost/mpl/aux_/config/ctps.hpp:
+/opt/ros/humble/include/urdfdom_headers/urdf_exception/exception.h:
 
-/usr/include/c++/11/cstring:
+/usr/include/c++/11/bit:
 
-/usr/include/eigen3/Eigen/src/Geometry/ParametrizedLine.h:
+/opt/ros/humble/include/rmw/rmw/events_statuses/liveliness_changed.h:
 
-/usr/include/c++/11/bits/atomic_futex.h:
-
-/usr/include/alloca.h:
-
-/opt/ros/humble/include/rclcpp/rclcpp/publisher_base.hpp:
+/usr/include/x86_64-linux-gnu/bits/thread-shared-types.h:
 
 /opt/ros/humble/include/moveit_msgs/moveit_msgs/msg/detail/joint_limits__traits.hpp:
 
 /usr/include/c++/11/ext/new_allocator.h:
 
 /usr/include/eigen3/Eigen/src/Core/Visitor.h:
+
+/usr/include/c++/11/bits/specfun.h:
+
+/usr/include/x86_64-linux-gnu/bits/pthreadtypes.h:
+
+/usr/include/eigen3/Eigen/src/Core/Assign.h:
+
+/usr/include/x86_64-linux-gnu/sys/types.h:
+
+/usr/include/c++/11/codecvt:
+
+/opt/ros/humble/include/rcl_interfaces/rcl_interfaces/msg/detail/parameter_descriptor__type_support.hpp:
+
+/usr/include/c++/11/ext/aligned_buffer.h:
+
+/usr/include/x86_64-linux-gnu/bits/signum-generic.h:
+
+/usr/include/c++/11/cstdlib:
+
+/usr/include/c++/11/string_view:
+
+/usr/include/eigen3/Eigen/src/Core/arch/Default/ConjHelper.h:
+
+/usr/include/x86_64-linux-gnu/bits/local_lim.h:
+
+/usr/include/boost/mpl/aux_/lambda_arity_param.hpp:
+
+/usr/include/c++/11/bits/stl_iterator.h:
+
+/usr/include/c++/11/ext/atomicity.h:
+
+/usr/include/eigen3/Eigen/src/SVD/SVDBase.h:
+
+/usr/include/c++/11/bits/stl_pair.h:
+
+/opt/ros/humble/include/rcutils/rcutils/types/hash_map.h:
+
+/usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h:
+
+/usr/include/time.h:
+
+/opt/ros/humble/include/tf2_ros/tf2_ros/async_buffer_interface.hpp:
+
+/usr/include/x86_64-linux-gnu/bits/cpu-set.h:
+
+/usr/include/eigen3/Eigen/src/Core/Dot.h:
+
+/opt/ros/humble/include/moveit_msgs/moveit_msgs/msg/detail/collision_object__traits.hpp:
+
+/usr/include/boost/mpl/integral_c_tag.hpp:
+
+/usr/include/boost/preprocessor/punctuation/comma.hpp:
+
+/opt/ros/humble/include/urdf/urdf/model.h:
+
+/usr/include/pthread.h:
+
+/opt/ros/humble/include/rclcpp_action/rclcpp_action/client.hpp:
+
+/usr/include/x86_64-linux-gnu/bits/timesize.h:
+
+/usr/include/x86_64-linux-gnu/c++/11/bits/gthr-default.h:
+
+/usr/include/boost/type_traits/is_unsigned.hpp:
+
+/usr/include/c++/11/bits/shared_ptr_base.h:
+
+/usr/include/c++/11/bits/basic_string.h:
+
+/usr/include/c++/11/backward/binders.h:
+
+/usr/include/eigen3/Eigen/src/Householder/BlockHouseholder.h:
+
+/opt/ros/humble/include/rmw/rmw/events_statuses/liveliness_lost.h:
+
+/usr/include/eigen3/Eigen/src/Core/util/IntegralConstant.h:
+
+/opt/ros/humble/include/rclcpp/rclcpp/detail/rmw_implementation_specific_payload.hpp:
+
+/opt/ros/humble/include/tf2/tf2/visibility_control.h:
+
+/usr/include/x86_64-linux-gnu/bits/siginfo-arch.h:
+
+/usr/include/eigen3/Eigen/src/Core/util/IndexedViewHelper.h:
+
+/usr/include/x86_64-linux-gnu/bits/time.h:
+
+/opt/ros/humble/include/action_msgs/action_msgs/msg/detail/goal_status_array__struct.h:
+
+/usr/include/locale.h:
+
+/usr/include/x86_64-linux-gnu/bits/waitflags.h:
+
+/usr/include/c++/11/bits/localefwd.h:
+
+/opt/ros/humble/include/moveit_msgs/moveit_msgs/msg/detail/constraints__traits.hpp:
+
+/usr/include/x86_64-linux-gnu/c++/11/bits/c++allocator.h:
+
+/usr/include/c++/11/bits/exception_ptr.h:
+
+/opt/ros/humble/include/rcl_interfaces/rcl_interfaces/srv/detail/describe_parameters__traits.hpp:
+
+/usr/include/math.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h:
+
+/usr/include/x86_64-linux-gnu/sys/select.h:
+
+/usr/include/x86_64-linux-gnu/c++/11/bits/atomic_word.h:
+
+/usr/include/c++/11/tuple:
+
+/usr/include/c++/11/bits/move.h:
+
+/usr/include/x86_64-linux-gnu/bits/mathcalls-narrow.h:
+
+/usr/include/x86_64-linux-gnu/bits/struct_rwlock.h:
+
+/usr/include/c++/11/bits/postypes.h:
+
+/usr/include/x86_64-linux-gnu/c++/11/bits/gthr.h:
+
+/opt/ros/humble/include/geometry_msgs/geometry_msgs/msg/detail/pose__traits.hpp:
+
+/usr/include/c++/11/bits/list.tcc:
+
+/usr/include/boost/preprocessor/arithmetic/dec.hpp:
+
+/usr/include/boost/mpl/int.hpp:
+
+/usr/include/boost/config/no_tr1/cmath.hpp:
+
+/usr/include/x86_64-linux-gnu/c++/11/bits/c++locale.h:
+
+/usr/include/linux/errno.h:
+
+/opt/ros/humble/include/moveit_msgs/moveit_msgs/msg/detail/cartesian_trajectory_point__struct.hpp:
+
+/usr/include/c++/11/bits/stl_algobase.h:
+
+/opt/ros/humble/include/moveit_msgs/moveit_msgs/msg/detail/allowed_collision_matrix__traits.hpp:
+
+/usr/include/c++/11/cwchar:
+
+/usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h:
+
+/opt/ros/humble/include/urdfdom_headers/urdf_model/pose.h:
+
+/opt/ros/humble/include/rclcpp/rclcpp/allocator/allocator_common.hpp:
+
+/opt/ros/humble/include/action_msgs/action_msgs/msg/goal_status.h:
+
+/usr/include/boost/preprocessor/list/detail/fold_right.hpp:
+
+/usr/include/c++/11/ext/string_conversions.h:
+
+/opt/ros/humble/include/geometry_msgs/geometry_msgs/msg/detail/vector3__traits.hpp:
+
+/usr/include/x86_64-linux-gnu/bits/time64.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/11/include/mm_malloc.h:
+
+/usr/include/c++/11/ctime:
+
+/opt/ros/humble/include/geometry_msgs/geometry_msgs/msg/detail/quaternion__struct.hpp:
+
+/usr/include/c++/11/ext/type_traits.h:
+
+/opt/ros/humble/include/rcl_interfaces/rcl_interfaces/srv/set_parameters_atomically.hpp:
+
+/opt/ros/humble/include/moveit/macros/class_forward.h:
+
+/usr/include/c++/11/pstl/pstl_config.h:
+
+/usr/include/c++/11/pstl/glue_memory_defs.h:
+
+/usr/include/c++/11/bits/exception_defines.h:
+
+/usr/include/c++/11/type_traits:
+
+/opt/ros/humble/include/rmw/rmw/visibility_control.h:
+
+/usr/include/c++/11/bits/ostream.tcc:
+
+/usr/include/c++/11/tr1/modified_bessel_func.tcc:
+
+/opt/ros/humble/include/rclcpp/rclcpp/create_generic_publisher.hpp:
+
+/usr/include/x86_64-linux-gnu/sys/single_threaded.h:
+
+/usr/include/eigen3/Eigen/src/Core/Ref.h:
+
+/usr/include/eigen3/Eigen/src/Core/arch/SSE/Complex.h:
+
+/usr/include/eigen3/Eigen/src/LU/FullPivLU.h:
+
+/opt/ros/humble/include/visualization_msgs/visualization_msgs/msg/detail/mesh_file__struct.hpp:
+
+/usr/include/c++/11/cmath:
+
+/opt/ros/humble/include/rclcpp/rclcpp/detail/qos_parameters.hpp:
+
+/usr/include/linux/limits.h:
+
+/usr/include/c++/11/bits/allocator.h:
+
+/usr/include/boost/type_traits/make_unsigned.hpp:
+
+/usr/include/features.h:
+
+/usr/include/boost/preprocessor/tuple/elem.hpp:
+
+/usr/include/eigen3/Eigen/src/Geometry/Hyperplane.h:
+
+/usr/include/x86_64-linux-gnu/bits/getopt_posix.h:
+
+/opt/ros/humble/include/moveit_msgs/moveit_msgs/msg/detail/joint_limits__builder.hpp:
+
+/usr/include/boost/mpl/aux_/value_wknd.hpp:
+
+/usr/include/boost/mpl/limits/arity.hpp:
+
+/usr/include/c++/11/bits/sstream.tcc:
+
+/usr/include/c++/11/bits/stl_function.h:
+
+/usr/include/c++/11/tr1/poly_hermite.tcc:
+
+/usr/include/c++/11/bits/memoryfwd.h:
+
+/usr/include/boost/type_traits/is_enum.hpp:
+
+/usr/include/boost/random/detail/int_float_pair.hpp:
+
+/usr/include/boost/type_traits/detail/config.hpp:
+
+/opt/ros/humble/include/urdfdom_headers/urdf_model/types.h:
+
+/usr/include/c++/11/bits/vector.tcc:
+
+/usr/include/eigen3/Eigen/src/Core/arch/Default/BFloat16.h:
+
+/usr/include/endian.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/FILE.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/time_t.h:
+
+/usr/include/x86_64-linux-gnu/bits/select.h:
+
+/usr/include/boost/throw_exception.hpp:
+
+/usr/include/boost/random/detail/disable_warnings.hpp:
+
+/usr/include/x86_64-linux-gnu/bits/uio_lim.h:
+
+/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:
+
+/usr/include/c++/11/cctype:
+
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:
+
+/usr/include/c++/11/bits/range_access.h:
+
+/usr/include/x86_64-linux-gnu/bits/types.h:
+
+/usr/include/x86_64-linux-gnu/bits/sched.h:
+
+/opt/ros/humble/include/rclcpp/rclcpp/any_subscription_callback.hpp:
+
+/usr/include/x86_64-linux-gnu/bits/waitstatus.h:
+
+/opt/ros/humble/include/geometric_shapes/geometric_shapes/check_isometry.h:
+
+/usr/include/boost/type_traits/add_const.hpp:
+
+/opt/ros/humble/include/rclcpp/rclcpp/node_interfaces/node_timers_interface.hpp:
+
+/usr/include/c++/11/cstdint:
+
+/usr/include/eigen3/Eigen/src/Core/functors/TernaryFunctors.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h:
+
+/opt/ros/humble/include/moveit_msgs/moveit_msgs/msg/detail/robot_state__builder.hpp:
+
+/opt/ros/humble/include/rmw/rmw/message_sequence.h:
+
+/usr/include/c++/11/tr1/gamma.tcc:
+
+/usr/include/x86_64-linux-gnu/gnu/stubs-64.h:
+
+/opt/ros/humble/include/visualization_msgs/visualization_msgs/msg/detail/marker__traits.hpp:
+
+/usr/include/x86_64-linux-gnu/bits/timex.h:
+
+/usr/include/x86_64-linux-gnu/bits/endianness.h:
+
+/usr/include/boost/mpl/bool_fwd.hpp:
+
+/opt/ros/humble/include/visualization_msgs/visualization_msgs/msg/detail/mesh_file__traits.hpp:
+
+/usr/include/x86_64-linux-gnu/bits/wchar.h:
+
+/usr/include/boost/preprocessor/variadic/size.hpp:
+
+/opt/ros/humble/include/rcl_interfaces/rcl_interfaces/msg/detail/parameter_type__traits.hpp:
+
+/opt/ros/humble/include/moveit_msgs/moveit_msgs/msg/detail/gripper_translation__struct.hpp:
+
+/usr/include/boost/mpl/aux_/preprocessor/enum.hpp:
+
+/usr/include/boost/config/workaround.hpp:
+
+/opt/ros/humble/include/moveit_msgs/moveit_msgs/msg/detail/generic_trajectory__traits.hpp:
+
+/usr/include/c++/11/bits/node_handle.h:
+
+/opt/ros/humble/include/moveit_msgs/moveit_msgs/msg/detail/grasp__type_support.hpp:
+
+/usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h:
+
+/usr/include/boost/config.hpp:
+
+/usr/include/x86_64-linux-gnu/bits/types/__FILE.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/__locale_t.h:
+
+/usr/include/stdc-predef.h:
+
+/usr/include/c++/11/bits/alloc_traits.h:
+
+/usr/include/errno.h:
+
+/opt/ros/humble/include/action_msgs/action_msgs/msg/goal_status_array.hpp:
+
+/opt/ros/humble/include/visualization_msgs/visualization_msgs/msg/detail/marker_array__traits.hpp:
+
+/opt/ros/humble/include/rcl/rcl/allocator.h:
+
+/usr/include/c++/11/system_error:
+
+/usr/include/x86_64-linux-gnu/bits/wctype-wchar.h:
+
+/usr/include/eigen3/Eigen/src/Core/ArrayWrapper.h:
+
+/opt/ros/humble/include/rmw/rmw/rmw.h:
+
+/opt/ros/humble/include/action_msgs/action_msgs/srv/cancel_goal.hpp:
+
+/usr/include/eigen3/Eigen/src/Core/MathFunctions.h:
+
+/opt/ros/humble/include/rcl/rcl/error_handling.h:
+
+/opt/ros/humble/include/rclcpp/rclcpp/detail/rmw_implementation_specific_subscription_payload.hpp:
+
+/usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h:
+
+/usr/include/x86_64-linux-gnu/bits/pthread_stack_min-dynamic.h:
+
+/usr/include/c++/11/functional:
+
+/usr/include/x86_64-linux-gnu/bits/uintn-identity.h:
+
+/opt/ros/humble/include/rcl_interfaces/rcl_interfaces/msg/detail/parameter_value__traits.hpp:
+
+/usr/include/c++/11/locale:
+
+/usr/include/eigen3/Eigen/src/Core/GenericPacketMath.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/11/include/syslimits.h:
+
+/opt/ros/humble/include/trajectory_msgs/trajectory_msgs/msg/detail/multi_dof_joint_trajectory__traits.hpp:
+
+/usr/include/eigen3/Eigen/src/Householder/HouseholderSequence.h:
+
+/usr/include/c++/11/debug/debug.h:
+
+/opt/ros/humble/include/moveit/macros/declare_ptr.h:
+
+/opt/ros/humble/include/geometry_msgs/geometry_msgs/msg/detail/point__struct.hpp:
+
+/opt/ros/humble/include/rcl_interfaces/rcl_interfaces/srv/detail/list_parameters__builder.hpp:
+
+/usr/include/c++/11/tr1/legendre_function.tcc:
+
+/usr/include/x86_64-linux-gnu/bits/stdio_lim.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/siginfo_t.h:
 
@@ -2306,301 +2661,23 @@ CMakeFiles/sweep_mover.dir/src/sweep_mover.cpp.o: /home/zech/robim_ur20_sim/src/
 
 /usr/include/eigen3/Eigen/Cholesky:
 
-/usr/include/eigen3/Eigen/src/Core/Assign.h:
-
-/opt/ros/humble/include/moveit_msgs/moveit_msgs/action/execute_trajectory.hpp:
-
-/usr/include/c++/11/bits/hashtable_policy.h:
-
-/usr/include/boost/preprocessor/identity.hpp:
-
-/usr/include/c++/11/set:
-
-/usr/include/eigen3/Eigen/StdVector:
-
-/usr/include/x86_64-linux-gnu/sys/select.h:
-
-/usr/include/x86_64-linux-gnu/bits/fp-logb.h:
-
-/usr/include/c++/11/bits/ios_base.h:
-
-/opt/ros/humble/include/rosidl_runtime_c/rosidl_runtime_c/message_type_support_struct.h:
-
-/opt/ros/humble/include/action_msgs/action_msgs/msg/detail/goal_status__struct.hpp:
-
-/opt/ros/humble/include/rmw/rmw/network_flow_endpoint_array.h:
-
-/opt/ros/humble/include/urdfdom_headers/urdf_model/utils.h:
-
-/usr/include/x86_64-linux-gnu/bits/stdlib-float.h:
-
-/usr/include/wchar.h:
-
-/usr/include/boost/mpl/aux_/value_wknd.hpp:
-
-/usr/include/c++/11/bits/stl_function.h:
-
-/usr/include/c++/11/bits/stl_pair.h:
-
-/usr/include/c++/11/bits/stl_iterator.h:
-
-/usr/include/c++/11/ext/atomicity.h:
-
-/usr/include/eigen3/Eigen/src/SVD/SVDBase.h:
-
-/opt/ros/humble/include/rclcpp/rclcpp/detail/rmw_implementation_specific_payload.hpp:
-
-/opt/ros/humble/include/tf2/tf2/visibility_control.h:
-
-/usr/include/x86_64-linux-gnu/bits/siginfo-arch.h:
-
-/usr/include/eigen3/Eigen/src/Core/util/IndexedViewHelper.h:
-
-/usr/include/x86_64-linux-gnu/bits/time.h:
-
-/usr/include/c++/11/bits/locale_facets.tcc:
-
-/opt/ros/humble/include/visualization_msgs/visualization_msgs/msg/detail/marker_array__type_support.hpp:
-
-/usr/include/eigen3/Eigen/src/Core/arch/Default/ConjHelper.h:
-
-/usr/include/x86_64-linux-gnu/bits/local_lim.h:
-
-/usr/include/boost/mpl/aux_/lambda_arity_param.hpp:
-
-/usr/include/c++/11/ext/type_traits.h:
-
-/opt/ros/humble/include/rcl_interfaces/rcl_interfaces/srv/set_parameters_atomically.hpp:
-
-/opt/ros/humble/include/moveit/macros/class_forward.h:
-
-/usr/include/c++/11/pstl/pstl_config.h:
-
-/usr/include/c++/11/pstl/glue_memory_defs.h:
-
-/usr/include/boost/preprocessor/variadic/elem.hpp:
-
-/usr/include/c++/11/bits/exception_defines.h:
-
-/opt/ros/humble/include/sensor_msgs/sensor_msgs/msg/detail/joint_state__traits.hpp:
-
-/usr/include/x86_64-linux-gnu/bits/mathcalls.h:
-
-/usr/include/x86_64-linux-gnu/bits/endian.h:
-
-/usr/include/c++/11/bits/basic_string.h:
-
-/usr/include/boost/type_traits/is_unsigned.hpp:
-
-/usr/include/c++/11/bits/shared_ptr_base.h:
-
-/usr/include/x86_64-linux-gnu/bits/signum-generic.h:
-
-/usr/include/c++/11/string_view:
-
-/usr/include/c++/11/cstdlib:
-
-/opt/ros/humble/include/moveit_msgs/moveit_msgs/msg/detail/motion_plan_request__type_support.hpp:
-
-/opt/ros/humble/include/urdf/urdf/urdfdom_compatibility.h:
-
-/opt/ros/humble/include/geometry_msgs/geometry_msgs/msg/detail/twist__struct.hpp:
-
-/opt/ros/humble/include/rclcpp/rclcpp/node_interfaces/get_node_parameters_interface.hpp:
-
-/opt/ros/humble/include/urdfdom_headers/urdf_exception/exception.h:
-
-/usr/include/c++/11/bit:
-
-/opt/ros/humble/include/rmw/rmw/events_statuses/liveliness_changed.h:
-
-/usr/include/x86_64-linux-gnu/bits/math-vector.h:
-
-/opt/ros/humble/include/moveit_msgs/moveit_msgs/msg/detail/joint_constraint__struct.hpp:
-
-/usr/include/boost/preprocessor/debug/error.hpp:
-
-/opt/ros/humble/include/moveit/robot_model/joint_model.h:
-
-/opt/ros/humble/include/geometry_msgs/geometry_msgs/msg/detail/polygon__traits.hpp:
-
-/usr/include/c++/11/bits/stl_algo.h:
-
-/opt/ros/humble/include/moveit_msgs/moveit_msgs/msg/detail/cartesian_trajectory_point__struct.hpp:
-
-/usr/include/c++/11/bits/stl_algobase.h:
-
-/usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h:
-
-/opt/ros/humble/include/moveit_msgs/moveit_msgs/msg/detail/allowed_collision_matrix__traits.hpp:
-
-/usr/include/c++/11/cwchar:
-
-/usr/include/boost/preprocessor/arithmetic/dec.hpp:
-
-/usr/include/boost/mpl/int.hpp:
-
-/usr/include/x86_64-linux-gnu/bits/time64.h:
-
-/usr/lib/gcc/x86_64-linux-gnu/11/include/mm_malloc.h:
-
-/usr/include/c++/11/ctime:
-
-/opt/ros/humble/include/geometry_msgs/geometry_msgs/msg/detail/quaternion__struct.hpp:
-
-/usr/include/c++/11/tuple:
-
-/usr/include/boost/type_traits/make_unsigned.hpp:
-
-/opt/ros/humble/include/rcl_interfaces/rcl_interfaces/srv/detail/set_parameters__struct.hpp:
-
-/usr/include/c++/11/bits/hash_bytes.h:
-
-/usr/include/boost/random/detail/seed_impl.hpp:
-
-/usr/include/c++/11/bits/move.h:
-
-/usr/include/boost/preprocessor/detail/is_binary.hpp:
-
-/usr/include/c++/11/bits/stl_relops.h:
-
-/usr/include/c++/11/bits/stl_tempbuf.h:
-
-/opt/ros/humble/include/moveit/robot_model/planar_joint_model.h:
-
-/opt/ros/humble/include/rclcpp/rclcpp/detail/qos_parameters.hpp:
-
-/usr/include/linux/limits.h:
-
-/usr/include/c++/11/bits/allocator.h:
-
-/usr/include/eigen3/Eigen/src/Core/arch/SSE/Complex.h:
-
-/usr/include/eigen3/Eigen/src/LU/FullPivLU.h:
-
-/usr/include/c++/11/type_traits:
-
-/opt/ros/humble/include/rmw/rmw/visibility_control.h:
-
-/usr/include/x86_64-linux-gnu/sys/single_threaded.h:
-
-/usr/include/eigen3/Eigen/src/Core/Ref.h:
-
 /usr/include/x86_64-linux-gnu/c++/11/bits/cpu_defines.h:
 
-/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:
+/usr/include/boost/preprocessor/tuple/detail/is_single_return.hpp:
 
-/usr/include/c++/11/bits/range_access.h:
+/opt/ros/humble/include/rosidl_runtime_cpp/rosidl_typesupport_cpp/service_type_support.hpp:
 
-/usr/include/x86_64-linux-gnu/bits/types.h:
+/usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h:
 
-/opt/ros/humble/include/moveit_msgs/moveit_msgs/msg/detail/grasp__traits.hpp:
+/usr/include/x86_64-linux-gnu/bits/floatn.h:
 
-/usr/include/x86_64-linux-gnu/bits/struct_mutex.h:
+/opt/ros/humble/include/rcpputils/rcpputils/time.hpp:
 
-/usr/include/boost/preprocessor/cat.hpp:
+/usr/include/c++/11/debug/assertions.h:
 
-/usr/include/stdlib.h:
+/opt/ros/humble/include/tracetools/tracetools/config.h:
 
-/usr/include/c++/11/system_error:
-
-/usr/include/x86_64-linux-gnu/bits/wctype-wchar.h:
-
-/usr/include/eigen3/Eigen/src/Core/ArrayWrapper.h:
-
-/opt/ros/humble/include/rmw/rmw/rmw.h:
-
-/opt/ros/humble/include/action_msgs/action_msgs/srv/cancel_goal.hpp:
-
-/usr/include/eigen3/Eigen/src/Core/MathFunctions.h:
-
-/opt/ros/humble/include/rcl/rcl/error_handling.h:
-
-/opt/ros/humble/include/rclcpp/rclcpp/detail/rmw_implementation_specific_subscription_payload.hpp:
-
-/opt/ros/humble/include/geometry_msgs/geometry_msgs/msg/detail/transform_stamped__struct.hpp:
-
-/opt/ros/humble/include/rcl_interfaces/rcl_interfaces/msg/detail/parameter_descriptor__struct.hpp:
-
-/usr/include/c++/11/bits/std_abs.h:
-
-/opt/ros/humble/include/rcl_interfaces/rcl_interfaces/msg/detail/list_parameters_result__traits.hpp:
-
-/opt/ros/humble/include/rcpputils/rcpputils/pointer_traits.hpp:
-
-/opt/ros/humble/include/moveit_msgs/moveit_msgs/msg/detail/grasp__type_support.hpp:
-
-/usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h:
-
-/usr/include/boost/config.hpp:
-
-/usr/include/x86_64-linux-gnu/bits/types/__FILE.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/__locale_t.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h:
-
-/usr/include/boost/config/detail/select_stdlib_config.hpp:
-
-/usr/include/x86_64-linux-gnu/bits/byteswap.h:
-
-/usr/include/eigen3/Eigen/Core:
-
-/opt/ros/humble/include/moveit_msgs/moveit_msgs/msg/detail/motion_plan_request__struct.hpp:
-
-/usr/include/boost/core/enable_if.hpp:
-
-/usr/include/c++/11/bits/shared_ptr.h:
-
-/usr/include/errno.h:
-
-/usr/include/c++/11/bits/alloc_traits.h:
-
-/opt/ros/humble/include/action_msgs/action_msgs/msg/goal_status_array.hpp:
-
-/opt/ros/humble/include/visualization_msgs/visualization_msgs/msg/detail/marker_array__traits.hpp:
-
-/opt/ros/humble/include/rcl/rcl/allocator.h:
-
-/usr/include/features.h:
-
-/usr/include/stdc-predef.h:
-
-/usr/include/c++/11/bits/vector.tcc:
-
-/opt/ros/humble/include/urdfdom_headers/urdf_model/types.h:
-
-/usr/include/boost/type_traits/is_enum.hpp:
-
-/usr/include/boost/random/detail/int_float_pair.hpp:
-
-/usr/include/boost/type_traits/detail/config.hpp:
-
-/usr/include/c++/11/bits/stl_uninitialized.h:
-
-/opt/ros/humble/include/geometry_msgs/geometry_msgs/msg/detail/pose__traits.hpp:
-
-/usr/include/x86_64-linux-gnu/c++/11/bits/gthr.h:
-
-/usr/include/c++/11/bits/list.tcc:
-
-/usr/include/x86_64-linux-gnu/bits/select.h:
-
-/usr/include/boost/throw_exception.hpp:
-
-/usr/include/x86_64-linux-gnu/bits/types/time_t.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/FILE.h:
-
-/usr/include/eigen3/Eigen/src/Core/GenericPacketMath.h:
-
-/usr/lib/gcc/x86_64-linux-gnu/11/include/syslimits.h:
-
-/opt/ros/humble/include/trajectory_msgs/trajectory_msgs/msg/detail/multi_dof_joint_trajectory__traits.hpp:
-
-/usr/include/eigen3/Eigen/src/Householder/HouseholderSequence.h:
-
-/usr/include/c++/11/debug/debug.h:
+/usr/include/x86_64-linux-gnu/bits/types/sigset_t.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h:
 
@@ -2612,45 +2689,31 @@ CMakeFiles/sweep_mover.dir/src/sweep_mover.cpp.o: /home/zech/robim_ur20_sim/src/
 
 /usr/include/boost/mpl/aux_/arity.hpp:
 
-/usr/include/x86_64-linux-gnu/bits/types/clock_t.h:
+/usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h:
 
-/opt/ros/humble/include/rclcpp/rclcpp/qos_event.hpp:
+/opt/ros/humble/include/moveit_msgs/moveit_msgs/msg/detail/grasp__traits.hpp:
 
-/opt/ros/humble/include/moveit_msgs/moveit_msgs/msg/detail/gripper_translation__struct.hpp:
+/usr/include/x86_64-linux-gnu/bits/struct_mutex.h:
 
-/usr/include/boost/mpl/aux_/preprocessor/enum.hpp:
+/opt/ros/humble/include/geometry_msgs/geometry_msgs/msg/detail/polygon__struct.hpp:
 
-/usr/include/boost/config/workaround.hpp:
+/usr/include/c++/11/climits:
 
-/opt/ros/humble/include/moveit_msgs/moveit_msgs/msg/detail/generic_trajectory__traits.hpp:
+/usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h:
 
-/usr/include/c++/11/bits/node_handle.h:
+/usr/include/c++/11/bits/istream.tcc:
 
-/opt/ros/humble/include/rclcpp/rclcpp/subscription.hpp:
+/usr/include/c++/11/clocale:
 
-/usr/include/boost/config/detail/suffix.hpp:
+/opt/ros/humble/include/rcl/rcl/event.h:
 
-/usr/include/c++/11/ext/aligned_buffer.h:
+/usr/include/boost/mpl/aux_/template_arity_fwd.hpp:
 
-/usr/include/x86_64-linux-gnu/bits/types/sigset_t.h:
+/usr/include/eigen3/Eigen/src/Core/StlIterators.h:
 
-/usr/include/x86_64-linux-gnu/bits/floatn.h:
+/usr/include/wchar.h:
 
-/opt/ros/humble/include/rcpputils/rcpputils/time.hpp:
-
-/usr/include/boost/preprocessor/tuple/detail/is_single_return.hpp:
-
-/opt/ros/humble/include/rosidl_runtime_cpp/rosidl_typesupport_cpp/service_type_support.hpp:
-
-/usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h:
-
-/usr/include/boost/mpl/integral_c_tag.hpp:
-
-/usr/include/boost/preprocessor/punctuation/comma.hpp:
-
-/opt/ros/humble/include/urdf/urdf/model.h:
-
-/usr/include/pthread.h:
+/usr/include/x86_64-linux-gnu/bits/stdlib-float.h:
 
 /usr/include/eigen3/Eigen/src/Core/arch/SSE/MathFunctions.h:
 
@@ -2662,43 +2725,11 @@ CMakeFiles/sweep_mover.dir/src/sweep_mover.cpp.o: /home/zech/robim_ur20_sim/src/
 
 /opt/ros/humble/include/moveit_kinematics_base_export.h:
 
-/usr/include/boost/preprocessor/facilities/identity.hpp:
-
-/usr/include/c++/11/bits/ostream.tcc:
-
-/opt/ros/humble/include/rclcpp/rclcpp/create_generic_publisher.hpp:
-
-/usr/include/c++/11/tr1/modified_bessel_func.tcc:
-
-/usr/include/eigen3/Eigen/src/Core/NestByValue.h:
-
 /home/zech/robim_ur20_sim/src/ur20_sim/src/sweep_mover.cpp:
 
 /usr/include/eigen3/Eigen/src/Core/GeneralProduct.h:
 
 /opt/ros/humble/include/rclcpp/rclcpp/create_client.hpp:
-
-/usr/include/x86_64-linux-gnu/bits/waitflags.h:
-
-/usr/include/c++/11/tr1/special_function_util.h:
-
-/usr/include/eigen3/Eigen/src/Geometry/Hyperplane.h:
-
-/usr/include/boost/preprocessor/tuple/elem.hpp:
-
-/usr/include/x86_64-linux-gnu/bits/mathcalls-narrow.h:
-
-/usr/include/x86_64-linux-gnu/bits/struct_rwlock.h:
-
-/usr/include/c++/11/bits/postypes.h:
-
-/usr/include/c++/11/vector:
-
-/usr/include/boost/mpl/aux_/config/integral.hpp:
-
-/usr/include/c++/11/bits/align.h:
-
-/opt/ros/humble/include/rclcpp/rclcpp/parameter_value.hpp:
 
 /usr/include/x86_64-linux-gnu/bits/floatn-common.h:
 
@@ -2718,273 +2749,41 @@ CMakeFiles/sweep_mover.dir/src/sweep_mover.cpp.o: /home/zech/robim_ur20_sim/src/
 
 /opt/ros/humble/include/rclcpp/rclcpp/waitable.hpp:
 
-/usr/include/x86_64-linux-gnu/sys/types.h:
+/usr/include/x86_64-linux-gnu/bits/types/clock_t.h:
 
-/usr/include/c++/11/codecvt:
+/opt/ros/humble/include/rclcpp/rclcpp/qos_event.hpp:
 
-/opt/ros/humble/include/rcl_interfaces/rcl_interfaces/msg/detail/parameter_descriptor__type_support.hpp:
+/usr/include/boost/mpl/aux_/config/ctps.hpp:
 
-/usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h:
+/usr/include/c++/11/cstring:
 
-/opt/ros/humble/include/action_msgs/action_msgs/msg/detail/goal_status_array__struct.h:
+/usr/include/eigen3/Eigen/src/Geometry/ParametrizedLine.h:
 
-/usr/include/locale.h:
+/usr/include/c++/11/bits/atomic_futex.h:
+
+/usr/include/c++/11/bits/stl_tempbuf.h:
+
+/opt/ros/humble/include/moveit/robot_model/planar_joint_model.h:
 
 /usr/include/x86_64-linux-gnu/bits/typesizes.h:
 
-/usr/include/c++/11/cstddef:
+/usr/include/boost/config/detail/select_stdlib_config.hpp:
 
-/opt/ros/humble/include/moveit_msgs/moveit_msgs/msg/detail/visibility_constraint__struct.hpp:
+/usr/include/x86_64-linux-gnu/bits/byteswap.h:
 
-/usr/include/c++/11/bits/stl_vector.h:
+/usr/include/eigen3/Eigen/Core:
 
-/usr/include/x86_64-linux-gnu/bits/timex.h:
+/opt/ros/humble/include/moveit_msgs/moveit_msgs/msg/detail/motion_plan_request__struct.hpp:
 
-/usr/include/x86_64-linux-gnu/bits/endianness.h:
+/usr/include/boost/core/enable_if.hpp:
 
-/usr/include/boost/mpl/bool_fwd.hpp:
+/usr/include/c++/11/bits/shared_ptr.h:
 
-/opt/ros/humble/include/rmw/rmw/events_statuses/liveliness_lost.h:
+/opt/ros/humble/include/urdfdom_headers/urdf_model/utils.h:
 
-/usr/include/eigen3/Eigen/src/Core/util/IntegralConstant.h:
+/usr/include/alloca.h:
 
-/usr/include/eigen3/Eigen/src/Householder/BlockHouseholder.h:
-
-/opt/ros/humble/include/std_msgs/std_msgs/msg/detail/header__struct.hpp:
-
-/usr/include/x86_64-linux-gnu/bits/pthreadtypes.h:
-
-/usr/include/c++/11/bits/specfun.h:
-
-/usr/include/boost/integer.hpp:
-
-/usr/include/x86_64-linux-gnu/bits/types/struct_sigstack.h:
-
-/usr/include/c++/11/limits:
-
-/usr/include/x86_64-linux-gnu/gnu/stubs-64.h:
-
-/opt/ros/humble/include/visualization_msgs/visualization_msgs/msg/detail/marker__traits.hpp:
-
-/opt/ros/humble/include/rmw/rmw/message_sequence.h:
-
-/usr/include/c++/11/tr1/gamma.tcc:
-
-/usr/include/c++/11/bits/locale_classes.h:
-
-/opt/ros/humble/include/moveit_msgs/moveit_msgs/msg/detail/joint_constraint__traits.hpp:
-
-/usr/include/eigen3/Eigen/src/Core/CoreIterators.h:
-
-/usr/include/c++/11/bits/atomic_lockfree_defines.h:
-
-/usr/include/boost/random/detail/seed.hpp:
-
-/usr/include/eigen3/Eigen/src/Geometry/RotationBase.h:
-
-/usr/include/c++/11/tr1/poly_laguerre.tcc:
-
-/usr/include/c++/11/array:
-
-/usr/include/c++/11/tr1/beta_function.tcc:
-
-/usr/include/boost/mpl/bool.hpp:
-
-/usr/include/x86_64-linux-gnu/bits/types/struct_sched_param.h:
-
-/usr/include/asm-generic/errno.h:
-
-/usr/include/boost/mpl/aux_/config/adl.hpp:
-
-/usr/include/c++/11/tr1/hypergeometric.tcc:
-
-/usr/include/c++/11/cmath:
-
-/opt/ros/humble/include/visualization_msgs/visualization_msgs/msg/detail/mesh_file__struct.hpp:
-
-/usr/include/c++/11/bits/localefwd.h:
-
-/usr/include/c++/11/bits/memoryfwd.h:
-
-/usr/include/c++/11/tr1/poly_hermite.tcc:
-
-/usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h:
-
-/usr/include/c++/11/bits/exception.h:
-
-/usr/include/eigen3/Eigen/src/Core/BandMatrix.h:
-
-/usr/include/c++/11/bits/locale_facets.h:
-
-/opt/ros/humble/include/rclcpp/rclcpp/detail/subscription_callback_type_helper.hpp:
-
-/usr/include/limits.h:
-
-/usr/include/c++/11/tr1/riemann_zeta.tcc:
-
-/opt/ros/humble/include/builtin_interfaces/builtin_interfaces/msg/time.hpp:
-
-/usr/include/c++/11/bits/erase_if.h:
-
-/usr/include/eigen3/Eigen/src/Core/arch/Default/BFloat16.h:
-
-/usr/include/endian.h:
-
-/opt/ros/humble/include/shape_msgs/shape_msgs/msg/detail/plane__struct.hpp:
-
-/opt/ros/humble/include/geometry_msgs/geometry_msgs/msg/detail/pose__type_support.hpp:
-
-/opt/ros/humble/include/moveit_msgs/moveit_msgs/msg/detail/robot_trajectory__type_support.hpp:
-
-/opt/ros/humble/include/urdf/urdf/visibility_control.hpp:
-
-/usr/include/c++/11/bits/ptr_traits.h:
-
-/usr/include/stdint.h:
-
-/usr/include/x86_64-linux-gnu/bits/wchar.h:
-
-/usr/include/boost/preprocessor/variadic/size.hpp:
-
-/opt/ros/humble/include/rcl_interfaces/rcl_interfaces/msg/detail/parameter_type__traits.hpp:
-
-/usr/include/c++/11/bits/unique_ptr.h:
-
-/opt/ros/humble/include/urdfdom_headers/urdf_model/pose.h:
-
-/opt/ros/humble/include/rclcpp/rclcpp/allocator/allocator_common.hpp:
-
-/opt/ros/humble/include/action_msgs/action_msgs/msg/goal_status.h:
-
-/usr/include/boost/preprocessor/list/detail/fold_right.hpp:
-
-/usr/include/c++/11/ext/string_conversions.h:
-
-/opt/ros/humble/include/geometry_msgs/geometry_msgs/msg/detail/vector3__traits.hpp:
-
-/usr/include/c++/11/climits:
-
-/opt/ros/humble/include/geometry_msgs/geometry_msgs/msg/detail/polygon__struct.hpp:
-
-/usr/include/c++/11/debug/assertions.h:
-
-/opt/ros/humble/include/tracetools/tracetools/config.h:
-
-/opt/ros/humble/include/rclcpp_action/rclcpp_action/client.hpp:
-
-/usr/include/x86_64-linux-gnu/bits/timesize.h:
-
-/usr/include/x86_64-linux-gnu/c++/11/bits/gthr-default.h:
-
-/usr/include/x86_64-linux-gnu/bits/sched.h:
-
-/opt/ros/humble/include/tf2_ros/tf2_ros/async_buffer_interface.hpp:
-
-/usr/include/x86_64-linux-gnu/bits/cpu-set.h:
-
-/usr/include/eigen3/Eigen/src/Core/Dot.h:
-
-/opt/ros/humble/include/moveit_msgs/moveit_msgs/msg/detail/collision_object__traits.hpp:
-
-/usr/include/c++/11/bits/sstream.tcc:
-
-/usr/include/boost/mpl/limits/arity.hpp:
-
-/opt/ros/humble/include/rcutils/rcutils/types/hash_map.h:
-
-/opt/ros/humble/include/moveit_msgs/moveit_msgs/msg/detail/joint_limits__builder.hpp:
-
-/usr/include/x86_64-linux-gnu/bits/getopt_posix.h:
-
-/usr/include/time.h:
-
-/opt/ros/humble/include/geometry_msgs/geometry_msgs/msg/detail/twist__traits.hpp:
-
-/usr/include/c++/11/bits/cxxabi_init_exception.h:
-
-/usr/include/c++/11/bits/locale_classes.tcc:
-
-/opt/ros/humble/include/rosidl_runtime_cpp/rosidl_runtime_cpp/traits.hpp:
-
-/opt/ros/humble/include/geometry_msgs/geometry_msgs/msg/velocity_stamped.hpp:
-
-/opt/ros/humble/include/rcutils/rcutils/macros.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/clockid_t.h:
-
-/opt/ros/humble/include/tf2/tf2/convert.hpp:
-
-/usr/include/c++/11/bits/stl_bvector.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/struct___jmp_buf_tag.h:
-
-/usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h:
-
-/opt/ros/humble/include/rcl_interfaces/rcl_interfaces/srv/detail/list_parameters__builder.hpp:
-
-/usr/include/x86_64-linux-gnu/bits/stdio_lim.h:
-
-/usr/include/c++/11/tr1/legendre_function.tcc:
-
-/usr/include/x86_64-linux-gnu/bits/pthread_stack_min-dynamic.h:
-
-/usr/include/c++/11/functional:
-
-/usr/include/x86_64-linux-gnu/bits/uintn-identity.h:
-
-/opt/ros/humble/include/rcl_interfaces/rcl_interfaces/msg/detail/parameter_value__traits.hpp:
-
-/usr/include/linux/errno.h:
-
-/usr/include/x86_64-linux-gnu/c++/11/bits/c++locale.h:
-
-/usr/include/x86_64-linux-gnu/c++/11/bits/atomic_word.h:
-
-/usr/include/c++/11/exception:
-
-/usr/include/c++/11/bits/nested_exception.h:
-
-/usr/include/c++/11/iomanip:
-
-/opt/ros/humble/include/rcutils/rcutils/visibility_control_macros.h:
-
-/usr/include/c++/11/bits/shared_ptr_atomic.h:
-
-/usr/include/c++/11/bits/parse_numbers.h:
-
-/usr/include/boost/random/detail/disable_warnings.hpp:
-
-/usr/include/x86_64-linux-gnu/bits/uio_lim.h:
-
-/opt/ros/humble/include/rclcpp/rclcpp/any_subscription_callback.hpp:
-
-/usr/include/x86_64-linux-gnu/bits/waitstatus.h:
-
-/opt/ros/humble/include/geometric_shapes/geometric_shapes/check_isometry.h:
-
-/usr/include/boost/type_traits/add_const.hpp:
-
-/opt/ros/humble/include/rclcpp/rclcpp/node_interfaces/node_timers_interface.hpp:
-
-/usr/include/c++/11/cstdint:
-
-/usr/include/boost/config/no_tr1/cmath.hpp:
-
-/usr/include/c++/11/bits/istream.tcc:
-
-/usr/include/c++/11/clocale:
-
-/opt/ros/humble/include/rcl/rcl/event.h:
-
-/usr/include/c++/11/locale:
-
-/usr/include/eigen3/Eigen/src/Core/functors/TernaryFunctors.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h:
-
-/opt/ros/humble/include/moveit_msgs/moveit_msgs/msg/detail/robot_state__builder.hpp:
-
-/usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h:
+/opt/ros/humble/include/rclcpp/rclcpp/publisher_base.hpp:
 
 /opt/ros/humble/include/action_msgs/action_msgs/msg/detail/goal_info__type_support.h:
 
@@ -2999,6 +2798,12 @@ CMakeFiles/sweep_mover.dir/src/sweep_mover.cpp.o: /home/zech/robim_ur20_sim/src/
 /opt/ros/humble/include/trajectory_msgs/trajectory_msgs/msg/detail/joint_trajectory_point__struct.hpp:
 
 /usr/include/stdio.h:
+
+/opt/ros/humble/include/geometry_msgs/geometry_msgs/msg/detail/pose__struct.hpp:
+
+/usr/include/c++/11/ios:
+
+/usr/include/c++/11/utility:
 
 /usr/include/x86_64-linux-gnu/bits/errno.h:
 
@@ -3022,6 +2827,20 @@ CMakeFiles/sweep_mover.dir/src/sweep_mover.cpp.o: /home/zech/robim_ur20_sim/src/
 
 /opt/ros/humble/include/rmw/rmw/topic_endpoint_info.h:
 
+/usr/include/x86_64-linux-gnu/c++/11/bits/ctype_base.h:
+
+/opt/ros/humble/include/moveit_msgs/moveit_msgs/action/detail/move_group__builder.hpp:
+
+/usr/include/c++/11/math.h:
+
+/opt/ros/humble/include/rcutils/rcutils/types/string_map.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/struct_sched_param.h:
+
+/usr/include/asm-generic/errno.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/error_t.h:
+
 /usr/include/c++/11/bits/algorithmfwd.h:
 
 /usr/include/c++/11/bits/basic_string.tcc:
@@ -3032,11 +2851,137 @@ CMakeFiles/sweep_mover.dir/src/sweep_mover.cpp.o: /home/zech/robim_ur20_sim/src/
 
 /usr/include/c++/11/bits/std_thread.h:
 
+/usr/include/c++/11/exception:
+
+/usr/include/c++/11/typeinfo:
+
+/usr/include/c++/11/bits/nested_exception.h:
+
+/usr/include/c++/11/tr1/riemann_zeta.tcc:
+
+/usr/include/limits.h:
+
+/usr/include/boost/preprocessor/detail/is_binary.hpp:
+
+/usr/include/c++/11/bits/stl_relops.h:
+
+/usr/include/c++/11/tr1/beta_function.tcc:
+
+/usr/include/c++/11/tr1/poly_laguerre.tcc:
+
+/usr/include/eigen3/Eigen/src/Geometry/RotationBase.h:
+
+/usr/include/c++/11/array:
+
+/usr/include/c++/11/bits/unique_ptr.h:
+
+/opt/ros/humble/include/moveit_msgs/moveit_msgs/msg/detail/link_padding__traits.hpp:
+
+/usr/include/c++/11/ostream:
+
 /opt/ros/humble/include/rclcpp/rclcpp/generic_publisher.hpp:
 
 /opt/ros/humble/include/rclcpp/rclcpp/message_memory_strategy.hpp:
 
 /opt/ros/humble/include/sensor_msgs/sensor_msgs/msg/joint_state.hpp:
+
+/usr/include/boost/integer.hpp:
+
+/usr/include/x86_64-linux-gnu/bits/types/struct_sigstack.h:
+
+/usr/include/c++/11/limits:
+
+/usr/include/c++/11/bits/parse_numbers.h:
+
+/opt/ros/humble/include/rcutils/rcutils/visibility_control_macros.h:
+
+/usr/include/c++/11/iomanip:
+
+/usr/include/c++/11/bits/shared_ptr_atomic.h:
+
+/usr/include/c++/11/vector:
+
+/usr/include/boost/mpl/aux_/config/integral.hpp:
+
+/usr/include/c++/11/bits/align.h:
+
+/opt/ros/humble/include/rclcpp/rclcpp/parameter_value.hpp:
+
+/opt/ros/humble/include/rosidl_runtime_c/rosidl_runtime_c/message_type_support_struct.h:
+
+/opt/ros/humble/include/action_msgs/action_msgs/msg/detail/goal_status__struct.hpp:
+
+/opt/ros/humble/include/rmw/rmw/network_flow_endpoint_array.h:
+
+/usr/include/c++/11/cstddef:
+
+/opt/ros/humble/include/moveit_msgs/moveit_msgs/msg/detail/visibility_constraint__struct.hpp:
+
+/usr/include/c++/11/bits/stl_vector.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/struct___jmp_buf_tag.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/clockid_t.h:
+
+/usr/include/c++/11/bits/locale_classes.tcc:
+
+/opt/ros/humble/include/geometry_msgs/geometry_msgs/msg/detail/twist__traits.hpp:
+
+/usr/include/c++/11/bits/cxxabi_init_exception.h:
+
+/opt/ros/humble/include/rosidl_runtime_cpp/rosidl_runtime_cpp/traits.hpp:
+
+/opt/ros/humble/include/geometry_msgs/geometry_msgs/msg/velocity_stamped.hpp:
+
+/opt/ros/humble/include/rcutils/rcutils/macros.h:
+
+/opt/ros/humble/include/tf2/tf2/convert.hpp:
+
+/usr/include/c++/11/bits/stl_bvector.h:
+
+/usr/include/c++/11/bits/stl_uninitialized.h:
+
+/usr/include/boost/preprocessor/debug/error.hpp:
+
+/opt/ros/humble/include/moveit/robot_model/joint_model.h:
+
+/opt/ros/humble/include/geometry_msgs/geometry_msgs/msg/detail/polygon__traits.hpp:
+
+/usr/include/c++/11/bits/stl_algo.h:
+
+/opt/ros/humble/include/rcl_interfaces/rcl_interfaces/msg/detail/parameter_descriptor__struct.hpp:
+
+/usr/include/c++/11/bits/std_abs.h:
+
+/opt/ros/humble/include/rcl_interfaces/rcl_interfaces/msg/detail/list_parameters_result__traits.hpp:
+
+/opt/ros/humble/include/rcpputils/rcpputils/pointer_traits.hpp:
+
+/opt/ros/humble/include/geometry_msgs/geometry_msgs/msg/detail/transform_stamped__struct.hpp:
+
+/usr/include/c++/11/bits/hashtable.h:
+
+/opt/ros/humble/include/moveit_msgs/moveit_msgs/action/execute_trajectory.hpp:
+
+/usr/include/c++/11/bits/hashtable_policy.h:
+
+/usr/include/boost/preprocessor/identity.hpp:
+
+/usr/include/c++/11/set:
+
+/usr/include/eigen3/Eigen/StdVector:
+
+/usr/include/stdint.h:
+
+/usr/include/c++/11/bits/ptr_traits.h:
+
+/usr/include/c++/11/bits/erase_if.h:
+
+/usr/include/eigen3/Eigen/src/Core/CoreIterators.h:
+
+/usr/include/c++/11/bits/atomic_lockfree_defines.h:
+
+/usr/include/boost/random/detail/seed.hpp:
 
 /opt/ros/humble/include/rclcpp/rclcpp/experimental/buffers/intra_process_buffer.hpp:
 
@@ -3070,17 +3015,77 @@ CMakeFiles/sweep_mover.dir/src/sweep_mover.cpp.o: /home/zech/robim_ur20_sim/src/
 
 /usr/include/c++/11/istream:
 
-/opt/ros/humble/include/geometry_msgs/geometry_msgs/msg/detail/pose__struct.hpp:
+/usr/include/c++/11/bits/ios_base.h:
 
-/usr/include/c++/11/ios:
+/usr/include/c++/11/bits/locale_classes.h:
 
-/usr/include/c++/11/utility:
+/opt/ros/humble/include/rclcpp/rclcpp/subscription.hpp:
+
+/usr/include/boost/config/detail/suffix.hpp:
 
 /usr/include/c++/11/bits/uniform_int_dist.h:
 
 /usr/include/eigen3/Eigen/src/Cholesky/LLT.h:
 
+/usr/include/c++/11/bits/basic_ios.h:
+
+/usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h:
+
+/usr/include/c++/11/bits/exception.h:
+
+/usr/include/eigen3/Eigen/src/Core/BandMatrix.h:
+
+/usr/include/c++/11/bits/locale_facets.h:
+
+/opt/ros/humble/include/rclcpp/rclcpp/detail/subscription_callback_type_helper.hpp:
+
 /usr/include/c++/11/cwctype:
+
+/usr/include/boost/random/detail/ptr_helper.hpp:
+
+/opt/ros/humble/include/shape_msgs/shape_msgs/msg/detail/plane__struct.hpp:
+
+/opt/ros/humble/include/geometry_msgs/geometry_msgs/msg/detail/pose__type_support.hpp:
+
+/opt/ros/humble/include/urdf/urdf/visibility_control.hpp:
+
+/opt/ros/humble/include/moveit_msgs/moveit_msgs/msg/detail/robot_trajectory__type_support.hpp:
+
+/usr/include/c++/11/bits/streambuf_iterator.h:
+
+/usr/include/c++/11/bits/this_thread_sleep.h:
+
+/opt/ros/humble/include/visualization_msgs/visualization_msgs/msg/detail/marker_array__type_support.hpp:
+
+/usr/include/c++/11/bits/locale_facets.tcc:
+
+/usr/include/boost/preprocessor/variadic/elem.hpp:
+
+/usr/include/c++/11/bits/locale_facets_nonio.h:
+
+/usr/include/boost/random/uniform_01.hpp:
+
+/usr/include/boost/preprocessor/list/fold_right.hpp:
+
+/opt/ros/humble/include/trajectory_msgs/trajectory_msgs/msg/detail/multi_dof_joint_trajectory__struct.hpp:
+
+/opt/ros/humble/include/tf2_ros/tf2_ros/visibility_control.hpp:
+
+/usr/include/x86_64-linux-gnu/c++/11/bits/time_members.h:
+
+/opt/ros/humble/include/moveit_msgs/moveit_msgs/msg/detail/planning_scene_world__struct.hpp:
+
+/usr/include/boost/config/platform/linux.hpp:
+
+/usr/include/c++/11/bits/locale_conv.h:
+
+/usr/include/eigen3/Eigen/src/Core/Random.h:
+
+/usr/include/c++/11/bits/quoted_string.h:
+
+/opt/ros/humble/include/moveit/move_group_interface/move_group_interface.h:
+
+/opt/ros/humble/include/geometry_msgs/geometry_msgs/msg/detail/quaternion__traits.hpp:
 
 /usr/include/eigen3/Eigen/src/Core/functors/AssignmentFunctors.h:
 
@@ -3542,11 +3547,13 @@ CMakeFiles/sweep_mover.dir/src/sweep_mover.cpp.o: /home/zech/robim_ur20_sim/src/
 
 /opt/ros/humble/include/rcpputils/rcpputils/visibility_control.hpp:
 
+/home/zech/robim_ur20_sim/src/ur20_sim/include/sweep_mover.hpp:
+
 /opt/ros/humble/include/rclcpp/rclcpp/node_interfaces/get_node_base_interface.hpp:
 
-/usr/include/x86_64-linux-gnu/bits/libc-header-start.h:
-
 /usr/include/x86_64-linux-gnu/bits/setjmp.h:
+
+/usr/include/x86_64-linux-gnu/bits/libc-header-start.h:
 
 /opt/ros/humble/include/rclcpp/rclcpp/context.hpp:
 
@@ -4018,8 +4025,6 @@ CMakeFiles/sweep_mover.dir/src/sweep_mover.cpp.o: /home/zech/robim_ur20_sim/src/
 
 /opt/ros/humble/include/visualization_msgs/visualization_msgs/msg/detail/marker_array__builder.hpp:
 
-/opt/ros/humble/include/visualization_msgs/visualization_msgs/msg/detail/mesh_file__traits.hpp:
-
 /opt/ros/humble/include/visualization_msgs/visualization_msgs/msg/rosidl_generator_cpp__visibility_control.hpp:
 
 /usr/include/x86_64-linux-gnu/bits/types/__fpos64_t.h:
@@ -4091,5 +4096,3 @@ CMakeFiles/sweep_mover.dir/src/sweep_mover.cpp.o: /home/zech/robim_ur20_sim/src/
 /usr/include/c++/11/new:
 
 /opt/ros/humble/include/moveit_msgs/moveit_msgs/msg/detail/bounding_volume__struct.hpp:
-
-/opt/ros/humble/include/moveit_msgs/moveit_msgs/msg/detail/orientation_constraint__traits.hpp:

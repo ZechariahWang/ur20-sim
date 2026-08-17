@@ -65,7 +65,7 @@ CMAKE_BINARY_DIR = /home/zech/robim_ur20_sim/build/ur20_sim
 # The main recursive "all" target.
 all: CMakeFiles/sweep_mover.dir/all
 all: CMakeFiles/room_publisher.dir/all
-all: CMakeFiles/test_move.dir/all
+all: CMakeFiles/tcp_orientate.dir/all
 all: CMakeFiles/axis_test.dir/all
 .PHONY : all
 
@@ -78,7 +78,7 @@ clean: CMakeFiles/uninstall.dir/clean
 clean: CMakeFiles/ur20_sim_uninstall.dir/clean
 clean: CMakeFiles/sweep_mover.dir/clean
 clean: CMakeFiles/room_publisher.dir/clean
-clean: CMakeFiles/test_move.dir/clean
+clean: CMakeFiles/tcp_orientate.dir/clean
 clean: CMakeFiles/axis_test.dir/clean
 .PHONY : clean
 
@@ -187,30 +187,30 @@ CMakeFiles/room_publisher.dir/clean:
 .PHONY : CMakeFiles/room_publisher.dir/clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/test_move.dir
+# Target rules for target CMakeFiles/tcp_orientate.dir
 
 # All Build rule for target.
-CMakeFiles/test_move.dir/all:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_move.dir/build.make CMakeFiles/test_move.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_move.dir/build.make CMakeFiles/test_move.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/zech/robim_ur20_sim/build/ur20_sim/CMakeFiles --progress-num=7,8 "Built target test_move"
-.PHONY : CMakeFiles/test_move.dir/all
+CMakeFiles/tcp_orientate.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tcp_orientate.dir/build.make CMakeFiles/tcp_orientate.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tcp_orientate.dir/build.make CMakeFiles/tcp_orientate.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/zech/robim_ur20_sim/build/ur20_sim/CMakeFiles --progress-num=7,8 "Built target tcp_orientate"
+.PHONY : CMakeFiles/tcp_orientate.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/test_move.dir/rule: cmake_check_build_system
+CMakeFiles/tcp_orientate.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/zech/robim_ur20_sim/build/ur20_sim/CMakeFiles 2
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/test_move.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/tcp_orientate.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/zech/robim_ur20_sim/build/ur20_sim/CMakeFiles 0
-.PHONY : CMakeFiles/test_move.dir/rule
+.PHONY : CMakeFiles/tcp_orientate.dir/rule
 
 # Convenience name for target.
-test_move: CMakeFiles/test_move.dir/rule
-.PHONY : test_move
+tcp_orientate: CMakeFiles/tcp_orientate.dir/rule
+.PHONY : tcp_orientate
 
 # clean rule for target.
-CMakeFiles/test_move.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_move.dir/build.make CMakeFiles/test_move.dir/clean
-.PHONY : CMakeFiles/test_move.dir/clean
+CMakeFiles/tcp_orientate.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tcp_orientate.dir/build.make CMakeFiles/tcp_orientate.dir/clean
+.PHONY : CMakeFiles/tcp_orientate.dir/clean
 
 #=============================================================================
 # Target rules for target CMakeFiles/axis_test.dir

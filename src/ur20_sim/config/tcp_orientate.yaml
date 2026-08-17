@@ -1,4 +1,4 @@
-test_move:
+tcp_orientate:
   ros__parameters:
     planning_group: ur_manipulator
     # Fraction (0-1] of maximum joint velocity/acceleration for all test

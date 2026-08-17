@@ -22,7 +22,7 @@ source install/setup.bash
 ros2 launch ur20_sim sim.launch.py
 
 # terminal 2: small wrist wiggle test
-ros2 launch ur20_sim test_move.launch.py
+ros2 launch ur20_sim tcp_orientate.launch.py
 
 # terminal 2: full sweep routine
 ros2 launch ur20_sim sweep.launch.py
@@ -35,7 +35,7 @@ ros2 launch ur20_sim sweep.launch.py
 ros2 launch ur20_sim sim.launch.py use_fake_hardware:=false robot_ip:=192.168.1.10
 
 # terminal 2
-ros2 launch ur20_sim test_move.launch.py
+ros2 launch ur20_sim tcp_orientate.launch.py
 ros2 launch ur20_sim sweep.launch.py
 ```
 

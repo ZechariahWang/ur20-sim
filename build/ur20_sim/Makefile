@@ -224,17 +224,17 @@ room_publisher/fast:
 .PHONY : room_publisher/fast
 
 #=============================================================================
-# Target rules for targets named test_move
+# Target rules for targets named tcp_orientate
 
 # Build rule for target.
-test_move: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_move
-.PHONY : test_move
+tcp_orientate: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tcp_orientate
+.PHONY : tcp_orientate
 
 # fast build rule for target.
-test_move/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_move.dir/build.make CMakeFiles/test_move.dir/build
-.PHONY : test_move/fast
+tcp_orientate/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tcp_orientate.dir/build.make CMakeFiles/tcp_orientate.dir/build
+.PHONY : tcp_orientate/fast
 
 #=============================================================================
 # Target rules for targets named axis_test
@@ -272,6 +272,30 @@ src/calibration_tests/axis_test.s: src/calibration_tests/axis_test.cpp.s
 src/calibration_tests/axis_test.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/axis_test.dir/build.make CMakeFiles/axis_test.dir/src/calibration_tests/axis_test.cpp.s
 .PHONY : src/calibration_tests/axis_test.cpp.s
+
+src/calibration_tests/tcp_orientate.o: src/calibration_tests/tcp_orientate.cpp.o
+.PHONY : src/calibration_tests/tcp_orientate.o
+
+# target to build an object file
+src/calibration_tests/tcp_orientate.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tcp_orientate.dir/build.make CMakeFiles/tcp_orientate.dir/src/calibration_tests/tcp_orientate.cpp.o
+.PHONY : src/calibration_tests/tcp_orientate.cpp.o
+
+src/calibration_tests/tcp_orientate.i: src/calibration_tests/tcp_orientate.cpp.i
+.PHONY : src/calibration_tests/tcp_orientate.i
+
+# target to preprocess a source file
+src/calibration_tests/tcp_orientate.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tcp_orientate.dir/build.make CMakeFiles/tcp_orientate.dir/src/calibration_tests/tcp_orientate.cpp.i
+.PHONY : src/calibration_tests/tcp_orientate.cpp.i
+
+src/calibration_tests/tcp_orientate.s: src/calibration_tests/tcp_orientate.cpp.s
+.PHONY : src/calibration_tests/tcp_orientate.s
+
+# target to generate assembly for a file
+src/calibration_tests/tcp_orientate.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tcp_orientate.dir/build.make CMakeFiles/tcp_orientate.dir/src/calibration_tests/tcp_orientate.cpp.s
+.PHONY : src/calibration_tests/tcp_orientate.cpp.s
 
 src/room_publisher.o: src/room_publisher.cpp.o
 .PHONY : src/room_publisher.o
@@ -321,30 +345,6 @@ src/sweep_mover.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sweep_mover.dir/build.make CMakeFiles/sweep_mover.dir/src/sweep_mover.cpp.s
 .PHONY : src/sweep_mover.cpp.s
 
-src/test_move.o: src/test_move.cpp.o
-.PHONY : src/test_move.o
-
-# target to build an object file
-src/test_move.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_move.dir/build.make CMakeFiles/test_move.dir/src/test_move.cpp.o
-.PHONY : src/test_move.cpp.o
-
-src/test_move.i: src/test_move.cpp.i
-.PHONY : src/test_move.i
-
-# target to preprocess a source file
-src/test_move.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_move.dir/build.make CMakeFiles/test_move.dir/src/test_move.cpp.i
-.PHONY : src/test_move.cpp.i
-
-src/test_move.s: src/test_move.cpp.s
-.PHONY : src/test_move.s
-
-# target to generate assembly for a file
-src/test_move.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_move.dir/build.make CMakeFiles/test_move.dir/src/test_move.cpp.s
-.PHONY : src/test_move.cpp.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -363,19 +363,19 @@ help:
 	@echo "... axis_test"
 	@echo "... room_publisher"
 	@echo "... sweep_mover"
-	@echo "... test_move"
+	@echo "... tcp_orientate"
 	@echo "... src/calibration_tests/axis_test.o"
 	@echo "... src/calibration_tests/axis_test.i"
 	@echo "... src/calibration_tests/axis_test.s"
+	@echo "... src/calibration_tests/tcp_orientate.o"
+	@echo "... src/calibration_tests/tcp_orientate.i"
+	@echo "... src/calibration_tests/tcp_orientate.s"
 	@echo "... src/room_publisher.o"
 	@echo "... src/room_publisher.i"
 	@echo "... src/room_publisher.s"
 	@echo "... src/sweep_mover.o"
 	@echo "... src/sweep_mover.i"
 	@echo "... src/sweep_mover.s"
-	@echo "... src/test_move.o"
-	@echo "... src/test_move.i"
-	@echo "... src/test_move.s"
 .PHONY : help
 
 

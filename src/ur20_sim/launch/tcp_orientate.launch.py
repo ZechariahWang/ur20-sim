@@ -47,18 +47,18 @@ def generate_launch_description():
     )
 
     kinematics_yaml = PathJoinSubstitution([FindPackageShare("ur_moveit_config"), "config", "kinematics.yaml"])
-    test_move_yaml = PathJoinSubstitution([FindPackageShare("ur20_sim"), "config", "test_move.yaml"])
+    tcp_orientate_yaml = PathJoinSubstitution([FindPackageShare("ur20_sim"), "config", "tcp_orientate.yaml"])
 
-    test_move = Node(
+    tcp_orientate = Node(
         package="ur20_sim",
-        executable="test_move",
+        executable="tcp_orientate",
         output="screen",
         parameters=[
             {"robot_description": robot_description},
             {"robot_description_semantic": robot_description_semantic},
             kinematics_yaml,
-            test_move_yaml,
+            tcp_orientate_yaml,
         ],
     )
 
-    return LaunchDescription(declared_args + [test_move])
+    return LaunchDescription(declared_args + [tcp_orientate])
