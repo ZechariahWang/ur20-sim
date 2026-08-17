@@ -7,6 +7,7 @@
 /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/config/initial_positions.yaml
 /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/config/room.yaml
 /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/config/sweep.yaml
+/home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/config/test_move.yaml
 /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/config/ur20/default_kinematics.yaml
 /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/config/ur20/joint_limits.yaml
 /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/config/ur20/physical_parameters.yaml

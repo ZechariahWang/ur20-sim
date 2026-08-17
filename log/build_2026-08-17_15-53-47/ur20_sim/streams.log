@@ -1,0 +1,43 @@
+[0.006s] Invoking command in '/home/zech/robim_ur20_sim/build/ur20_sim': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/zech/exia_ws/install/exia_driver:/home/zech/exia_ws/install/exia_control:/opt/ros/humble /usr/bin/cmake --build /home/zech/robim_ur20_sim/build/ur20_sim -- -j20 -l20
+[0.046s] Consolidate compiler generated dependencies of target test_move
+[0.055s] [ 33%] Built target sweep_mover
+[0.056s] [ 66%] Built target room_publisher
+[0.060s] [ 83%] Building CXX object CMakeFiles/test_move.dir/src/test_move.cpp.o
+[3.927s] [100%] Linking CXX executable test_move
+[4.102s] [100%] Built target test_move
+[4.109s] Invoked command in '/home/zech/robim_ur20_sim/build/ur20_sim' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/zech/exia_ws/install/exia_driver:/home/zech/exia_ws/install/exia_control:/opt/ros/humble /usr/bin/cmake --build /home/zech/robim_ur20_sim/build/ur20_sim -- -j20 -l20
+[4.116s] Invoking command in '/home/zech/robim_ur20_sim/build/ur20_sim': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/zech/exia_ws/install/exia_driver:/home/zech/exia_ws/install/exia_control:/opt/ros/humble /usr/bin/cmake --install /home/zech/robim_ur20_sim/build/ur20_sim
+[4.121s] -- Install configuration: ""
+[4.122s] -- Execute custom install script
+[4.122s] -- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/lib/ur20_sim/sweep_mover
+[4.122s] -- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/lib/ur20_sim/room_publisher
+[4.122s] -- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/lib/ur20_sim/test_move
+[4.122s] -- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/launch/sim.launch.py
+[4.122s] -- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/launch/sweep.launch.py
+[4.122s] -- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/launch/test_move.launch.py
+[4.122s] -- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/config/initial_positions.yaml
+[4.122s] -- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/config/room.yaml
+[4.122s] -- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/config/sweep.yaml
+[4.122s] -- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/config/test_move.yaml
+[4.122s] -- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/config/ur20/default_kinematics.yaml
+[4.122s] -- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/config/ur20/joint_limits.yaml
+[4.122s] -- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/config/ur20/physical_parameters.yaml
+[4.122s] -- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/config/ur20/visual_parameters.yaml
+[4.122s] -- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/config/ur20_calibration.yaml
+[4.122s] -- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/urdf/ur20_parked.urdf.xacro
+[4.122s] -- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ament_index/resource_index/package_run_dependencies/ur20_sim
+[4.122s] -- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ament_index/resource_index/parent_prefix_path/ur20_sim
+[4.122s] -- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/environment/ament_prefix_path.sh
+[4.123s] -- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/environment/ament_prefix_path.dsv
+[4.123s] -- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/environment/path.sh
+[4.123s] -- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/environment/path.dsv
+[4.123s] -- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/local_setup.bash
+[4.123s] -- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/local_setup.sh
+[4.123s] -- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/local_setup.zsh
+[4.123s] -- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/local_setup.dsv
+[4.123s] -- Symlinking: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/package.dsv
+[4.130s] -- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ament_index/resource_index/packages/ur20_sim
+[4.130s] -- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/cmake/ur20_simConfig.cmake
+[4.130s] -- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/cmake/ur20_simConfig-version.cmake
+[4.130s] -- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/package.xml
+[4.131s] Invoked command in '/home/zech/robim_ur20_sim/build/ur20_sim' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/zech/exia_ws/install/exia_driver:/home/zech/exia_ws/install/exia_control:/opt/ros/humble /usr/bin/cmake --install /home/zech/robim_ur20_sim/build/ur20_sim

@@ -47,6 +47,7 @@ def generate_launch_description():
     )
 
     kinematics_yaml = PathJoinSubstitution([FindPackageShare("ur_moveit_config"), "config", "kinematics.yaml"])
+    test_move_yaml = PathJoinSubstitution([FindPackageShare("ur20_sim"), "config", "test_move.yaml"])
 
     test_move = Node(
         package="ur20_sim",
@@ -56,6 +57,7 @@ def generate_launch_description():
             {"robot_description": robot_description},
             {"robot_description_semantic": robot_description_semantic},
             kinematics_yaml,
+            test_move_yaml,
         ],
     )
 
