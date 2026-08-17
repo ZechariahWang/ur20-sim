@@ -1,5 +1,4 @@
 # Fake-hardware spawn pose: matches the real UR20's parked position
-# (read off the teach pendant on 2026-08-17). Radians.
 shoulder_pan_joint: 0.2147    # base      12.30 deg
 shoulder_lift_joint: -0.3833  # shoulder -21.96 deg
 elbow_joint: 1.7333           # elbow     99.31 deg
