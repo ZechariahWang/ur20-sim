@@ -1,5 +1,5 @@
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
+from launch.actions import DeclareLaunchArgument, ExecuteProcess, IncludeLaunchDescription
 from launch.conditions import IfCondition
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
@@ -77,6 +77,17 @@ def generate_launch_description():
         condition=IfCondition(LaunchConfiguration("launch_foxglove")),
     )
 
+    disable_friction_controller = ExecuteProcess(
+        cmd=[
+            "bash", "-c",
+            "for i in $(seq 1 30); do "
+            "ros2 control set_controller_state friction_model_controller inactive && exit 0; "
+            "sleep 2; done; "
+            "echo 'could not deactivate friction_model_controller'",
+        ],
+        output="screen",
+    )
+
     room_config = PathJoinSubstitution(
         [FindPackageShare("ur20_sim"), "config", "room.yaml"]
     )
@@ -87,4 +98,4 @@ def generate_launch_description():
         parameters=[room_config],
     )
 
-    return LaunchDescription(declared_args + [ur_control, moveit, foxglove_bridge, room_publisher])
+    return LaunchDescription(declared_args + [ur_control, moveit, foxglove_bridge, room_publisher, disable_friction_controller])
