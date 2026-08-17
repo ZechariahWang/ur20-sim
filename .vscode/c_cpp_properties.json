@@ -2,7 +2,7 @@
     "configurations": [
         {
             "name": "Linux",
-            "compileCommands": "${workspaceFolder}/build/robim_ur20_sim/compile_commands.json",
+            "compileCommands": "${workspaceFolder}/build/ur20_sim/compile_commands.json",
             "includePath": [
                 "${workspaceFolder}/**",
                 "/opt/ros/humble/include/**"

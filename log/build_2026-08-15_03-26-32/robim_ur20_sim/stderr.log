@@ -1,7 +1,0 @@
-CMake Error at /opt/ros/humble/share/ament_cmake_core/cmake/symlink_install/ament_cmake_symlink_install_targets.cmake:67 (message):
-  ament_cmake_symlink_install_targets() 'waypoint_mover' is not a target
-Call Stack (most recent call first):
-  /opt/ros/humble/share/ament_cmake_core/cmake/symlink_install/install.cmake:37 (ament_cmake_symlink_install_targets)
-  CMakeLists.txt:16 (install)
-
-

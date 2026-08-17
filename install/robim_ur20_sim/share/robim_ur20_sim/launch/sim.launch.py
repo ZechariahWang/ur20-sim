@@ -1,1 +1,0 @@
-/home/zech/robim_ur20_sim/src/robim_ur20_sim/launch/sim.launch.py

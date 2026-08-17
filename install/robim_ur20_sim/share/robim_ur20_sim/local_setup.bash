@@ -1,1 +1,0 @@
-/home/zech/robim_ur20_sim/build/robim_ur20_sim/ament_cmake_environment_hooks/local_setup.bash

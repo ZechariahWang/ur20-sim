@@ -1,1 +1,0 @@
-/home/zech/robim_ur20_sim/src/robim_ur20_sim/launch/move_waypoints.launch.py

@@ -1,9 +1,0 @@
-<?xml version="1.0"?>
-<!-- Wrapper around the standard UR description that makes the fake
-     hardware spawn in the real robot's parked pose instead of straight up.
-     The initial_positions_file arg is declared here first, so the default
-     inside ur.urdf.xacro does not apply. Real hardware ignores it. -->
-<robot xmlns:xacro="http://wiki.ros.org/xacro" name="ur">
-  <xacro:arg name="initial_positions_file" default="$(find robim_ur20_sim)/config/initial_positions.yaml"/>
-  <xacro:include filename="$(find ur_description)/urdf/ur.urdf.xacro"/>
-</robot>

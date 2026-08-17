@@ -1,1 +1,0 @@
-ament_cmake_symlink_install_targets("TARGET_FILES" "/home/zech/robim_ur20_sim/build/robim_ur20_sim/sweep_mover" "/home/zech/robim_ur20_sim/build/robim_ur20_sim/room_publisher" "/home/zech/robim_ur20_sim/build/robim_ur20_sim/test_move" "TARGETS" "sweep_mover" "room_publisher" "test_move" "DESTINATION" "lib/robim_ur20_sim")

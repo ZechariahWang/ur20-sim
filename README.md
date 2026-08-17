@@ -1,4 +1,4 @@
-# robim_ur20_sim
+# ur20_sim
 
 Simulated UR20 arm you can move between named waypoints, built on the official
 Universal Robots ROS 2 driver (mock hardware mode) and MoveIt 2.
@@ -14,7 +14,7 @@ sudo apt install ros-humble-ur ros-humble-moveit
 ## Build
 
 ```bash
-cd ~/robim_ur20_sim
+cd ~/ur20_sim
 source /opt/ros/humble/setup.bash
 colcon build --symlink-install
 source install/setup.bash
@@ -25,13 +25,13 @@ source install/setup.bash
 Terminal 1
 
 ```bash
-ros2 launch robim_ur20_sim sim.launch.py
+ros2 launch ur20_sim sim.launch.py
 ```
 
 Terminal 2
 
 ```bash
-ros2 launch robim_ur20_sim move_waypoints.launch.py
+ros2 launch ur20_sim move_waypoints.launch.py
 ```
 
 You can also drag the interactive marker in RViz and use MoveIt's
@@ -43,7 +43,7 @@ You can also drag the interactive marker in RViz and use MoveIt's
 Cartesian line across the workspace with the TCP pointing down at the ground.
 
 ```bash
-ros2 launch robim_ur20_sim sweep.launch.py
+ros2 launch ur20_sim sweep.launch.py
 ```
 
 Line geometry (x/z height, y extent) and speeds are in `config/sweep.yaml`.
@@ -67,7 +67,7 @@ RViz at the same time, launch with `launch_rviz:=false`.
 
 ## Editing waypoints
 
-`src/robim_ur20_sim/config/waypoints.yaml` holds one flat `waypoints` list;
+`src/ur20_sim/config/waypoints.yaml` holds one flat `waypoints` list;
 each row of 6 values is one waypoint (radians, in the order shoulder_pan,
 shoulder_lift, elbow, wrist_1, wrist_2, wrist_3), visited top to bottom.
 Set `cycle: true` to loop forever. With `--symlink-install`, YAML edits take
@@ -78,7 +78,7 @@ effect on next run without rebuilding.
 The stack is identical, only the hardware endpoint changes:
 
 ```bash
-ros2 launch robim_ur20_sim sim.launch.py use_fake_hardware:=false robot_ip:=<ip>
+ros2 launch ur20_sim sim.launch.py use_fake_hardware:=false robot_ip:=<ip>
 ```
 
 For URSim, run UR's controller simulator in Docker and load an External
