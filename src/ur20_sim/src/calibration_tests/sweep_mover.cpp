@@ -66,14 +66,9 @@ bool SweepMover::doMovement() {
     if (!utils::moveToJoints(*move_group_, get_logger(), park_joints_, "move to park position")) { return false; }
   }
 
-  // TCP orientations. In ROS base coordinates the open workspace is on
-  // +x and the wall is behind the robot on -x (the pendant base frame
-  // is rotated 180 deg about z, so pendant x is the opposite sign).
-  geometry_msgs::msg::Quaternion down = utils::pitchQuaternion(M_PI);
-  geometry_msgs::msg::Quaternion side = utils::pitchQuaternion(M_PI / 2.0);
-
-  // Negative roll tilts left (toward the start), positive tilts right.
-  geometry_msgs::msg::Quaternion oblique = utils::rollQuaternion(3.0 * M_PI / 4.0);
+  // One orientation for the whole routine: whatever the TCP has in the
+  // park pose. Only positions change, the TCP never rotates.
+  geometry_msgs::msg::Quaternion q = move_group_->getCurrentPose().pose.orientation;
 
   double x = sweep_x_;
   double z = sweep_z_;
@@ -81,11 +76,11 @@ bool SweepMover::doMovement() {
   double end = sweep_y_end_;
 
   std::vector<Step> script;
-  script.push_back({Step::MOVE,  utils::makePose(x, start, z, down),                "sweep start"});
-  script.push_back({Step::SWEEP, utils::makePose(x, end,   z, down),                "top sweep"});
-  script.push_back({Step::MOVE,  utils::makePose(x - 0.1, start, z, side),          "return to start (side view)"});
-  script.push_back({Step::SWEEP, utils::makePose(x - 0.1, end,   z, side),          "side sweep"});
-  script.push_back({Step::MOVE,  utils::makePose(x - 0.2, end,   z + 0.3, oblique), "oblique view"});
+  script.push_back({Step::MOVE,  utils::makePose(x, start, z, q),             "sweep start"});
+  script.push_back({Step::SWEEP, utils::makePose(x, end,   z, q),             "top sweep"});
+  script.push_back({Step::MOVE,  utils::makePose(x - 0.1, start, z, q),       "return to start (offset line)"});
+  script.push_back({Step::SWEEP, utils::makePose(x - 0.1, end,   z, q),       "second sweep"});
+  script.push_back({Step::MOVE,  utils::makePose(x - 0.2, end,   z + 0.3, q), "final raised position"});
 
   for (size_t i = 0; i < script.size(); i++) {
     Step step = script[i];

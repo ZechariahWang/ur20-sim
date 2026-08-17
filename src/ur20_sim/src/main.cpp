@@ -16,7 +16,10 @@ MainSweep::~MainSweep() {
 bool MainSweep::run() {
   loadParameters();
 
-  std::vector<Step> script = buildScript();
+  // Room check only uses positions, orientation does not matter here.
+  geometry_msgs::msg::Quaternion identity;
+  identity.w = 1.0;
+  std::vector<Step> script = buildScript(identity);
   if (!checkAgainstRoom(script)) { return false; }
 
   if (!setup()) { return false; }
@@ -50,13 +53,11 @@ void MainSweep::loadParameters() {
   room_margin_ = get_parameter_or<double>("room_margin", 0.15);
 }
 
-std::vector<MainSweep::Step> MainSweep::buildScript() {
+std::vector<MainSweep::Step> MainSweep::buildScript(const geometry_msgs::msg::Quaternion &tcp_orientation) {
 
-  // TCP orientations. In ROS base coordinates the open workspace is on
-  // +x and the wall is behind the robot on -x.
-  geometry_msgs::msg::Quaternion down = utils::pitchQuaternion(M_PI);
-  geometry_msgs::msg::Quaternion side = utils::pitchQuaternion(M_PI / 2.0);
-  geometry_msgs::msg::Quaternion oblique = utils::rollQuaternion(3.0 * M_PI / 4.0);
+  // One orientation for the whole routine: whatever the TCP has in the
+  // park pose. Only positions change, the TCP never rotates.
+  geometry_msgs::msg::Quaternion q = tcp_orientation;
 
   double x = sweep_x_;
   double z = sweep_z_;
@@ -64,11 +65,11 @@ std::vector<MainSweep::Step> MainSweep::buildScript() {
   double end = sweep_y_end_;
 
   std::vector<Step> script;
-  script.push_back({Step::MOVE,  utils::makePose(x, start, z, down),                "sweep start"});
-  script.push_back({Step::SWEEP, utils::makePose(x, end,   z, down),                "top sweep"});
-  script.push_back({Step::MOVE,  utils::makePose(x - 0.1, start, z, side),          "return to start (side view)"});
-  script.push_back({Step::SWEEP, utils::makePose(x - 0.1, end,   z, side),          "side sweep"});
-  script.push_back({Step::MOVE,  utils::makePose(x - 0.2, end,   z + 0.3, oblique), "oblique view"});
+  script.push_back({Step::MOVE,  utils::makePose(x, start, z, q),           "sweep start"});
+  script.push_back({Step::SWEEP, utils::makePose(x, end,   z, q),           "top sweep"});
+  script.push_back({Step::MOVE,  utils::makePose(x - 0.1, start, z, q),     "return to start (offset line)"});
+  script.push_back({Step::SWEEP, utils::makePose(x - 0.1, end,   z, q),     "second sweep"});
+  script.push_back({Step::MOVE,  utils::makePose(x - 0.2, end,   z + 0.3, q), "final raised position"});
   return script;
 }
 
@@ -136,7 +137,10 @@ bool MainSweep::doMovement() {
     if (!utils::moveToJoints(*move_group_, get_logger(), park_joints_, "move to park position")) { return false; }
   }
 
-  std::vector<Step> script = buildScript();
+  // Hold the park pose's TCP orientation for the entire routine.
+  geometry_msgs::msg::Quaternion tcp_orientation = move_group_->getCurrentPose().pose.orientation;
+
+  std::vector<Step> script = buildScript(tcp_orientation);
   for (size_t i = 0; i < script.size(); i++) {
     Step step = script[i];
     bool ok = false;

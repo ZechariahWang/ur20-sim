@@ -35,7 +35,7 @@ class MainSweep : public rclcpp::Node {
 
     void loadParameters();
     bool setup();
-    std::vector<Step> buildScript();
+    std::vector<Step> buildScript(const geometry_msgs::msg::Quaternion &tcp_orientation);
     bool checkAgainstRoom(const std::vector<Step> &script);
     bool doMovement();
     void stopSpinner();
