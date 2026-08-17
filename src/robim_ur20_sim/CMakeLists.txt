@@ -16,7 +16,10 @@ ament_target_dependencies(sweep_mover rclcpp moveit_ros_planning_interface)
 add_executable(room_publisher src/room_publisher.cpp)
 ament_target_dependencies(room_publisher rclcpp moveit_ros_planning_interface visualization_msgs)
 
-install(TARGETS sweep_mover room_publisher
+add_executable(test_move src/test_move.cpp)
+ament_target_dependencies(test_move rclcpp moveit_ros_planning_interface)
+
+install(TARGETS sweep_mover room_publisher test_move
   DESTINATION lib/${PROJECT_NAME})
 
 install(DIRECTORY launch config

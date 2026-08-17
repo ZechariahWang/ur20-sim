@@ -1333,4 +1333,5 @@ set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/robim_ur20_sim_uninstall.dir/DependInfo.cmake"
   "CMakeFiles/sweep_mover.dir/DependInfo.cmake"
   "CMakeFiles/room_publisher.dir/DependInfo.cmake"
+  "CMakeFiles/test_move.dir/DependInfo.cmake"
   )

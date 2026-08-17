@@ -223,6 +223,19 @@ room_publisher/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/room_publisher.dir/build.make CMakeFiles/room_publisher.dir/build
 .PHONY : room_publisher/fast
 
+#=============================================================================
+# Target rules for targets named test_move
+
+# Build rule for target.
+test_move: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_move
+.PHONY : test_move
+
+# fast build rule for target.
+test_move/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_move.dir/build.make CMakeFiles/test_move.dir/build
+.PHONY : test_move/fast
+
 src/room_publisher.o: src/room_publisher.cpp.o
 .PHONY : src/room_publisher.o
 
@@ -271,6 +284,30 @@ src/sweep_mover.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sweep_mover.dir/build.make CMakeFiles/sweep_mover.dir/src/sweep_mover.cpp.s
 .PHONY : src/sweep_mover.cpp.s
 
+src/test_move.o: src/test_move.cpp.o
+.PHONY : src/test_move.o
+
+# target to build an object file
+src/test_move.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_move.dir/build.make CMakeFiles/test_move.dir/src/test_move.cpp.o
+.PHONY : src/test_move.cpp.o
+
+src/test_move.i: src/test_move.cpp.i
+.PHONY : src/test_move.i
+
+# target to preprocess a source file
+src/test_move.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_move.dir/build.make CMakeFiles/test_move.dir/src/test_move.cpp.i
+.PHONY : src/test_move.cpp.i
+
+src/test_move.s: src/test_move.cpp.s
+.PHONY : src/test_move.s
+
+# target to generate assembly for a file
+src/test_move.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_move.dir/build.make CMakeFiles/test_move.dir/src/test_move.cpp.s
+.PHONY : src/test_move.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -288,12 +325,16 @@ help:
 	@echo "... uninstall"
 	@echo "... room_publisher"
 	@echo "... sweep_mover"
+	@echo "... test_move"
 	@echo "... src/room_publisher.o"
 	@echo "... src/room_publisher.i"
 	@echo "... src/room_publisher.s"
 	@echo "... src/sweep_mover.o"
 	@echo "... src/sweep_mover.i"
 	@echo "... src/sweep_mover.s"
+	@echo "... src/test_move.o"
+	@echo "... src/test_move.i"
+	@echo "... src/test_move.s"
 .PHONY : help
 
 

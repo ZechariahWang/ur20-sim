@@ -19,7 +19,8 @@
 						0,
 						1,
 						2,
-						3
+						3,
+						4
 					]
 				}
 			],
@@ -37,7 +38,8 @@
 						0,
 						1,
 						2,
-						3
+						3,
+						4
 					]
 				}
 			],
@@ -62,6 +64,13 @@
 					"id" : "sweep_mover::@6890427a1f51a3e7e1df",
 					"jsonFile" : "target-sweep_mover-ca72fb3056a4ae26907e.json",
 					"name" : "sweep_mover",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "test_move::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-test_move-e57aa9a3b5b920075985.json",
+					"name" : "test_move",
 					"projectIndex" : 0
 				},
 				{
