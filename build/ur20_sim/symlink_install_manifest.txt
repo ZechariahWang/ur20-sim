@@ -1,9 +1,12 @@
 /home/zech/robim_ur20_sim/install/ur20_sim/lib/ur20_sim/sweep_mover
 /home/zech/robim_ur20_sim/install/ur20_sim/lib/ur20_sim/room_publisher
 /home/zech/robim_ur20_sim/install/ur20_sim/lib/ur20_sim/test_move
+/home/zech/robim_ur20_sim/install/ur20_sim/lib/ur20_sim/axis_test
+/home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/launch/axis_test.launch.py
 /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/launch/sim.launch.py
 /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/launch/sweep.launch.py
 /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/launch/test_move.launch.py
+/home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/config/axis_test.yaml
 /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/config/initial_positions.yaml
 /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/config/room.yaml
 /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/config/sweep.yaml

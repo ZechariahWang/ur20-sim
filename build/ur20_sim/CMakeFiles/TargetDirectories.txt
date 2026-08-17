@@ -3,6 +3,7 @@
 /home/zech/robim_ur20_sim/build/ur20_sim/CMakeFiles/sweep_mover.dir
 /home/zech/robim_ur20_sim/build/ur20_sim/CMakeFiles/room_publisher.dir
 /home/zech/robim_ur20_sim/build/ur20_sim/CMakeFiles/test_move.dir
+/home/zech/robim_ur20_sim/build/ur20_sim/CMakeFiles/axis_test.dir
 /home/zech/robim_ur20_sim/build/ur20_sim/CMakeFiles/test.dir
 /home/zech/robim_ur20_sim/build/ur20_sim/CMakeFiles/edit_cache.dir
 /home/zech/robim_ur20_sim/build/ur20_sim/CMakeFiles/rebuild_cache.dir

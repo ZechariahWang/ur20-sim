@@ -315,7 +315,7 @@ message(STATUS "Execute custom install script")
 
 # begin of custom install code
 
-# install("TARGETS" "sweep_mover" "room_publisher" "test_move" "DESTINATION" "lib/ur20_sim")
+# install("TARGETS" "sweep_mover" "room_publisher" "test_move" "axis_test" "DESTINATION" "lib/ur20_sim")
 include("/home/zech/robim_ur20_sim/build/ur20_sim/ament_cmake_symlink_install_targets_0_${CMAKE_INSTALL_CONFIG_NAME}.cmake")
 
 # install(DIRECTORY "launch" "config" "urdf" "DESTINATION" "share/ur20_sim")

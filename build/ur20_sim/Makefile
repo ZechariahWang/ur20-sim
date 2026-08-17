@@ -236,6 +236,43 @@ test_move/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_move.dir/build.make CMakeFiles/test_move.dir/build
 .PHONY : test_move/fast
 
+#=============================================================================
+# Target rules for targets named axis_test
+
+# Build rule for target.
+axis_test: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 axis_test
+.PHONY : axis_test
+
+# fast build rule for target.
+axis_test/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/axis_test.dir/build.make CMakeFiles/axis_test.dir/build
+.PHONY : axis_test/fast
+
+src/calibration_tests/axis_test.o: src/calibration_tests/axis_test.cpp.o
+.PHONY : src/calibration_tests/axis_test.o
+
+# target to build an object file
+src/calibration_tests/axis_test.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/axis_test.dir/build.make CMakeFiles/axis_test.dir/src/calibration_tests/axis_test.cpp.o
+.PHONY : src/calibration_tests/axis_test.cpp.o
+
+src/calibration_tests/axis_test.i: src/calibration_tests/axis_test.cpp.i
+.PHONY : src/calibration_tests/axis_test.i
+
+# target to preprocess a source file
+src/calibration_tests/axis_test.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/axis_test.dir/build.make CMakeFiles/axis_test.dir/src/calibration_tests/axis_test.cpp.i
+.PHONY : src/calibration_tests/axis_test.cpp.i
+
+src/calibration_tests/axis_test.s: src/calibration_tests/axis_test.cpp.s
+.PHONY : src/calibration_tests/axis_test.s
+
+# target to generate assembly for a file
+src/calibration_tests/axis_test.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/axis_test.dir/build.make CMakeFiles/axis_test.dir/src/calibration_tests/axis_test.cpp.s
+.PHONY : src/calibration_tests/axis_test.cpp.s
+
 src/room_publisher.o: src/room_publisher.cpp.o
 .PHONY : src/room_publisher.o
 
@@ -323,9 +360,13 @@ help:
 	@echo "... test"
 	@echo "... uninstall"
 	@echo "... ur20_sim_uninstall"
+	@echo "... axis_test"
 	@echo "... room_publisher"
 	@echo "... sweep_mover"
 	@echo "... test_move"
+	@echo "... src/calibration_tests/axis_test.o"
+	@echo "... src/calibration_tests/axis_test.i"
+	@echo "... src/calibration_tests/axis_test.s"
 	@echo "... src/room_publisher.o"
 	@echo "... src/room_publisher.i"
 	@echo "... src/room_publisher.s"

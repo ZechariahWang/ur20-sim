@@ -1,0 +1,5 @@
+Consolidate compiler generated dependencies of target axis_test
+[ 25%] Built target room_publisher
+[ 75%] Built target test_move
+[ 75%] Built target sweep_mover
+[ 87%] Building CXX object CMakeFiles/axis_test.dir/src/calibration_tests/axis_test.cpp.o

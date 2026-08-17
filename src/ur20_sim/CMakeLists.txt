@@ -19,7 +19,10 @@ ament_target_dependencies(room_publisher rclcpp moveit_ros_planning_interface vi
 add_executable(test_move src/test_move.cpp)
 ament_target_dependencies(test_move rclcpp moveit_ros_planning_interface)
 
-install(TARGETS sweep_mover room_publisher test_move
+add_executable(axis_test src/calibration_tests/axis_test.cpp)
+ament_target_dependencies(axis_test rclcpp moveit_ros_planning_interface)
+
+install(TARGETS sweep_mover room_publisher test_move axis_test
   DESTINATION lib/${PROJECT_NAME})
 
 install(DIRECTORY launch config urdf
