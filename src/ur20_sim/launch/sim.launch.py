@@ -92,7 +92,13 @@ def generate_launch_description():
         package="foxglove_bridge",
         executable="foxglove_bridge",
         output="screen",
-        parameters=[{"port": 8765}],
+        parameters=[{
+            "port": 8765,
+            # No parameter browsing: we configure everything via YAML, and
+            # the bridge's bulk parameter queries time out on busy nodes
+            # and spam errors. Topics, services, and the 3D view keep working.
+            "capabilities": ["clientPublish", "services", "connectionGraph", "assets"],
+        }],
         condition=IfCondition(LaunchConfiguration("launch_foxglove")),
     )
 
