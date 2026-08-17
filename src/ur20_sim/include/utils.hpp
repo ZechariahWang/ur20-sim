@@ -23,6 +23,12 @@ geometry_msgs::msg::Quaternion rollQuaternion(double roll);
 
 geometry_msgs::msg::Pose makePose(double x, double y, double z, const geometry_msgs::msg::Quaternion &q);
 
+// TCP orientation the arm would have at the given joint configuration
+// (forward kinematics, no motion).
+geometry_msgs::msg::Quaternion orientationFromJoints(
+    moveit::planning_interface::MoveGroupInterface &move_group,
+    const std::vector<double> &joints);
+
 // Free repositioning move to a pose. Solves IK from several seeds, wraps
 // each solution to the 2*pi-equivalent nearest the current joints, and
 // plans to the closest solution first, falling back to the next closest

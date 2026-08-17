@@ -5,6 +5,8 @@
 #include <limits>
 #include <memory>
 
+#include <Eigen/Geometry>
+
 #include <moveit/robot_trajectory/robot_trajectory.h>
 #include <moveit/trajectory_processing/time_optimal_trajectory_generation.h>
 
@@ -74,6 +76,25 @@ geometry_msgs::msg::Pose makePose(double x, double y, double z, const geometry_m
   pose.position.z = z;
   pose.orientation = q;
   return pose;
+}
+
+geometry_msgs::msg::Quaternion orientationFromJoints(
+    moveit::planning_interface::MoveGroupInterface &move_group,
+    const std::vector<double> &joints) {
+  moveit::core::RobotStatePtr state = move_group.getCurrentState(10.0);
+  const moveit::core::JointModelGroup *group = state->getJointModelGroup(move_group.getName());
+  state->setJointGroupPositions(group, joints);
+  state->update();
+  const Eigen::Isometry3d &tcp = state->getGlobalLinkTransform(move_group.getEndEffectorLink());
+  Eigen::Quaterniond eigen_q(tcp.rotation());
+  eigen_q.normalize();
+
+  geometry_msgs::msg::Quaternion q;
+  q.x = eigen_q.x();
+  q.y = eigen_q.y();
+  q.z = eigen_q.z();
+  q.w = eigen_q.w();
+  return q;
 }
 
 bool moveToPose(moveit::planning_interface::MoveGroupInterface &move_group,

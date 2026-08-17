@@ -19,7 +19,7 @@ bool MainSweep::run() {
   // Room check only uses positions, orientation does not matter here.
   geometry_msgs::msg::Quaternion identity;
   identity.w = 1.0;
-  std::vector<Step> script = buildScript(identity);
+  std::vector<Step> script = buildScript(identity, identity);
   if (!checkAgainstRoom(script)) { return false; }
 
   if (!setup()) { return false; }
@@ -42,6 +42,7 @@ void MainSweep::loadParameters() {
   sweep_y_end_ = get_parameter_or<double>("sweep_y_end", -0.9);
   eef_step_ = get_parameter_or<double>("eef_step", 0.01);
   park_joints_ = get_parameter_or<std::vector<double>>("park_joints", {});
+  side_view_joints_ = get_parameter_or<std::vector<double>>("side_view_joints", {});
 
   // Room bounds, same values room_publisher builds the collision boxes
   floor_z_ = get_parameter_or<double>("floor_z", -0.80);
@@ -53,11 +54,13 @@ void MainSweep::loadParameters() {
   room_margin_ = get_parameter_or<double>("room_margin", 0.15);
 }
 
-std::vector<MainSweep::Step> MainSweep::buildScript(const geometry_msgs::msg::Quaternion &tcp_orientation) {
+std::vector<MainSweep::Step> MainSweep::buildScript(const geometry_msgs::msg::Quaternion &top_orientation, const geometry_msgs::msg::Quaternion &side_orientation) {
 
-  // One orientation for the whole routine: whatever the TCP has in the
-  // park pose. Only positions change, the TCP never rotates.
-  geometry_msgs::msg::Quaternion q = tcp_orientation;
+  // Top pass holds the park orientation; the side pass holds the
+  // "forwards and upside down" orientation from side_view_joints.
+  // Orientation only changes between passes, never during one.
+  geometry_msgs::msg::Quaternion q1 = top_orientation;
+  geometry_msgs::msg::Quaternion q2 = side_orientation;
 
   double x = sweep_x_;
   double z = sweep_z_;
@@ -65,11 +68,11 @@ std::vector<MainSweep::Step> MainSweep::buildScript(const geometry_msgs::msg::Qu
   double end = sweep_y_end_;
 
   std::vector<Step> script;
-  script.push_back({Step::MOVE,  utils::makePose(x, start, z, q),           "sweep start"});
-  script.push_back({Step::SWEEP, utils::makePose(x, end,   z, q),           "top sweep"});
-  script.push_back({Step::MOVE,  utils::makePose(x - 0.1, start, z, q),     "return to start (offset line)"});
-  script.push_back({Step::SWEEP, utils::makePose(x - 0.1, end,   z, q),     "second sweep"});
-  script.push_back({Step::MOVE,  utils::makePose(x - 0.2, end,   z + 0.3, q), "final raised position"});
+  script.push_back({Step::MOVE,  utils::makePose(x, start, z, q1),            "sweep start"});
+  script.push_back({Step::SWEEP, utils::makePose(x, end,   z, q1),            "top sweep"});
+  script.push_back({Step::MOVE,  utils::makePose(x - 0.1, start, z, q2),      "return to start (side view)"});
+  script.push_back({Step::SWEEP, utils::makePose(x - 0.1, end,   z, q2),      "side sweep"});
+  script.push_back({Step::MOVE,  utils::makePose(x - 0.2, end,   z + 0.3, q2), "final raised position"});
   return script;
 }
 
@@ -137,10 +140,16 @@ bool MainSweep::doMovement() {
     if (!utils::moveToJoints(*move_group_, get_logger(), park_joints_, "move to park position")) { return false; }
   }
 
-  // Hold the park pose's TCP orientation for the entire routine.
-  geometry_msgs::msg::Quaternion tcp_orientation = move_group_->getCurrentPose().pose.orientation;
+  // Top pass: the park pose's TCP orientation. Side pass: the orientation
+  // of side_view_joints (forward kinematics), or the same as the top pass
+  // if not configured.
+  geometry_msgs::msg::Quaternion top_orientation = move_group_->getCurrentPose().pose.orientation;
+  geometry_msgs::msg::Quaternion side_orientation = top_orientation;
+  if (side_view_joints_.size() == 6) {
+    side_orientation = utils::orientationFromJoints(*move_group_, side_view_joints_);
+  }
 
-  std::vector<Step> script = buildScript(tcp_orientation);
+  std::vector<Step> script = buildScript(top_orientation, side_orientation);
   for (size_t i = 0; i < script.size(); i++) {
     Step step = script[i];
     bool ok = false;

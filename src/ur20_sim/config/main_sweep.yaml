@@ -25,3 +25,8 @@ main_sweep:
     # The routine first moves here (radians, shoulder_pan..wrist_3), the
     # robot's parked pose, so every run starts from the same place.
     park_joints: [-0.2039, -1.1884, 2.0029, -2.3604, -1.5605, 0.8880]
+
+    # Joint pose whose TCP orientation ("forwards and upside down", jogged
+    # on the pendant 2026-08-17) is used for the second/side pass. The
+    # position of this pose is ignored, only its orientation is used.
+    side_view_joints: [-0.2419, -0.8502, 2.0817, -4.3216, -1.3280, 4.1860]

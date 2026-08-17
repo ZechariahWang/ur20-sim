@@ -35,7 +35,7 @@ class MainSweep : public rclcpp::Node {
 
     void loadParameters();
     bool setup();
-    std::vector<Step> buildScript(const geometry_msgs::msg::Quaternion &tcp_orientation);
+    std::vector<Step> buildScript(const geometry_msgs::msg::Quaternion &top_orientation, const geometry_msgs::msg::Quaternion &side_orientation);
     bool checkAgainstRoom(const std::vector<Step> &script);
     bool doMovement();
     void stopSpinner();
@@ -54,6 +54,8 @@ class MainSweep : public rclcpp::Node {
     double sweep_y_end_{-0.9};
     double eef_step_{0.01};
     std::vector<double> park_joints_;
+    // Joint pose whose TCP orientation is used for the second (side) pass.
+    std::vector<double> side_view_joints_;
 
     // Room bounds (room.yaml) and how close the TCP may get to them.
     double floor_z_{-0.80};
