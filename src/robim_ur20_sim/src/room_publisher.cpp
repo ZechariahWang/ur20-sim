@@ -51,6 +51,8 @@ class RoomPublisher : public rclcpp::Node {
       y_max_ = get_parameter_or<double>("y_max", 1.50);
       // Thickness of the floor, ceiling, and wall slabs.
       thickness_ = get_parameter_or<double>("thickness", 0.1);
+      // Footprint of the square pillar (mounting block) under the base.
+      pillar_size_ = get_parameter_or<double>("pillar_size", 0.4);
     }
 
     std::vector<Box> buildRoom() {
@@ -69,6 +71,13 @@ class RoomPublisher : public rclcpp::Node {
       boxes.push_back({"wall_front", x_min_ - t / 2.0, center_y, wall_center_z, t, width_y, wall_height});
       boxes.push_back({"wall_left",  center_x, y_max_ + t / 2.0, wall_center_z, width_x, t, wall_height});
       boxes.push_back({"wall_right", center_x, y_min_ - t / 2.0, wall_center_z, width_x, t, wall_height});
+
+      // The mounting block under the base: from the floor up to 5 mm below
+      // the base, so the resting base itself does not count as a collision.
+      double pillar_top = -0.005;
+      double pillar_height = pillar_top - floor_z_;
+      double pillar_center_z = (pillar_top + floor_z_) / 2.0;
+      boxes.push_back({"pillar", 0.0, 0.0, pillar_center_z, pillar_size_, pillar_size_, pillar_height});
       return boxes;
     }
 
@@ -149,6 +158,7 @@ class RoomPublisher : public rclcpp::Node {
     double y_min_{-1.50};
     double y_max_{1.50};
     double thickness_{0.1};
+    double pillar_size_{0.4};
     rclcpp::Publisher<visualization_msgs::msg::MarkerArray>::SharedPtr marker_pub_;
 };
 

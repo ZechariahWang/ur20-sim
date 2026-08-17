@@ -10,9 +10,11 @@ room_publisher:
     x_max: 1.12
     # Clear space in front (-x side): 2.50 m to the nearest obstacle.
     x_min: -2.50
-    # Side clearances: NOT MEASURED YET, conservative guess of 1.5 m.
-    # Confirm and update these before trusting side motions.
-    y_min: -1.50
-    y_max: 1.50
+    # Side walls: 165 cm from the base center to each side.
+    y_min: -1.65
+    y_max: 1.65
     # Thickness of the floor, ceiling, and wall slabs (m).
     thickness: 0.1
+    # Square footprint of the mounting block under the base (m).
+    # 0.4 is a guess, measure the real block and update.
+    pillar_size: 0.4
