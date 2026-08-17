@@ -80,6 +80,7 @@ class SweepMover : public rclcpp::Node {
     double sweep_y_start_{0.9};
     double sweep_y_end_{-0.9};
     double eef_step_{0.01};
+    std::vector<double> park_joints_;
     struct Step {
       enum Type { MOVE, SWEEP } type;
       geometry_msgs::msg::Pose pose;
@@ -95,6 +96,7 @@ class SweepMover : public rclcpp::Node {
       sweep_y_start_ = get_parameter_or<double>("sweep_y_start", 0.9);
       sweep_y_end_ = get_parameter_or<double>("sweep_y_end", -0.9);
       eef_step_ = get_parameter_or<double>("eef_step", 0.01);
+      park_joints_ = get_parameter_or<std::vector<double>>("park_joints", {});
     }
 
     bool setup() {
@@ -252,6 +254,12 @@ class SweepMover : public rclcpp::Node {
 
     bool doMovement() {
 
+      // First move to the parked pose (joint-space, exact) so every run
+      // starts the routine from the same place no matter where the arm was.
+      if (park_joints_.size() == 6) {
+        if (!moveToJoints(park_joints_, "move to park position")) { return false; }
+      }
+
       // TCP orientations. In ROS base coordinates the open workspace is on
       // +x and the wall is behind the robot on -x (the pendant base frame
       // is rotated 180 deg about z, so pendant x is the opposite sign).
@@ -286,6 +294,23 @@ class SweepMover : public rclcpp::Node {
           ok = sweepTo(step.pose, step.label);
         }
         if (!ok) { return false; }
+      }
+      return true;
+    }
+
+    bool moveToJoints(const std::vector<double> &target, const std::string &label) {
+      move_group_->setJointValueTarget(target);
+      moveit::planning_interface::MoveGroupInterface::Plan plan;
+      bool planned = (move_group_->plan(plan) == moveit::core::MoveItErrorCode::SUCCESS);
+      if (!planned) {
+        RCLCPP_ERROR(get_logger(), "Planning failed: %s", label.c_str());
+        return false;
+      }
+      RCLCPP_INFO(get_logger(), "Moving: %s...", label.c_str());
+      bool executed = (move_group_->execute(plan) == moveit::core::MoveItErrorCode::SUCCESS);
+      if (!executed) {
+        RCLCPP_ERROR(get_logger(), "Execution failed: %s", label.c_str());
+        return false;
       }
       return true;
     }

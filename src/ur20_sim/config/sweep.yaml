@@ -16,3 +16,7 @@ sweep_mover:
 
     # Cartesian interpolation step along the line (m)
     eef_step: 0.01
+
+    # The routine first moves here (radians, shoulder_pan..wrist_3), the
+    # robot's parked pose, so every run starts from the same place.
+    park_joints: [0.2147, -0.3833, 1.7333, -2.6704, -1.4963, 1.3504]
