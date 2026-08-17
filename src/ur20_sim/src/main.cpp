@@ -147,6 +147,11 @@ bool MainSweep::doMovement() {
     }
     if (!ok) { return false; }
   }
+
+  // Finish back in the resting (park) pose.
+  if (park_joints_.size() == 6) {
+    return utils::moveToJoints(*move_group_, get_logger(), park_joints_, "return to park");
+  }
   return true;
 }
 

@@ -88,7 +88,13 @@ bool AxisTest::doMovement() {
   std::vector<double> rotated = joints;
   rotated[5] = rotated[5] + rotation_rad_;
   if (!utils::moveToJoints(*move_group_, get_logger(), rotated, "rotate TCP")) { return false; }
-  return utils::moveToJoints(*move_group_, get_logger(), joints, "rotate TCP back");
+  if (!utils::moveToJoints(*move_group_, get_logger(), joints, "rotate TCP back")) { return false; }
+
+  // Finish back in the resting (park) pose.
+  if (park_joints_.size() == 6) {
+    return utils::moveToJoints(*move_group_, get_logger(), park_joints_, "return to park");
+  }
+  return true;
 }
 
 void AxisTest::stopSpinner() {

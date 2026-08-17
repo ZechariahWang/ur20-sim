@@ -100,7 +100,9 @@ def generate_launch_description():
         cmd=[
             "bash", "-c",
             "for i in $(seq 1 30); do "
-            "ros2 control set_controller_state friction_model_controller inactive && exit 0; "
+            "ros2 control list_controllers 2>/dev/null | grep friction_model_controller | grep -q inactive && "
+            "{ echo 'friction_model_controller is inactive'; exit 0; }; "
+            "ros2 control set_controller_state friction_model_controller inactive 2>/dev/null && exit 0; "
             "sleep 2; done; "
             "echo 'could not deactivate friction_model_controller'",
         ],

@@ -54,6 +54,11 @@ bool TcpOrientate::run() {
   if (!utils::moveToJoints(move_group, get_logger(), out, "wiggle out")) { return false; }
   if (!utils::moveToJoints(move_group, get_logger(), joints, "wiggle back")) { return false; }
 
+  // Finish back in the resting (park) pose.
+  if (park_joints_.size() == 6) {
+    if (!utils::moveToJoints(move_group, get_logger(), park_joints_, "return to park")) { return false; }
+  }
+
   RCLCPP_INFO(get_logger(), "Test complete. The robot moved and returned.");
   return true;
 }
