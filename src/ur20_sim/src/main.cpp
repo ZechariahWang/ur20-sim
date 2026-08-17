@@ -38,7 +38,7 @@ void MainSweep::loadParameters() {
   acceleration_scaling_ = get_parameter_or<double>("acceleration_scaling", 0.1);
   sweep_x_ = get_parameter_or<double>("sweep_x", 1.0);
   top_pass_height_ = get_parameter_or<double>("top_pass_height", 0.30);
-  side_pass_height_ = get_parameter_or<double>("side_pass_height", 0.06);
+  side_pass_height_ = get_parameter_or<double>("side_pass_height", 0.25);
   sweep_y_start_ = get_parameter_or<double>("sweep_y_start", 0.9);
   sweep_y_end_ = get_parameter_or<double>("sweep_y_end", -0.9);
   eef_step_ = get_parameter_or<double>("eef_step", 0.01);
