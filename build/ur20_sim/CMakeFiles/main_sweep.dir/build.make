@@ -92,6 +92,7 @@ main_sweep_EXTERNAL_OBJECTS =
 
 main_sweep: CMakeFiles/main_sweep.dir/src/main.cpp.o
 main_sweep: CMakeFiles/main_sweep.dir/build.make
+main_sweep: libur20_utils.a
 main_sweep: /opt/ros/humble/lib/libmoveit_move_group_interface.so.2.5.9
 main_sweep: /opt/ros/humble/lib/libmoveit_common_planning_interface_objects.so.2.5.9
 main_sweep: /opt/ros/humble/lib/libmoveit_planning_scene_interface.so.2.5.9

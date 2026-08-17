@@ -92,6 +92,7 @@ sweep_mover_EXTERNAL_OBJECTS =
 
 sweep_mover: CMakeFiles/sweep_mover.dir/src/calibration_tests/sweep_mover.cpp.o
 sweep_mover: CMakeFiles/sweep_mover.dir/build.make
+sweep_mover: libur20_utils.a
 sweep_mover: /opt/ros/humble/lib/libmoveit_move_group_interface.so.2.5.9
 sweep_mover: /opt/ros/humble/lib/libmoveit_common_planning_interface_objects.so.2.5.9
 sweep_mover: /opt/ros/humble/lib/libmoveit_planning_scene_interface.so.2.5.9

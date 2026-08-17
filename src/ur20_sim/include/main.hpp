@@ -33,29 +33,11 @@ class MainSweep : public rclcpp::Node {
       std::string label;
     };
 
-    // One IK solution and how far its joints are from the current joints.
-    struct IkCandidate {
-      double distance;
-      std::vector<double> joints;
-    };
-
     void loadParameters();
     bool setup();
     std::vector<Step> buildScript();
     bool checkAgainstRoom(const std::vector<Step> &script);
     bool doMovement();
-
-    bool moveToPose(const geometry_msgs::msg::Pose &pose, const std::string &label);
-    bool moveToJoints(const std::vector<double> &target, const std::string &label);
-    bool sweepTo(const geometry_msgs::msg::Pose &pose, const std::string &label);
-
-    static bool closerCandidate(const IkCandidate &a, const IkCandidate &b);
-    static bool isDuplicate(const std::vector<double> &solution, const std::vector<IkCandidate> &candidates);
-    static void wrapToNearest(std::vector<double> &solution, const std::vector<double> &current, const moveit::core::JointModelGroup *group);
-    static geometry_msgs::msg::Quaternion pitchQuaternion(double pitch);
-    static geometry_msgs::msg::Quaternion rollQuaternion(double roll);
-    static geometry_msgs::msg::Pose makePose(double x, double y, double z, const geometry_msgs::msg::Quaternion &q);
-
     void stopSpinner();
 
     rclcpp::executors::SingleThreadedExecutor executor_;

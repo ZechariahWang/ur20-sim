@@ -1,0 +1,2 @@
+/usr/bin/ar qc libur20_utils.a CMakeFiles/ur20_utils.dir/src/utils.cpp.o
+/usr/bin/ranlib libur20_utils.a

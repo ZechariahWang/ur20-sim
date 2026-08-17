@@ -92,6 +92,7 @@ axis_test_EXTERNAL_OBJECTS =
 
 axis_test: CMakeFiles/axis_test.dir/src/calibration_tests/axis_test.cpp.o
 axis_test: CMakeFiles/axis_test.dir/build.make
+axis_test: libur20_utils.a
 axis_test: /opt/ros/humble/lib/libmoveit_move_group_interface.so.2.5.9
 axis_test: /opt/ros/humble/lib/libmoveit_common_planning_interface_objects.so.2.5.9
 axis_test: /opt/ros/humble/lib/libmoveit_planning_scene_interface.so.2.5.9

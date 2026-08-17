@@ -198,6 +198,19 @@ ur20_sim_uninstall/fast:
 .PHONY : ur20_sim_uninstall/fast
 
 #=============================================================================
+# Target rules for targets named ur20_utils
+
+# Build rule for target.
+ur20_utils: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ur20_utils
+.PHONY : ur20_utils
+
+# fast build rule for target.
+ur20_utils/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ur20_utils.dir/build.make CMakeFiles/ur20_utils.dir/build
+.PHONY : ur20_utils/fast
+
+#=============================================================================
 # Target rules for targets named main_sweep
 
 # Build rule for target.
@@ -382,6 +395,30 @@ src/room_publisher.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/room_publisher.dir/build.make CMakeFiles/room_publisher.dir/src/room_publisher.cpp.s
 .PHONY : src/room_publisher.cpp.s
 
+src/utils.o: src/utils.cpp.o
+.PHONY : src/utils.o
+
+# target to build an object file
+src/utils.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ur20_utils.dir/build.make CMakeFiles/ur20_utils.dir/src/utils.cpp.o
+.PHONY : src/utils.cpp.o
+
+src/utils.i: src/utils.cpp.i
+.PHONY : src/utils.i
+
+# target to preprocess a source file
+src/utils.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ur20_utils.dir/build.make CMakeFiles/ur20_utils.dir/src/utils.cpp.i
+.PHONY : src/utils.cpp.i
+
+src/utils.s: src/utils.cpp.s
+.PHONY : src/utils.s
+
+# target to generate assembly for a file
+src/utils.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ur20_utils.dir/build.make CMakeFiles/ur20_utils.dir/src/utils.cpp.s
+.PHONY : src/utils.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -402,6 +439,7 @@ help:
 	@echo "... room_publisher"
 	@echo "... sweep_mover"
 	@echo "... tcp_orientate"
+	@echo "... ur20_utils"
 	@echo "... src/calibration_tests/axis_test.o"
 	@echo "... src/calibration_tests/axis_test.i"
 	@echo "... src/calibration_tests/axis_test.s"
@@ -417,6 +455,9 @@ help:
 	@echo "... src/room_publisher.o"
 	@echo "... src/room_publisher.i"
 	@echo "... src/room_publisher.s"
+	@echo "... src/utils.o"
+	@echo "... src/utils.i"
+	@echo "... src/utils.s"
 .PHONY : help
 
 

@@ -9,7 +9,8 @@
 #include <moveit/move_group_interface/move_group_interface.h>
 #include <rclcpp/rclcpp.hpp>
 
-// Runs the scanning routine: park, top sweep, side sweep, oblique view.
+// Calibration version of the scanning routine: park, top sweep, side
+// sweep, oblique view. No room pre-check; use main_sweep for production.
 class SweepMover : public rclcpp::Node {
 
   public:
@@ -30,27 +31,9 @@ class SweepMover : public rclcpp::Node {
       std::string label;
     };
 
-    // One IK solution and how far its joints are from the current joints.
-    struct IkCandidate {
-      double distance;
-      std::vector<double> joints;
-    };
-
     void loadParameters();
     bool setup();
     bool doMovement();
-
-    bool moveToPose(const geometry_msgs::msg::Pose &pose, const std::string &label);
-    bool moveToJoints(const std::vector<double> &target, const std::string &label);
-    bool sweepTo(const geometry_msgs::msg::Pose &pose, const std::string &label);
-
-    static bool closerCandidate(const IkCandidate &a, const IkCandidate &b);
-    static bool isDuplicate(const std::vector<double> &solution, const std::vector<IkCandidate> &candidates);
-    static void wrapToNearest(std::vector<double> &solution, const std::vector<double> &current, const moveit::core::JointModelGroup *group);
-    static geometry_msgs::msg::Quaternion pitchQuaternion(double pitch);
-    static geometry_msgs::msg::Quaternion rollQuaternion(double roll);
-    static geometry_msgs::msg::Pose makePose(double x, double y, double z, const geometry_msgs::msg::Quaternion &q);
-
     void stopSpinner();
 
     rclcpp::executors::SingleThreadedExecutor executor_;

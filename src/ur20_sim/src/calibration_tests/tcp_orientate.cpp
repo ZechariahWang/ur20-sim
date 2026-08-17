@@ -2,6 +2,8 @@
 
 #include <memory>
 
+#include "utils.hpp"
+
 TcpOrientate::TcpOrientate()
     : Node("tcp_orientate",
           rclcpp::NodeOptions().automatically_declare_parameters_from_overrides(true)) {}
@@ -35,7 +37,7 @@ bool TcpOrientate::run() {
   // First move to the parked pose so the test always runs from the
   // same place.
   if (park_joints_.size() == 6) {
-    if (!moveTo(move_group, park_joints_, "move to park position")) { return false; }
+    if (!utils::moveToJoints(move_group, get_logger(), park_joints_, "move to park position")) { return false; }
   }
 
   moveit::core::RobotStatePtr current = move_group.getCurrentState(10.0);
@@ -49,29 +51,13 @@ bool TcpOrientate::run() {
   // Move wrist_3 out by the wiggle angle, then back to where it was.
   std::vector<double> out = joints;
   out[5] = out[5] + wiggle;
-  if (!moveTo(move_group, out, "wiggle out")) { return false; }
-  if (!moveTo(move_group, joints, "wiggle back")) { return false; }
+  if (!utils::moveToJoints(move_group, get_logger(), out, "wiggle out")) { return false; }
+  if (!utils::moveToJoints(move_group, get_logger(), joints, "wiggle back")) { return false; }
 
   RCLCPP_INFO(get_logger(), "Test complete. The robot moved and returned.");
   return true;
 }
 
-bool TcpOrientate::moveTo(moveit::planning_interface::MoveGroupInterface &move_group, const std::vector<double> &target, const std::string &label) {
-  move_group.setJointValueTarget(target);
-  moveit::planning_interface::MoveGroupInterface::Plan plan;
-  bool planned = (move_group.plan(plan) == moveit::core::MoveItErrorCode::SUCCESS);
-  if (!planned) {
-    RCLCPP_ERROR(get_logger(), "Planning failed: %s", label.c_str());
-    return false;
-  }
-  RCLCPP_INFO(get_logger(), "Moving: %s...", label.c_str());
-  bool executed = (move_group.execute(plan) == moveit::core::MoveItErrorCode::SUCCESS);
-  if (!executed) {
-    RCLCPP_ERROR(get_logger(), "Execution failed: %s", label.c_str());
-    return false;
-  }
-  return true;
-}
 
 int main(int argc, char **argv) {
   rclcpp::init(argc, argv);

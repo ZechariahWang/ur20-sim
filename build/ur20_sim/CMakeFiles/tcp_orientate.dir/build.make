@@ -92,6 +92,7 @@ tcp_orientate_EXTERNAL_OBJECTS =
 
 tcp_orientate: CMakeFiles/tcp_orientate.dir/src/calibration_tests/tcp_orientate.cpp.o
 tcp_orientate: CMakeFiles/tcp_orientate.dir/build.make
+tcp_orientate: libur20_utils.a
 tcp_orientate: /opt/ros/humble/lib/libmoveit_move_group_interface.so.2.5.9
 tcp_orientate: /opt/ros/humble/lib/libmoveit_common_planning_interface_objects.so.2.5.9
 tcp_orientate: /opt/ros/humble/lib/libmoveit_planning_scene_interface.so.2.5.9

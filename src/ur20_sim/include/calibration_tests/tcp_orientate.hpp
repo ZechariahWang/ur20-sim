@@ -21,8 +21,6 @@ class TcpOrientate : public rclcpp::Node {
 
   private:
 
-    bool moveTo(moveit::planning_interface::MoveGroupInterface &move_group, const std::vector<double> &target, const std::string &label);
-
     rclcpp::executors::SingleThreadedExecutor executor_;
     std::thread spinner_;
     std::vector<double> park_joints_;

@@ -757,6 +757,9 @@ ur20_sim_IS_TOP_LEVEL:STATIC=ON
 //Value Computed by CMake
 ur20_sim_SOURCE_DIR:STATIC=/home/zech/robim_ur20_sim/src/ur20_sim
 
+//Dependencies for the target
+ur20_utils_LIB_DEPENDS:STATIC=general;rclcpp::rclcpp;general;moveit_ros_planning_interface::moveit_common_planning_interface_objects;general;moveit_ros_planning_interface::moveit_planning_scene_interface;general;moveit_ros_planning_interface::moveit_move_group_interface;
+
 //The directory containing a CMake configuration file for urdf.
 urdf_DIR:PATH=/opt/ros/humble/share/urdf/cmake
 
