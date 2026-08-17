@@ -50,6 +50,10 @@ def generate_launch_description():
             # parked pose (config/initial_positions.yaml).
             "description_package": "ur20_sim",
             "description_file": "ur20_parked.urdf.xacro",
+            # Factory calibration extracted from the real robot 2026-08-17.
+            "kinematics_params_file": PathJoinSubstitution(
+                [FindPackageShare("ur20_sim"), "config", "ur20_calibration.yaml"]
+            ),
         }.items(),
     )
 

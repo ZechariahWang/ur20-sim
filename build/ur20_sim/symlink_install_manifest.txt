@@ -11,6 +11,7 @@
 /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/config/ur20/joint_limits.yaml
 /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/config/ur20/physical_parameters.yaml
 /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/config/ur20/visual_parameters.yaml
+/home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/config/ur20_calibration.yaml
 /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/urdf/ur20_parked.urdf.xacro
 /home/zech/robim_ur20_sim/install/ur20_sim/share/ament_index/resource_index/package_run_dependencies/ur20_sim
 /home/zech/robim_ur20_sim/install/ur20_sim/share/ament_index/resource_index/parent_prefix_path/ur20_sim

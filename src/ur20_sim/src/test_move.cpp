@@ -1,6 +1,3 @@
-// First-contact hardware test: rotate wrist_3 by a small angle and back.
-// Joint-space only, no Cartesian targets, so the arm barely moves.
-
 #include <memory>
 #include <string>
 #include <thread>
@@ -24,7 +21,13 @@ class TestMove : public rclcpp::Node {
       }
     }
 
+    std::vector<double> park_joints_;
+    std::unique_ptr<moveit::planning_interface::MoveGroupInterface> move_group_;
+
     bool run() {
+
+      park_joints_ = get_parameter_or<std::vector<double>>("park_joints", {});
+
       executor_.add_node(shared_from_this());
       spinner_ = std::thread([this]() { executor_.spin(); });
 
@@ -57,8 +60,12 @@ class TestMove : public rclcpp::Node {
 
   private:
 
-    bool moveTo(moveit::planning_interface::MoveGroupInterface &move_group,
-                const std::vector<double> &target, const std::string &label) {
+    bool moveTo(moveit::planning_interface::MoveGroupInterface &move_group, const std::vector<double> &target, const std::string &label) {
+
+      if (park_joints_.size() == 6) {
+        if (!moveToJoints(park_joints_, "move to park position")) { return false; }
+      }
+
       move_group.setJointValueTarget(target);
       moveit::planning_interface::MoveGroupInterface::Plan plan;
       bool planned = (move_group.plan(plan) == moveit::core::MoveItErrorCode::SUCCESS);
@@ -68,6 +75,23 @@ class TestMove : public rclcpp::Node {
       }
       RCLCPP_INFO(get_logger(), "Moving: %s...", label.c_str());
       bool executed = (move_group.execute(plan) == moveit::core::MoveItErrorCode::SUCCESS);
+      if (!executed) {
+        RCLCPP_ERROR(get_logger(), "Execution failed: %s", label.c_str());
+        return false;
+      }
+      return true;
+    }
+
+    bool moveToJoints(const std::vector<double> &target, const std::string &label) {
+      move_group_->setJointValueTarget(target);
+      moveit::planning_interface::MoveGroupInterface::Plan plan;
+      bool planned = (move_group_->plan(plan) == moveit::core::MoveItErrorCode::SUCCESS);
+      if (!planned) {
+        RCLCPP_ERROR(get_logger(), "Planning failed: %s", label.c_str());
+        return false;
+      }
+      RCLCPP_INFO(get_logger(), "Moving: %s...", label.c_str());
+      bool executed = (move_group_->execute(plan) == moveit::core::MoveItErrorCode::SUCCESS);
       if (!executed) {
         RCLCPP_ERROR(get_logger(), "Execution failed: %s", label.c_str());
         return false;
