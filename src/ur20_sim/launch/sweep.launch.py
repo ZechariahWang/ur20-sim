@@ -1,9 +1,3 @@
-"""Run the sweep_mover node: linear TCP sweeps in down/side/oblique views.
-
-Loads the same MoveIt model configs as move_waypoints.launch.py so
-MoveGroupInterface can build the robot model locally.
-"""
-
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument
 from launch.substitutions import Command, FindExecutable, LaunchConfiguration, PathJoinSubstitution

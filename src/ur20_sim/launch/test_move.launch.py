@@ -1,5 +1,3 @@
-"""Run the test_move node: a small wrist wiggle to verify real-robot control."""
-
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument
 from launch.substitutions import Command, FindExecutable, LaunchConfiguration, PathJoinSubstitution
