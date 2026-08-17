@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/sweep_mover.dir/src/sweep_mover.cpp.o"
-  "CMakeFiles/sweep_mover.dir/src/sweep_mover.cpp.o.d"
+  "CMakeFiles/sweep_mover.dir/src/calibration_tests/sweep_mover.cpp.o"
+  "CMakeFiles/sweep_mover.dir/src/calibration_tests/sweep_mover.cpp.o.d"
   "sweep_mover"
   "sweep_mover.pdb"
 )

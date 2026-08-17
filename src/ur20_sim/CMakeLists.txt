@@ -12,7 +12,10 @@ find_package(visualization_msgs REQUIRED)
 
 include_directories(include)
 
-add_executable(sweep_mover src/sweep_mover.cpp)
+add_executable(main_sweep src/main.cpp)
+ament_target_dependencies(main_sweep rclcpp moveit_ros_planning_interface)
+
+add_executable(sweep_mover src/calibration_tests/sweep_mover.cpp)
 ament_target_dependencies(sweep_mover rclcpp moveit_ros_planning_interface)
 
 add_executable(room_publisher src/room_publisher.cpp)
@@ -24,7 +27,7 @@ ament_target_dependencies(tcp_orientate rclcpp moveit_ros_planning_interface)
 add_executable(axis_test src/calibration_tests/axis_test.cpp)
 ament_target_dependencies(axis_test rclcpp moveit_ros_planning_interface)
 
-install(TARGETS sweep_mover room_publisher tcp_orientate axis_test
+install(TARGETS main_sweep sweep_mover room_publisher tcp_orientate axis_test
   DESTINATION lib/${PROJECT_NAME})
 
 install(DIRECTORY launch config urdf

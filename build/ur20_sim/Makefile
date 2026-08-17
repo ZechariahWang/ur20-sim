@@ -198,6 +198,19 @@ ur20_sim_uninstall/fast:
 .PHONY : ur20_sim_uninstall/fast
 
 #=============================================================================
+# Target rules for targets named main_sweep
+
+# Build rule for target.
+main_sweep: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 main_sweep
+.PHONY : main_sweep
+
+# fast build rule for target.
+main_sweep/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main_sweep.dir/build.make CMakeFiles/main_sweep.dir/build
+.PHONY : main_sweep/fast
+
+#=============================================================================
 # Target rules for targets named sweep_mover
 
 # Build rule for target.
@@ -273,6 +286,30 @@ src/calibration_tests/axis_test.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/axis_test.dir/build.make CMakeFiles/axis_test.dir/src/calibration_tests/axis_test.cpp.s
 .PHONY : src/calibration_tests/axis_test.cpp.s
 
+src/calibration_tests/sweep_mover.o: src/calibration_tests/sweep_mover.cpp.o
+.PHONY : src/calibration_tests/sweep_mover.o
+
+# target to build an object file
+src/calibration_tests/sweep_mover.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sweep_mover.dir/build.make CMakeFiles/sweep_mover.dir/src/calibration_tests/sweep_mover.cpp.o
+.PHONY : src/calibration_tests/sweep_mover.cpp.o
+
+src/calibration_tests/sweep_mover.i: src/calibration_tests/sweep_mover.cpp.i
+.PHONY : src/calibration_tests/sweep_mover.i
+
+# target to preprocess a source file
+src/calibration_tests/sweep_mover.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sweep_mover.dir/build.make CMakeFiles/sweep_mover.dir/src/calibration_tests/sweep_mover.cpp.i
+.PHONY : src/calibration_tests/sweep_mover.cpp.i
+
+src/calibration_tests/sweep_mover.s: src/calibration_tests/sweep_mover.cpp.s
+.PHONY : src/calibration_tests/sweep_mover.s
+
+# target to generate assembly for a file
+src/calibration_tests/sweep_mover.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sweep_mover.dir/build.make CMakeFiles/sweep_mover.dir/src/calibration_tests/sweep_mover.cpp.s
+.PHONY : src/calibration_tests/sweep_mover.cpp.s
+
 src/calibration_tests/tcp_orientate.o: src/calibration_tests/tcp_orientate.cpp.o
 .PHONY : src/calibration_tests/tcp_orientate.o
 
@@ -296,6 +333,30 @@ src/calibration_tests/tcp_orientate.s: src/calibration_tests/tcp_orientate.cpp.s
 src/calibration_tests/tcp_orientate.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tcp_orientate.dir/build.make CMakeFiles/tcp_orientate.dir/src/calibration_tests/tcp_orientate.cpp.s
 .PHONY : src/calibration_tests/tcp_orientate.cpp.s
+
+src/main.o: src/main.cpp.o
+.PHONY : src/main.o
+
+# target to build an object file
+src/main.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main_sweep.dir/build.make CMakeFiles/main_sweep.dir/src/main.cpp.o
+.PHONY : src/main.cpp.o
+
+src/main.i: src/main.cpp.i
+.PHONY : src/main.i
+
+# target to preprocess a source file
+src/main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main_sweep.dir/build.make CMakeFiles/main_sweep.dir/src/main.cpp.i
+.PHONY : src/main.cpp.i
+
+src/main.s: src/main.cpp.s
+.PHONY : src/main.s
+
+# target to generate assembly for a file
+src/main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main_sweep.dir/build.make CMakeFiles/main_sweep.dir/src/main.cpp.s
+.PHONY : src/main.cpp.s
 
 src/room_publisher.o: src/room_publisher.cpp.o
 .PHONY : src/room_publisher.o
@@ -321,30 +382,6 @@ src/room_publisher.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/room_publisher.dir/build.make CMakeFiles/room_publisher.dir/src/room_publisher.cpp.s
 .PHONY : src/room_publisher.cpp.s
 
-src/sweep_mover.o: src/sweep_mover.cpp.o
-.PHONY : src/sweep_mover.o
-
-# target to build an object file
-src/sweep_mover.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sweep_mover.dir/build.make CMakeFiles/sweep_mover.dir/src/sweep_mover.cpp.o
-.PHONY : src/sweep_mover.cpp.o
-
-src/sweep_mover.i: src/sweep_mover.cpp.i
-.PHONY : src/sweep_mover.i
-
-# target to preprocess a source file
-src/sweep_mover.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sweep_mover.dir/build.make CMakeFiles/sweep_mover.dir/src/sweep_mover.cpp.i
-.PHONY : src/sweep_mover.cpp.i
-
-src/sweep_mover.s: src/sweep_mover.cpp.s
-.PHONY : src/sweep_mover.s
-
-# target to generate assembly for a file
-src/sweep_mover.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sweep_mover.dir/build.make CMakeFiles/sweep_mover.dir/src/sweep_mover.cpp.s
-.PHONY : src/sweep_mover.cpp.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -361,21 +398,25 @@ help:
 	@echo "... uninstall"
 	@echo "... ur20_sim_uninstall"
 	@echo "... axis_test"
+	@echo "... main_sweep"
 	@echo "... room_publisher"
 	@echo "... sweep_mover"
 	@echo "... tcp_orientate"
 	@echo "... src/calibration_tests/axis_test.o"
 	@echo "... src/calibration_tests/axis_test.i"
 	@echo "... src/calibration_tests/axis_test.s"
+	@echo "... src/calibration_tests/sweep_mover.o"
+	@echo "... src/calibration_tests/sweep_mover.i"
+	@echo "... src/calibration_tests/sweep_mover.s"
 	@echo "... src/calibration_tests/tcp_orientate.o"
 	@echo "... src/calibration_tests/tcp_orientate.i"
 	@echo "... src/calibration_tests/tcp_orientate.s"
+	@echo "... src/main.o"
+	@echo "... src/main.i"
+	@echo "... src/main.s"
 	@echo "... src/room_publisher.o"
 	@echo "... src/room_publisher.i"
 	@echo "... src/room_publisher.s"
-	@echo "... src/sweep_mover.o"
-	@echo "... src/sweep_mover.i"
-	@echo "... src/sweep_mover.s"
 .PHONY : help
 
 

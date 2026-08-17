@@ -1,4 +1,4 @@
-#include "sweep_mover.hpp"
+#include "calibration_tests/sweep_mover.hpp"
 
 #include <algorithm>
 #include <cmath>

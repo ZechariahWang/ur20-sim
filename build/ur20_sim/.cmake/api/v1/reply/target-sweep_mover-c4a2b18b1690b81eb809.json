@@ -2,7 +2,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "axis_test"
+			"path" : "sweep_mover"
 		}
 	],
 	"backtrace" : 1,
@@ -30,13 +30,13 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 24,
+				"line" : 18,
 				"parent" : 0
 			},
 			{
 				"command" : 2,
 				"file" : 0,
-				"line" : 25,
+				"line" : 19,
 				"parent" : 0
 			},
 			{
@@ -498,7 +498,7 @@
 			]
 		}
 	],
-	"id" : "axis_test::@6890427a1f51a3e7e1df",
+	"id" : "sweep_mover::@6890427a1f51a3e7e1df",
 	"link" : 
 	{
 		"commandFragments" : 
@@ -1566,8 +1566,8 @@
 		],
 		"language" : "CXX"
 	},
-	"name" : "axis_test",
-	"nameOnDisk" : "axis_test",
+	"name" : "sweep_mover",
+	"nameOnDisk" : "sweep_mover",
 	"paths" : 
 	{
 		"build" : ".",
@@ -1588,7 +1588,7 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "src/calibration_tests/axis_test.cpp",
+			"path" : "src/calibration_tests/sweep_mover.cpp",
 			"sourceGroupIndex" : 0
 		}
 	],

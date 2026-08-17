@@ -1,5 +1,5 @@
-#ifndef UR20_SIM_SWEEP_MOVER_HPP
-#define UR20_SIM_SWEEP_MOVER_HPP
+#ifndef UR20_SIM_MAIN_HPP
+#define UR20_SIM_MAIN_HPP
 
 #include <string>
 #include <thread>
@@ -9,13 +9,16 @@
 #include <moveit/move_group_interface/move_group_interface.h>
 #include <rclcpp/rclcpp.hpp>
 
-// Runs the scanning routine: park, top sweep, side sweep, oblique view.
-class SweepMover : public rclcpp::Node {
+// The production sweep routine: park, top sweep, side sweep, oblique view.
+// Before moving it checks every scripted pose against the measured room
+// bounds (loaded from room.yaml) and refuses to start if any pose is too
+// close to the floor, ceiling, or walls.
+class MainSweep : public rclcpp::Node {
 
   public:
 
-    SweepMover();
-    ~SweepMover() override;
+    MainSweep();
+    ~MainSweep() override;
 
     bool run();
 
@@ -38,6 +41,8 @@ class SweepMover : public rclcpp::Node {
 
     void loadParameters();
     bool setup();
+    std::vector<Step> buildScript();
+    bool checkAgainstRoom(const std::vector<Step> &script);
     bool doMovement();
 
     bool moveToPose(const geometry_msgs::msg::Pose &pose, const std::string &label);
@@ -57,15 +62,25 @@ class SweepMover : public rclcpp::Node {
     std::thread spinner_;
     std::unique_ptr<moveit::planning_interface::MoveGroupInterface> move_group_;
 
+    // Sweep geometry and speeds (main_sweep.yaml)
     std::string planning_group_;
-    double velocity_scaling_{0.3};
-    double acceleration_scaling_{0.2};
+    double velocity_scaling_{0.05};
+    double acceleration_scaling_{0.1};
     double sweep_x_{1.0};
     double sweep_z_{0.35};
     double sweep_y_start_{0.9};
     double sweep_y_end_{-0.9};
     double eef_step_{0.01};
     std::vector<double> park_joints_;
+
+    // Room bounds (room.yaml) and how close the TCP may get to them.
+    double floor_z_{-0.80};
+    double ceiling_z_{1.80};
+    double x_min_{-1.12};
+    double x_max_{2.50};
+    double y_min_{-1.65};
+    double y_max_{1.65};
+    double room_margin_{0.15};
 };
 
 #endif

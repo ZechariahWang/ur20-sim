@@ -1,4 +1,7 @@
-room_publisher:
+# Wildcard node key: any node that loads this file gets the room bounds
+# (room_publisher builds the collision boxes from them, main_sweep uses
+# them to validate its motions).
+/**:
   ros__parameters:
     frame_id: world
     # Real cell, measured 2026-08-17. All values in the robot BASE frame:

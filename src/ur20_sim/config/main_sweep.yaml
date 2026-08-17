@@ -1,0 +1,27 @@
+main_sweep:
+  ros__parameters:
+    planning_group: ur_manipulator
+    # Fraction (0-1] of maximum joint velocity/acceleration.
+    velocity_scaling: 0.05
+    acceleration_scaling: 0.1
+
+    # The sweep line runs parallel to the base Y axis at fixed x/z (m,
+    # ROS base frame: open workspace is +x, wall behind the robot is -x).
+    sweep_x: 1.0
+    sweep_z: 0.35
+    # Both sweeps travel from sweep_y_start to sweep_y_end; swap the two
+    # values to flip the sweep direction.
+    sweep_y_start: 0.9
+    sweep_y_end: -0.9
+
+    # Cartesian interpolation step along the line (m).
+    eef_step: 0.01
+
+    # Closest any scripted TCP position may be to the floor, ceiling, or a
+    # wall (m). The node refuses to start if the script violates this.
+    # Room bounds themselves come from room.yaml.
+    room_margin: 0.15
+
+    # The routine first moves here (radians, shoulder_pan..wrist_3), the
+    # robot's parked pose, so every run starts from the same place.
+    park_joints: [-0.2023, -1.1880, 2.0057, -2.3736, -1.5708, 1.3685]
