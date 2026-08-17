@@ -37,7 +37,8 @@ void MainSweep::loadParameters() {
   velocity_scaling_ = get_parameter_or<double>("velocity_scaling", 0.05);
   acceleration_scaling_ = get_parameter_or<double>("acceleration_scaling", 0.1);
   sweep_x_ = get_parameter_or<double>("sweep_x", 1.0);
-  sweep_z_ = get_parameter_or<double>("sweep_z", 0.35);
+  top_pass_height_ = get_parameter_or<double>("top_pass_height", 0.30);
+  side_pass_height_ = get_parameter_or<double>("side_pass_height", 0.06);
   sweep_y_start_ = get_parameter_or<double>("sweep_y_start", 0.9);
   sweep_y_end_ = get_parameter_or<double>("sweep_y_end", -0.9);
   eef_step_ = get_parameter_or<double>("eef_step", 0.01);
@@ -45,13 +46,14 @@ void MainSweep::loadParameters() {
   side_view_joints_ = get_parameter_or<std::vector<double>>("side_view_joints", {});
 
   // Room bounds, same values room_publisher builds the collision boxes
-  floor_z_ = get_parameter_or<double>("floor_z", -0.80);
-  ceiling_z_ = get_parameter_or<double>("ceiling_z", 1.80);
+  floor_z_ = get_parameter_or<double>("floor_z", -0.81);
+  ceiling_z_ = get_parameter_or<double>("ceiling_z", 1.79);
   x_min_ = get_parameter_or<double>("x_min", -1.12);
   x_max_ = get_parameter_or<double>("x_max", 2.50);
   y_min_ = get_parameter_or<double>("y_min", -1.65);
   y_max_ = get_parameter_or<double>("y_max", 1.65);
   room_margin_ = get_parameter_or<double>("room_margin", 0.15);
+  floor_margin_ = get_parameter_or<double>("floor_margin", 0.03);
 }
 
 std::vector<MainSweep::Step> MainSweep::buildScript(const geometry_msgs::msg::Quaternion &top_orientation, const geometry_msgs::msg::Quaternion &side_orientation) {
@@ -63,16 +65,18 @@ std::vector<MainSweep::Step> MainSweep::buildScript(const geometry_msgs::msg::Qu
   geometry_msgs::msg::Quaternion q2 = side_orientation;
 
   double x = sweep_x_;
-  double z = sweep_z_;
   double start = sweep_y_start_;
   double end = sweep_y_end_;
+  // Heights are configured above the real floor, convert to base frame.
+  double z_top = floor_z_ + top_pass_height_;
+  double z_side = floor_z_ + side_pass_height_;
 
   std::vector<Step> script;
-  script.push_back({Step::MOVE,  utils::makePose(x, start, z, q1),            "sweep start"});
-  script.push_back({Step::SWEEP, utils::makePose(x, end,   z, q1),            "top sweep"});
-  script.push_back({Step::MOVE,  utils::makePose(x - 0.1, start, z, q2),      "return to start (side view)"});
-  script.push_back({Step::SWEEP, utils::makePose(x - 0.1, end,   z, q2),      "side sweep"});
-  script.push_back({Step::MOVE,  utils::makePose(x - 0.2, end,   z + 0.3, q2), "final raised position"});
+  script.push_back({Step::MOVE,  utils::makePose(x, start, z_top, q1),            "sweep start"});
+  script.push_back({Step::SWEEP, utils::makePose(x, end,   z_top, q1),            "top sweep"});
+  script.push_back({Step::MOVE,  utils::makePose(x - 0.1, start, z_side, q2),     "return to start (side view)"});
+  script.push_back({Step::SWEEP, utils::makePose(x - 0.1, end,   z_side, q2),     "side sweep"});
+  script.push_back({Step::MOVE,  utils::makePose(x - 0.2, end,   z_top + 0.3, q2), "final raised position"});
   return script;
 }
 
@@ -97,9 +101,14 @@ bool MainSweep::checkAgainstRoom(const std::vector<Step> &script) {
                    label.c_str(), y, room_margin_, y_min_, y_max_);
       all_ok = false;
     }
-    if (z < floor_z_ + room_margin_ || z > ceiling_z_ - room_margin_) {
-      RCLCPP_ERROR(get_logger(), "'%s' z=%.2f is within %.2f m of the floor/ceiling [%.2f, %.2f].",
-                   label.c_str(), z, room_margin_, floor_z_, ceiling_z_);
+    if (z < floor_z_ + floor_margin_) {
+      RCLCPP_ERROR(get_logger(), "'%s' z=%.2f is within %.2f m of the floor at %.2f.",
+                   label.c_str(), z, floor_margin_, floor_z_);
+      all_ok = false;
+    }
+    if (z > ceiling_z_ - room_margin_) {
+      RCLCPP_ERROR(get_logger(), "'%s' z=%.2f is within %.2f m of the ceiling at %.2f.",
+                   label.c_str(), z, room_margin_, ceiling_z_);
       all_ok = false;
     }
   }

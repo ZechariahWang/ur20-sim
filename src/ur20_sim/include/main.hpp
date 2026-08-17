@@ -49,7 +49,9 @@ class MainSweep : public rclcpp::Node {
     double velocity_scaling_{0.05};
     double acceleration_scaling_{0.1};
     double sweep_x_{1.0};
-    double sweep_z_{0.35};
+    // Pass heights above the real floor (m), not the robot base.
+    double top_pass_height_{0.30};
+    double side_pass_height_{0.06};
     double sweep_y_start_{0.9};
     double sweep_y_end_{-0.9};
     double eef_step_{0.01};
@@ -58,13 +60,15 @@ class MainSweep : public rclcpp::Node {
     std::vector<double> side_view_joints_;
 
     // Room bounds (room.yaml) and how close the TCP may get to them.
-    double floor_z_{-0.80};
-    double ceiling_z_{1.80};
+    double floor_z_{-0.81};
+    double ceiling_z_{1.79};
     double x_min_{-1.12};
     double x_max_{2.50};
     double y_min_{-1.65};
     double y_max_{1.65};
     double room_margin_{0.15};
+    // Separate, smaller margin for the floor so the side pass may fly low.
+    double floor_margin_{0.03};
 };
 
 #endif

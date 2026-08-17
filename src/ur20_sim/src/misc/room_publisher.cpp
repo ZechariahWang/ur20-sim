@@ -22,9 +22,9 @@ void RoomPublisher::loadParameters() {
   frame_id_ = get_parameter_or<std::string>("frame_id", "world");
   // All values are in the robot base frame (base origin = 0,0,0).
   // Top surface of the real floor, below the base when it is on a stand.
-  floor_z_ = get_parameter_or<double>("floor_z", -0.80);
+  floor_z_ = get_parameter_or<double>("floor_z", -0.81);
   // Bottom surface of the ceiling, above the base.
-  ceiling_z_ = get_parameter_or<double>("ceiling_z", 1.80);
+  ceiling_z_ = get_parameter_or<double>("ceiling_z", 1.79);
   // Walls: the reachable space spans x_min..x_max and y_min..y_max.
   x_min_ = get_parameter_or<double>("x_min", -1.12);
   x_max_ = get_parameter_or<double>("x_max", 2.50);

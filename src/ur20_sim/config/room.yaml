@@ -5,10 +5,10 @@
   ros__parameters:
     frame_id: world
     # Real cell, measured 2026-08-17. All values in the robot BASE frame:
-    # the base sits on an 80 cm block, so the real floor is at z = -0.80.
-    floor_z: -0.80
-    # Roof is 2.60 m above the ground = 1.80 m above the base.
-    ceiling_z: 1.80
+    # the base sits on an 81 cm block, so the real floor is at z = -0.81.
+    floor_z: -0.81
+    # Roof is 2.60 m above the ground = 1.79 m above the base.
+    ceiling_z: 1.79
     # Open space in front of the robot (ROS +x): 2.50 m to the nearest obstacle.
     x_max: 2.50
     # Wall behind the robot (ROS -x): 1.12 m from the base. NOTE: the pendant

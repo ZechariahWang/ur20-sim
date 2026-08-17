@@ -8,7 +8,11 @@ main_sweep:
     # The sweep line runs parallel to the base Y axis at fixed x/z (m,
     # ROS base frame: open workspace is +x, wall behind the robot is -x).
     sweep_x: 1.0
-    sweep_z: 0.35
+    # Camera pass heights ABOVE THE REAL FLOOR (m). The board is ~40 mm
+    # tall: the top pass looks down on it, the side pass flies just above
+    # board-top height to capture the side without touching the ground.
+    top_pass_height: 0.30
+    side_pass_height: 0.06
     # Both sweeps travel from sweep_y_start to sweep_y_end; swap the two
     # values to flip the sweep direction.
     sweep_y_start: 0.9
@@ -17,10 +21,13 @@ main_sweep:
     # Cartesian interpolation step along the line (m).
     eef_step: 0.01
 
-    # Closest any scripted TCP position may be to the floor, ceiling, or a
-    # wall (m). The node refuses to start if the script violates this.
+    # Closest any scripted TCP position may be to the ceiling or a wall
+    # (m). The node refuses to start if the script violates this.
     # Room bounds themselves come from room.yaml.
     room_margin: 0.15
+    # Separate, smaller margin for the floor so the side pass may fly low
+    # (m). The TCP may never be closer to the floor than this.
+    floor_margin: 0.03
 
     # The routine first moves here (radians, shoulder_pan..wrist_3), the
     # robot's parked pose, so every run starts from the same place.

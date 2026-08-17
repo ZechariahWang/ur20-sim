@@ -36,8 +36,8 @@ class RoomPublisher : public rclcpp::Node {
     void addToPlanningScene(const std::vector<Box> &boxes);
 
     std::string frame_id_;
-    double floor_z_{-0.80};
-    double ceiling_z_{1.80};
+    double floor_z_{-0.81};
+    double ceiling_z_{1.79};
     double x_min_{-1.12};
     double x_max_{2.50};
     double y_min_{-1.65};
