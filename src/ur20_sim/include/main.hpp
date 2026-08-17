@@ -55,6 +55,8 @@ class MainSweep : public rclcpp::Node {
     double sweep_y_start_{0.9};
     double sweep_y_end_{-0.9};
     double eef_step_{0.01};
+    // How far the camera tip sticks out of the flange along tool z (m).
+    double camera_length_{0.22};
     std::vector<double> park_joints_;
     // Joint pose whose TCP orientation is used for the second (side) pass.
     std::vector<double> side_view_joints_;

@@ -8,11 +8,15 @@ main_sweep:
     # The sweep line runs parallel to the base Y axis at fixed x/z (m,
     # ROS base frame: open workspace is +x, wall behind the robot is -x).
     sweep_x: 1.0
-    # Camera pass heights ABOVE THE REAL FLOOR (m). The board is ~40 mm
+    # CAMERA TIP heights ABOVE THE REAL FLOOR (m). The board is ~40 mm
     # tall: the top pass looks down on it, the side pass flies just above
     # board-top height to capture the side without touching the ground.
+    # The flange offset for the 22 cm camera is applied automatically.
     top_pass_height: 0.30
-    side_pass_height: 0.06
+    side_pass_height: 0.10
+
+    # How far the camera tip sticks out of the flange along tool z (m).
+    camera_length: 0.22
     # Both sweeps travel from sweep_y_start to sweep_y_end; swap the two
     # values to flip the sweep direction.
     sweep_y_start: 0.9

@@ -6,4 +6,30 @@
 <robot xmlns:xacro="http://wiki.ros.org/xacro" name="ur">
   <xacro:arg name="initial_positions_file" default="$(find ur20_sim)/config/initial_positions.yaml"/>
   <xacro:include filename="$(find ur_description)/urdf/ur.urdf.xacro"/>
+
+  <!-- Camera sticking 22 cm out of the flange along tool z. Modeled as a
+       cylinder so MoveIt collision-checks it against the room. Starts 1 cm
+       past the flange to avoid false self-collision with wrist_3. -->
+  <link name="camera">
+    <visual>
+      <origin xyz="0 0 0.115" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.03" length="0.21"/>
+      </geometry>
+      <material name="camera_grey">
+        <color rgba="0.3 0.3 0.3 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.115" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.03" length="0.21"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="camera_joint" type="fixed">
+    <parent link="tool0"/>
+    <child link="camera"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
 </robot>

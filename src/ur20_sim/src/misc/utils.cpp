@@ -97,6 +97,19 @@ geometry_msgs::msg::Quaternion orientationFromJoints(
   return q;
 }
 
+geometry_msgs::msg::Pose flangePoseFromCameraPose(
+    const geometry_msgs::msg::Pose &camera_pose, double camera_length) {
+  Eigen::Quaterniond q(camera_pose.orientation.w, camera_pose.orientation.x,
+                       camera_pose.orientation.y, camera_pose.orientation.z);
+  Eigen::Vector3d camera_axis = q * Eigen::Vector3d(0.0, 0.0, camera_length);
+
+  geometry_msgs::msg::Pose flange_pose = camera_pose;
+  flange_pose.position.x = camera_pose.position.x - camera_axis.x();
+  flange_pose.position.y = camera_pose.position.y - camera_axis.y();
+  flange_pose.position.z = camera_pose.position.z - camera_axis.z();
+  return flange_pose;
+}
+
 bool moveToPose(moveit::planning_interface::MoveGroupInterface &move_group,
                 const rclcpp::Logger &logger,
                 const geometry_msgs::msg::Pose &pose, const std::string &label) {

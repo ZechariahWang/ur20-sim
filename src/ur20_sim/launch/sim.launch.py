@@ -85,6 +85,10 @@ def generate_launch_description():
         launch_arguments={
             "ur_type": ur_type,
             "launch_rviz": launch_rviz,
+            # Same wrapper description as the driver so move_group's
+            # planning model includes the camera for collision checking.
+            "description_package": "ur20_sim",
+            "description_file": "ur20_parked.urdf.xacro",
         }.items(),
     )
 

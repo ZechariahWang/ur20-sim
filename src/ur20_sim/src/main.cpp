@@ -42,6 +42,7 @@ void MainSweep::loadParameters() {
   sweep_y_start_ = get_parameter_or<double>("sweep_y_start", 0.9);
   sweep_y_end_ = get_parameter_or<double>("sweep_y_end", -0.9);
   eef_step_ = get_parameter_or<double>("eef_step", 0.01);
+  camera_length_ = get_parameter_or<double>("camera_length", 0.22);
   park_joints_ = get_parameter_or<std::vector<double>>("park_joints", {});
   side_view_joints_ = get_parameter_or<std::vector<double>>("side_view_joints", {});
 
@@ -161,6 +162,9 @@ bool MainSweep::doMovement() {
   std::vector<Step> script = buildScript(top_orientation, side_orientation);
   for (size_t i = 0; i < script.size(); i++) {
     Step step = script[i];
+    // Script poses say where the camera TIP should be; the arm is
+    // commanded by flange pose, so pull each target back along tool z.
+    step.pose = utils::flangePoseFromCameraPose(step.pose, camera_length_);
     bool ok = false;
     if (step.type == Step::MOVE) {
       ok = utils::moveToPose(*move_group_, get_logger(), step.pose, step.label);

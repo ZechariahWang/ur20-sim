@@ -29,6 +29,12 @@ geometry_msgs::msg::Quaternion orientationFromJoints(
     moveit::planning_interface::MoveGroupInterface &move_group,
     const std::vector<double> &joints);
 
+// The camera sticks out of the flange along tool z. Given where the
+// camera TIP should be, return where the flange must go: the same pose
+// pulled back by camera_length along the tool z axis.
+geometry_msgs::msg::Pose flangePoseFromCameraPose(
+    const geometry_msgs::msg::Pose &camera_pose, double camera_length);
+
 // Free repositioning move to a pose. Solves IK from several seeds, wraps
 // each solution to the 2*pi-equivalent nearest the current joints, and
 // plans to the closest solution first, falling back to the next closest
