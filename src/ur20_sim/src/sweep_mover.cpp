@@ -252,11 +252,11 @@ class SweepMover : public rclcpp::Node {
 
     bool doMovement() {
 
-      // TCP orientations. The workspace is on the -x side of the robot
-      // (it is backed against a wall on +x), so "away from the robot" is -x:
-      // that is why the side view uses a negative pitch.
+      // TCP orientations. In ROS base coordinates the open workspace is on
+      // +x and the wall is behind the robot on -x (the pendant base frame
+      // is rotated 180 deg about z, so pendant x is the opposite sign).
       geometry_msgs::msg::Quaternion down = pitchQuaternion(M_PI);
-      geometry_msgs::msg::Quaternion side = pitchQuaternion(-M_PI / 2.0);
+      geometry_msgs::msg::Quaternion side = pitchQuaternion(M_PI / 2.0);
 
       // Negative roll tilts left (toward the start), positive tilts right.
       // -2.0 * M_PI / 3.0 (-120 deg) = shallower, 30 down / 60 left

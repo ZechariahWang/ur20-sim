@@ -7,7 +7,7 @@ sweep_mover:
     # The sweep line runs parallel to the base Y axis at fixed x/z (meters,
     # in the robot base frame). UR20 reach is 1.75 m; keep
     # sqrt(x^2 + y^2) comfortably inside that.
-    sweep_x: -1.0
+    sweep_x: 1.0
     sweep_z: 0.35
     # Both sweeps travel from sweep_y_start to sweep_y_end; swap the two
     # values to flip the sweep direction.

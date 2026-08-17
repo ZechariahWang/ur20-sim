@@ -6,10 +6,12 @@ room_publisher:
     floor_z: -0.80
     # Roof is 2.60 m above the ground = 1.80 m above the base.
     ceiling_z: 1.80
-    # Wall behind the robot (+x side): 1.12 m from the base.
-    x_max: 1.12
-    # Clear space in front (-x side): 2.50 m to the nearest obstacle.
-    x_min: -2.50
+    # Open space in front of the robot (ROS +x): 2.50 m to the nearest obstacle.
+    x_max: 2.50
+    # Wall behind the robot (ROS -x): 1.12 m from the base. NOTE: the pendant
+    # base frame is rotated 180 deg about z from ROS base_link, so pendant x
+    # and ROS x have opposite signs.
+    x_min: -1.12
     # Side walls: 165 cm from the base center to each side.
     y_min: -1.65
     y_max: 1.65
