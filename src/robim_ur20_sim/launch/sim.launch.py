@@ -46,6 +46,10 @@ def generate_launch_description():
             "use_fake_hardware": use_fake_hardware,
             "initial_joint_controller": initial_joint_controller,
             "launch_rviz": "false",
+            # Wrapper description: fake hardware spawns in the real robot's
+            # parked pose (config/initial_positions.yaml).
+            "description_package": "robim_ur20_sim",
+            "description_file": "ur20_parked.urdf.xacro",
         }.items(),
     )
 

@@ -22,7 +22,7 @@ ament_target_dependencies(test_move rclcpp moveit_ros_planning_interface)
 install(TARGETS sweep_mover room_publisher test_move
   DESTINATION lib/${PROJECT_NAME})
 
-install(DIRECTORY launch config
+install(DIRECTORY launch config urdf
   DESTINATION share/${PROJECT_NAME})
 
 ament_package()

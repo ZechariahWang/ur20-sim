@@ -1,0 +1,142 @@
+[0.000000] (-) TimerEvent: {}
+[0.000209] (robim_ur20_sim) JobQueued: {'identifier': 'robim_ur20_sim', 'dependencies': OrderedDict()}
+[0.000420] (robim_ur20_sim) JobStarted: {'identifier': 'robim_ur20_sim'}
+[0.005107] (robim_ur20_sim) JobProgress: {'identifier': 'robim_ur20_sim', 'progress': 'cmake'}
+[0.006645] (robim_ur20_sim) JobProgress: {'identifier': 'robim_ur20_sim', 'progress': 'build'}
+[0.006685] (robim_ur20_sim) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/zech/robim_ur20_sim/build/robim_ur20_sim', '--', '-j20', '-l20'], 'cwd': '/home/zech/robim_ur20_sim/build/robim_ur20_sim', 'env': OrderedDict([('GZ_SIM_SYSTEM_PLUGIN_PATH', ':/usr/lib/x86_64-linux-gnu'), ('LESSOPEN', '| /usr/bin/lesspipe %s'), ('IGN_IP', '127.0.0.1'), ('AI_AGENT', 'claude-code_2-1-227_agent'), ('LANGUAGE', 'en_CA:en'), ('USER', 'zech'), ('CLAUDE_CODE_ENTRYPOINT', 'cli'), ('GIT_EDITOR', 'true'), ('XDG_SESSION_TYPE', 'wayland'), ('STM32CubeMX_PATH', '/home/zech/STM32CubeMX'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/zech/exia_ws/install/exia_msgs/lib:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/zech'), ('OLDPWD', '/home/zech/robim_ur20_sim'), ('DESKTOP_SESSION', 'ubuntu'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('CLAUDE_CODE_CHILD_SESSION', '1'), ('SYSTEMD_EXEC_PID', '2695'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('NVM_DIR', '/home/zech/.nvm'), ('IM_CONFIG_PHASE', '1'), ('WAYLAND_DISPLAY', 'wayland-0'), ('COLCON_PREFIX_PATH', '/home/zech/exia_ws/install:/home/zech/ros2_ws/install'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'zech'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'zech'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '1'), ('PATH', '/home/zech/.npm-global/bin:/home/zech/.local/bin:/opt/ros/humble/bin:/usr/bin:/home/zech/.npm-global/bin:/home/zech/.local/bin:/usr/bin:/home/zech/.npm-global/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/usr/bin:/opt/st/stm32cubeide_2.1.1/'), ('SESSION_MANAGER', 'local/zech-computer:@/tmp/.ICE-unix/2665,unix/zech-computer:/tmp/.ICE-unix/2665'), ('COREPACK_ENABLE_AUTO_PIN', '0'), ('XDG_MENU_PREFIX', 'gnome-'), ('GNOME_TERMINAL_SCREEN', '/org/gnome/Terminal/screen/abf4ea3d_c555_492e_a0da_87cd6b440020'), ('GNOME_SETUP_DISPLAY', ':1'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('CLAUDE_EFFORT', 'high'), ('DISPLAY', ':0'), ('CLAUDE_PID', '3481'), ('NoDefaultCurrentDirectoryInExePath', '1'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/.mutter-Xwaylandauth.LV9YT3'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('GNOME_TERMINAL_SERVICE', ':1.102'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('ROS_DOMAIN_ID', '77'), ('AMENT_PREFIX_PATH', '/home/zech/exia_ws/install/exia_bringup:/home/zech/exia_ws/install/exia_driver:/home/zech/exia_ws/install/exia_control:/home/zech/exia_ws/install/exia_msgs:/home/zech/ros2_ws/install/eclipse_diffdrive:/home/zech/ros2_ws/install/eclipse_ackermann:/opt/ros/humble'), ('SHELL', '/bin/bash'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('CLAUDE_CODE_SESSION_ID', 'bbd4415b-604e-4c58-8804-d8e5a6b35278'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('CLAUDECODE', '1'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/zech/robim_ur20_sim/build/robim_ur20_sim'), ('TURTLEBOT3_MODEL', 'burger'), ('LC_ALL', 'en_US.UTF-8'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('NVM_CD_FLAGS', ''), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('CLAUDE_CODE_EXECPATH', '/home/zech/.local/share/claude/versions/2.1.227'), ('PYTHONPATH', '/home/zech/exia_ws/install/exia_driver/lib/python3.10/site-packages:/home/zech/exia_ws/install/exia_control/lib/python3.10/site-packages:/home/zech/exia_ws/install/exia_msgs/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CLAUDE_CODE_MESSAGING_SOCKET', '/run/user/1000/cc-socks/3481.sock'), ('CMAKE_PREFIX_PATH', '/home/zech/exia_ws/install/exia_bringup:/home/zech/exia_ws/install/exia_msgs:/home/zech/ros2_ws/install/eclipse_diffdrive:/home/zech/ros2_ws/install/eclipse_ackermann:/home/zech/exia_ws/install/exia_driver:/home/zech/exia_ws/install/exia_control:/opt/ros/humble')]), 'shell': False}
+[0.062532] (robim_ur20_sim) StdoutLine: {'line': b'[ 16%] Building CXX object CMakeFiles/room_publisher.dir/src/room_publisher.cpp.o\n'}
+[0.063129] (robim_ur20_sim) StdoutLine: {'line': b'[ 50%] Built target sweep_mover\n'}
+[0.063313] (robim_ur20_sim) StdoutLine: {'line': b'[ 83%] Built target test_move\n'}
+[0.099862] (-) TimerEvent: {}
+[0.200143] (-) TimerEvent: {}
+[0.300430] (-) TimerEvent: {}
+[0.400613] (-) TimerEvent: {}
+[0.500907] (-) TimerEvent: {}
+[0.601190] (-) TimerEvent: {}
+[0.701420] (-) TimerEvent: {}
+[0.801695] (-) TimerEvent: {}
+[0.901977] (-) TimerEvent: {}
+[1.002262] (-) TimerEvent: {}
+[1.102578] (-) TimerEvent: {}
+[1.202863] (-) TimerEvent: {}
+[1.303142] (-) TimerEvent: {}
+[1.403429] (-) TimerEvent: {}
+[1.503737] (-) TimerEvent: {}
+[1.604009] (-) TimerEvent: {}
+[1.704306] (-) TimerEvent: {}
+[1.804588] (-) TimerEvent: {}
+[1.904866] (-) TimerEvent: {}
+[2.005147] (-) TimerEvent: {}
+[2.105434] (-) TimerEvent: {}
+[2.179718] (robim_ur20_sim) StderrLine: {'line': b'/home/zech/robim_ur20_sim/src/robim_ur20_sim/src/room_publisher.cpp: In member function \xe2\x80\x98void RoomPublisher::loadParameters()\xe2\x80\x99:\n'}
+[2.179927] (robim_ur20_sim) StderrLine: {'line': b'/home/zech/robim_ur20_sim/src/robim_ur20_sim/src/room_publisher.cpp:48:7: error: \xe2\x80\x98x_min_\xe2\x80\x99 was not declared in this scope\n'}
+[2.179992] (robim_ur20_sim) StderrLine: {'line': b'   48 |       x_min_ = get_parameter_or<double>("x_min", -2.50);\n'}
+[2.180050] (robim_ur20_sim) StderrLine: {'line': b'      |       ^~~~~~\n'}
+[2.183530] (robim_ur20_sim) StderrLine: {'line': b'/home/zech/robim_ur20_sim/src/robim_ur20_sim/src/room_publisher.cpp:49:7: error: \xe2\x80\x98x_max_\xe2\x80\x99 was not declared in this scope\n'}
+[2.183693] (robim_ur20_sim) StderrLine: {'line': b'   49 |       x_max_ = get_parameter_or<double>("x_max", 1.12);\n'}
+[2.183754] (robim_ur20_sim) StderrLine: {'line': b'      |       ^~~~~~\n'}
+[2.186847] (robim_ur20_sim) StderrLine: {'line': b'/home/zech/robim_ur20_sim/src/robim_ur20_sim/src/room_publisher.cpp:50:7: error: \xe2\x80\x98y_min_\xe2\x80\x99 was not declared in this scope\n'}
+[2.187018] (robim_ur20_sim) StderrLine: {'line': b'   50 |       y_min_ = get_parameter_or<double>("y_min", -1.50);\n'}
+[2.187079] (robim_ur20_sim) StderrLine: {'line': b'      |       ^~~~~~\n'}
+[2.190216] (robim_ur20_sim) StderrLine: {'line': b'/home/zech/robim_ur20_sim/src/robim_ur20_sim/src/room_publisher.cpp:51:7: error: \xe2\x80\x98y_max_\xe2\x80\x99 was not declared in this scope\n'}
+[2.190377] (robim_ur20_sim) StderrLine: {'line': b'   51 |       y_max_ = get_parameter_or<double>("y_max", 1.50);\n'}
+[2.190439] (robim_ur20_sim) StderrLine: {'line': b'      |       ^~~~~~\n'}
+[2.193627] (robim_ur20_sim) StderrLine: {'line': b'/home/zech/robim_ur20_sim/src/robim_ur20_sim/src/room_publisher.cpp: In member function \xe2\x80\x98std::vector<Box> RoomPublisher::buildRoom()\xe2\x80\x99:\n'}
+[2.193777] (robim_ur20_sim) StderrLine: {'line': b'/home/zech/robim_ur20_sim/src/robim_ur20_sim/src/room_publisher.cpp:58:24: error: \xe2\x80\x98x_max_\xe2\x80\x99 was not declared in this scope\n'}
+[2.193838] (robim_ur20_sim) StderrLine: {'line': b'   58 |       double width_x = x_max_ - x_min_;\n'}
+[2.193894] (robim_ur20_sim) StderrLine: {'line': b'      |                        ^~~~~~\n'}
+[2.196758] (robim_ur20_sim) StderrLine: {'line': b'/home/zech/robim_ur20_sim/src/robim_ur20_sim/src/room_publisher.cpp:58:33: error: \xe2\x80\x98x_min_\xe2\x80\x99 was not declared in this scope\n'}
+[2.196909] (robim_ur20_sim) StderrLine: {'line': b'   58 |       double width_x = x_max_ - x_min_;\n'}
+[2.196968] (robim_ur20_sim) StderrLine: {'line': b'      |                                 ^~~~~~\n'}
+[2.199958] (robim_ur20_sim) StderrLine: {'line': b'/home/zech/robim_ur20_sim/src/robim_ur20_sim/src/room_publisher.cpp:59:24: error: \xe2\x80\x98y_max_\xe2\x80\x99 was not declared in this scope\n'}
+[2.200108] (robim_ur20_sim) StderrLine: {'line': b'   59 |       double width_y = y_max_ - y_min_;\n'}
+[2.200169] (robim_ur20_sim) StderrLine: {'line': b'      |                        ^~~~~~\n'}
+[2.203093] (robim_ur20_sim) StderrLine: {'line': b'/home/zech/robim_ur20_sim/src/robim_ur20_sim/src/room_publisher.cpp:59:33: error: \xe2\x80\x98y_min_\xe2\x80\x99 was not declared in this scope\n'}
+[2.203255] (robim_ur20_sim) StderrLine: {'line': b'   59 |       double width_y = y_max_ - y_min_;\n'}
+[2.203327] (robim_ur20_sim) StderrLine: {'line': b'      |                                 ^~~~~~\n'}
+[2.203880] (robim_ur20_sim) StderrLine: {'line': b'/home/zech/robim_ur20_sim/src/robim_ur20_sim/src/room_publisher.cpp:68:22: error: no matching function for call to \xe2\x80\x98std::vector<Box>::push_back(<brace-enclosed initializer list>)\xe2\x80\x99\n'}
+[2.203962] (robim_ur20_sim) StderrLine: {'line': b'   68 |       boxes.push_back({"wall_back",  x_max_ + t / 2.0, center_y, wall_center_z, t, width_y, wall_height});\n'}
+[2.204023] (robim_ur20_sim) StderrLine: {'line': b'      |       ~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n'}
+[2.204081] (robim_ur20_sim) StderrLine: {'line': b'In file included from /usr/include/c++/11/vector:67,\n'}
+[2.204135] (robim_ur20_sim) StderrLine: {'line': b'                 from /home/zech/robim_ur20_sim/src/robim_ur20_sim/src/room_publisher.cpp:3:\n'}
+[2.204190] (robim_ur20_sim) StderrLine: {'line': b'/usr/include/c++/11/bits/stl_vector.h:1187:7: note: candidate: \xe2\x80\x98void std::vector<_Tp, _Alloc>::push_back(const value_type&) [with _Tp = Box; _Alloc = std::allocator<Box>; std::vector<_Tp, _Alloc>::value_type = Box]\xe2\x80\x99\n'}
+[2.204246] (robim_ur20_sim) StderrLine: {'line': b' 1187 |       push_back(const value_type& __x)\n'}
+[2.204308] (robim_ur20_sim) StderrLine: {'line': b'      |       ^~~~~~~~~\n'}
+[2.204368] (robim_ur20_sim) StderrLine: {'line': b'/usr/include/c++/11/bits/stl_vector.h:1187:35: note:   no known conversion for argument 1 from \xe2\x80\x98<brace-enclosed initializer list>\xe2\x80\x99 to \xe2\x80\x98const value_type&\xe2\x80\x99 {aka \xe2\x80\x98const Box&\xe2\x80\x99}\n'}
+[2.204436] (robim_ur20_sim) StderrLine: {'line': b' 1187 |       push_back(const value_type& __x)\n'}
+[2.204491] (robim_ur20_sim) StderrLine: {'line': b'      |                 ~~~~~~~~~~~~~~~~~~^~~\n'}
+[2.204544] (robim_ur20_sim) StderrLine: {'line': b'/usr/include/c++/11/bits/stl_vector.h:1203:7: note: candidate: \xe2\x80\x98void std::vector<_Tp, _Alloc>::push_back(std::vector<_Tp, _Alloc>::value_type&&) [with _Tp = Box; _Alloc = std::allocator<Box>; std::vector<_Tp, _Alloc>::value_type = Box]\xe2\x80\x99\n'}
+[2.204609] (robim_ur20_sim) StderrLine: {'line': b' 1203 |       push_back(value_type&& __x)\n'}
+[2.204663] (robim_ur20_sim) StderrLine: {'line': b'      |       ^~~~~~~~~\n'}
+[2.204716] (robim_ur20_sim) StderrLine: {'line': b'/usr/include/c++/11/bits/stl_vector.h:1203:30: note:   no known conversion for argument 1 from \xe2\x80\x98<brace-enclosed initializer list>\xe2\x80\x99 to \xe2\x80\x98std::vector<Box>::value_type&&\xe2\x80\x99 {aka \xe2\x80\x98Box&&\xe2\x80\x99}\n'}
+[2.204770] (robim_ur20_sim) StderrLine: {'line': b' 1203 |       push_back(value_type&& __x)\n'}
+[2.204823] (robim_ur20_sim) StderrLine: {'line': b'      |                 ~~~~~~~~~~~~~^~~\n'}
+[2.204876] (robim_ur20_sim) StderrLine: {'line': b'/home/zech/robim_ur20_sim/src/robim_ur20_sim/src/room_publisher.cpp:69:22: error: no matching function for call to \xe2\x80\x98std::vector<Box>::push_back(<brace-enclosed initializer list>)\xe2\x80\x99\n'}
+[2.204930] (robim_ur20_sim) StderrLine: {'line': b'   69 |       boxes.push_back({"wall_front", x_min_ - t / 2.0, center_y, wall_center_z, t, width_y, wall_height});\n'}
+[2.204988] (robim_ur20_sim) StderrLine: {'line': b'      |       ~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n'}
+[2.205046] (robim_ur20_sim) StderrLine: {'line': b'In file included from /usr/include/c++/11/vector:67,\n'}
+[2.205099] (robim_ur20_sim) StderrLine: {'line': b'                 from /home/zech/robim_ur20_sim/src/robim_ur20_sim/src/room_publisher.cpp:3:\n'}
+[2.205151] (robim_ur20_sim) StderrLine: {'line': b'/usr/include/c++/11/bits/stl_vector.h:1187:7: note: candidate: \xe2\x80\x98void std::vector<_Tp, _Alloc>::push_back(const value_type&) [with _Tp = Box; _Alloc = std::allocator<Box>; std::vector<_Tp, _Alloc>::value_type = Box]\xe2\x80\x99\n'}
+[2.205205] (robim_ur20_sim) StderrLine: {'line': b' 1187 |       push_back(const value_type& __x)\n'}
+[2.205257] (robim_ur20_sim) StderrLine: {'line': b'      |       ^~~~~~~~~\n'}
+[2.205317] (robim_ur20_sim) StderrLine: {'line': b'/usr/include/c++/11/bits/stl_vector.h:1187:35: note:   no known conversion for argument 1 from \xe2\x80\x98<brace-enclosed initializer list>\xe2\x80\x99 to \xe2\x80\x98const value_type&\xe2\x80\x99 {aka \xe2\x80\x98const Box&\xe2\x80\x99}\n'}
+[2.205374] (robim_ur20_sim) StderrLine: {'line': b' 1187 |       push_back(const value_type& __x)\n'}
+[2.205425] (-) TimerEvent: {}
+[2.205440] (robim_ur20_sim) StderrLine: {'line': b'      |                 ~~~~~~~~~~~~~~~~~~^~~\n'}
+[2.205493] (robim_ur20_sim) StderrLine: {'line': b'/usr/include/c++/11/bits/stl_vector.h:1203:7: note: candidate: \xe2\x80\x98void std::vector<_Tp, _Alloc>::push_back(std::vector<_Tp, _Alloc>::value_type&&) [with _Tp = Box; _Alloc = std::allocator<Box>; std::vector<_Tp, _Alloc>::value_type = Box]\xe2\x80\x99\n'}
+[2.205547] (robim_ur20_sim) StderrLine: {'line': b' 1203 |       push_back(value_type&& __x)\n'}
+[2.205599] (robim_ur20_sim) StderrLine: {'line': b'      |       ^~~~~~~~~\n'}
+[2.205652] (robim_ur20_sim) StderrLine: {'line': b'/usr/include/c++/11/bits/stl_vector.h:1203:30: note:   no known conversion for argument 1 from \xe2\x80\x98<brace-enclosed initializer list>\xe2\x80\x99 to \xe2\x80\x98std::vector<Box>::value_type&&\xe2\x80\x99 {aka \xe2\x80\x98Box&&\xe2\x80\x99}\n'}
+[2.205706] (robim_ur20_sim) StderrLine: {'line': b' 1203 |       push_back(value_type&& __x)\n'}
+[2.205758] (robim_ur20_sim) StderrLine: {'line': b'      |                 ~~~~~~~~~~~~~^~~\n'}
+[2.205816] (robim_ur20_sim) StderrLine: {'line': b'/home/zech/robim_ur20_sim/src/robim_ur20_sim/src/room_publisher.cpp:70:22: error: no matching function for call to \xe2\x80\x98std::vector<Box>::push_back(<brace-enclosed initializer list>)\xe2\x80\x99\n'}
+[2.205870] (robim_ur20_sim) StderrLine: {'line': b'   70 |       boxes.push_back({"wall_left",  center_x, y_max_ + t / 2.0, wall_center_z, width_x, t, wall_height});\n'}
+[2.205923] (robim_ur20_sim) StderrLine: {'line': b'      |       ~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n'}
+[2.205975] (robim_ur20_sim) StderrLine: {'line': b'In file included from /usr/include/c++/11/vector:67,\n'}
+[2.206029] (robim_ur20_sim) StderrLine: {'line': b'                 from /home/zech/robim_ur20_sim/src/robim_ur20_sim/src/room_publisher.cpp:3:\n'}
+[2.206082] (robim_ur20_sim) StderrLine: {'line': b'/usr/include/c++/11/bits/stl_vector.h:1187:7: note: candidate: \xe2\x80\x98void std::vector<_Tp, _Alloc>::push_back(const value_type&) [with _Tp = Box; _Alloc = std::allocator<Box>; std::vector<_Tp, _Alloc>::value_type = Box]\xe2\x80\x99\n'}
+[2.206136] (robim_ur20_sim) StderrLine: {'line': b' 1187 |       push_back(const value_type& __x)\n'}
+[2.206188] (robim_ur20_sim) StderrLine: {'line': b'      |       ^~~~~~~~~\n'}
+[2.206241] (robim_ur20_sim) StderrLine: {'line': b'/usr/include/c++/11/bits/stl_vector.h:1187:35: note:   no known conversion for argument 1 from \xe2\x80\x98<brace-enclosed initializer list>\xe2\x80\x99 to \xe2\x80\x98const value_type&\xe2\x80\x99 {aka \xe2\x80\x98const Box&\xe2\x80\x99}\n'}
+[2.206297] (robim_ur20_sim) StderrLine: {'line': b' 1187 |       push_back(const value_type& __x)\n'}
+[2.206355] (robim_ur20_sim) StderrLine: {'line': b'      |                 ~~~~~~~~~~~~~~~~~~^~~\n'}
+[2.206408] (robim_ur20_sim) StderrLine: {'line': b'/usr/include/c++/11/bits/stl_vector.h:1203:7: note: candidate: \xe2\x80\x98void std::vector<_Tp, _Alloc>::push_back(std::vector<_Tp, _Alloc>::value_type&&) [with _Tp = Box; _Alloc = std::allocator<Box>; std::vector<_Tp, _Alloc>::value_type = Box]\xe2\x80\x99\n'}
+[2.206462] (robim_ur20_sim) StderrLine: {'line': b' 1203 |       push_back(value_type&& __x)\n'}
+[2.206514] (robim_ur20_sim) StderrLine: {'line': b'      |       ^~~~~~~~~\n'}
+[2.206567] (robim_ur20_sim) StderrLine: {'line': b'/usr/include/c++/11/bits/stl_vector.h:1203:30: note:   no known conversion for argument 1 from \xe2\x80\x98<brace-enclosed initializer list>\xe2\x80\x99 to \xe2\x80\x98std::vector<Box>::value_type&&\xe2\x80\x99 {aka \xe2\x80\x98Box&&\xe2\x80\x99}\n'}
+[2.206621] (robim_ur20_sim) StderrLine: {'line': b' 1203 |       push_back(value_type&& __x)\n'}
+[2.206677] (robim_ur20_sim) StderrLine: {'line': b'      |                 ~~~~~~~~~~~~~^~~\n'}
+[2.206731] (robim_ur20_sim) StderrLine: {'line': b'/home/zech/robim_ur20_sim/src/robim_ur20_sim/src/room_publisher.cpp:71:22: error: no matching function for call to \xe2\x80\x98std::vector<Box>::push_back(<brace-enclosed initializer list>)\xe2\x80\x99\n'}
+[2.206785] (robim_ur20_sim) StderrLine: {'line': b'   71 |       boxes.push_back({"wall_right", center_x, y_min_ - t / 2.0, wall_center_z, width_x, t, wall_height});\n'}
+[2.206838] (robim_ur20_sim) StderrLine: {'line': b'      |       ~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n'}
+[2.206891] (robim_ur20_sim) StderrLine: {'line': b'In file included from /usr/include/c++/11/vector:67,\n'}
+[2.206944] (robim_ur20_sim) StderrLine: {'line': b'                 from /home/zech/robim_ur20_sim/src/robim_ur20_sim/src/room_publisher.cpp:3:\n'}
+[2.206996] (robim_ur20_sim) StderrLine: {'line': b'/usr/include/c++/11/bits/stl_vector.h:1187:7: note: candidate: \xe2\x80\x98void std::vector<_Tp, _Alloc>::push_back(const value_type&) [with _Tp = Box; _Alloc = std::allocator<Box>; std::vector<_Tp, _Alloc>::value_type = Box]\xe2\x80\x99\n'}
+[2.207050] (robim_ur20_sim) StderrLine: {'line': b' 1187 |       push_back(const value_type& __x)\n'}
+[2.207104] (robim_ur20_sim) StderrLine: {'line': b'      |       ^~~~~~~~~\n'}
+[2.207160] (robim_ur20_sim) StderrLine: {'line': b'/usr/include/c++/11/bits/stl_vector.h:1187:35: note:   no known conversion for argument 1 from \xe2\x80\x98<brace-enclosed initializer list>\xe2\x80\x99 to \xe2\x80\x98const value_type&\xe2\x80\x99 {aka \xe2\x80\x98const Box&\xe2\x80\x99}\n'}
+[2.207218] (robim_ur20_sim) StderrLine: {'line': b' 1187 |       push_back(const value_type& __x)\n'}
+[2.207274] (robim_ur20_sim) StderrLine: {'line': b'      |                 ~~~~~~~~~~~~~~~~~~^~~\n'}
+[2.207335] (robim_ur20_sim) StderrLine: {'line': b'/usr/include/c++/11/bits/stl_vector.h:1203:7: note: candidate: \xe2\x80\x98void std::vector<_Tp, _Alloc>::push_back(std::vector<_Tp, _Alloc>::value_type&&) [with _Tp = Box; _Alloc = std::allocator<Box>; std::vector<_Tp, _Alloc>::value_type = Box]\xe2\x80\x99\n'}
+[2.207389] (robim_ur20_sim) StderrLine: {'line': b' 1203 |       push_back(value_type&& __x)\n'}
+[2.207442] (robim_ur20_sim) StderrLine: {'line': b'      |       ^~~~~~~~~\n'}
+[2.207495] (robim_ur20_sim) StderrLine: {'line': b'/usr/include/c++/11/bits/stl_vector.h:1203:30: note:   no known conversion for argument 1 from \xe2\x80\x98<brace-enclosed initializer list>\xe2\x80\x99 to \xe2\x80\x98std::vector<Box>::value_type&&\xe2\x80\x99 {aka \xe2\x80\x98Box&&\xe2\x80\x99}\n'}
+[2.207548] (robim_ur20_sim) StderrLine: {'line': b' 1203 |       push_back(value_type&& __x)\n'}
+[2.207601] (robim_ur20_sim) StderrLine: {'line': b'      |                 ~~~~~~~~~~~~~^~~\n'}
+[2.305648] (-) TimerEvent: {}
+[2.405903] (-) TimerEvent: {}
+[2.506174] (-) TimerEvent: {}
+[2.606463] (-) TimerEvent: {}
+[2.706734] (-) TimerEvent: {}
+[2.807013] (-) TimerEvent: {}
+[2.907292] (-) TimerEvent: {}
+[3.007570] (-) TimerEvent: {}
+[3.107851] (-) TimerEvent: {}
+[3.208133] (-) TimerEvent: {}
+[3.308405] (-) TimerEvent: {}
+[3.388473] (robim_ur20_sim) StderrLine: {'line': b'gmake[2]: *** [CMakeFiles/room_publisher.dir/build.make:76: CMakeFiles/room_publisher.dir/src/room_publisher.cpp.o] Error 1\n'}
+[3.388799] (robim_ur20_sim) StderrLine: {'line': b'gmake[1]: *** [CMakeFiles/Makefile2:167: CMakeFiles/room_publisher.dir/all] Error 2\n'}
+[3.388870] (robim_ur20_sim) StderrLine: {'line': b'gmake: *** [Makefile:146: all] Error 2\n'}
+[3.390229] (robim_ur20_sim) CommandEnded: {'returncode': 2}
+[3.398025] (robim_ur20_sim) JobEnded: {'identifier': 'robim_ur20_sim', 'rc': 2}
+[3.408522] (-) EventReactorShutdown: {}

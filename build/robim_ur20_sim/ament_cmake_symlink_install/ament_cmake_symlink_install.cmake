@@ -318,8 +318,8 @@ message(STATUS "Execute custom install script")
 # install("TARGETS" "sweep_mover" "room_publisher" "test_move" "DESTINATION" "lib/robim_ur20_sim")
 include("/home/zech/robim_ur20_sim/build/robim_ur20_sim/ament_cmake_symlink_install_targets_0_${CMAKE_INSTALL_CONFIG_NAME}.cmake")
 
-# install(DIRECTORY "launch" "config" "DESTINATION" "share/robim_ur20_sim")
-ament_cmake_symlink_install_directory("/home/zech/robim_ur20_sim/src/robim_ur20_sim" DIRECTORY "launch" "config" "DESTINATION" "share/robim_ur20_sim")
+# install(DIRECTORY "launch" "config" "urdf" "DESTINATION" "share/robim_ur20_sim")
+ament_cmake_symlink_install_directory("/home/zech/robim_ur20_sim/src/robim_ur20_sim" DIRECTORY "launch" "config" "urdf" "DESTINATION" "share/robim_ur20_sim")
 
 # install(FILES "/home/zech/robim_ur20_sim/build/robim_ur20_sim/ament_cmake_index/share/ament_index/resource_index/package_run_dependencies/robim_ur20_sim" "DESTINATION" "share/ament_index/resource_index/package_run_dependencies")
 ament_cmake_symlink_install_files("/home/zech/robim_ur20_sim/src/robim_ur20_sim" FILES "/home/zech/robim_ur20_sim/build/robim_ur20_sim/ament_cmake_index/share/ament_index/resource_index/package_run_dependencies/robim_ur20_sim" "DESTINATION" "share/ament_index/resource_index/package_run_dependencies")

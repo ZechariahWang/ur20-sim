@@ -1,12 +1,18 @@
 room_publisher:
   ros__parameters:
     frame_id: world
-    # Top surface of the floor (m). Slightly below zero so the robot base,
-    # which sits at z = 0, does not touch it and count as a collision.
-    floor_z: -0.01
-    # Bottom surface of the ceiling (m).
-    ceiling_z: 2.5
-    # Square room footprint, centered on the robot base (m).
-    room_size: 4.0
+    # Real cell, measured 2026-08-17. All values in the robot BASE frame:
+    # the base sits on an 80 cm block, so the real floor is at z = -0.80.
+    floor_z: -0.80
+    # Roof is 2.60 m above the ground = 1.80 m above the base.
+    ceiling_z: 1.80
+    # Wall behind the robot (+x side): 1.12 m from the base.
+    x_max: 1.12
+    # Clear space in front (-x side): 2.50 m to the nearest obstacle.
+    x_min: -2.50
+    # Side clearances: NOT MEASURED YET, conservative guess of 1.5 m.
+    # Confirm and update these before trusting side motions.
+    y_min: -1.50
+    y_max: 1.50
     # Thickness of the floor, ceiling, and wall slabs (m).
     thickness: 0.1

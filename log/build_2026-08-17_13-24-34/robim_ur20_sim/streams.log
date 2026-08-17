@@ -1,0 +1,102 @@
+[0.007s] Invoking command in '/home/zech/robim_ur20_sim/build/robim_ur20_sim': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/zech/exia_ws/install/exia_driver:/home/zech/exia_ws/install/exia_control:/opt/ros/humble /usr/bin/cmake --build /home/zech/robim_ur20_sim/build/robim_ur20_sim -- -j20 -l20
+[0.062s] [ 16%] Building CXX object CMakeFiles/room_publisher.dir/src/room_publisher.cpp.o
+[0.063s] [ 50%] Built target sweep_mover
+[0.063s] [ 83%] Built target test_move
+[2.179s] /home/zech/robim_ur20_sim/src/robim_ur20_sim/src/room_publisher.cpp: In member function ‘void RoomPublisher::loadParameters()’:
+[2.179s] /home/zech/robim_ur20_sim/src/robim_ur20_sim/src/room_publisher.cpp:48:7: error: ‘x_min_’ was not declared in this scope
+[2.179s]    48 |       x_min_ = get_parameter_or<double>("x_min", -2.50);
+[2.180s]       |       ^~~~~~
+[2.183s] /home/zech/robim_ur20_sim/src/robim_ur20_sim/src/room_publisher.cpp:49:7: error: ‘x_max_’ was not declared in this scope
+[2.183s]    49 |       x_max_ = get_parameter_or<double>("x_max", 1.12);
+[2.183s]       |       ^~~~~~
+[2.186s] /home/zech/robim_ur20_sim/src/robim_ur20_sim/src/room_publisher.cpp:50:7: error: ‘y_min_’ was not declared in this scope
+[2.187s]    50 |       y_min_ = get_parameter_or<double>("y_min", -1.50);
+[2.187s]       |       ^~~~~~
+[2.190s] /home/zech/robim_ur20_sim/src/robim_ur20_sim/src/room_publisher.cpp:51:7: error: ‘y_max_’ was not declared in this scope
+[2.190s]    51 |       y_max_ = get_parameter_or<double>("y_max", 1.50);
+[2.190s]       |       ^~~~~~
+[2.193s] /home/zech/robim_ur20_sim/src/robim_ur20_sim/src/room_publisher.cpp: In member function ‘std::vector<Box> RoomPublisher::buildRoom()’:
+[2.193s] /home/zech/robim_ur20_sim/src/robim_ur20_sim/src/room_publisher.cpp:58:24: error: ‘x_max_’ was not declared in this scope
+[2.193s]    58 |       double width_x = x_max_ - x_min_;
+[2.193s]       |                        ^~~~~~
+[2.196s] /home/zech/robim_ur20_sim/src/robim_ur20_sim/src/room_publisher.cpp:58:33: error: ‘x_min_’ was not declared in this scope
+[2.196s]    58 |       double width_x = x_max_ - x_min_;
+[2.196s]       |                                 ^~~~~~
+[2.200s] /home/zech/robim_ur20_sim/src/robim_ur20_sim/src/room_publisher.cpp:59:24: error: ‘y_max_’ was not declared in this scope
+[2.200s]    59 |       double width_y = y_max_ - y_min_;
+[2.200s]       |                        ^~~~~~
+[2.203s] /home/zech/robim_ur20_sim/src/robim_ur20_sim/src/room_publisher.cpp:59:33: error: ‘y_min_’ was not declared in this scope
+[2.203s]    59 |       double width_y = y_max_ - y_min_;
+[2.203s]       |                                 ^~~~~~
+[2.203s] /home/zech/robim_ur20_sim/src/robim_ur20_sim/src/room_publisher.cpp:68:22: error: no matching function for call to ‘std::vector<Box>::push_back(<brace-enclosed initializer list>)’
+[2.203s]    68 |       boxes.push_back({"wall_back",  x_max_ + t / 2.0, center_y, wall_center_z, t, width_y, wall_height});
+[2.204s]       |       ~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[2.204s] In file included from /usr/include/c++/11/vector:67,
+[2.204s]                  from /home/zech/robim_ur20_sim/src/robim_ur20_sim/src/room_publisher.cpp:3:
+[2.204s] /usr/include/c++/11/bits/stl_vector.h:1187:7: note: candidate: ‘void std::vector<_Tp, _Alloc>::push_back(const value_type&) [with _Tp = Box; _Alloc = std::allocator<Box>; std::vector<_Tp, _Alloc>::value_type = Box]’
+[2.204s]  1187 |       push_back(const value_type& __x)
+[2.204s]       |       ^~~~~~~~~
+[2.204s] /usr/include/c++/11/bits/stl_vector.h:1187:35: note:   no known conversion for argument 1 from ‘<brace-enclosed initializer list>’ to ‘const value_type&’ {aka ‘const Box&’}
+[2.204s]  1187 |       push_back(const value_type& __x)
+[2.204s]       |                 ~~~~~~~~~~~~~~~~~~^~~
+[2.204s] /usr/include/c++/11/bits/stl_vector.h:1203:7: note: candidate: ‘void std::vector<_Tp, _Alloc>::push_back(std::vector<_Tp, _Alloc>::value_type&&) [with _Tp = Box; _Alloc = std::allocator<Box>; std::vector<_Tp, _Alloc>::value_type = Box]’
+[2.204s]  1203 |       push_back(value_type&& __x)
+[2.204s]       |       ^~~~~~~~~
+[2.204s] /usr/include/c++/11/bits/stl_vector.h:1203:30: note:   no known conversion for argument 1 from ‘<brace-enclosed initializer list>’ to ‘std::vector<Box>::value_type&&’ {aka ‘Box&&’}
+[2.204s]  1203 |       push_back(value_type&& __x)
+[2.204s]       |                 ~~~~~~~~~~~~~^~~
+[2.204s] /home/zech/robim_ur20_sim/src/robim_ur20_sim/src/room_publisher.cpp:69:22: error: no matching function for call to ‘std::vector<Box>::push_back(<brace-enclosed initializer list>)’
+[2.204s]    69 |       boxes.push_back({"wall_front", x_min_ - t / 2.0, center_y, wall_center_z, t, width_y, wall_height});
+[2.204s]       |       ~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[2.205s] In file included from /usr/include/c++/11/vector:67,
+[2.205s]                  from /home/zech/robim_ur20_sim/src/robim_ur20_sim/src/room_publisher.cpp:3:
+[2.205s] /usr/include/c++/11/bits/stl_vector.h:1187:7: note: candidate: ‘void std::vector<_Tp, _Alloc>::push_back(const value_type&) [with _Tp = Box; _Alloc = std::allocator<Box>; std::vector<_Tp, _Alloc>::value_type = Box]’
+[2.205s]  1187 |       push_back(const value_type& __x)
+[2.205s]       |       ^~~~~~~~~
+[2.205s] /usr/include/c++/11/bits/stl_vector.h:1187:35: note:   no known conversion for argument 1 from ‘<brace-enclosed initializer list>’ to ‘const value_type&’ {aka ‘const Box&’}
+[2.205s]  1187 |       push_back(const value_type& __x)
+[2.205s]       |                 ~~~~~~~~~~~~~~~~~~^~~
+[2.205s] /usr/include/c++/11/bits/stl_vector.h:1203:7: note: candidate: ‘void std::vector<_Tp, _Alloc>::push_back(std::vector<_Tp, _Alloc>::value_type&&) [with _Tp = Box; _Alloc = std::allocator<Box>; std::vector<_Tp, _Alloc>::value_type = Box]’
+[2.205s]  1203 |       push_back(value_type&& __x)
+[2.205s]       |       ^~~~~~~~~
+[2.205s] /usr/include/c++/11/bits/stl_vector.h:1203:30: note:   no known conversion for argument 1 from ‘<brace-enclosed initializer list>’ to ‘std::vector<Box>::value_type&&’ {aka ‘Box&&’}
+[2.205s]  1203 |       push_back(value_type&& __x)
+[2.205s]       |                 ~~~~~~~~~~~~~^~~
+[2.205s] /home/zech/robim_ur20_sim/src/robim_ur20_sim/src/room_publisher.cpp:70:22: error: no matching function for call to ‘std::vector<Box>::push_back(<brace-enclosed initializer list>)’
+[2.205s]    70 |       boxes.push_back({"wall_left",  center_x, y_max_ + t / 2.0, wall_center_z, width_x, t, wall_height});
+[2.205s]       |       ~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[2.205s] In file included from /usr/include/c++/11/vector:67,
+[2.206s]                  from /home/zech/robim_ur20_sim/src/robim_ur20_sim/src/room_publisher.cpp:3:
+[2.206s] /usr/include/c++/11/bits/stl_vector.h:1187:7: note: candidate: ‘void std::vector<_Tp, _Alloc>::push_back(const value_type&) [with _Tp = Box; _Alloc = std::allocator<Box>; std::vector<_Tp, _Alloc>::value_type = Box]’
+[2.206s]  1187 |       push_back(const value_type& __x)
+[2.206s]       |       ^~~~~~~~~
+[2.206s] /usr/include/c++/11/bits/stl_vector.h:1187:35: note:   no known conversion for argument 1 from ‘<brace-enclosed initializer list>’ to ‘const value_type&’ {aka ‘const Box&’}
+[2.206s]  1187 |       push_back(const value_type& __x)
+[2.206s]       |                 ~~~~~~~~~~~~~~~~~~^~~
+[2.206s] /usr/include/c++/11/bits/stl_vector.h:1203:7: note: candidate: ‘void std::vector<_Tp, _Alloc>::push_back(std::vector<_Tp, _Alloc>::value_type&&) [with _Tp = Box; _Alloc = std::allocator<Box>; std::vector<_Tp, _Alloc>::value_type = Box]’
+[2.206s]  1203 |       push_back(value_type&& __x)
+[2.206s]       |       ^~~~~~~~~
+[2.206s] /usr/include/c++/11/bits/stl_vector.h:1203:30: note:   no known conversion for argument 1 from ‘<brace-enclosed initializer list>’ to ‘std::vector<Box>::value_type&&’ {aka ‘Box&&’}
+[2.206s]  1203 |       push_back(value_type&& __x)
+[2.206s]       |                 ~~~~~~~~~~~~~^~~
+[2.206s] /home/zech/robim_ur20_sim/src/robim_ur20_sim/src/room_publisher.cpp:71:22: error: no matching function for call to ‘std::vector<Box>::push_back(<brace-enclosed initializer list>)’
+[2.206s]    71 |       boxes.push_back({"wall_right", center_x, y_min_ - t / 2.0, wall_center_z, width_x, t, wall_height});
+[2.206s]       |       ~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[2.206s] In file included from /usr/include/c++/11/vector:67,
+[2.206s]                  from /home/zech/robim_ur20_sim/src/robim_ur20_sim/src/room_publisher.cpp:3:
+[2.206s] /usr/include/c++/11/bits/stl_vector.h:1187:7: note: candidate: ‘void std::vector<_Tp, _Alloc>::push_back(const value_type&) [with _Tp = Box; _Alloc = std::allocator<Box>; std::vector<_Tp, _Alloc>::value_type = Box]’
+[2.207s]  1187 |       push_back(const value_type& __x)
+[2.207s]       |       ^~~~~~~~~
+[2.207s] /usr/include/c++/11/bits/stl_vector.h:1187:35: note:   no known conversion for argument 1 from ‘<brace-enclosed initializer list>’ to ‘const value_type&’ {aka ‘const Box&’}
+[2.207s]  1187 |       push_back(const value_type& __x)
+[2.207s]       |                 ~~~~~~~~~~~~~~~~~~^~~
+[2.207s] /usr/include/c++/11/bits/stl_vector.h:1203:7: note: candidate: ‘void std::vector<_Tp, _Alloc>::push_back(std::vector<_Tp, _Alloc>::value_type&&) [with _Tp = Box; _Alloc = std::allocator<Box>; std::vector<_Tp, _Alloc>::value_type = Box]’
+[2.207s]  1203 |       push_back(value_type&& __x)
+[2.207s]       |       ^~~~~~~~~
+[2.207s] /usr/include/c++/11/bits/stl_vector.h:1203:30: note:   no known conversion for argument 1 from ‘<brace-enclosed initializer list>’ to ‘std::vector<Box>::value_type&&’ {aka ‘Box&&’}
+[2.207s]  1203 |       push_back(value_type&& __x)
+[2.207s]       |                 ~~~~~~~~~~~~~^~~
+[3.388s] gmake[2]: *** [CMakeFiles/room_publisher.dir/build.make:76: CMakeFiles/room_publisher.dir/src/room_publisher.cpp.o] Error 1
+[3.388s] gmake[1]: *** [CMakeFiles/Makefile2:167: CMakeFiles/room_publisher.dir/all] Error 2
+[3.388s] gmake: *** [Makefile:146: all] Error 2
+[3.390s] Invoked command in '/home/zech/robim_ur20_sim/build/robim_ur20_sim' returned '2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/zech/exia_ws/install/exia_driver:/home/zech/exia_ws/install/exia_control:/opt/ros/humble /usr/bin/cmake --build /home/zech/robim_ur20_sim/build/robim_ur20_sim -- -j20 -l20

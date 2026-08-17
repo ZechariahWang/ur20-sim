@@ -39,31 +39,36 @@ class RoomPublisher : public rclcpp::Node {
 
     void loadParameters() {
       frame_id_ = get_parameter_or<std::string>("frame_id", "world");
-      // Top surface of the floor. Slightly below zero so the robot base,
-      // which sits at z = 0, does not touch it and count as a collision.
-      floor_z_ = get_parameter_or<double>("floor_z", -0.01);
-      // Bottom surface of the ceiling.
-      ceiling_z_ = get_parameter_or<double>("ceiling_z", 2.5);
-      // The room footprint is a square of this size, centered on the robot.
-      room_size_ = get_parameter_or<double>("room_size", 4.0);
+      // All values are in the robot base frame (base origin = 0,0,0).
+      // Top surface of the real floor, below the base when it is on a stand.
+      floor_z_ = get_parameter_or<double>("floor_z", -0.80);
+      // Bottom surface of the ceiling, above the base.
+      ceiling_z_ = get_parameter_or<double>("ceiling_z", 1.80);
+      // Walls: the reachable space spans x_min..x_max and y_min..y_max.
+      x_min_ = get_parameter_or<double>("x_min", -2.50);
+      x_max_ = get_parameter_or<double>("x_max", 1.12);
+      y_min_ = get_parameter_or<double>("y_min", -1.50);
+      y_max_ = get_parameter_or<double>("y_max", 1.50);
       // Thickness of the floor, ceiling, and wall slabs.
       thickness_ = get_parameter_or<double>("thickness", 0.1);
     }
 
     std::vector<Box> buildRoom() {
-      double size = room_size_;
-      double half = room_size_ / 2.0;
       double t = thickness_;
+      double width_x = x_max_ - x_min_;
+      double width_y = y_max_ - y_min_;
+      double center_x = (x_max_ + x_min_) / 2.0;
+      double center_y = (y_max_ + y_min_) / 2.0;
       double wall_height = ceiling_z_ - floor_z_;
       double wall_center_z = (ceiling_z_ + floor_z_) / 2.0;
 
       std::vector<Box> boxes;
-      boxes.push_back({"floor",      0.0,       0.0,       floor_z_ - t / 2.0,   size, size, t});
-      boxes.push_back({"ceiling",    0.0,       0.0,       ceiling_z_ + t / 2.0, size, size, t});
-      boxes.push_back({"wall_front", half + t / 2.0,  0.0, wall_center_z,        t,    size, wall_height});
-      boxes.push_back({"wall_back",  -half - t / 2.0, 0.0, wall_center_z,        t,    size, wall_height});
-      boxes.push_back({"wall_left",  0.0,  half + t / 2.0,  wall_center_z,       size, t,    wall_height});
-      boxes.push_back({"wall_right", 0.0,  -half - t / 2.0, wall_center_z,       size, t,    wall_height});
+      boxes.push_back({"floor",      center_x, center_y, floor_z_ - t / 2.0,   width_x, width_y, t});
+      boxes.push_back({"ceiling",    center_x, center_y, ceiling_z_ + t / 2.0, width_x, width_y, t});
+      boxes.push_back({"wall_back",  x_max_ + t / 2.0, center_y, wall_center_z, t, width_y, wall_height});
+      boxes.push_back({"wall_front", x_min_ - t / 2.0, center_y, wall_center_z, t, width_y, wall_height});
+      boxes.push_back({"wall_left",  center_x, y_max_ + t / 2.0, wall_center_z, width_x, t, wall_height});
+      boxes.push_back({"wall_right", center_x, y_min_ - t / 2.0, wall_center_z, width_x, t, wall_height});
       return boxes;
     }
 
@@ -137,9 +142,12 @@ class RoomPublisher : public rclcpp::Node {
     }
 
     std::string frame_id_;
-    double floor_z_{-0.01};
-    double ceiling_z_{2.5};
-    double room_size_{4.0};
+    double floor_z_{-0.80};
+    double ceiling_z_{1.80};
+    double x_min_{-2.50};
+    double x_max_{1.12};
+    double y_min_{-1.50};
+    double y_max_{1.50};
     double thickness_{0.1};
     rclcpp::Publisher<visualization_msgs::msg::MarkerArray>::SharedPtr marker_pub_;
 };
