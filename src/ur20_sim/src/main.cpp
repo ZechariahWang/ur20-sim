@@ -59,16 +59,12 @@ void MainSweep::loadParameters() {
 
 std::vector<MainSweep::Step> MainSweep::buildScript(const geometry_msgs::msg::Quaternion &top_orientation, const geometry_msgs::msg::Quaternion &side_orientation) {
 
-  // Top pass holds the park orientation; the side pass holds the
-  // "forwards and upside down" orientation from side_view_joints.
-  // Orientation only changes between passes, never during one.
   geometry_msgs::msg::Quaternion q1 = top_orientation;
   geometry_msgs::msg::Quaternion q2 = side_orientation;
 
   double x = sweep_x_;
   double start = sweep_y_start_;
   double end = sweep_y_end_;
-  // Heights are configured above the real floor, convert to base frame.
   double z_top = floor_z_ + top_pass_height_;
   double z_side = floor_z_ + side_pass_height_;
 
@@ -81,9 +77,6 @@ std::vector<MainSweep::Step> MainSweep::buildScript(const geometry_msgs::msg::Qu
   return script;
 }
 
-// Refuse to run if any scripted TCP position is closer than room_margin
-// to the floor, ceiling, or a wall. This catches bad config before the
-// arm moves at all, instead of failing halfway through a sweep.
 bool MainSweep::checkAgainstRoom(const std::vector<Step> &script) {
   bool all_ok = true;
   for (size_t i = 0; i < script.size(); i++) {
@@ -122,8 +115,6 @@ bool MainSweep::checkAgainstRoom(const std::vector<Step> &script) {
 
 bool MainSweep::setup() {
 
-  // MoveGroupInterface needs the node spinning in the background for its
-  // action clients and TF lookups.
   executor_.add_node(shared_from_this());
   spinner_ = std::thread([this]() { executor_.spin(); });
 
@@ -136,23 +127,16 @@ bool MainSweep::setup() {
   RCLCPP_INFO(get_logger(), "Sweeping in frame '%s' with TCP link '%s' at %.0f%% speed.",
               frame.c_str(), tcp_link.c_str(), velocity_scaling_ * 100.0);
 
-  // Give DDS discovery a moment to connect, otherwise the first planning
-  // request can be lost.
   rclcpp::sleep_for(std::chrono::seconds(1));
   return true;
 }
 
 bool MainSweep::doMovement() {
 
-  // First move to the parked pose (joint-space, exact) so every run
-  // starts the routine from the same place no matter where the arm was.
   if (park_joints_.size() == 6) {
     if (!utils::moveToJoints(*move_group_, get_logger(), park_joints_, "move to park position")) { return false; }
   }
 
-  // Top pass: the park pose's TCP orientation. Side pass: the orientation
-  // of side_view_joints (forward kinematics), or the same as the top pass
-  // if not configured.
   geometry_msgs::msg::Quaternion top_orientation = move_group_->getCurrentPose().pose.orientation;
   geometry_msgs::msg::Quaternion side_orientation = top_orientation;
   if (side_view_joints_.size() == 6) {
@@ -160,13 +144,14 @@ bool MainSweep::doMovement() {
   }
 
   std::vector<Step> script = buildScript(top_orientation, side_orientation);
+
   for (size_t i = 0; i < script.size(); i++) {
+
     Step step = script[i];
-    // Script poses say where the camera TIP should be; the arm is
-    // commanded by flange pose, so pull each target back along tool z.
     step.pose = utils::flangePoseFromCameraPose(step.pose, camera_length_);
+
     bool ok = false;
-    if (step.type == Step::MOVE) {
+    if (step.type == Step::MOVE) { 
       ok = utils::moveToPose(*move_group_, get_logger(), step.pose, step.label);
     } else {
       ok = utils::sweepTo(*move_group_, get_logger(), eef_step_, velocity_scaling_, acceleration_scaling_, step.pose, step.label);
@@ -174,10 +159,8 @@ bool MainSweep::doMovement() {
     if (!ok) { return false; }
   }
 
-  // Finish back in the resting (park) pose.
-  if (park_joints_.size() == 6) {
-    return utils::moveToJoints(*move_group_, get_logger(), park_joints_, "return to park");
-  }
+  // back to start pos
+  if (park_joints_.size() == 6) { return utils::moveToJoints(*move_group_, get_logger(), park_joints_, "return to park"); }
   return true;
 }
 
