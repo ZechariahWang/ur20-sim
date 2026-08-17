@@ -60,6 +60,8 @@ class MainSweep : public rclcpp::Node {
     std::vector<double> park_joints_;
     // Joint pose whose TCP orientation is used for the second (side) pass.
     std::vector<double> side_view_joints_;
+    // Joint pose for the final oblique view after both passes.
+    std::vector<double> oblique_view_joints_;
 
     // Room bounds (room.yaml) and how close the TCP may get to them.
     double floor_z_{-0.81};

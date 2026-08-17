@@ -45,6 +45,7 @@ void MainSweep::loadParameters() {
   camera_length_ = get_parameter_or<double>("camera_length", 0.22);
   park_joints_ = get_parameter_or<std::vector<double>>("park_joints", {});
   side_view_joints_ = get_parameter_or<std::vector<double>>("side_view_joints", {});
+  oblique_view_joints_ = get_parameter_or<std::vector<double>>("oblique_view_joints", {});
 
   // Room bounds, same values room_publisher builds the collision boxes
   floor_z_ = get_parameter_or<double>("floor_z", -0.81);
@@ -73,7 +74,6 @@ std::vector<MainSweep::Step> MainSweep::buildScript(const geometry_msgs::msg::Qu
   script.push_back({Step::SWEEP, utils::makePose(x, end,   z_top, q1),            "top sweep"});
   script.push_back({Step::MOVE,  utils::makePose(x - 0.1, start, z_side, q2),     "return to start (side view)"});
   script.push_back({Step::SWEEP, utils::makePose(x - 0.1, end,   z_side, q2),     "side sweep"});
-  script.push_back({Step::MOVE,  utils::makePose(x - 0.2, end,   z_top + 0.3, q2), "final raised position"});
   return script;
 }
 
@@ -157,6 +157,11 @@ bool MainSweep::doMovement() {
       ok = utils::sweepTo(*move_group_, get_logger(), eef_step_, velocity_scaling_, acceleration_scaling_, step.pose, step.label);
     }
     if (!ok) { return false; }
+  }
+
+  // Final oblique view of the board (exact joint pose from the pendant).
+  if (oblique_view_joints_.size() == 6) {
+    if (!utils::moveToJoints(*move_group_, get_logger(), oblique_view_joints_, "oblique view")) { return false; }
   }
 
   // back to start pos

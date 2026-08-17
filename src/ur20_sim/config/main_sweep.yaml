@@ -41,3 +41,7 @@ main_sweep:
     # on the pendant 2026-08-17) is used for the second/side pass. The
     # position of this pose is ignored, only its orientation is used.
     side_view_joints: [-0.2419, -0.8502, 2.0817, -4.3216, -1.3280, 4.1860]
+
+    # Final oblique view after both passes (radians, exact joint pose
+    # jogged on the pendant 2026-08-17). Remove to skip.
+    oblique_view_joints: [-1.4336, -0.3388, 1.3064, -1.6788, -0.9463, -1.6949]
