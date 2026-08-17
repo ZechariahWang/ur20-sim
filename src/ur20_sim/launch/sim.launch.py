@@ -1,6 +1,6 @@
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, ExecuteProcess, IncludeLaunchDescription
-from launch.conditions import IfCondition
+from launch.conditions import IfCondition, UnlessCondition
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
 from launch_ros.actions import Node
@@ -54,7 +54,26 @@ def generate_launch_description():
             "kinematics_params_file": PathJoinSubstitution(
                 [FindPackageShare("ur20_sim"), "config", "ur20_calibration.yaml"]
             ),
+            # We run our own dashboard client below with respawn, because
+            # the driver's copy gives up after 2 s if the robot is still
+            # booting when the stack launches.
+            "launch_dashboard_client": "false",
         }.items(),
+    )
+
+    # Same node the driver would start, but with respawn: if the robot's
+    # dashboard server is not up yet (robot still booting), the client
+    # exits and simply retries until it connects.
+    dashboard_client = Node(
+        package="ur_robot_driver",
+        executable="dashboard_client",
+        name="dashboard_client",
+        output="screen",
+        emulate_tty=True,
+        respawn=True,
+        respawn_delay=3.0,
+        parameters=[{"robot_ip": robot_ip}],
+        condition=UnlessCondition(use_fake_hardware),
     )
 
     moveit = IncludeLaunchDescription(
@@ -98,4 +117,4 @@ def generate_launch_description():
         parameters=[room_config],
     )
 
-    return LaunchDescription(declared_args + [ur_control, moveit, foxglove_bridge, room_publisher, disable_friction_controller])
+    return LaunchDescription(declared_args + [ur_control, dashboard_client, moveit, foxglove_bridge, room_publisher, disable_friction_controller])
