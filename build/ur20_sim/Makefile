@@ -371,53 +371,53 @@ src/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main_sweep.dir/build.make CMakeFiles/main_sweep.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
-src/room_publisher.o: src/room_publisher.cpp.o
-.PHONY : src/room_publisher.o
+src/misc/room_publisher.o: src/misc/room_publisher.cpp.o
+.PHONY : src/misc/room_publisher.o
 
 # target to build an object file
-src/room_publisher.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/room_publisher.dir/build.make CMakeFiles/room_publisher.dir/src/room_publisher.cpp.o
-.PHONY : src/room_publisher.cpp.o
+src/misc/room_publisher.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/room_publisher.dir/build.make CMakeFiles/room_publisher.dir/src/misc/room_publisher.cpp.o
+.PHONY : src/misc/room_publisher.cpp.o
 
-src/room_publisher.i: src/room_publisher.cpp.i
-.PHONY : src/room_publisher.i
+src/misc/room_publisher.i: src/misc/room_publisher.cpp.i
+.PHONY : src/misc/room_publisher.i
 
 # target to preprocess a source file
-src/room_publisher.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/room_publisher.dir/build.make CMakeFiles/room_publisher.dir/src/room_publisher.cpp.i
-.PHONY : src/room_publisher.cpp.i
+src/misc/room_publisher.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/room_publisher.dir/build.make CMakeFiles/room_publisher.dir/src/misc/room_publisher.cpp.i
+.PHONY : src/misc/room_publisher.cpp.i
 
-src/room_publisher.s: src/room_publisher.cpp.s
-.PHONY : src/room_publisher.s
+src/misc/room_publisher.s: src/misc/room_publisher.cpp.s
+.PHONY : src/misc/room_publisher.s
 
 # target to generate assembly for a file
-src/room_publisher.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/room_publisher.dir/build.make CMakeFiles/room_publisher.dir/src/room_publisher.cpp.s
-.PHONY : src/room_publisher.cpp.s
+src/misc/room_publisher.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/room_publisher.dir/build.make CMakeFiles/room_publisher.dir/src/misc/room_publisher.cpp.s
+.PHONY : src/misc/room_publisher.cpp.s
 
-src/utils.o: src/utils.cpp.o
-.PHONY : src/utils.o
+src/misc/utils.o: src/misc/utils.cpp.o
+.PHONY : src/misc/utils.o
 
 # target to build an object file
-src/utils.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ur20_utils.dir/build.make CMakeFiles/ur20_utils.dir/src/utils.cpp.o
-.PHONY : src/utils.cpp.o
+src/misc/utils.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ur20_utils.dir/build.make CMakeFiles/ur20_utils.dir/src/misc/utils.cpp.o
+.PHONY : src/misc/utils.cpp.o
 
-src/utils.i: src/utils.cpp.i
-.PHONY : src/utils.i
+src/misc/utils.i: src/misc/utils.cpp.i
+.PHONY : src/misc/utils.i
 
 # target to preprocess a source file
-src/utils.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ur20_utils.dir/build.make CMakeFiles/ur20_utils.dir/src/utils.cpp.i
-.PHONY : src/utils.cpp.i
+src/misc/utils.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ur20_utils.dir/build.make CMakeFiles/ur20_utils.dir/src/misc/utils.cpp.i
+.PHONY : src/misc/utils.cpp.i
 
-src/utils.s: src/utils.cpp.s
-.PHONY : src/utils.s
+src/misc/utils.s: src/misc/utils.cpp.s
+.PHONY : src/misc/utils.s
 
 # target to generate assembly for a file
-src/utils.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ur20_utils.dir/build.make CMakeFiles/ur20_utils.dir/src/utils.cpp.s
-.PHONY : src/utils.cpp.s
+src/misc/utils.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ur20_utils.dir/build.make CMakeFiles/ur20_utils.dir/src/misc/utils.cpp.s
+.PHONY : src/misc/utils.cpp.s
 
 # Help Target
 help:
@@ -452,12 +452,12 @@ help:
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
-	@echo "... src/room_publisher.o"
-	@echo "... src/room_publisher.i"
-	@echo "... src/room_publisher.s"
-	@echo "... src/utils.o"
-	@echo "... src/utils.i"
-	@echo "... src/utils.s"
+	@echo "... src/misc/room_publisher.o"
+	@echo "... src/misc/room_publisher.i"
+	@echo "... src/misc/room_publisher.s"
+	@echo "... src/misc/utils.o"
+	@echo "... src/misc/utils.i"
+	@echo "... src/misc/utils.s"
 .PHONY : help
 
 

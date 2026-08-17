@@ -69,28 +69,28 @@ include CMakeFiles/ur20_utils.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/ur20_utils.dir/flags.make
 
-CMakeFiles/ur20_utils.dir/src/utils.cpp.o: CMakeFiles/ur20_utils.dir/flags.make
-CMakeFiles/ur20_utils.dir/src/utils.cpp.o: /home/zech/robim_ur20_sim/src/ur20_sim/src/utils.cpp
-CMakeFiles/ur20_utils.dir/src/utils.cpp.o: CMakeFiles/ur20_utils.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/zech/robim_ur20_sim/build/ur20_sim/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/ur20_utils.dir/src/utils.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ur20_utils.dir/src/utils.cpp.o -MF CMakeFiles/ur20_utils.dir/src/utils.cpp.o.d -o CMakeFiles/ur20_utils.dir/src/utils.cpp.o -c /home/zech/robim_ur20_sim/src/ur20_sim/src/utils.cpp
+CMakeFiles/ur20_utils.dir/src/misc/utils.cpp.o: CMakeFiles/ur20_utils.dir/flags.make
+CMakeFiles/ur20_utils.dir/src/misc/utils.cpp.o: /home/zech/robim_ur20_sim/src/ur20_sim/src/misc/utils.cpp
+CMakeFiles/ur20_utils.dir/src/misc/utils.cpp.o: CMakeFiles/ur20_utils.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/zech/robim_ur20_sim/build/ur20_sim/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/ur20_utils.dir/src/misc/utils.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ur20_utils.dir/src/misc/utils.cpp.o -MF CMakeFiles/ur20_utils.dir/src/misc/utils.cpp.o.d -o CMakeFiles/ur20_utils.dir/src/misc/utils.cpp.o -c /home/zech/robim_ur20_sim/src/ur20_sim/src/misc/utils.cpp
 
-CMakeFiles/ur20_utils.dir/src/utils.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ur20_utils.dir/src/utils.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/zech/robim_ur20_sim/src/ur20_sim/src/utils.cpp > CMakeFiles/ur20_utils.dir/src/utils.cpp.i
+CMakeFiles/ur20_utils.dir/src/misc/utils.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ur20_utils.dir/src/misc/utils.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/zech/robim_ur20_sim/src/ur20_sim/src/misc/utils.cpp > CMakeFiles/ur20_utils.dir/src/misc/utils.cpp.i
 
-CMakeFiles/ur20_utils.dir/src/utils.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ur20_utils.dir/src/utils.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/zech/robim_ur20_sim/src/ur20_sim/src/utils.cpp -o CMakeFiles/ur20_utils.dir/src/utils.cpp.s
+CMakeFiles/ur20_utils.dir/src/misc/utils.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ur20_utils.dir/src/misc/utils.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/zech/robim_ur20_sim/src/ur20_sim/src/misc/utils.cpp -o CMakeFiles/ur20_utils.dir/src/misc/utils.cpp.s
 
 # Object files for target ur20_utils
 ur20_utils_OBJECTS = \
-"CMakeFiles/ur20_utils.dir/src/utils.cpp.o"
+"CMakeFiles/ur20_utils.dir/src/misc/utils.cpp.o"
 
 # External object files for target ur20_utils
 ur20_utils_EXTERNAL_OBJECTS =
 
-libur20_utils.a: CMakeFiles/ur20_utils.dir/src/utils.cpp.o
+libur20_utils.a: CMakeFiles/ur20_utils.dir/src/misc/utils.cpp.o
 libur20_utils.a: CMakeFiles/ur20_utils.dir/build.make
 libur20_utils.a: CMakeFiles/ur20_utils.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/zech/robim_ur20_sim/build/ur20_sim/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX static library libur20_utils.a"

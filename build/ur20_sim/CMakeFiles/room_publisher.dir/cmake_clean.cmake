@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/room_publisher.dir/src/room_publisher.cpp.o"
-  "CMakeFiles/room_publisher.dir/src/room_publisher.cpp.o.d"
+  "CMakeFiles/room_publisher.dir/src/misc/room_publisher.cpp.o"
+  "CMakeFiles/room_publisher.dir/src/misc/room_publisher.cpp.o.d"
   "room_publisher"
   "room_publisher.pdb"
 )

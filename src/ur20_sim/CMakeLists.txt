@@ -12,7 +12,7 @@ find_package(visualization_msgs REQUIRED)
 
 include_directories(include)
 
-add_library(ur20_utils src/utils.cpp)
+add_library(ur20_utils src/misc/utils.cpp)
 ament_target_dependencies(ur20_utils rclcpp moveit_ros_planning_interface)
 
 add_executable(main_sweep src/main.cpp)
@@ -23,7 +23,7 @@ add_executable(sweep_mover src/calibration_tests/sweep_mover.cpp)
 ament_target_dependencies(sweep_mover rclcpp moveit_ros_planning_interface)
 target_link_libraries(sweep_mover ur20_utils)
 
-add_executable(room_publisher src/room_publisher.cpp)
+add_executable(room_publisher src/misc/room_publisher.cpp)
 ament_target_dependencies(room_publisher rclcpp moveit_ros_planning_interface visualization_msgs)
 
 add_executable(tcp_orientate src/calibration_tests/tcp_orientate.cpp)

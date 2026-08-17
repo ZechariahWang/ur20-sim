@@ -1596,7 +1596,7 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "src/room_publisher.cpp",
+			"path" : "src/misc/room_publisher.cpp",
 			"sourceGroupIndex" : 0
 		}
 	],

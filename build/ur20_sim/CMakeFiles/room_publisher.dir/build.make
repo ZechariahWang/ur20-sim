@@ -69,28 +69,28 @@ include CMakeFiles/room_publisher.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/room_publisher.dir/flags.make
 
-CMakeFiles/room_publisher.dir/src/room_publisher.cpp.o: CMakeFiles/room_publisher.dir/flags.make
-CMakeFiles/room_publisher.dir/src/room_publisher.cpp.o: /home/zech/robim_ur20_sim/src/ur20_sim/src/room_publisher.cpp
-CMakeFiles/room_publisher.dir/src/room_publisher.cpp.o: CMakeFiles/room_publisher.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/zech/robim_ur20_sim/build/ur20_sim/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/room_publisher.dir/src/room_publisher.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/room_publisher.dir/src/room_publisher.cpp.o -MF CMakeFiles/room_publisher.dir/src/room_publisher.cpp.o.d -o CMakeFiles/room_publisher.dir/src/room_publisher.cpp.o -c /home/zech/robim_ur20_sim/src/ur20_sim/src/room_publisher.cpp
+CMakeFiles/room_publisher.dir/src/misc/room_publisher.cpp.o: CMakeFiles/room_publisher.dir/flags.make
+CMakeFiles/room_publisher.dir/src/misc/room_publisher.cpp.o: /home/zech/robim_ur20_sim/src/ur20_sim/src/misc/room_publisher.cpp
+CMakeFiles/room_publisher.dir/src/misc/room_publisher.cpp.o: CMakeFiles/room_publisher.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/zech/robim_ur20_sim/build/ur20_sim/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/room_publisher.dir/src/misc/room_publisher.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/room_publisher.dir/src/misc/room_publisher.cpp.o -MF CMakeFiles/room_publisher.dir/src/misc/room_publisher.cpp.o.d -o CMakeFiles/room_publisher.dir/src/misc/room_publisher.cpp.o -c /home/zech/robim_ur20_sim/src/ur20_sim/src/misc/room_publisher.cpp
 
-CMakeFiles/room_publisher.dir/src/room_publisher.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/room_publisher.dir/src/room_publisher.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/zech/robim_ur20_sim/src/ur20_sim/src/room_publisher.cpp > CMakeFiles/room_publisher.dir/src/room_publisher.cpp.i
+CMakeFiles/room_publisher.dir/src/misc/room_publisher.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/room_publisher.dir/src/misc/room_publisher.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/zech/robim_ur20_sim/src/ur20_sim/src/misc/room_publisher.cpp > CMakeFiles/room_publisher.dir/src/misc/room_publisher.cpp.i
 
-CMakeFiles/room_publisher.dir/src/room_publisher.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/room_publisher.dir/src/room_publisher.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/zech/robim_ur20_sim/src/ur20_sim/src/room_publisher.cpp -o CMakeFiles/room_publisher.dir/src/room_publisher.cpp.s
+CMakeFiles/room_publisher.dir/src/misc/room_publisher.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/room_publisher.dir/src/misc/room_publisher.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/zech/robim_ur20_sim/src/ur20_sim/src/misc/room_publisher.cpp -o CMakeFiles/room_publisher.dir/src/misc/room_publisher.cpp.s
 
 # Object files for target room_publisher
 room_publisher_OBJECTS = \
-"CMakeFiles/room_publisher.dir/src/room_publisher.cpp.o"
+"CMakeFiles/room_publisher.dir/src/misc/room_publisher.cpp.o"
 
 # External object files for target room_publisher
 room_publisher_EXTERNAL_OBJECTS =
 
-room_publisher: CMakeFiles/room_publisher.dir/src/room_publisher.cpp.o
+room_publisher: CMakeFiles/room_publisher.dir/src/misc/room_publisher.cpp.o
 room_publisher: CMakeFiles/room_publisher.dir/build.make
 room_publisher: /opt/ros/humble/lib/libmoveit_move_group_interface.so.2.5.9
 room_publisher: /opt/ros/humble/lib/libmoveit_common_planning_interface_objects.so.2.5.9
