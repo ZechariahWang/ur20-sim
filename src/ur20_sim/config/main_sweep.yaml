@@ -48,5 +48,6 @@ main_sweep:
     side_view_joints: [-0.2419, -0.8502, 2.0817, -4.3216, -1.3280, 4.1860]
 
     # Final oblique view after both passes (radians, exact joint pose
-    # jogged on the pendant 2026-08-17). Remove to skip.
-    oblique_view_joints: [-1.4336, -0.3388, 1.3064, -1.6788, -0.9463, -1.6949]
+    # jogged on the pendant 2026-08-17; wrist_3 rotated 180 deg on
+    # 2026-08-18 so the camera's extension points up). Remove to skip.
+    oblique_view_joints: [-1.4336, -0.3388, 1.3064, -1.6788, -0.9463, 1.4467]

@@ -93,24 +93,24 @@ std::vector<MainSweep::Step> MainSweep::buildLargeBoardScript(const geometry_msg
   return script;
 }
 
-// Currently the same path as the large board. Edit freely when the small
-// board needs its own sweep (shorter line, different heights, ...).
+// Small board: no sweeping. The camera holds one fixed y (centered on
+// the board) and only changes viewpoint: top view, then side view. The
+// oblique view and return to park happen after the script as usual.
 std::vector<MainSweep::Step> MainSweep::buildSmallBoardScript(const geometry_msgs::msg::Quaternion &top_orientation, const geometry_msgs::msg::Quaternion &side_orientation) {
 
   geometry_msgs::msg::Quaternion q1 = top_orientation;
   geometry_msgs::msg::Quaternion q2 = side_orientation;
 
   double x = sweep_x_;
-  double start = sweep_y_start_;
-  double end = sweep_y_end_;
+  double y_center = (sweep_y_start_ + sweep_y_end_) / 2.0;
   double z_top = floor_z_ + top_pass_height_;
   double z_side = floor_z_ + side_pass_height_;
 
   std::vector<Step> script;
-  script.push_back({Step::MOVE,  utils::makePose(x, start, z_top, q1),            "sweep start"});
-  script.push_back({Step::SWEEP, utils::makePose(x, end,   z_top, q1),            "top sweep"});
-  script.push_back({Step::MOVE,  utils::makePose(x - 0.1, start, z_side, q2),     "return to start (side view)"});
-  script.push_back({Step::SWEEP, utils::makePose(x - 0.1, end,   z_side, q2),     "side sweep"});
+  script.push_back({Step::MOVE, utils::makePose(x, y_center, z_top, q1),         "top view"});
+  // Side view stands 25 cm back from the board line so the camera body
+  // cannot touch the wood.
+  script.push_back({Step::MOVE, utils::makePose(x - 0.25, y_center, z_side, q2), "side view"});
   return script;
 }
 
