@@ -9,6 +9,9 @@ find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(moveit_ros_planning_interface REQUIRED)
 find_package(visualization_msgs REQUIRED)
+find_package(std_msgs REQUIRED)
+find_package(control_msgs REQUIRED)
+find_package(rclcpp_action REQUIRED)
 
 include_directories(include)
 
@@ -34,7 +37,10 @@ add_executable(axis_test src/calibration_tests/axis_test.cpp)
 ament_target_dependencies(axis_test rclcpp moveit_ros_planning_interface)
 target_link_libraries(axis_test ur20_utils)
 
-install(TARGETS main_sweep sweep_mover room_publisher tcp_orientate axis_test
+add_executable(command_server src/command_server.cpp)
+ament_target_dependencies(command_server rclcpp rclcpp_action std_msgs control_msgs)
+
+install(TARGETS main_sweep sweep_mover room_publisher tcp_orientate axis_test command_server
   DESTINATION lib/${PROJECT_NAME})
 
 install(DIRECTORY launch config urdf

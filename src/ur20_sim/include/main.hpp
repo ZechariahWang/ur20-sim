@@ -61,6 +61,8 @@ class MainSweep : public rclcpp::Node {
     // How far the camera tip sticks out of the flange along tool z (m).
     double camera_length_{0.22};
     std::vector<double> park_joints_;
+    // If true, only move to park and exit (webapp "park" command).
+    bool park_only_{false};
     // Joint pose whose TCP orientation is used for the second (side) pass.
     std::vector<double> side_view_joints_;
     // Joint pose for the final oblique view after both passes.

@@ -44,6 +44,7 @@ void MainSweep::loadParameters() {
   eef_step_ = get_parameter_or<double>("eef_step", 0.01);
   camera_length_ = get_parameter_or<double>("camera_length", 0.22);
   park_joints_ = get_parameter_or<std::vector<double>>("park_joints", {});
+  park_only_ = get_parameter_or<bool>("park_only", false);
   side_view_joints_ = get_parameter_or<std::vector<double>>("side_view_joints", {});
   oblique_view_joints_ = get_parameter_or<std::vector<double>>("oblique_view_joints", {});
 
@@ -136,6 +137,9 @@ bool MainSweep::doMovement() {
   if (park_joints_.size() == 6) {
     if (!utils::moveToNearestJoints(*move_group_, get_logger(), park_joints_, "move to park position")) { return false; }
   }
+
+  // "park" command from the webapp: just go to park, skip the sweeps.
+  if (park_only_) { return true; }
 
   geometry_msgs::msg::Quaternion top_orientation = move_group_->getCurrentPose().pose.orientation;
   geometry_msgs::msg::Quaternion side_orientation = top_orientation;

@@ -11,6 +11,7 @@ def generate_launch_description():
 
     declared_args = [
         DeclareLaunchArgument("ur_type", default_value="ur20"),
+        DeclareLaunchArgument("park_only", default_value="false"),
     ]
 
     robot_description = ParameterValue(
@@ -60,6 +61,7 @@ def generate_launch_description():
             kinematics_yaml,
             room_yaml,
             main_yaml,
+            {"park_only": ParameterValue(LaunchConfiguration("park_only"), value_type=bool)},
         ],
     )
 
