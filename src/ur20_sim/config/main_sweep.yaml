@@ -63,3 +63,9 @@ main_sweep:
     # jogged on the pendant 2026-08-17; wrist_3 rotated 180 deg on
     # 2026-08-18 so the camera's extension points up). Remove to skip.
     oblique_view_joints: [-1.4336, -0.3388, 1.3064, -1.6788, -0.9463, 1.4467]
+
+    # Pose for the "angled" sweep (radians, jogged on the pendant
+    # 2026-08-18: wrist at 45 deg to the ground, camera orthogonal).
+    # The whole angled sweep holds this pose's FK height and
+    # orientation; only y changes along the line.
+    angled_view_joints: [-0.2274, -0.1974, 1.8953, -4.1178, -1.4216, 4.0635]

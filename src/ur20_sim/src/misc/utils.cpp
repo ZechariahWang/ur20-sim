@@ -164,6 +164,19 @@ geometry_msgs::msg::Pose flangePoseFromCameraPose(
   return flange_pose;
 }
 
+geometry_msgs::msg::Pose cameraPoseFromFlangePose(
+    const geometry_msgs::msg::Pose &flange_pose, double camera_length) {
+  Eigen::Quaterniond q(flange_pose.orientation.w, flange_pose.orientation.x,
+                       flange_pose.orientation.y, flange_pose.orientation.z);
+  Eigen::Vector3d camera_axis = q * Eigen::Vector3d(0.0, 0.0, camera_length);
+
+  geometry_msgs::msg::Pose camera_pose = flange_pose;
+  camera_pose.position.x = flange_pose.position.x + camera_axis.x();
+  camera_pose.position.y = flange_pose.position.y + camera_axis.y();
+  camera_pose.position.z = flange_pose.position.z + camera_axis.z();
+  return camera_pose;
+}
+
 bool moveToPose(moveit::planning_interface::MoveGroupInterface &move_group,
                 const rclcpp::Logger &logger,
                 const geometry_msgs::msg::Pose &pose, const std::string &label) {

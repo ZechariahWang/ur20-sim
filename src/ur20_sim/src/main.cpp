@@ -16,13 +16,16 @@ MainSweep::~MainSweep() {
 bool MainSweep::run() {
   loadParameters();
 
+  // Setup runs first because the angled script needs FK (move_group).
+  if (!setup()) { return false; }
+
   // Room check only uses positions, orientation does not matter here.
   geometry_msgs::msg::Quaternion identity;
   identity.w = 1.0;
   std::vector<Step> script = buildScript(identity, identity);
+  if (script.empty() && !park_only_) { return false; }
   if (!checkAgainstRoom(script)) { return false; }
 
-  if (!setup()) { return false; }
   bool ok = doMovement();
   if (ok) {
     RCLCPP_INFO(get_logger(), "Sweep complete.");
@@ -53,6 +56,7 @@ void MainSweep::loadParameters() {
   park_only_ = get_parameter_or<bool>("park_only", false);
   side_view_joints_ = get_parameter_or<std::vector<double>>("side_view_joints", {});
   oblique_view_joints_ = get_parameter_or<std::vector<double>>("oblique_view_joints", {});
+  angled_view_joints_ = get_parameter_or<std::vector<double>>("angled_view_joints", {});
 
   // Room bounds, same values room_publisher builds the collision boxes
   floor_z_ = get_parameter_or<double>("floor_z", -0.81);
@@ -94,10 +98,10 @@ std::vector<MainSweep::Step> MainSweep::buildLargeBoardScript(const geometry_msg
   double z_side = floor_z_ + side_pass_height_;
 
   std::vector<Step> script;
-  script.push_back({Step::MOVE,  utils::makePose(x, start, z_top, q1),            "sweep start"});
-  script.push_back({Step::SWEEP, utils::makePose(x, end,   z_top, q1),            "top sweep"});
-  script.push_back({Step::MOVE,  utils::makePose(x - 0.1, start, z_side, q2),     "return to start (side view)"});
-  script.push_back({Step::SWEEP, utils::makePose(x - 0.1, end,   z_side, q2),     "side sweep"});
+  script.push_back({Step::MOVE,  utils::makePose(x, start, z_top, q1),            "sweep start", {}});
+  script.push_back({Step::SWEEP, utils::makePose(x, end,   z_top, q1),            "top sweep", {}});
+  script.push_back({Step::MOVE,  utils::makePose(x - 0.1, start, z_side, q2),     "return to start (side view)", {}});
+  script.push_back({Step::SWEEP, utils::makePose(x - 0.1, end,   z_side, q2),     "side sweep", {}});
   return script;
 }
 
@@ -115,27 +119,37 @@ std::vector<MainSweep::Step> MainSweep::buildSmallBoardScript(const geometry_msg
   double z_side = floor_z_ + side_pass_height_;
 
   std::vector<Step> script;
-  script.push_back({Step::MOVE, utils::makePose(x, y_center, z_top, q1),         "top view"});
+  script.push_back({Step::MOVE, utils::makePose(x, y_center, z_top, q1),         "top view", {}});
   // Side view stands 25 cm back from the board line so the camera body
   // cannot touch the wood. Shifted 15 cm toward -y.
-  script.push_back({Step::MOVE, utils::makePose(x - 0.25, y_center - 0.15, z_side, q2), "side view"});
+  script.push_back({Step::MOVE, utils::makePose(x - 0.25, y_center - 0.15, z_side, q2), "side view", {}});
   return script;
 }
 
-// One pass, left to right, camera pitched 45 deg down facing away from
-// the robot. No side view, no oblique: after this the routine parks.
+
+// Angled mode: the whole sweep holds the exact height and orientation
+// of the pose jogged on the pendant (angled_view_joints in the yaml).
+// Only y changes during the sweep, from sweep_y_start to sweep_y_end.
 std::vector<MainSweep::Step> MainSweep::buildAngledScript() {
 
-  geometry_msgs::msg::Quaternion q45 = utils::pitchQuaternion(3.0 * M_PI / 4.0);
-
-  double x = sweep_x_;
-  double start = sweep_y_start_;
-  double end = sweep_y_end_;
-  double z_top = floor_z_ + top_pass_height_;
-
   std::vector<Step> script;
-  script.push_back({Step::MOVE,  utils::makePose(x, start, z_top, q45), "angled sweep start"});
-  script.push_back({Step::SWEEP, utils::makePose(x, end,   z_top, q45), "angled sweep"});
+  if (angled_view_joints_.size() != 6) {
+    RCLCPP_ERROR(get_logger(), "Board type 'angled' needs angled_view_joints (6 values) in main_sweep.yaml.");
+    return script;
+  }
+
+  // FK of the jogged joints gives the flange pose. The script works in
+  // camera tip poses, so push forward by camera_length along tool z.
+  geometry_msgs::msg::Pose flange_pose = utils::poseFromJoints(*move_group_, angled_view_joints_);
+  geometry_msgs::msg::Pose camera_pose = utils::cameraPoseFromFlangePose(flange_pose, camera_length_);
+
+  geometry_msgs::msg::Pose start_pose = camera_pose;
+  start_pose.position.y = sweep_y_start_;
+  geometry_msgs::msg::Pose end_pose = camera_pose;
+  end_pose.position.y = sweep_y_end_;
+
+  script.push_back({Step::MOVE,  start_pose, "angled sweep start", {}});
+  script.push_back({Step::SWEEP, end_pose,   "angled sweep", {}});
   return script;
 }
 
@@ -238,11 +252,6 @@ bool MainSweep::doMovement() {
     oblique_base.position.y = oblique_base.position.y + oblique_shift_y_;
     oblique_base.position.z = oblique_base.position.z + oblique_shift_z_;
 
-    // Anchor the oblique to wherever the routine's last view ended: the
-    // offset between the small-board side view and the tuned oblique spot
-    // is applied to the actual last pose. For the small board this equals
-    // the tuned spot exactly; for the large board the oblique follows the
-    // side sweep's end position with the same relative offset.
     double y_center = (sweep_y_start_ + sweep_y_end_) / 2.0;
     double z_side = floor_z_ + side_pass_height_;
     geometry_msgs::msg::Pose reference_tip = utils::makePose(sweep_x_ - 0.25, y_center - 0.15, z_side, side_orientation);

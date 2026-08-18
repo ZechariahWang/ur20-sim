@@ -44,8 +44,9 @@ class MainSweep : public rclcpp::Node {
     // when the boards need different paths.
     std::vector<Step> buildLargeBoardScript(const geometry_msgs::msg::Quaternion &top_orientation, const geometry_msgs::msg::Quaternion &side_orientation);
     std::vector<Step> buildSmallBoardScript(const geometry_msgs::msg::Quaternion &top_orientation, const geometry_msgs::msg::Quaternion &side_orientation);
-    // "angled" mode: one left-to-right sweep with the camera 45 deg down,
-    // facing away from the robot, then straight back to park.
+    // "angled" mode: one left-to-right sweep that holds the height and
+    // orientation of the jogged angled pose (angled_view_joints) the
+    // whole way, then straight back to park.
     std::vector<Step> buildAngledScript();
     bool checkAgainstRoom(const std::vector<Step> &script);
     bool doMovement();
@@ -86,6 +87,9 @@ class MainSweep : public rclcpp::Node {
     std::vector<double> side_view_joints_;
     // Joint pose for the final oblique view after both passes.
     std::vector<double> oblique_view_joints_;
+    // Jogged joint pose whose FK height and orientation the "angled"
+    // sweep holds for the whole pass.
+    std::vector<double> angled_view_joints_;
 
     // Room bounds (room.yaml) and how close the TCP may get to them.
     double floor_z_{-0.81};

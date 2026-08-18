@@ -48,6 +48,12 @@ std::vector<double> nearestJointTarget(
 geometry_msgs::msg::Pose flangePoseFromCameraPose(
     const geometry_msgs::msg::Pose &camera_pose, double camera_length);
 
+// The opposite direction: given a flange pose (for example from FK of
+// jogged joints), return where the camera tip is: the same pose pushed
+// forward by camera_length along the tool z axis.
+geometry_msgs::msg::Pose cameraPoseFromFlangePose(
+    const geometry_msgs::msg::Pose &flange_pose, double camera_length);
+
 // Free repositioning move to a pose. Solves IK from several seeds, wraps
 // each solution to the 2*pi-equivalent nearest the current joints, and
 // plans to the closest solution first, falling back to the next closest
