@@ -12,6 +12,11 @@ def generate_launch_description():
     declared_args = [
         DeclareLaunchArgument("ur_type", default_value="ur20"),
         DeclareLaunchArgument("park_only", default_value="false"),
+        DeclareLaunchArgument(
+            "board_type",
+            default_value="large",
+            description="Which board to scan: 'large' or 'small'.",
+        ),
     ]
 
     robot_description = ParameterValue(
@@ -62,6 +67,7 @@ def generate_launch_description():
             room_yaml,
             main_yaml,
             {"park_only": ParameterValue(LaunchConfiguration("park_only"), value_type=bool)},
+            {"board_type": ParameterValue(LaunchConfiguration("board_type"), value_type=str)},
         ],
     )
 

@@ -33,6 +33,7 @@ bool MainSweep::run() {
 }
 
 void MainSweep::loadParameters() {
+  board_type_ = get_parameter_or<std::string>("board_type", "large");
   planning_group_ = get_parameter_or<std::string>("planning_group", "ur_manipulator");
   velocity_scaling_ = get_parameter_or<double>("velocity_scaling", 0.05);
   acceleration_scaling_ = get_parameter_or<double>("acceleration_scaling", 0.1);
@@ -43,6 +44,7 @@ void MainSweep::loadParameters() {
   sweep_y_end_ = get_parameter_or<double>("sweep_y_end", -0.9);
   eef_step_ = get_parameter_or<double>("eef_step", 0.01);
   camera_length_ = get_parameter_or<double>("camera_length", 0.22);
+  
   park_joints_ = get_parameter_or<std::vector<double>>("park_joints", {});
   park_only_ = get_parameter_or<bool>("park_only", false);
   side_view_joints_ = get_parameter_or<std::vector<double>>("side_view_joints", {});
@@ -60,6 +62,40 @@ void MainSweep::loadParameters() {
 }
 
 std::vector<MainSweep::Step> MainSweep::buildScript(const geometry_msgs::msg::Quaternion &top_orientation, const geometry_msgs::msg::Quaternion &side_orientation) {
+  if (board_type_ == "small") {
+    RCLCPP_INFO(get_logger(), "Board type: small");
+    return buildSmallBoardScript(top_orientation, side_orientation);
+  }
+  if (board_type_ != "large") {
+    RCLCPP_WARN(get_logger(), "Unknown board_type '%s', using the large board sweep.", board_type_.c_str());
+  } else {
+    RCLCPP_INFO(get_logger(), "Board type: large");
+  }
+  return buildLargeBoardScript(top_orientation, side_orientation);
+}
+
+std::vector<MainSweep::Step> MainSweep::buildLargeBoardScript(const geometry_msgs::msg::Quaternion &top_orientation, const geometry_msgs::msg::Quaternion &side_orientation) {
+
+  geometry_msgs::msg::Quaternion q1 = top_orientation;
+  geometry_msgs::msg::Quaternion q2 = side_orientation;
+
+  double x = sweep_x_;
+  double start = sweep_y_start_;
+  double end = sweep_y_end_;
+  double z_top = floor_z_ + top_pass_height_;
+  double z_side = floor_z_ + side_pass_height_;
+
+  std::vector<Step> script;
+  script.push_back({Step::MOVE,  utils::makePose(x, start, z_top, q1),            "sweep start"});
+  script.push_back({Step::SWEEP, utils::makePose(x, end,   z_top, q1),            "top sweep"});
+  script.push_back({Step::MOVE,  utils::makePose(x - 0.1, start, z_side, q2),     "return to start (side view)"});
+  script.push_back({Step::SWEEP, utils::makePose(x - 0.1, end,   z_side, q2),     "side sweep"});
+  return script;
+}
+
+// Currently the same path as the large board. Edit freely when the small
+// board needs its own sweep (shorter line, different heights, ...).
+std::vector<MainSweep::Step> MainSweep::buildSmallBoardScript(const geometry_msgs::msg::Quaternion &top_orientation, const geometry_msgs::msg::Quaternion &side_orientation) {
 
   geometry_msgs::msg::Quaternion q1 = top_orientation;
   geometry_msgs::msg::Quaternion q2 = side_orientation;

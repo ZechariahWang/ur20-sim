@@ -38,7 +38,12 @@ class MainSweep : public rclcpp::Node {
 
     void loadParameters();
     bool setup();
+    // Picks the script for the configured board type.
     std::vector<Step> buildScript(const geometry_msgs::msg::Quaternion &top_orientation, const geometry_msgs::msg::Quaternion &side_orientation);
+    // One script per board type. Currently identical; edit independently
+    // when the boards need different paths.
+    std::vector<Step> buildLargeBoardScript(const geometry_msgs::msg::Quaternion &top_orientation, const geometry_msgs::msg::Quaternion &side_orientation);
+    std::vector<Step> buildSmallBoardScript(const geometry_msgs::msg::Quaternion &top_orientation, const geometry_msgs::msg::Quaternion &side_orientation);
     bool checkAgainstRoom(const std::vector<Step> &script);
     bool doMovement();
     void stopSpinner();
@@ -46,6 +51,10 @@ class MainSweep : public rclcpp::Node {
     rclcpp::executors::SingleThreadedExecutor executor_;
     std::thread spinner_;
     std::unique_ptr<moveit::planning_interface::MoveGroupInterface> move_group_;
+
+    // Which board is being scanned: "large" or "small". Selects the
+    // sweep script in buildScript().
+    std::string board_type_{"large"};
 
     // Sweep geometry and speeds (main_sweep.yaml)
     std::string planning_group_;

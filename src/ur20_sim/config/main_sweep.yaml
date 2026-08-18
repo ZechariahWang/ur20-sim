@@ -1,5 +1,10 @@
 main_sweep:
   ros__parameters:
+    # Board type ("large" or "small") is chosen at launch:
+    #   ros2 launch ur20_sim main.launch.py board_type:=small
+    # Each type has its own sweep script in main.cpp
+    # (buildLargeBoardScript / buildSmallBoardScript).
+
     planning_group: ur_manipulator
     # Fraction (0-1] of maximum joint velocity/acceleration.
     velocity_scaling: 0.05
