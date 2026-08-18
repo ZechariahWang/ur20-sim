@@ -78,16 +78,10 @@ def generate_launch_description():
             "kinematics_params_file": PathJoinSubstitution(
                 [FindPackageShare("ur20_sim"), "config", "ur20_calibration.yaml"]
             ),
-            # We run our own dashboard client below with respawn, because
-            # the driver's copy gives up after 2 s if the robot is still
-            # booting when the stack launches.
             "launch_dashboard_client": "false",
         }.items(),
     )
 
-    # Same node the driver would start, but with respawn: if the robot's
-    # dashboard server is not up yet (robot still booting), the client
-    # exits and simply retries until it connects.
     dashboard_client = Node(
         package="ur_robot_driver",
         executable="dashboard_client",
@@ -109,8 +103,6 @@ def generate_launch_description():
         launch_arguments={
             "ur_type": ur_type,
             "launch_rviz": launch_rviz,
-            # Same wrapper description as the driver so move_group's
-            # planning model includes the camera for collision checking.
             "description_package": "ur20_sim",
             "description_file": "ur20_parked.urdf.xacro",
         }.items(),
@@ -122,9 +114,6 @@ def generate_launch_description():
         output="screen",
         parameters=[{
             "port": 8765,
-            # No parameter browsing: we configure everything via YAML, and
-            # the bridge's bulk parameter queries time out on busy nodes
-            # and spam errors. Topics, services, and the 3D view keep working.
             "capabilities": ["clientPublish", "services", "connectionGraph", "assets"],
         }],
         condition=IfCondition(LaunchConfiguration("launch_foxglove")),

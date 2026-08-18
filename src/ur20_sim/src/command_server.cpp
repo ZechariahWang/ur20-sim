@@ -54,8 +54,6 @@ void CommandServer::startRoutine(const std::string &command) {
     return;
   }
   if (pid == 0) {
-    // Child process: run the routine through its normal launch file so it
-    // gets the same configs, room check, and park behavior as always.
     if (command == "park") {
       execlp("ros2", "ros2", "launch", "ur20_sim", "main.launch.py", "park_only:=true", (char *)NULL);
     } else {
