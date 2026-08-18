@@ -47,6 +47,7 @@ void MainSweep::loadParameters() {
   pose_pause_seconds_ = get_parameter_or<double>("pose_pause_seconds", 2.0);
   oblique_shift_x_ = get_parameter_or<double>("oblique_shift_x", 0.15);
   oblique_shift_y_ = get_parameter_or<double>("oblique_shift_y", 0.15);
+  oblique_shift_z_ = get_parameter_or<double>("oblique_shift_z", 0.0);
   
   park_joints_ = get_parameter_or<std::vector<double>>("park_joints", {});
   park_only_ = get_parameter_or<bool>("park_only", false);
@@ -214,6 +215,7 @@ bool MainSweep::doMovement() {
     geometry_msgs::msg::Pose oblique_pose = utils::poseFromJoints(*move_group_, oblique_view_joints_);
     oblique_pose.position.x = oblique_pose.position.x + oblique_shift_x_;
     oblique_pose.position.y = oblique_pose.position.y + oblique_shift_y_;
+    oblique_pose.position.z = oblique_pose.position.z + oblique_shift_z_;
 
     // Go direct when the wrapped joint travel is modest; detour through
     // park only when a large wrist unwind makes the direct move swing.

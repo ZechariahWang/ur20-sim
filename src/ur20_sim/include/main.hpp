@@ -75,6 +75,7 @@ class MainSweep : public rclcpp::Node {
     // Shift of the oblique view relative to the jogged pose (m, base frame).
     double oblique_shift_x_{0.15};
     double oblique_shift_y_{0.15};
+    double oblique_shift_z_{0.0};
     std::vector<double> park_joints_;
     // If true, only move to park and exit (webapp "park" command).
     bool park_only_{false};
