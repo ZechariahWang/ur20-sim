@@ -1,1 +1,0 @@
-/home/zech/robim_ur20_sim/build/ur20_sim/ament_cmake_core/ur20_simConfig-version.cmake

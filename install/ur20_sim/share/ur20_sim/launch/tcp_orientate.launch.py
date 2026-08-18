@@ -1,1 +1,0 @@
-/home/zech/robim_ur20_sim/src/ur20_sim/launch/tcp_orientate.launch.py

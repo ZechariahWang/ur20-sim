@@ -6,6 +6,16 @@
 sudo apt install ros-humble-ur ros-humble-moveit
 ```
 
+## ZED camera dependency
+
+The ZED wrapper is a source dependency, not tracked in this repo. After
+cloning, fetch it (needs the ZED SDK 4.2 installed from stereolabs.com):
+
+```bash
+cd src
+git clone --branch humble-v4.2.5 --depth 1 https://github.com/stereolabs/zed-ros2-wrapper.git
+```
+
 ## Build
 
 ```bash
