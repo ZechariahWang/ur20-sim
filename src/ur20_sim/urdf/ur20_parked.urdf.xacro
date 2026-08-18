@@ -23,7 +23,16 @@
     <collision>
       <origin xyz="0 0 0.115" rpy="0 0 0"/>
       <geometry>
-        <cylinder radius="0.03" length="0.21"/>
+        <cylinder radius="0.045" length="0.21"/>
+      </geometry>
+    </collision>
+    <!-- Guard volume around the flange area: the UR firmware protective-
+         stops on possible clamping between tool flange and lower arm well
+         before the meshes would touch, so keep planning clear of it. -->
+    <collision>
+      <origin xyz="0 0 0.065" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.10" length="0.12"/>
       </geometry>
     </collision>
   </link>

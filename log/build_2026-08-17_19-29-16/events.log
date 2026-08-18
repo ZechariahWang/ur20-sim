@@ -1,0 +1,108 @@
+[0.000000] (-) TimerEvent: {}
+[0.000063] (ur20_sim) JobQueued: {'identifier': 'ur20_sim', 'dependencies': OrderedDict()}
+[0.000143] (ur20_sim) JobStarted: {'identifier': 'ur20_sim'}
+[0.005357] (ur20_sim) JobProgress: {'identifier': 'ur20_sim', 'progress': 'cmake'}
+[0.006915] (ur20_sim) JobProgress: {'identifier': 'ur20_sim', 'progress': 'build'}
+[0.006946] (ur20_sim) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/zech/robim_ur20_sim/build/ur20_sim', '--', '-j20', '-l20'], 'cwd': '/home/zech/robim_ur20_sim/build/ur20_sim', 'env': OrderedDict([('GZ_SIM_SYSTEM_PLUGIN_PATH', ':/usr/lib/x86_64-linux-gnu'), ('LESSOPEN', '| /usr/bin/lesspipe %s'), ('IGN_IP', '127.0.0.1'), ('AI_AGENT', 'claude-code_2-1-227_agent'), ('LANGUAGE', 'en_CA:en'), ('USER', 'zech'), ('CLAUDE_CODE_ENTRYPOINT', 'cli'), ('GIT_EDITOR', 'true'), ('XDG_SESSION_TYPE', 'wayland'), ('STM32CubeMX_PATH', '/home/zech/STM32CubeMX'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/zech/exia_ws/install/exia_msgs/lib:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/zech'), ('OLDPWD', '/home/zech/robim_ur20_sim'), ('DESKTOP_SESSION', 'ubuntu'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('CLAUDE_CODE_CHILD_SESSION', '1'), ('SYSTEMD_EXEC_PID', '2695'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('NVM_DIR', '/home/zech/.nvm'), ('IM_CONFIG_PHASE', '1'), ('WAYLAND_DISPLAY', 'wayland-0'), ('COLCON_PREFIX_PATH', '/home/zech/exia_ws/install:/home/zech/ros2_ws/install'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'zech'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'zech'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '1'), ('PATH', '/home/zech/.npm-global/bin:/home/zech/.local/bin:/opt/ros/humble/bin:/usr/bin:/home/zech/.npm-global/bin:/home/zech/.local/bin:/usr/bin:/home/zech/.npm-global/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/usr/bin:/opt/st/stm32cubeide_2.1.1/'), ('SESSION_MANAGER', 'local/zech-computer:@/tmp/.ICE-unix/2665,unix/zech-computer:/tmp/.ICE-unix/2665'), ('COREPACK_ENABLE_AUTO_PIN', '0'), ('XDG_MENU_PREFIX', 'gnome-'), ('GNOME_TERMINAL_SCREEN', '/org/gnome/Terminal/screen/abf4ea3d_c555_492e_a0da_87cd6b440020'), ('GNOME_SETUP_DISPLAY', ':1'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('CLAUDE_EFFORT', 'high'), ('DISPLAY', ':0'), ('CLAUDE_PID', '3481'), ('NoDefaultCurrentDirectoryInExePath', '1'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/.mutter-Xwaylandauth.LV9YT3'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('GNOME_TERMINAL_SERVICE', ':1.102'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('ROS_DOMAIN_ID', '0'), ('AMENT_PREFIX_PATH', '/home/zech/exia_ws/install/exia_bringup:/home/zech/exia_ws/install/exia_driver:/home/zech/exia_ws/install/exia_control:/home/zech/exia_ws/install/exia_msgs:/home/zech/ros2_ws/install/eclipse_diffdrive:/home/zech/ros2_ws/install/eclipse_ackermann:/opt/ros/humble'), ('SHELL', '/bin/bash'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('CLAUDE_CODE_SESSION_ID', 'bbd4415b-604e-4c58-8804-d8e5a6b35278'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('CLAUDECODE', '1'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/zech/robim_ur20_sim/build/ur20_sim'), ('TURTLEBOT3_MODEL', 'burger'), ('LC_ALL', 'en_US.UTF-8'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('NVM_CD_FLAGS', ''), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('CLAUDE_CODE_EXECPATH', '/home/zech/.local/share/claude/versions/2.1.227'), ('PYTHONPATH', '/home/zech/exia_ws/install/exia_driver/lib/python3.10/site-packages:/home/zech/exia_ws/install/exia_control/lib/python3.10/site-packages:/home/zech/exia_ws/install/exia_msgs/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CLAUDE_CODE_MESSAGING_SOCKET', '/run/user/1000/cc-socks/3481.sock'), ('CMAKE_PREFIX_PATH', '/home/zech/exia_ws/install/exia_bringup:/home/zech/exia_ws/install/exia_msgs:/home/zech/ros2_ws/install/eclipse_diffdrive:/home/zech/ros2_ws/install/eclipse_ackermann:/home/zech/exia_ws/install/exia_driver:/home/zech/exia_ws/install/exia_control:/opt/ros/humble')]), 'shell': False}
+[0.051569] (ur20_sim) StdoutLine: {'line': b'Consolidate compiler generated dependencies of target ur20_utils\n'}
+[0.063628] (ur20_sim) StdoutLine: {'line': b'[ 16%] Built target room_publisher\n'}
+[0.065624] (ur20_sim) StdoutLine: {'line': b'[ 25%] Building CXX object CMakeFiles/ur20_utils.dir/src/misc/utils.cpp.o\n'}
+[0.099543] (-) TimerEvent: {}
+[0.199688] (-) TimerEvent: {}
+[0.299872] (-) TimerEvent: {}
+[0.400110] (-) TimerEvent: {}
+[0.500296] (-) TimerEvent: {}
+[0.600543] (-) TimerEvent: {}
+[0.700738] (-) TimerEvent: {}
+[0.800979] (-) TimerEvent: {}
+[0.901157] (-) TimerEvent: {}
+[1.001449] (-) TimerEvent: {}
+[1.101699] (-) TimerEvent: {}
+[1.201934] (-) TimerEvent: {}
+[1.302179] (-) TimerEvent: {}
+[1.402428] (-) TimerEvent: {}
+[1.502663] (-) TimerEvent: {}
+[1.602811] (-) TimerEvent: {}
+[1.702992] (-) TimerEvent: {}
+[1.803227] (-) TimerEvent: {}
+[1.903392] (-) TimerEvent: {}
+[2.003633] (-) TimerEvent: {}
+[2.103875] (-) TimerEvent: {}
+[2.204054] (-) TimerEvent: {}
+[2.304309] (-) TimerEvent: {}
+[2.404560] (-) TimerEvent: {}
+[2.504810] (-) TimerEvent: {}
+[2.605067] (-) TimerEvent: {}
+[2.705319] (-) TimerEvent: {}
+[2.805575] (-) TimerEvent: {}
+[2.905816] (-) TimerEvent: {}
+[3.006067] (-) TimerEvent: {}
+[3.106303] (-) TimerEvent: {}
+[3.206464] (-) TimerEvent: {}
+[3.306647] (-) TimerEvent: {}
+[3.406849] (-) TimerEvent: {}
+[3.507030] (-) TimerEvent: {}
+[3.607208] (-) TimerEvent: {}
+[3.707395] (-) TimerEvent: {}
+[3.807569] (-) TimerEvent: {}
+[3.907767] (-) TimerEvent: {}
+[4.007937] (-) TimerEvent: {}
+[4.108110] (-) TimerEvent: {}
+[4.150601] (ur20_sim) StdoutLine: {'line': b'[ 33%] Linking CXX static library libur20_utils.a\n'}
+[4.186548] (ur20_sim) StdoutLine: {'line': b'[ 33%] Built target ur20_utils\n'}
+[4.208201] (-) TimerEvent: {}
+[4.217565] (ur20_sim) StdoutLine: {'line': b'[ 41%] Linking CXX executable sweep_mover\n'}
+[4.217808] (ur20_sim) StdoutLine: {'line': b'[ 58%] Linking CXX executable axis_test\n'}
+[4.217895] (ur20_sim) StdoutLine: {'line': b'[ 58%] Linking CXX executable tcp_orientate\n'}
+[4.218229] (ur20_sim) StdoutLine: {'line': b'[ 66%] Linking CXX executable main_sweep\n'}
+[4.308372] (-) TimerEvent: {}
+[4.408585] (-) TimerEvent: {}
+[4.434636] (ur20_sim) StdoutLine: {'line': b'[ 75%] Built target sweep_mover\n'}
+[4.440283] (ur20_sim) StdoutLine: {'line': b'[ 83%] Built target main_sweep\n'}
+[4.440574] (ur20_sim) StdoutLine: {'line': b'[ 91%] Built target axis_test\n'}
+[4.445240] (ur20_sim) StdoutLine: {'line': b'[100%] Built target tcp_orientate\n'}
+[4.451494] (ur20_sim) CommandEnded: {'returncode': 0}
+[4.452185] (ur20_sim) JobProgress: {'identifier': 'ur20_sim', 'progress': 'install'}
+[4.456570] (ur20_sim) Command: {'cmd': ['/usr/bin/cmake', '--install', '/home/zech/robim_ur20_sim/build/ur20_sim'], 'cwd': '/home/zech/robim_ur20_sim/build/ur20_sim', 'env': OrderedDict([('GZ_SIM_SYSTEM_PLUGIN_PATH', ':/usr/lib/x86_64-linux-gnu'), ('LESSOPEN', '| /usr/bin/lesspipe %s'), ('IGN_IP', '127.0.0.1'), ('AI_AGENT', 'claude-code_2-1-227_agent'), ('LANGUAGE', 'en_CA:en'), ('USER', 'zech'), ('CLAUDE_CODE_ENTRYPOINT', 'cli'), ('GIT_EDITOR', 'true'), ('XDG_SESSION_TYPE', 'wayland'), ('STM32CubeMX_PATH', '/home/zech/STM32CubeMX'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/zech/exia_ws/install/exia_msgs/lib:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/zech'), ('OLDPWD', '/home/zech/robim_ur20_sim'), ('DESKTOP_SESSION', 'ubuntu'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('CLAUDE_CODE_CHILD_SESSION', '1'), ('SYSTEMD_EXEC_PID', '2695'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('NVM_DIR', '/home/zech/.nvm'), ('IM_CONFIG_PHASE', '1'), ('WAYLAND_DISPLAY', 'wayland-0'), ('COLCON_PREFIX_PATH', '/home/zech/exia_ws/install:/home/zech/ros2_ws/install'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'zech'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'zech'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '1'), ('PATH', '/home/zech/.npm-global/bin:/home/zech/.local/bin:/opt/ros/humble/bin:/usr/bin:/home/zech/.npm-global/bin:/home/zech/.local/bin:/usr/bin:/home/zech/.npm-global/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/usr/bin:/opt/st/stm32cubeide_2.1.1/'), ('SESSION_MANAGER', 'local/zech-computer:@/tmp/.ICE-unix/2665,unix/zech-computer:/tmp/.ICE-unix/2665'), ('COREPACK_ENABLE_AUTO_PIN', '0'), ('XDG_MENU_PREFIX', 'gnome-'), ('GNOME_TERMINAL_SCREEN', '/org/gnome/Terminal/screen/abf4ea3d_c555_492e_a0da_87cd6b440020'), ('GNOME_SETUP_DISPLAY', ':1'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('CLAUDE_EFFORT', 'high'), ('DISPLAY', ':0'), ('CLAUDE_PID', '3481'), ('NoDefaultCurrentDirectoryInExePath', '1'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/.mutter-Xwaylandauth.LV9YT3'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('GNOME_TERMINAL_SERVICE', ':1.102'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('ROS_DOMAIN_ID', '0'), ('AMENT_PREFIX_PATH', '/home/zech/exia_ws/install/exia_bringup:/home/zech/exia_ws/install/exia_driver:/home/zech/exia_ws/install/exia_control:/home/zech/exia_ws/install/exia_msgs:/home/zech/ros2_ws/install/eclipse_diffdrive:/home/zech/ros2_ws/install/eclipse_ackermann:/opt/ros/humble'), ('SHELL', '/bin/bash'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('CLAUDE_CODE_SESSION_ID', 'bbd4415b-604e-4c58-8804-d8e5a6b35278'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('CLAUDECODE', '1'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/zech/robim_ur20_sim/build/ur20_sim'), ('TURTLEBOT3_MODEL', 'burger'), ('LC_ALL', 'en_US.UTF-8'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('NVM_CD_FLAGS', ''), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('CLAUDE_CODE_EXECPATH', '/home/zech/.local/share/claude/versions/2.1.227'), ('PYTHONPATH', '/home/zech/exia_ws/install/exia_driver/lib/python3.10/site-packages:/home/zech/exia_ws/install/exia_control/lib/python3.10/site-packages:/home/zech/exia_ws/install/exia_msgs/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CLAUDE_CODE_MESSAGING_SOCKET', '/run/user/1000/cc-socks/3481.sock'), ('CMAKE_PREFIX_PATH', '/home/zech/exia_ws/install/exia_bringup:/home/zech/exia_ws/install/exia_msgs:/home/zech/ros2_ws/install/eclipse_diffdrive:/home/zech/ros2_ws/install/eclipse_ackermann:/home/zech/exia_ws/install/exia_driver:/home/zech/exia_ws/install/exia_control:/opt/ros/humble')]), 'shell': False}
+[4.461568] (ur20_sim) StdoutLine: {'line': b'-- Install configuration: ""\n'}
+[4.461840] (ur20_sim) StdoutLine: {'line': b'-- Execute custom install script\n'}
+[4.461952] (ur20_sim) StdoutLine: {'line': b'-- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/lib/ur20_sim/main_sweep\n'}
+[4.462068] (ur20_sim) StdoutLine: {'line': b'-- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/lib/ur20_sim/sweep_mover\n'}
+[4.462175] (ur20_sim) StdoutLine: {'line': b'-- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/lib/ur20_sim/room_publisher\n'}
+[4.462237] (ur20_sim) StdoutLine: {'line': b'-- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/lib/ur20_sim/tcp_orientate\n'}
+[4.462306] (ur20_sim) StdoutLine: {'line': b'-- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/lib/ur20_sim/axis_test\n'}
+[4.462417] (ur20_sim) StdoutLine: {'line': b'-- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/launch/axis_test.launch.py\n'}
+[4.462533] (ur20_sim) StdoutLine: {'line': b'-- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/launch/main.launch.py\n'}
+[4.462592] (ur20_sim) StdoutLine: {'line': b'-- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/launch/sim.launch.py\n'}
+[4.462678] (ur20_sim) StdoutLine: {'line': b'-- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/launch/sweep.launch.py\n'}
+[4.462795] (ur20_sim) StdoutLine: {'line': b'-- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/launch/tcp_orientate.launch.py\n'}
+[4.462911] (ur20_sim) StdoutLine: {'line': b'-- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/config/axis_test.yaml\n'}
+[4.463039] (ur20_sim) StdoutLine: {'line': b'-- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/config/initial_positions.yaml\n'}
+[4.463121] (ur20_sim) StdoutLine: {'line': b'-- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/config/main_sweep.yaml\n'}
+[4.463204] (ur20_sim) StdoutLine: {'line': b'-- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/config/room.yaml\n'}
+[4.463293] (ur20_sim) StdoutLine: {'line': b'-- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/config/sweep.yaml\n'}
+[4.463361] (ur20_sim) StdoutLine: {'line': b'-- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/config/tcp_orientate.yaml\n'}
+[4.463444] (ur20_sim) StdoutLine: {'line': b'-- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/config/ur20/default_kinematics.yaml\n'}
+[4.463539] (ur20_sim) StdoutLine: {'line': b'-- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/config/ur20/joint_limits.yaml\n'}
+[4.463635] (ur20_sim) StdoutLine: {'line': b'-- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/config/ur20/physical_parameters.yaml\n'}
+[4.463718] (ur20_sim) StdoutLine: {'line': b'-- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/config/ur20/visual_parameters.yaml\n'}
+[4.463813] (ur20_sim) StdoutLine: {'line': b'-- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/config/ur20_calibration.yaml\n'}
+[4.463890] (ur20_sim) StdoutLine: {'line': b'-- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/urdf/ur20_parked.urdf.xacro\n'}
+[4.463943] (ur20_sim) StdoutLine: {'line': b'-- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ament_index/resource_index/package_run_dependencies/ur20_sim\n'}
+[4.464003] (ur20_sim) StdoutLine: {'line': b'-- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ament_index/resource_index/parent_prefix_path/ur20_sim\n'}
+[4.464058] (ur20_sim) StdoutLine: {'line': b'-- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/environment/ament_prefix_path.sh\n'}
+[4.464111] (ur20_sim) StdoutLine: {'line': b'-- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/environment/ament_prefix_path.dsv\n'}
+[4.464165] (ur20_sim) StdoutLine: {'line': b'-- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/environment/path.sh\n'}
+[4.464218] (ur20_sim) StdoutLine: {'line': b'-- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/environment/path.dsv\n'}
+[4.464284] (ur20_sim) StdoutLine: {'line': b'-- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/local_setup.bash\n'}
+[4.464339] (ur20_sim) StdoutLine: {'line': b'-- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/local_setup.sh\n'}
+[4.464392] (ur20_sim) StdoutLine: {'line': b'-- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/local_setup.zsh\n'}
+[4.464444] (ur20_sim) StdoutLine: {'line': b'-- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/local_setup.dsv\n'}
+[4.464497] (ur20_sim) StdoutLine: {'line': b'-- Symlinking: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/package.dsv\n'}
+[4.469232] (ur20_sim) StdoutLine: {'line': b'-- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ament_index/resource_index/packages/ur20_sim\n'}
+[4.469386] (ur20_sim) StdoutLine: {'line': b'-- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/cmake/ur20_simConfig.cmake\n'}
+[4.469485] (ur20_sim) StdoutLine: {'line': b'-- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/cmake/ur20_simConfig-version.cmake\n'}
+[4.469555] (ur20_sim) StdoutLine: {'line': b'-- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/package.xml\n'}
+[4.470393] (ur20_sim) CommandEnded: {'returncode': 0}
+[4.485176] (ur20_sim) JobEnded: {'identifier': 'ur20_sim', 'rc': 0}
+[4.485766] (-) EventReactorShutdown: {}

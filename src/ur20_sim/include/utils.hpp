@@ -43,10 +43,26 @@ bool moveToPose(moveit::planning_interface::MoveGroupInterface &move_group,
                 const rclcpp::Logger &logger,
                 const geometry_msgs::msg::Pose &pose, const std::string &label);
 
+// Same, but solves IK seeded from a demonstrated joint configuration so
+// the arm lands in that specific configuration family (for example the
+// branch the operator jogged to). Falls back to moveToPose if the seeded
+// solve fails.
+bool moveToPoseSeeded(moveit::planning_interface::MoveGroupInterface &move_group,
+                      const rclcpp::Logger &logger,
+                      const geometry_msgs::msg::Pose &pose,
+                      const std::vector<double> &seed_joints, const std::string &label);
+
 // Joint-space move to an exact joint configuration.
 bool moveToJoints(moveit::planning_interface::MoveGroupInterface &move_group,
                   const rclcpp::Logger &logger,
                   const std::vector<double> &target, const std::string &label);
+
+// Same, but first shifts each target joint by multiples of 2*pi to the
+// equivalent angle nearest the current joints (within limits): the same
+// physical pose, reached the short way instead of unwinding a full turn.
+bool moveToNearestJoints(moveit::planning_interface::MoveGroupInterface &move_group,
+                         const rclcpp::Logger &logger,
+                         const std::vector<double> &target, const std::string &label);
 
 // Straight Cartesian line from the current TCP pose to the given pose,
 // retimed to the given velocity/acceleration scaling.

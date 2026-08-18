@@ -1,0 +1,56 @@
+Consolidate compiler generated dependencies of target ur20_utils
+[ 16%] Built target room_publisher
+[ 25%] Building CXX object CMakeFiles/ur20_utils.dir/src/misc/utils.cpp.o
+[ 33%] Linking CXX static library libur20_utils.a
+[ 33%] Built target ur20_utils
+[ 41%] Building CXX object CMakeFiles/axis_test.dir/src/calibration_tests/axis_test.cpp.o
+[ 50%] Building CXX object CMakeFiles/main_sweep.dir/src/main.cpp.o
+[ 58%] Building CXX object CMakeFiles/sweep_mover.dir/src/calibration_tests/sweep_mover.cpp.o
+[ 66%] Building CXX object CMakeFiles/tcp_orientate.dir/src/calibration_tests/tcp_orientate.cpp.o
+[ 75%] Linking CXX executable axis_test
+[ 83%] Linking CXX executable sweep_mover
+[ 91%] Linking CXX executable tcp_orientate
+[100%] Linking CXX executable main_sweep
+[100%] Built target axis_test
+[100%] Built target sweep_mover
+[100%] Built target tcp_orientate
+[100%] Built target main_sweep
+-- Install configuration: ""
+-- Execute custom install script
+-- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/lib/ur20_sim/main_sweep
+-- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/lib/ur20_sim/sweep_mover
+-- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/lib/ur20_sim/room_publisher
+-- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/lib/ur20_sim/tcp_orientate
+-- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/lib/ur20_sim/axis_test
+-- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/launch/axis_test.launch.py
+-- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/launch/main.launch.py
+-- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/launch/sim.launch.py
+-- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/launch/sweep.launch.py
+-- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/launch/tcp_orientate.launch.py
+-- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/config/axis_test.yaml
+-- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/config/initial_positions.yaml
+-- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/config/main_sweep.yaml
+-- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/config/room.yaml
+-- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/config/sweep.yaml
+-- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/config/tcp_orientate.yaml
+-- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/config/ur20/default_kinematics.yaml
+-- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/config/ur20/joint_limits.yaml
+-- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/config/ur20/physical_parameters.yaml
+-- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/config/ur20/visual_parameters.yaml
+-- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/config/ur20_calibration.yaml
+-- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/urdf/ur20_parked.urdf.xacro
+-- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ament_index/resource_index/package_run_dependencies/ur20_sim
+-- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ament_index/resource_index/parent_prefix_path/ur20_sim
+-- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/environment/ament_prefix_path.sh
+-- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/environment/ament_prefix_path.dsv
+-- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/environment/path.sh
+-- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/environment/path.dsv
+-- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/local_setup.bash
+-- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/local_setup.sh
+-- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/local_setup.zsh
+-- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/local_setup.dsv
+-- Symlinking: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/package.dsv
+-- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ament_index/resource_index/packages/ur20_sim
+-- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/cmake/ur20_simConfig.cmake
+-- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/cmake/ur20_simConfig-version.cmake
+-- Up-to-date symlink: /home/zech/robim_ur20_sim/install/ur20_sim/share/ur20_sim/package.xml

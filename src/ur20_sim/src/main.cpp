@@ -134,7 +134,7 @@ bool MainSweep::setup() {
 bool MainSweep::doMovement() {
 
   if (park_joints_.size() == 6) {
-    if (!utils::moveToJoints(*move_group_, get_logger(), park_joints_, "move to park position")) { return false; }
+    if (!utils::moveToNearestJoints(*move_group_, get_logger(), park_joints_, "move to park position")) { return false; }
   }
 
   geometry_msgs::msg::Quaternion top_orientation = move_group_->getCurrentPose().pose.orientation;
@@ -151,21 +151,29 @@ bool MainSweep::doMovement() {
     step.pose = utils::flangePoseFromCameraPose(step.pose, camera_length_);
 
     bool ok = false;
-    if (step.type == Step::MOVE) { 
-      ok = utils::moveToPose(*move_group_, get_logger(), step.pose, step.label);
+    if (step.type == Step::MOVE) {
+      if (step.seed.size() == 6) {
+        ok = utils::moveToPoseSeeded(*move_group_, get_logger(), step.pose, step.seed, step.label);
+      } else {
+        ok = utils::moveToPose(*move_group_, get_logger(), step.pose, step.label);
+      }
     } else {
       ok = utils::sweepTo(*move_group_, get_logger(), eef_step_, velocity_scaling_, acceleration_scaling_, step.pose, step.label);
     }
     if (!ok) { return false; }
   }
 
-  // Final oblique view of the board (exact joint pose from the pendant).
+  // Go through the park pose first (known good, unwound), then to the
+  // oblique view. Two short predictable moves instead of one big one.
   if (oblique_view_joints_.size() == 6) {
-    if (!utils::moveToJoints(*move_group_, get_logger(), oblique_view_joints_, "oblique view")) { return false; }
+    if (park_joints_.size() == 6) {
+      if (!utils::moveToNearestJoints(*move_group_, get_logger(), park_joints_, "via park position")) { return false; }
+    }
+    if (!utils::moveToNearestJoints(*move_group_, get_logger(), oblique_view_joints_, "oblique view")) { return false; }
   }
 
   // back to start pos
-  if (park_joints_.size() == 6) { return utils::moveToJoints(*move_group_, get_logger(), park_joints_, "return to park"); }
+  if (park_joints_.size() == 6) { return utils::moveToNearestJoints(*move_group_, get_logger(), park_joints_, "return to park"); }
   return true;
 }
 

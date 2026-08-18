@@ -12,14 +12,16 @@
 
 namespace utils {
 
-// One IK solution and how far its joints are from the current joints.
+// One IK solution, how far its joints are from the current joints, and
+// its selection score (distance plus a penalty for wound-up joints).
 struct IkCandidate {
   double distance;
+  double score;
   std::vector<double> joints;
 };
 
-static bool closerCandidate(const IkCandidate &a, const IkCandidate &b) {
-  return a.distance < b.distance;
+static bool betterCandidate(const IkCandidate &a, const IkCandidate &b) {
+  return a.score < b.score;
 }
 
 // True if this solution is nearly identical to one already collected.
@@ -32,6 +34,23 @@ static bool isDuplicate(const std::vector<double> &solution, const std::vector<I
     if (difference < 0.01) { return true; }
   }
   return false;
+}
+
+// Shift each joint by multiples of 2*pi into [-pi, pi] where the limits
+// allow: the same physical pose in its least wound-up form.
+static std::vector<double> unwoundVariant(const std::vector<double> &solution, const moveit::core::JointModelGroup *group) {
+  const std::vector<const moveit::core::JointModel::Bounds *> &all_bounds = group->getActiveJointModelsBounds();
+  std::vector<double> unwound = solution;
+  for (size_t i = 0; i < unwound.size(); i++) {
+    const moveit::core::VariableBounds &bounds = (*all_bounds[i])[0];
+    while (unwound[i] > M_PI && unwound[i] - 2.0 * M_PI >= bounds.min_position_) {
+      unwound[i] = unwound[i] - 2.0 * M_PI;
+    }
+    while (unwound[i] < -M_PI && unwound[i] + 2.0 * M_PI <= bounds.max_position_) {
+      unwound[i] = unwound[i] + 2.0 * M_PI;
+    }
+  }
+  return unwound;
 }
 
 // Shift each joint by a multiple of 2*pi so it lands on the equivalent
@@ -138,8 +157,36 @@ bool moveToPose(moveit::planning_interface::MoveGroupInterface &move_group,
     for (size_t i = 0; i < solution.size(); i++) {
       distance = distance + std::abs(solution[i] - current_joints[i]);
     }
-    if (isDuplicate(solution, candidates)) { continue; }
-    candidates.push_back({distance, solution});
+
+    // Penalize wound-up configurations (joints beyond +-180 deg). They may
+    // be close to the current pose now, but every later move out of them
+    // forces a huge unwinding rotation.
+    double winding = 0.0;
+    for (size_t i = 0; i < solution.size(); i++) {
+      double beyond = std::abs(solution[i]) - M_PI;
+      if (beyond > 0.0) { winding = winding + beyond; }
+    }
+
+    if (!isDuplicate(solution, candidates)) {
+      candidates.push_back({distance, distance + winding, solution});
+    }
+
+    // Also offer the least wound-up equivalent of this solution (same
+    // physical pose), so the unwound branch is always a candidate even
+    // when the random IK seeds never land on it directly.
+    std::vector<double> unwound = unwoundVariant(solution, group);
+    if (!isDuplicate(unwound, candidates)) {
+      double unwound_distance = 0.0;
+      for (size_t i = 0; i < unwound.size(); i++) {
+        unwound_distance = unwound_distance + std::abs(unwound[i] - current_joints[i]);
+      }
+      double unwound_winding = 0.0;
+      for (size_t i = 0; i < unwound.size(); i++) {
+        double beyond = std::abs(unwound[i]) - M_PI;
+        if (beyond > 0.0) { unwound_winding = unwound_winding + beyond; }
+      }
+      candidates.push_back({unwound_distance, unwound_distance + unwound_winding, unwound});
+    }
   }
   if (candidates.empty()) {
     RCLCPP_ERROR(logger, "No reachable IK solution: %s", label.c_str());
@@ -148,7 +195,7 @@ bool moveToPose(moveit::planning_interface::MoveGroupInterface &move_group,
 
   // Try the closest solution first, fall back to the next closest if
   // planning rejects one.
-  std::sort(candidates.begin(), candidates.end(), closerCandidate);
+  std::sort(candidates.begin(), candidates.end(), betterCandidate);
   for (size_t i = 0; i < candidates.size(); i++) {
     IkCandidate candidate = candidates[i];
     move_group.setJointValueTarget(candidate.joints);
@@ -160,6 +207,9 @@ bool moveToPose(moveit::planning_interface::MoveGroupInterface &move_group,
     }
 
     RCLCPP_INFO(logger, "Moving: %s (joint distance %.2f rad)...", label.c_str(), candidate.distance);
+    RCLCPP_INFO(logger, "  chosen config: %.2f %.2f %.2f %.2f %.2f %.2f",
+                candidate.joints[0], candidate.joints[1], candidate.joints[2],
+                candidate.joints[3], candidate.joints[4], candidate.joints[5]);
     bool executed = (move_group.execute(plan) == moveit::core::MoveItErrorCode::SUCCESS);
     if (!executed) {
       RCLCPP_ERROR(logger, "Execution failed: %s", label.c_str());
@@ -170,6 +220,45 @@ bool moveToPose(moveit::planning_interface::MoveGroupInterface &move_group,
 
   RCLCPP_ERROR(logger, "Planning failed for every IK solution: %s", label.c_str());
   return false;
+}
+
+bool moveToPoseSeeded(moveit::planning_interface::MoveGroupInterface &move_group,
+                      const rclcpp::Logger &logger,
+                      const geometry_msgs::msg::Pose &pose,
+                      const std::vector<double> &seed_joints, const std::string &label) {
+  moveit::core::RobotStatePtr current = move_group.getCurrentState(10.0);
+  const moveit::core::JointModelGroup *group = current->getJointModelGroup(move_group.getName());
+
+  moveit::core::RobotState state(*current);
+  state.setJointGroupPositions(group, seed_joints);
+  bool found = state.setFromIK(group, pose, 0.1);
+  if (!found) {
+    RCLCPP_WARN(logger, "Seeded IK failed for %s, falling back to unseeded.", label.c_str());
+    return moveToPose(move_group, logger, pose, label);
+  }
+
+  std::vector<double> solution;
+  state.copyJointGroupPositions(group, solution);
+  // Keep the solution in the seed's winding, not the current pose's.
+  wrapToNearest(solution, seed_joints, group);
+
+  move_group.setJointValueTarget(solution);
+  moveit::planning_interface::MoveGroupInterface::Plan plan;
+  bool planned = (move_group.plan(plan) == moveit::core::MoveItErrorCode::SUCCESS);
+  if (!planned) {
+    RCLCPP_WARN(logger, "Seeded plan failed for %s, falling back to unseeded.", label.c_str());
+    return moveToPose(move_group, logger, pose, label);
+  }
+
+  RCLCPP_INFO(logger, "Moving: %s (seeded)...", label.c_str());
+  RCLCPP_INFO(logger, "  chosen config: %.2f %.2f %.2f %.2f %.2f %.2f",
+              solution[0], solution[1], solution[2], solution[3], solution[4], solution[5]);
+  bool executed = (move_group.execute(plan) == moveit::core::MoveItErrorCode::SUCCESS);
+  if (!executed) {
+    RCLCPP_ERROR(logger, "Execution failed: %s", label.c_str());
+    return false;
+  }
+  return true;
 }
 
 bool moveToJoints(moveit::planning_interface::MoveGroupInterface &move_group,
@@ -189,6 +278,21 @@ bool moveToJoints(moveit::planning_interface::MoveGroupInterface &move_group,
     return false;
   }
   return true;
+}
+
+bool moveToNearestJoints(moveit::planning_interface::MoveGroupInterface &move_group, const rclcpp::Logger &logger, const std::vector<double> &target, const std::string &label) {
+  moveit::core::RobotStatePtr current = move_group.getCurrentState(10.0);
+  const moveit::core::JointModelGroup *group = current->getJointModelGroup(move_group.getName());
+  std::vector<double> current_joints;
+  current->copyJointGroupPositions(group, current_joints);
+
+  std::vector<double> wrapped = target;
+  wrapToNearest(wrapped, current_joints, group);
+  for (size_t i = 0; i < wrapped.size(); i++) {
+    RCLCPP_INFO(logger, "  joint %zu: current %.2f -> target %.2f (delta %.2f rad)",
+                i, current_joints[i], wrapped[i], wrapped[i] - current_joints[i]);
+  }
+  return moveToJoints(move_group, logger, wrapped, label);
 }
 
 bool sweepTo(moveit::planning_interface::MoveGroupInterface &move_group,
@@ -226,6 +330,13 @@ bool sweepTo(moveit::planning_interface::MoveGroupInterface &move_group,
     RCLCPP_ERROR(logger, "Execution failed: %s", label.c_str());
     return false;
   }
+
+  moveit::core::RobotStatePtr after = move_group.getCurrentState(10.0);
+  std::vector<double> joints_after;
+  after->copyJointGroupPositions(after->getJointModelGroup(move_group.getName()), joints_after);
+  RCLCPP_INFO(logger, "  joints after sweep: %.2f %.2f %.2f %.2f %.2f %.2f",
+              joints_after[0], joints_after[1], joints_after[2],
+              joints_after[3], joints_after[4], joints_after[5]);
   return true;
 }
 

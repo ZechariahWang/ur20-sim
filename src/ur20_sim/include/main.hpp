@@ -31,6 +31,9 @@ class MainSweep : public rclcpp::Node {
       enum Type { MOVE, SWEEP } type;
       geometry_msgs::msg::Pose pose;
       std::string label;
+      // Optional: IK seed so this move lands in a demonstrated
+      // configuration family. Empty = pick nearest to current.
+      std::vector<double> seed;
     };
 
     void loadParameters();
