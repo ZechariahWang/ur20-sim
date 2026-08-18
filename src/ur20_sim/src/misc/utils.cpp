@@ -171,9 +171,6 @@ bool moveToPose(moveit::planning_interface::MoveGroupInterface &move_group,
       candidates.push_back({distance, distance + winding, solution});
     }
 
-    // Also offer the least wound-up equivalent of this solution (same
-    // physical pose), so the unwound branch is always a candidate even
-    // when the random IK seeds never land on it directly.
     std::vector<double> unwound = unwoundVariant(solution, group);
     if (!isDuplicate(unwound, candidates)) {
       double unwound_distance = 0.0;

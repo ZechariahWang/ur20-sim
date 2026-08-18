@@ -163,8 +163,8 @@ bool MainSweep::doMovement() {
     if (!ok) { return false; }
   }
 
-  // Go through the park pose first (known good, unwound), then to the
-  // oblique view. Two short predictable moves instead of one big one.
+
+  // TEMPORARY SOLUTION
   if (oblique_view_joints_.size() == 6) {
     if (park_joints_.size() == 6) {
       if (!utils::moveToNearestJoints(*move_group_, get_logger(), park_joints_, "via park position")) { return false; }
