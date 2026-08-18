@@ -236,7 +236,7 @@ bool MainSweep::doMovement() {
     pauseAtPose(step.label);
   }
 
-  if (oblique_view_joints_.size() == 6 && board_type_ != "angled") {
+  if (oblique_view_joints_.size() == 6 && board_type_ != "angled" && board_type_ != "large") {
     // The tuned oblique spot: the jogged pose plus the configured shifts.
     geometry_msgs::msg::Pose oblique_base = utils::poseFromJoints(*move_group_, oblique_view_joints_);
     oblique_base.position.x = oblique_base.position.x + oblique_shift_x_;
