@@ -113,7 +113,8 @@ std::vector<MainSweep::Step> MainSweep::buildSmallBoardScript(const geometry_msg
   std::vector<Step> script;
   script.push_back({Step::MOVE, utils::makePose(x, y_center, z_top, q1),         "top view"});
   // Side view stands 25 cm back from the board line so the camera body
-  // cannot touch the wood.
+  // cannot touch the wood. (More setback than this puts the forearm into
+  // the mounting pillar at this height.)
   script.push_back({Step::MOVE, utils::makePose(x - 0.25, y_center, z_side, q2), "side view"});
   return script;
 }
