@@ -105,9 +105,6 @@ std::vector<MainSweep::Step> MainSweep::buildLargeBoardScript(const geometry_msg
   return script;
 }
 
-// Small board: no sweeping. The camera holds one fixed y (centered on
-// the board) and only changes viewpoint: top view, then side view. The
-// oblique view and return to park happen after the script as usual.
 std::vector<MainSweep::Step> MainSweep::buildSmallBoardScript(const geometry_msgs::msg::Quaternion &top_orientation, const geometry_msgs::msg::Quaternion &side_orientation) {
 
   geometry_msgs::msg::Quaternion q1 = top_orientation;
@@ -126,10 +123,6 @@ std::vector<MainSweep::Step> MainSweep::buildSmallBoardScript(const geometry_msg
   return script;
 }
 
-
-// Angled mode: the whole sweep holds the exact height and orientation
-// of the pose jogged on the pendant (angled_view_joints in the yaml).
-// Only y changes during the sweep, from sweep_y_start to sweep_y_end.
 std::vector<MainSweep::Step> MainSweep::buildAngledScript() {
 
   std::vector<Step> script;
@@ -138,8 +131,6 @@ std::vector<MainSweep::Step> MainSweep::buildAngledScript() {
     return script;
   }
 
-  // FK of the jogged joints gives the flange pose. The script works in
-  // camera tip poses, so push forward by camera_length along tool z.
   geometry_msgs::msg::Pose flange_pose = utils::poseFromJoints(*move_group_, angled_view_joints_);
   geometry_msgs::msg::Pose camera_pose = utils::cameraPoseFromFlangePose(flange_pose, camera_length_);
 
