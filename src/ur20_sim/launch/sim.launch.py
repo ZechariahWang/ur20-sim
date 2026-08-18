@@ -1,7 +1,7 @@
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, ExecuteProcess, IncludeLaunchDescription
 from launch.conditions import IfCondition, UnlessCondition
-from launch.launch_description_sources import PythonLaunchDescriptionSource
+from launch.launch_description_sources import AnyLaunchDescriptionSource, PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
@@ -32,7 +32,31 @@ def generate_launch_description():
             default_value="true",
             description="Start foxglove_bridge (connect Foxglove Studio to ws://localhost:8765).",
         ),
+        DeclareLaunchArgument(
+            "launch_webapp",
+            default_value="true",
+            description="Start rosbridge and the command server for the webapp.",
+        ),
+        DeclareLaunchArgument("rosbridge_port", default_value="9090"),
     ]
+
+    # Webapp interface: rosbridge websocket plus the command server that
+    # runs/aborts the sweep routines on webapp commands.
+    rosbridge = IncludeLaunchDescription(
+        AnyLaunchDescriptionSource(
+            PathJoinSubstitution(
+                [FindPackageShare("rosbridge_server"), "launch", "rosbridge_websocket_launch.xml"]
+            )
+        ),
+        launch_arguments={"port": LaunchConfiguration("rosbridge_port")}.items(),
+        condition=IfCondition(LaunchConfiguration("launch_webapp")),
+    )
+    command_server = Node(
+        package="ur20_sim",
+        executable="command_server",
+        output="screen",
+        condition=IfCondition(LaunchConfiguration("launch_webapp")),
+    )
 
     ur_control = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
@@ -129,4 +153,4 @@ def generate_launch_description():
         parameters=[room_config],
     )
 
-    return LaunchDescription(declared_args + [ur_control, dashboard_client, moveit, foxglove_bridge, room_publisher, disable_friction_controller])
+    return LaunchDescription(declared_args + [ur_control, dashboard_client, moveit, foxglove_bridge, room_publisher, disable_friction_controller, rosbridge, command_server])
