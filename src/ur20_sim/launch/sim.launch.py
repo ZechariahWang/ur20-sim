@@ -142,4 +142,14 @@ def generate_launch_description():
         parameters=[room_config],
     )
 
-    return LaunchDescription(declared_args + [ur_control, dashboard_client, moveit, foxglove_bridge, room_publisher, disable_friction_controller, rosbridge, command_server])
+    # Fake hardware only: the real robot's driver runs the genuine
+    # tcp_pose_broadcaster controller; this node fakes the same topic
+    # from tf so the webapp works identically in sim.
+    tcp_pose_publisher = Node(
+        package="ur20_sim",
+        executable="tcp_pose_publisher",
+        output="screen",
+        condition=IfCondition(use_fake_hardware),
+    )
+
+    return LaunchDescription(declared_args + [ur_control, dashboard_client, moveit, foxglove_bridge, room_publisher, disable_friction_controller, rosbridge, command_server, tcp_pose_publisher])
