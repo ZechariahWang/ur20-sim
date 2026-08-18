@@ -40,7 +40,7 @@ main_sweep:
     # top center (1.04 m -> 0.52 m), set 2026-08-18.
     oblique_shift_x: 0.35
     oblique_shift_y: 0.77
-    oblique_shift_z: -0.25
+    oblique_shift_z: -0.16
 
     # Closest any scripted TCP position may be to the ceiling or a wall
     # (m). The node refuses to start if the script violates this.
