@@ -30,6 +30,15 @@ main_sweep:
     # Cartesian interpolation step along the line (m).
     eef_step: 0.01
 
+    # How long to hold still at every reached pose (s). 0 disables.
+    pose_pause_seconds: 2.0
+
+    # Oblique view shift relative to the jogged pose (m, ROS base frame):
+    # +x moves away from the robot toward the board line, +y moves from the
+    # jogged spot toward the board center.
+    oblique_shift_x: 0.15
+    oblique_shift_y: 0.35
+
     # Closest any scripted TCP position may be to the ceiling or a wall
     # (m). The node refuses to start if the script violates this.
     # Room bounds themselves come from room.yaml.

@@ -46,6 +46,7 @@ class MainSweep : public rclcpp::Node {
     std::vector<Step> buildSmallBoardScript(const geometry_msgs::msg::Quaternion &top_orientation, const geometry_msgs::msg::Quaternion &side_orientation);
     bool checkAgainstRoom(const std::vector<Step> &script);
     bool doMovement();
+    void pauseAtPose(const std::string &label);
     void stopSpinner();
 
     rclcpp::executors::SingleThreadedExecutor executor_;
@@ -69,6 +70,11 @@ class MainSweep : public rclcpp::Node {
     double eef_step_{0.01};
     // How far the camera tip sticks out of the flange along tool z (m).
     double camera_length_{0.22};
+    // How long to hold still at each reached pose (s).
+    double pose_pause_seconds_{2.0};
+    // Shift of the oblique view relative to the jogged pose (m, base frame).
+    double oblique_shift_x_{0.15};
+    double oblique_shift_y_{0.15};
     std::vector<double> park_joints_;
     // If true, only move to park and exit (webapp "park" command).
     bool park_only_{false};

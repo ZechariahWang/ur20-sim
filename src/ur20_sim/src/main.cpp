@@ -44,6 +44,9 @@ void MainSweep::loadParameters() {
   sweep_y_end_ = get_parameter_or<double>("sweep_y_end", -0.9);
   eef_step_ = get_parameter_or<double>("eef_step", 0.01);
   camera_length_ = get_parameter_or<double>("camera_length", 0.22);
+  pose_pause_seconds_ = get_parameter_or<double>("pose_pause_seconds", 2.0);
+  oblique_shift_x_ = get_parameter_or<double>("oblique_shift_x", 0.15);
+  oblique_shift_y_ = get_parameter_or<double>("oblique_shift_y", 0.15);
   
   park_joints_ = get_parameter_or<std::vector<double>>("park_joints", {});
   park_only_ = get_parameter_or<bool>("park_only", false);
@@ -201,20 +204,47 @@ bool MainSweep::doMovement() {
       ok = utils::sweepTo(*move_group_, get_logger(), eef_step_, velocity_scaling_, acceleration_scaling_, step.pose, step.label);
     }
     if (!ok) { return false; }
+    pauseAtPose(step.label);
   }
 
-
-  // TEMPORARY SOLUTION
   if (oblique_view_joints_.size() == 6) {
-    if (park_joints_.size() == 6) {
+    // The oblique target: the jogged pose, shifted closer to the board
+    // (less y, more x). IK is seeded from the jogged joints so the arm
+    // stays in that configuration family, extension pointing up.
+    geometry_msgs::msg::Pose oblique_pose = utils::poseFromJoints(*move_group_, oblique_view_joints_);
+    oblique_pose.position.x = oblique_pose.position.x + oblique_shift_x_;
+    oblique_pose.position.y = oblique_pose.position.y + oblique_shift_y_;
+
+    // Go direct when the wrapped joint travel is modest; detour through
+    // park only when a large wrist unwind makes the direct move swing.
+    std::vector<double> wrapped = utils::nearestJointTarget(*move_group_, oblique_view_joints_);
+    moveit::core::RobotStatePtr current = move_group_->getCurrentState(10.0);
+    std::vector<double> current_joints;
+    current->copyJointGroupPositions(current->getJointModelGroup(planning_group_), current_joints);
+    double max_delta = 0.0;
+    for (size_t i = 0; i < wrapped.size(); i++) {
+      double delta = std::abs(wrapped[i] - current_joints[i]);
+      if (delta > max_delta) { max_delta = delta; }
+    }
+    if (max_delta > 3.0 && park_joints_.size() == 6) {
+      RCLCPP_INFO(get_logger(), "Large joint travel to oblique (%.1f rad), going via park.", max_delta);
       if (!utils::moveToNearestJoints(*move_group_, get_logger(), park_joints_, "via park position")) { return false; }
     }
-    if (!utils::moveToNearestJoints(*move_group_, get_logger(), oblique_view_joints_, "oblique view")) { return false; }
+
+    if (!utils::moveToPoseSeeded(*move_group_, get_logger(), oblique_pose, oblique_view_joints_, "oblique view")) { return false; }
+    pauseAtPose("oblique view");
   }
 
   // back to start pos
   if (park_joints_.size() == 6) { return utils::moveToNearestJoints(*move_group_, get_logger(), park_joints_, "return to park"); }
   return true;
+}
+
+// Hold still at a reached pose (camera settle / capture time).
+void MainSweep::pauseAtPose(const std::string &label) {
+  if (pose_pause_seconds_ <= 0.0) { return; }
+  RCLCPP_INFO(get_logger(), "Pausing %.1f s at '%s'.", pose_pause_seconds_, label.c_str());
+  rclcpp::sleep_for(std::chrono::milliseconds((int)(pose_pause_seconds_ * 1000.0)));
 }
 
 void MainSweep::stopSpinner() {

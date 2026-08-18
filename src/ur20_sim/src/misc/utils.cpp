@@ -116,6 +116,41 @@ geometry_msgs::msg::Quaternion orientationFromJoints(
   return q;
 }
 
+geometry_msgs::msg::Pose poseFromJoints(
+    moveit::planning_interface::MoveGroupInterface &move_group,
+    const std::vector<double> &joints) {
+  moveit::core::RobotStatePtr state = move_group.getCurrentState(10.0);
+  const moveit::core::JointModelGroup *group = state->getJointModelGroup(move_group.getName());
+  state->setJointGroupPositions(group, joints);
+  state->update();
+  const Eigen::Isometry3d &tcp = state->getGlobalLinkTransform(move_group.getEndEffectorLink());
+  Eigen::Quaterniond eigen_q(tcp.rotation());
+  eigen_q.normalize();
+
+  geometry_msgs::msg::Pose pose;
+  pose.position.x = tcp.translation().x();
+  pose.position.y = tcp.translation().y();
+  pose.position.z = tcp.translation().z();
+  pose.orientation.x = eigen_q.x();
+  pose.orientation.y = eigen_q.y();
+  pose.orientation.z = eigen_q.z();
+  pose.orientation.w = eigen_q.w();
+  return pose;
+}
+
+std::vector<double> nearestJointTarget(
+    moveit::planning_interface::MoveGroupInterface &move_group,
+    const std::vector<double> &target) {
+  moveit::core::RobotStatePtr current = move_group.getCurrentState(10.0);
+  const moveit::core::JointModelGroup *group = current->getJointModelGroup(move_group.getName());
+  std::vector<double> current_joints;
+  current->copyJointGroupPositions(group, current_joints);
+
+  std::vector<double> wrapped = target;
+  wrapToNearest(wrapped, current_joints, group);
+  return wrapped;
+}
+
 geometry_msgs::msg::Pose flangePoseFromCameraPose(
     const geometry_msgs::msg::Pose &camera_pose, double camera_length) {
   Eigen::Quaterniond q(camera_pose.orientation.w, camera_pose.orientation.x,

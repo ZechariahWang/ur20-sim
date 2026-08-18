@@ -29,6 +29,19 @@ geometry_msgs::msg::Quaternion orientationFromJoints(
     moveit::planning_interface::MoveGroupInterface &move_group,
     const std::vector<double> &joints);
 
+// Full TCP pose (position + orientation) the arm would have at the given
+// joint configuration (forward kinematics, no motion).
+geometry_msgs::msg::Pose poseFromJoints(
+    moveit::planning_interface::MoveGroupInterface &move_group,
+    const std::vector<double> &joints);
+
+// The target joints shifted by multiples of 2*pi to the equivalents
+// nearest the CURRENT joints (within limits). Same physical pose; useful
+// for measuring how far a move really is before committing to it.
+std::vector<double> nearestJointTarget(
+    moveit::planning_interface::MoveGroupInterface &move_group,
+    const std::vector<double> &target);
+
 // The camera sticks out of the flange along tool z. Given where the
 // camera TIP should be, return where the flange must go: the same pose
 // pulled back by camera_length along the tool z axis.
