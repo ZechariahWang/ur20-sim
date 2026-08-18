@@ -12,7 +12,7 @@ main_sweep:
 
     # The sweep line runs parallel to the base Y axis at fixed x/z (m,
     # ROS base frame: open workspace is +x, wall behind the robot is -x).
-    sweep_x: 1.0
+    sweep_x: 1.2
     # CAMERA TIP heights ABOVE THE REAL FLOOR (m). The board is ~40 mm
     # tall: the top pass looks down on it, the side pass flies just above
     # board-top height to capture the side without touching the ground.
@@ -38,9 +38,9 @@ main_sweep:
     # jogged spot toward the board center, -z moves down.
     # These values put the camera at HALF the jogged distance to the board
     # top center (1.04 m -> 0.52 m), set 2026-08-18.
-    oblique_shift_x: 0.45
-    oblique_shift_y: 0.77
-    oblique_shift_z: -0.16
+    oblique_shift_x: 0.75
+    oblique_shift_y: 0.62
+    oblique_shift_z: -0.06
 
     # Closest any scripted TCP position may be to the ceiling or a wall
     # (m). The node refuses to start if the script violates this.
