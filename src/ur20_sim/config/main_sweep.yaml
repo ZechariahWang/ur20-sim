@@ -12,7 +12,7 @@ main_sweep:
     # tall: the top pass looks down on it, the side pass flies just above
     # board-top height to capture the side without touching the ground.
     # The flange offset for the 22 cm camera is applied automatically.
-    top_pass_height: 0.30
+    top_pass_height: 0.17
     side_pass_height: 0.25
 
     # How far the camera tip sticks out of the flange along tool z (m).
@@ -35,7 +35,7 @@ main_sweep:
 
     # The routine first moves here (radians, shoulder_pan..wrist_3), the
     # robot's parked pose, so every run starts from the same place.
-    park_joints: [-0.2039, -1.1884, 2.0029, -2.3604, -1.5605, 0.8880]
+    park_joints: [-0.2044, -0.7735, 2.0590, -2.8312, -1.5607, 0.8894]
 
     # Joint pose whose TCP orientation ("forwards and upside down", jogged
     # on the pendant 2026-08-17) is used for the second/side pass. The

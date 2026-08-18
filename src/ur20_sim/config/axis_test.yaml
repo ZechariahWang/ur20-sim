@@ -21,4 +21,4 @@ axis_test:
 
     # The test first moves here (radians, shoulder_pan..wrist_3), the
     # robot's parked pose. Remove to skip the park move.
-    park_joints: [-0.2039, -1.1884, 2.0029, -2.3604, -1.5605, 0.8880]
+    park_joints: [-0.2044, -0.7735, 2.0590, -2.8312, -1.5607, 0.8894]
