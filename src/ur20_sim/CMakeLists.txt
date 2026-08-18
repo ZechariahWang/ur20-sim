@@ -40,7 +40,11 @@ target_link_libraries(axis_test ur20_utils)
 add_executable(command_server src/command_server.cpp)
 ament_target_dependencies(command_server rclcpp rclcpp_action std_msgs control_msgs)
 
-install(TARGETS main_sweep sweep_mover room_publisher tcp_orientate axis_test command_server
+add_executable(jog_to_rest src/jog_to_rest.cpp)
+ament_target_dependencies(jog_to_rest rclcpp moveit_ros_planning_interface)
+target_link_libraries(jog_to_rest ur20_utils)
+
+install(TARGETS main_sweep sweep_mover room_publisher tcp_orientate axis_test command_server jog_to_rest
   DESTINATION lib/${PROJECT_NAME})
 
 install(DIRECTORY launch config urdf

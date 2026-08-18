@@ -1,0 +1,17 @@
+jog_to_rest:
+  ros__parameters:
+    planning_group: ur_manipulator
+    # Fraction (0-1] of maximum joint velocity/acceleration.
+    velocity_scaling: 0.05
+    acceleration_scaling: 0.1
+
+    # How far the camera tip sticks out of the flange along tool z (m).
+    camera_length: 0.22
+
+    # End of day rest pose (radians, shoulder_pan..wrist_3): upper arm
+    # near vertical, forearm folded back down, camera pointing down.
+    # The arm's mass sits almost directly over the base so the shoulder
+    # and elbow hold nearly zero gravity torque while idle.
+    # wrist_3 matches the park pose (2 pi equivalent) so the wrist does
+    # not roll on the way to rest and never sits on a joint limit.
+    rest_joints: [-0.1504, -1.7453, 2.5307, -2.3562, -1.5586, 0.9423]
