@@ -70,6 +70,10 @@ std::vector<MainSweep::Step> MainSweep::buildScript(const geometry_msgs::msg::Qu
     RCLCPP_INFO(get_logger(), "Board type: small");
     return buildSmallBoardScript(top_orientation, side_orientation);
   }
+  if (board_type_ == "angled") {
+    RCLCPP_INFO(get_logger(), "Board type: angled");
+    return buildAngledScript();
+  }
   if (board_type_ != "large") {
     RCLCPP_WARN(get_logger(), "Unknown board_type '%s', using the large board sweep.", board_type_.c_str());
   } else {
@@ -115,6 +119,23 @@ std::vector<MainSweep::Step> MainSweep::buildSmallBoardScript(const geometry_msg
   // Side view stands 25 cm back from the board line so the camera body
   // cannot touch the wood. Shifted 15 cm toward -y.
   script.push_back({Step::MOVE, utils::makePose(x - 0.25, y_center - 0.15, z_side, q2), "side view"});
+  return script;
+}
+
+// One pass, left to right, camera pitched 45 deg down facing away from
+// the robot. No side view, no oblique: after this the routine parks.
+std::vector<MainSweep::Step> MainSweep::buildAngledScript() {
+
+  geometry_msgs::msg::Quaternion q45 = utils::pitchQuaternion(3.0 * M_PI / 4.0);
+
+  double x = sweep_x_;
+  double start = sweep_y_start_;
+  double end = sweep_y_end_;
+  double z_top = floor_z_ + top_pass_height_;
+
+  std::vector<Step> script;
+  script.push_back({Step::MOVE,  utils::makePose(x, start, z_top, q45), "angled sweep start"});
+  script.push_back({Step::SWEEP, utils::makePose(x, end,   z_top, q45), "angled sweep"});
   return script;
 }
 
@@ -189,10 +210,12 @@ bool MainSweep::doMovement() {
 
   std::vector<Step> script = buildScript(top_orientation, side_orientation);
 
+  geometry_msgs::msg::Pose last_flange_pose;
   for (size_t i = 0; i < script.size(); i++) {
 
     Step step = script[i];
     step.pose = utils::flangePoseFromCameraPose(step.pose, camera_length_);
+    last_flange_pose = step.pose;
 
     bool ok = false;
     if (step.type == Step::MOVE) {
@@ -208,14 +231,27 @@ bool MainSweep::doMovement() {
     pauseAtPose(step.label);
   }
 
-  if (oblique_view_joints_.size() == 6) {
-    // The oblique target: the jogged pose, shifted closer to the board
-    // (less y, more x). IK is seeded from the jogged joints so the arm
-    // stays in that configuration family, extension pointing up.
-    geometry_msgs::msg::Pose oblique_pose = utils::poseFromJoints(*move_group_, oblique_view_joints_);
-    oblique_pose.position.x = oblique_pose.position.x + oblique_shift_x_;
-    oblique_pose.position.y = oblique_pose.position.y + oblique_shift_y_;
-    oblique_pose.position.z = oblique_pose.position.z + oblique_shift_z_;
+  if (oblique_view_joints_.size() == 6 && board_type_ != "angled") {
+    // The tuned oblique spot: the jogged pose plus the configured shifts.
+    geometry_msgs::msg::Pose oblique_base = utils::poseFromJoints(*move_group_, oblique_view_joints_);
+    oblique_base.position.x = oblique_base.position.x + oblique_shift_x_;
+    oblique_base.position.y = oblique_base.position.y + oblique_shift_y_;
+    oblique_base.position.z = oblique_base.position.z + oblique_shift_z_;
+
+    // Anchor the oblique to wherever the routine's last view ended: the
+    // offset between the small-board side view and the tuned oblique spot
+    // is applied to the actual last pose. For the small board this equals
+    // the tuned spot exactly; for the large board the oblique follows the
+    // side sweep's end position with the same relative offset.
+    double y_center = (sweep_y_start_ + sweep_y_end_) / 2.0;
+    double z_side = floor_z_ + side_pass_height_;
+    geometry_msgs::msg::Pose reference_tip = utils::makePose(sweep_x_ - 0.25, y_center - 0.15, z_side, side_orientation);
+    geometry_msgs::msg::Pose reference_flange = utils::flangePoseFromCameraPose(reference_tip, camera_length_);
+
+    geometry_msgs::msg::Pose oblique_pose = oblique_base;
+    oblique_pose.position.x = last_flange_pose.position.x + (oblique_base.position.x - reference_flange.position.x);
+    oblique_pose.position.y = last_flange_pose.position.y + (oblique_base.position.y - reference_flange.position.y);
+    oblique_pose.position.z = last_flange_pose.position.z + (oblique_base.position.z - reference_flange.position.z);
 
     // Go direct when the wrapped joint travel is modest; detour through
     // park only when a large wrist unwind makes the direct move swing.

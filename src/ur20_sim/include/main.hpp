@@ -44,6 +44,9 @@ class MainSweep : public rclcpp::Node {
     // when the boards need different paths.
     std::vector<Step> buildLargeBoardScript(const geometry_msgs::msg::Quaternion &top_orientation, const geometry_msgs::msg::Quaternion &side_orientation);
     std::vector<Step> buildSmallBoardScript(const geometry_msgs::msg::Quaternion &top_orientation, const geometry_msgs::msg::Quaternion &side_orientation);
+    // "angled" mode: one left-to-right sweep with the camera 45 deg down,
+    // facing away from the robot, then straight back to park.
+    std::vector<Step> buildAngledScript();
     bool checkAgainstRoom(const std::vector<Step> &script);
     bool doMovement();
     void pauseAtPose(const std::string &label);
