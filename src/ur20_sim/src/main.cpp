@@ -100,8 +100,10 @@ std::vector<MainSweep::Step> MainSweep::buildLargeBoardScript(const geometry_msg
   std::vector<Step> script;
   script.push_back({Step::MOVE,  utils::makePose(x, start, z_top, q1),            "sweep start", {}});
   script.push_back({Step::SWEEP, utils::makePose(x, end,   z_top, q1),            "top sweep", {}});
-  script.push_back({Step::MOVE,  utils::makePose(x - 0.1, start, z_side, q2),     "return to start (side view)", {}});
-  script.push_back({Step::SWEEP, utils::makePose(x - 0.1, end,   z_side, q2),     "side sweep", {}});
+  // Side pass runs 20 cm behind the board line (moved 10 cm closer to
+  // the robot on 2026-08-19, same as the small board side view).
+  script.push_back({Step::MOVE,  utils::makePose(x - 0.2, start, z_side, q2),     "return to start (side view)", {}});
+  script.push_back({Step::SWEEP, utils::makePose(x - 0.2, end,   z_side, q2),     "side sweep", {}});
   return script;
 }
 
