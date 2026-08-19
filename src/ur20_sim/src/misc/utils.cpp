@@ -273,6 +273,8 @@ bool moveToPoseSeeded(moveit::planning_interface::MoveGroupInterface &move_group
                       const std::vector<double> &seed_joints, const std::string &label) {
   moveit::core::RobotStatePtr current = move_group.getCurrentState(10.0);
   const moveit::core::JointModelGroup *group = current->getJointModelGroup(move_group.getName());
+  std::vector<double> current_joints;
+  current->copyJointGroupPositions(group, current_joints);
 
   moveit::core::RobotState state(*current);
   state.setJointGroupPositions(group, seed_joints);
@@ -284,8 +286,11 @@ bool moveToPoseSeeded(moveit::planning_interface::MoveGroupInterface &move_group
 
   std::vector<double> solution;
   state.copyJointGroupPositions(group, solution);
-  // Keep the solution in the seed's winding, not the current pose's.
-  wrapToNearest(solution, seed_joints, group);
+  // The seed picks the configuration family; the winding must still be
+  // the 2*pi equivalent nearest the CURRENT joints. Shifting by 2*pi
+  // never changes the physical pose, only how far the joints travel
+  // (wrapping to the seed's winding once caused a 440 deg wrist spin).
+  wrapToNearest(solution, current_joints, group);
 
   move_group.setJointValueTarget(solution);
   moveit::planning_interface::MoveGroupInterface::Plan plan;

@@ -139,7 +139,9 @@ std::vector<MainSweep::Step> MainSweep::buildAngledScript() {
   geometry_msgs::msg::Pose end_pose = camera_pose;
   end_pose.position.y = sweep_y_end_;
 
-  script.push_back({Step::MOVE,  start_pose, "angled sweep start", {}});
+  // Seed the start move with the jogged joints so the arm lands in the
+  // demonstrated configuration family instead of a random IK branch.
+  script.push_back({Step::MOVE,  start_pose, "angled sweep start", angled_view_joints_});
   script.push_back({Step::SWEEP, end_pose,   "angled sweep", {}});
   return script;
 }
