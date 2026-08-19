@@ -39,7 +39,7 @@ add_executable(axis_test src/calibration_tests/axis_test.cpp)
 ament_target_dependencies(axis_test rclcpp moveit_ros_planning_interface)
 target_link_libraries(axis_test ur20_utils)
 
-add_executable(command_server src/command_server.cpp)
+add_executable(command_server src/misc/command_server.cpp)
 ament_target_dependencies(command_server rclcpp rclcpp_action std_msgs control_msgs)
 
 add_executable(jog_to_rest src/jog_to_rest.cpp)
