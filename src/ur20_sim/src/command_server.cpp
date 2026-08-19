@@ -1,5 +1,6 @@
 #include "command_server.hpp"
 
+#include <sys/prctl.h>
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <unistd.h>
@@ -25,6 +26,13 @@ CommandServer::CommandServer() : Node("command_server") {
 
   publishStatus("idle");
   RCLCPP_INFO(get_logger(), "Command server ready: publish 'sweep', 'park', or 'stop' to /webapp/command");
+}
+
+CommandServer::~CommandServer() {
+  // Do not leave a running sweep launch behind when this node dies.
+  if (child_pid_ > 0) {
+    kill(child_pid_, SIGINT);
+  }
 }
 
 void CommandServer::onCommand(const std_msgs::msg::String &msg) {
@@ -113,9 +121,15 @@ void CommandServer::publishStatus(const std::string &status) {
 }
 
 int main(int argc, char **argv) {
+  // If the launch process that started this node dies for ANY reason
+  // (double Ctrl+C, crash, kill -9), the kernel sends us SIGTERM so a
+  // command server can never be left running as an orphan.
+  prctl(PR_SET_PDEATHSIG, SIGTERM);
+
   rclcpp::init(argc, argv);
   auto node = std::make_shared<CommandServer>();
   rclcpp::spin(node);
+  node.reset();
   rclcpp::shutdown();
   return 0;
 }

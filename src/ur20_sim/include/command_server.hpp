@@ -8,8 +8,6 @@
 #include <rclcpp_action/rclcpp_action.hpp>
 #include <std_msgs/msg/string.hpp>
 
-// Lets the webapp control the robot over rosbridge. Listens for simple
-// text commands on /webapp/command and reports on /webapp/status.
 // Commands:
 //   "sweep" - run the full main sweep routine
 //   "park"  - move to the park pose only
@@ -19,6 +17,7 @@ class CommandServer : public rclcpp::Node {
   public:
 
     CommandServer();
+    ~CommandServer() override;
 
   private:
 
