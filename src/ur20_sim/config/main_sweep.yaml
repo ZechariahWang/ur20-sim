@@ -17,7 +17,8 @@ main_sweep:
     pose_pause_seconds: 2.0
 
     # Oblique view shift relative to the jogged pose
-    oblique_shift_x: 0.75
+    # (x trimmed 0.75 -> 0.65 on 2026-08-19: oblique 10 cm closer to the robot)
+    oblique_shift_x: 0.65
     oblique_shift_y: 0.62
     oblique_shift_z: -0.06
 

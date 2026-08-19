@@ -117,9 +117,9 @@ std::vector<MainSweep::Step> MainSweep::buildSmallBoardScript(const geometry_msg
 
   std::vector<Step> script;
   script.push_back({Step::MOVE, utils::makePose(x, y_center, z_top, q1),         "top view", {}});
-  // Side view stands 25 cm back from the board line so the camera body
+  // Side view stands 35 cm back from the board line so the camera body
   // cannot touch the wood. Shifted 15 cm toward -y.
-  script.push_back({Step::MOVE, utils::makePose(x - 0.25, y_center - 0.15, z_side, q2), "side view", {}});
+  script.push_back({Step::MOVE, utils::makePose(x - 0.35, y_center - 0.15, z_side, q2), "side view", {}});
   return script;
 }
 
@@ -256,7 +256,8 @@ bool MainSweep::doMovement() {
 
     double y_center = (sweep_y_start_ + sweep_y_end_) / 2.0;
     double z_side = floor_z_ + side_pass_height_;
-    geometry_msgs::msg::Pose reference_tip = utils::makePose(sweep_x_ - 0.25, y_center - 0.15, z_side, side_orientation);
+    // Must match the small board side view pose in buildSmallBoardScript.
+    geometry_msgs::msg::Pose reference_tip = utils::makePose(sweep_x_ - 0.35, y_center - 0.15, z_side, side_orientation);
     geometry_msgs::msg::Pose reference_flange = utils::flangePoseFromCameraPose(reference_tip, camera_length_);
 
     geometry_msgs::msg::Pose oblique_pose = oblique_base;
