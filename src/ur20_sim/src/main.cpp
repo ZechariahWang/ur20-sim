@@ -47,7 +47,8 @@ void MainSweep::loadParameters() {
   sweep_y_end_ = get_parameter_or<double>("sweep_y_end", -0.9);
   eef_step_ = get_parameter_or<double>("eef_step", 0.01);
   camera_length_ = get_parameter_or<double>("camera_length", 0.22);
-  pose_pause_seconds_ = get_parameter_or<double>("pose_pause_seconds", 2.0);
+  pose_pause_seconds_ = get_parameter_or<double>("pose_pause_seconds", 5.0);
+  sweep_pause_seconds_ = get_parameter_or<double>("sweep_pause_seconds", 5.0);
   oblique_shift_x_ = get_parameter_or<double>("oblique_shift_x", 0.15);
   oblique_shift_y_ = get_parameter_or<double>("oblique_shift_y", 0.15);
   oblique_shift_z_ = get_parameter_or<double>("oblique_shift_z", 0.0);
@@ -246,7 +247,16 @@ bool MainSweep::doMovement() {
       return utils::sweepTo(*move_group_, get_logger(), eef_step_, velocity_scaling_, acceleration_scaling_, step.pose, step.label);
     }, step.label);
     if (!ok) { return false; }
-    pauseAtPose(step.label);
+
+    // Large board: hold longer at any pose that starts or ends a sweep
+    // (the pose before a SWEEP step, and the SWEEP end itself).
+    double pause_seconds = pose_pause_seconds_;
+    if (board_type_ == "large") {
+      bool touches_sweep = (step.type == Step::SWEEP);
+      if (i + 1 < script.size() && script[i + 1].type == Step::SWEEP) { touches_sweep = true; }
+      if (touches_sweep) { pause_seconds = sweep_pause_seconds_; }
+    }
+    pauseAtPose(step.label, pause_seconds);
   }
 
   if (oblique_view_joints_.size() == 6 && board_type_ != "angled" && board_type_ != "large") {
@@ -290,7 +300,7 @@ bool MainSweep::doMovement() {
       return utils::moveToPoseSeeded(*move_group_, get_logger(), oblique_pose, oblique_view_joints_, "oblique view");
     }, "oblique view");
     if (!oblique_ok) { return false; }
-    pauseAtPose("oblique view");
+    pauseAtPose("oblique view", pose_pause_seconds_);
   }
 
   // back to start pos
@@ -327,10 +337,10 @@ void MainSweep::waitWhilePaused() {
 }
 
 // Hold still at a reached pose (camera settle / capture time).
-void MainSweep::pauseAtPose(const std::string &label) {
-  if (pose_pause_seconds_ <= 0.0) { return; }
-  RCLCPP_INFO(get_logger(), "Pausing %.1f s at '%s'.", pose_pause_seconds_, label.c_str());
-  rclcpp::sleep_for(std::chrono::milliseconds((int)(pose_pause_seconds_ * 1000.0)));
+void MainSweep::pauseAtPose(const std::string &label, double seconds) {
+  if (seconds <= 0.0) { return; }
+  RCLCPP_INFO(get_logger(), "Pausing %.1f s at '%s'.", seconds, label.c_str());
+  rclcpp::sleep_for(std::chrono::milliseconds((int)(seconds * 1000.0)));
 }
 
 void MainSweep::stopSpinner() {

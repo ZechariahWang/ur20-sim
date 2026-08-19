@@ -53,7 +53,7 @@ class MainSweep : public rclcpp::Node {
     std::vector<Step> buildAngledScript();
     bool checkAgainstRoom(const std::vector<Step> &script);
     bool doMovement();
-    void pauseAtPose(const std::string &label);
+    void pauseAtPose(const std::string &label, double seconds);
     // Runs one motion, holding and retrying while the webapp pause flag
     // is up. On resume the motion replans from wherever the arm stopped.
     bool withPauseRetry(const std::function<bool()> &motion, const std::string &label);
@@ -86,6 +86,8 @@ class MainSweep : public rclcpp::Node {
     double camera_length_{0.22};
     // How long to hold still at each reached pose (s).
     double pose_pause_seconds_{2.0};
+    // Longer hold at poses that start or end a sweep (large board only).
+    double sweep_pause_seconds_{5.0};
     // Shift of the oblique view relative to the jogged pose (m, base frame).
     double oblique_shift_x_{0.15};
     double oblique_shift_y_{0.15};

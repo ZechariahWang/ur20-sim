@@ -17,7 +17,9 @@ main_sweep:
     sweep_y_end: -1.2
 
     eef_step: 0.01
-    pose_pause_seconds: 2.0
+    pose_pause_seconds: 5.0
+    # Large board: hold this long at every sweep start and sweep end.
+    sweep_pause_seconds: 5.0
 
     # Oblique view shift relative to the jogged pose
     # (x trimmed 0.75 -> 0.65 on 2026-08-19: oblique 10 cm closer to the robot)
