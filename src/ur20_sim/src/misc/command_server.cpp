@@ -14,12 +14,19 @@ CommandServer::CommandServer() : Node("command_server") {
       "/webapp/command", 10,
       [this](const std_msgs::msg::String &msg) { onCommand(msg); });
 
+  joint_sub_ = create_subscription<sensor_msgs::msg::JointState>(
+      "/joint_states", 10,
+      [this](const sensor_msgs::msg::JointState &msg) { latest_positions_ = msg.position; });
+
   // Latched so the webapp sees the current status right after connecting.
   rclcpp::QoS qos(1);
   qos.transient_local();
   status_pub_ = create_publisher<std_msgs::msg::String>("/webapp/status", qos);
 
-  timer_ = create_wall_timer(std::chrono::seconds(1), [this]() { checkChild(); });
+  timer_ = create_wall_timer(std::chrono::seconds(1), [this]() {
+    checkChild();
+    checkExternalMotion();
+  });
 
   trajectory_client_ = rclcpp_action::create_client<control_msgs::action::FollowJointTrajectory>(
       this, "/scaled_joint_trajectory_controller/follow_joint_trajectory");
@@ -111,6 +118,43 @@ void CommandServer::checkChild() {
   child_pid_ = -1;
   stopping_ = false;
   running_command_ = "";
+}
+
+// Detects motion this server did not start (a routine launched from a
+// terminal) by comparing joint positions between timer ticks. Reports
+// "running: external" while moving and goes back to "idle" after,
+// without touching the done/stopped/failed messages of own routines.
+void CommandServer::checkExternalMotion() {
+  std::vector<double> current = latest_positions_;
+  if (current.empty()) { return; }
+  if (last_checked_positions_.size() != current.size()) {
+    last_checked_positions_ = current;
+    return;
+  }
+
+  double max_delta = 0.0;
+  for (size_t i = 0; i < current.size(); i++) {
+    double delta = std::abs(current[i] - last_checked_positions_[i]);
+    if (delta > max_delta) { max_delta = delta; }
+  }
+  last_checked_positions_ = current;
+
+  // How far any joint moved in the last second. Real encoders jitter a
+  // tiny amount while standing still, so require a real change.
+  bool moving = max_delta > 0.002;
+
+  if (child_pid_ > 0) {
+    external_moving_ = false;
+    return;
+  }
+  if (moving && !external_moving_) {
+    external_moving_ = true;
+    publishStatus("running: external");
+  }
+  if (!moving && external_moving_) {
+    external_moving_ = false;
+    publishStatus("idle");
+  }
 }
 
 void CommandServer::publishStatus(const std::string &status) {
