@@ -1,72 +1,38 @@
 main_sweep:
   ros__parameters:
-    # Board type ("large" or "small") is chosen at launch:
-    #   ros2 launch ur20_sim main.launch.py board_type:=small
-    # Each type has its own sweep script in main.cpp
-    # (buildLargeBoardScript / buildSmallBoardScript).
 
     planning_group: ur_manipulator
-    # Fraction (0-1] of maximum joint velocity/acceleration.
-    velocity_scaling: 0.05
+    velocity_scaling: 0.05  # Fraction (0-1] of maximum joint velocity/acceleration.
     acceleration_scaling: 0.1
 
-    # The sweep line runs parallel to the base Y axis at fixed x/z (m,
-    # ROS base frame: open workspace is +x, wall behind the robot is -x).
     sweep_x: 1.2
-    # CAMERA TIP heights ABOVE THE REAL FLOOR (m). The board is ~40 mm
-    # tall: the top pass looks down on it, the side pass flies just above
-    # board-top height to capture the side without touching the ground.
-    # The flange offset for the 22 cm camera is applied automatically.
     top_pass_height: 0.57
     side_pass_height: 0.25
 
-    # How far the camera tip sticks out of the flange along tool z (m).
-    camera_length: 0.22
-    # Both sweeps travel from sweep_y_start to sweep_y_end; swap the two
-    # values to flip the sweep direction.
+    camera_length: 0.22  # How far the camera tip sticks out of the flange along tool z (m).
     sweep_y_start: 0.9
     sweep_y_end: -0.9
 
-    # Cartesian interpolation step along the line (m).
     eef_step: 0.01
-
-    # How long to hold still at every reached pose (s). 0 disables.
     pose_pause_seconds: 2.0
 
-    # Oblique view shift relative to the jogged pose (m, ROS base frame):
-    # +x moves away from the robot toward the board line, +y moves from the
-    # jogged spot toward the board center, -z moves down.
-    # These values put the camera at HALF the jogged distance to the board
-    # top center (1.04 m -> 0.52 m), set 2026-08-18.
+    # Oblique view shift relative to the jogged pose
     oblique_shift_x: 0.75
     oblique_shift_y: 0.62
     oblique_shift_z: -0.06
 
-    # Closest any scripted TCP position may be to the ceiling or a wall
-    # (m). The node refuses to start if the script violates this.
-    # Room bounds themselves come from room.yaml.
+    # Closest any scripted TCP position may be to the ceiling or a wall, and wall
     room_margin: 0.15
-    # Separate, smaller margin for the floor so the side pass may fly low
-    # (m). The TCP may never be closer to the floor than this.
     floor_margin: 0.03
 
-    # The routine first moves here (radians, shoulder_pan..wrist_3), the
-    # robot's parked pose, so every run starts from the same place
-    # (jogged on the pendant 2026-08-18, moved further out in x).
-    park_joints: [-0.1504, -0.5779, 1.4711, -2.4394, -1.5586, -5.3409]
+    # The routine first moves here (radians, shoulder_pan..wrist_3), the robot's parked pose
+    park_joints: [-0.1720, -0.6719, 1.7296, -2.6034, -1.5591, 0.9208]
 
-    # Joint pose whose TCP orientation ("forwards and upside down", jogged
-    # on the pendant 2026-08-17) is used for the second/side pass. The
-    # position of this pose is ignored, only its orientation is used.
+    # Joint pose whose TCP orientation is used for the second/side pass. only its orientation is used.
     side_view_joints: [-0.2419, -0.8502, 2.0817, -4.3216, -1.3280, 4.1860]
 
-    # Final oblique view after both passes (radians, exact joint pose
-    # jogged on the pendant 2026-08-17; wrist_3 rotated 180 deg on
-    # 2026-08-18 so the camera's extension points up). Remove to skip.
+    # Final oblique view after both passes
     oblique_view_joints: [-1.4336, -0.3388, 1.3064, -1.6788, -0.9463, 1.4467]
 
-    # Pose for the "angled" sweep (radians, jogged on the pendant
-    # 2026-08-18: wrist at 45 deg to the ground, camera orthogonal).
-    # The whole angled sweep holds this pose's FK height and
-    # orientation; only y changes along the line.
+    # Pose for the "angled" sweep 
     angled_view_joints: [-0.2274, -0.1974, 1.8953, -4.1178, -1.4216, 4.0635]

@@ -1,25 +1,15 @@
-# Wildcard node key: any node that loads this file gets the room bounds
-# (room_publisher builds the collision boxes from them, main_sweep uses
-# them to validate its motions).
 /**:
   ros__parameters:
     frame_id: world
-    # Real cell, measured 2026-08-17. All values in the robot BASE frame:
-    # the base sits on an 81 cm block, so the real floor is at z = -0.81.
+    
     floor_z: -0.81
-    # Roof is 2.60 m above the ground = 1.79 m above the base.
     ceiling_z: 1.79
-    # Open space in front of the robot (ROS +x): 2.50 m to the nearest obstacle.
+
     x_max: 2.50
-    # Wall behind the robot (ROS -x): 1.12 m from the base. NOTE: the pendant
-    # base frame is rotated 180 deg about z from ROS base_link, so pendant x
-    # and ROS x have opposite signs.
     x_min: -1.12
-    # Side walls: 165 cm from the base center to each side.
+
     y_min: -1.65
     y_max: 1.65
-    # Thickness of the floor, ceiling, and wall slabs (m).
+
     thickness: 0.1
-    # Square footprint of the mounting block under the base (m).
-    # 0.4 is a guess, measure the real block and update.
     pillar_size: 0.4

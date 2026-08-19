@@ -1,11 +1,9 @@
 tcp_orientate:
   ros__parameters:
     planning_group: ur_manipulator
-    # Fraction (0-1] of maximum joint velocity/acceleration for all test
-    # motions. Keep low while testing on hardware.
+
     test_speed: 0.03
-    # How far wrist_3 rotates out and back (radians).
     wiggle_rad: 0.2
-    # The test first moves here (radians, shoulder_pan..wrist_3), the
-    # robot's parked pose. Remove to skip the park move.
+    
+    # The test first moves here 
     park_joints: [-0.2044, -0.7735, 2.0590, -2.8312, -1.5607, 0.8894]

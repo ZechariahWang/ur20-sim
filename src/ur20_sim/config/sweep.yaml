@@ -4,19 +4,15 @@ sweep_mover:
     velocity_scaling: 0.05
     acceleration_scaling: 0.1
 
-    # The sweep line runs parallel to the base Y axis at fixed x/z (meters,
-    # in the robot base frame). UR20 reach is 1.75 m; keep
-    # sqrt(x^2 + y^2) comfortably inside that.
+    # The sweep line runs parallel to the base Y axis at fixed x/z (meters, in the robot base frame). UR20 reach is 1.75 m; keep sqrt(x^2 + y^2) comfortably inside that.
     sweep_x: 1.0
     sweep_z: 0.35
-    # Both sweeps travel from sweep_y_start to sweep_y_end; swap the two
-    # values to flip the sweep direction.
+
     sweep_y_start: 0.9
     sweep_y_end: -0.9
 
     # Cartesian interpolation step along the line (m)
     eef_step: 0.01
 
-    # The routine first moves here (radians, shoulder_pan..wrist_3), the
-    # robot's parked pose, so every run starts from the same place.
+    # The routine first moves here 
     park_joints: [-0.2044, -0.7735, 2.0590, -2.8312, -1.5607, 0.8894]

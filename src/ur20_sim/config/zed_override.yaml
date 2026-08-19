@@ -1,16 +1,11 @@
 /**:
   ros__parameters:
     general:
-      # HD720 at 15 fps: plenty for the board scan, light on the laptop.
       grab_resolution: 'HD720'
       grab_frame_rate: 15
       pub_frame_rate: 10.0
     depth:
-      # ULTRA is the classic stereo depth: solid quality, no AI model, no
-      # first-run TensorRT optimization, far lighter than NEURAL on a
-      # 6 GB laptop GPU.
       depth_mode: 'ULTRA'
       point_cloud_freq: 5.0
     pos_tracking:
-      # The robot arm knows where the camera is, no need for visual odometry.
       pos_tracking_enabled: false

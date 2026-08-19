@@ -1,24 +1,16 @@
 axis_test:
   ros__parameters:
     planning_group: ur_manipulator
-    # Fraction (0-1] of maximum joint velocity/acceleration for all motions.
+    
     test_speed: 0.03
 
-    # Center point of the test pattern (m, robot base frame, TCP down).
     center_x: 1.0
     center_y: 0.0
     center_z: 0.35
 
-    # Half-travel of the left-right sweep (m each side of center).
     y_travel: 0.4
-    # Half-travel of the up-down sweep (m above and below center).
     z_travel: 0.25
-    # How far wrist_3 rotates the TCP in place and back (radians).
+
     rotation_rad: 1.57
-
-    # Cartesian interpolation step along sweep lines (m).
     eef_step: 0.01
-
-    # The test first moves here (radians, shoulder_pan..wrist_3), the
-    # robot's parked pose. Remove to skip the park move.
     park_joints: [-0.2044, -0.7735, 2.0590, -2.8312, -1.5607, 0.8894]
