@@ -23,6 +23,11 @@ CommandServer::CommandServer() : Node("command_server") {
   qos.transient_local();
   status_pub_ = create_publisher<std_msgs::msg::String>("/webapp/status", qos);
 
+  // Latched pause flag the routine nodes (main_sweep, jog_to_rest)
+  // subscribe to. True = hold all motion until it turns false again.
+  paused_pub_ = create_publisher<std_msgs::msg::Bool>("/webapp/paused", qos);
+  publishPaused(false);
+
   timer_ = create_wall_timer(std::chrono::seconds(1), [this]() {
     checkChild();
     checkExternalMotion();
@@ -32,7 +37,7 @@ CommandServer::CommandServer() : Node("command_server") {
       this, "/scaled_joint_trajectory_controller/follow_joint_trajectory");
 
   publishStatus("idle");
-  RCLCPP_INFO(get_logger(), "Command server ready: publish 'sweep', 'small', 'park', 'rest', or 'stop' to /webapp/command");
+  RCLCPP_INFO(get_logger(), "Command server ready: publish 'sweep', 'small', 'park', 'rest', 'pause', 'resume', or 'stop' to /webapp/command");
 }
 
 CommandServer::~CommandServer() {
@@ -48,6 +53,14 @@ void CommandServer::onCommand(const std_msgs::msg::String &msg) {
 
   if (command == "stop") {
     stopRoutine();
+    return;
+  }
+  if (command == "pause") {
+    pauseRoutine();
+    return;
+  }
+  if (command == "resume") {
+    resumeRoutine();
     return;
   }
   if (command == "sweep" || command == "small" || command == "park" || command == "rest") {
@@ -83,12 +96,50 @@ void CommandServer::startRoutine(const std::string &command) {
 
   child_pid_ = pid;
   running_command_ = command;
+  routine_paused_ = false;
+  publishPaused(false);
   publishStatus("running: " + command);
+}
+
+void CommandServer::pauseRoutine() {
+  if (child_pid_ <= 0) {
+    publishStatus("idle");
+    return;
+  }
+  if (routine_paused_) {
+    publishStatus("paused: " + running_command_);
+    return;
+  }
+  routine_paused_ = true;
+
+  publishPaused(true);
+  if (trajectory_client_->action_server_is_ready()) {
+    trajectory_client_->async_cancel_all_goals();
+    RCLCPP_INFO(get_logger(), "Cancelled active trajectory goals for pause.");
+  }
+  publishStatus("paused: " + running_command_);
+}
+
+void CommandServer::resumeRoutine() {
+  if (child_pid_ <= 0) {
+    publishStatus("idle");
+    return;
+  }
+  if (!routine_paused_) {
+    publishStatus("running: " + running_command_);
+    return;
+  }
+  routine_paused_ = false;
+  publishPaused(false);
+  publishStatus("running: " + running_command_);
 }
 
 void CommandServer::stopRoutine() {
   if (child_pid_ > 0) {
-    // SIGINT the launch so the routine node shuts down like a Ctrl+C.
+    if (routine_paused_) {
+      routine_paused_ = false;
+      publishPaused(false);
+    }
     kill(child_pid_, SIGINT);
     stopping_ = true;
     publishStatus("stopping: " + running_command_);
@@ -96,8 +147,6 @@ void CommandServer::stopRoutine() {
     publishStatus("idle");
   }
 
-  // Cancel the trajectory the controller is executing right now,
-  // otherwise the arm finishes its current motion segment.
   if (trajectory_client_->action_server_is_ready()) {
     trajectory_client_->async_cancel_all_goals();
     RCLCPP_INFO(get_logger(), "Cancelled active trajectory goals.");
@@ -122,12 +171,16 @@ void CommandServer::checkChild() {
   child_pid_ = -1;
   stopping_ = false;
   running_command_ = "";
+  if (routine_paused_) {
+    routine_paused_ = false;
+    publishPaused(false);
+  }
+  // Reset the motion baseline so the routine's final approach is not
+  // mistaken for external motion on the next tick.
+  last_checked_positions_ = latest_positions_;
+  external_moving_ = false;
 }
 
-// Detects motion this server did not start (a routine launched from a
-// terminal) by comparing joint positions between timer ticks. Reports
-// "running: external" while moving and goes back to "idle" after,
-// without touching the done/stopped/failed messages of own routines.
 void CommandServer::checkExternalMotion() {
   std::vector<double> current = latest_positions_;
   if (current.empty()) { return; }
@@ -168,12 +221,14 @@ void CommandServer::publishStatus(const std::string &status) {
   RCLCPP_INFO(get_logger(), "Status: %s", status.c_str());
 }
 
-int main(int argc, char **argv) {
-  // If the launch process that started this node dies for ANY reason
-  // (double Ctrl+C, crash, kill -9), the kernel sends us SIGTERM so a
-  // command server can never be left running as an orphan.
-  prctl(PR_SET_PDEATHSIG, SIGTERM);
+void CommandServer::publishPaused(bool paused) {
+  std_msgs::msg::Bool msg;
+  msg.data = paused;
+  paused_pub_->publish(msg);
+}
 
+int main(int argc, char **argv) {
+  prctl(PR_SET_PDEATHSIG, SIGTERM); // command server can never be left running as an orphan.
   rclcpp::init(argc, argv);
   auto node = std::make_shared<CommandServer>();
   rclcpp::spin(node);

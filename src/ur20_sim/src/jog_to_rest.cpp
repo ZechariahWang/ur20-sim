@@ -29,7 +29,17 @@ bool JogToRest::run() {
               flange_pose.position.x, flange_pose.position.y, flange_pose.position.z,
               camera_pose.position.x, camera_pose.position.y, camera_pose.position.z);
 
-  bool ok = utils::moveToNearestJoints(*move_group_, get_logger(), rest_joints_, "jog to rest");
+  // A webapp pause cancels the trajectory and the move reports failure.
+  bool ok = false;
+  while (rclcpp::ok()) {
+    waitWhilePaused();
+    ok = utils::moveToNearestJoints(*move_group_, get_logger(), rest_joints_, "jog to rest");
+    if (ok) { break; }
+    rclcpp::sleep_for(std::chrono::milliseconds(300));
+    if (!paused_) { break; }
+    RCLCPP_INFO(get_logger(), "Paused during 'jog to rest'.");
+  }
+
   if (ok) {
     RCLCPP_INFO(get_logger(), "Arm is resting. Safe to power the robot down.");
   } else {
@@ -55,8 +65,26 @@ bool JogToRest::setup() {
   move_group_->setMaxVelocityScalingFactor(velocity_scaling_);
   move_group_->setMaxAccelerationScalingFactor(acceleration_scaling_);
 
+  // Latched pause flag from the command server (webapp pause button).
+  rclcpp::QoS paused_qos(1);
+  paused_qos.transient_local();
+  pause_sub_ = create_subscription<std_msgs::msg::Bool>(
+      "/webapp/paused", paused_qos,
+      [this](const std_msgs::msg::Bool &msg) { paused_ = msg.data; });
+
   rclcpp::sleep_for(std::chrono::seconds(1));
   return true;
+}
+
+void JogToRest::waitWhilePaused() {
+  if (!paused_) { return; }
+  RCLCPP_INFO(get_logger(), "Holding while paused.");
+  while (paused_ && rclcpp::ok()) {
+    rclcpp::sleep_for(std::chrono::milliseconds(200));
+  }
+  if (rclcpp::ok()) {
+    RCLCPP_INFO(get_logger(), "Resuming.");
+  }
 }
 
 void JogToRest::stopSpinner() {

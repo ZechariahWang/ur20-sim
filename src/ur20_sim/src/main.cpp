@@ -189,6 +189,13 @@ bool MainSweep::setup() {
   move_group_->setMaxVelocityScalingFactor(velocity_scaling_);
   move_group_->setMaxAccelerationScalingFactor(acceleration_scaling_);
 
+  // Latched pause flag from the command server (webapp pause button).
+  rclcpp::QoS paused_qos(1);
+  paused_qos.transient_local();
+  pause_sub_ = create_subscription<std_msgs::msg::Bool>(
+      "/webapp/paused", paused_qos,
+      [this](const std_msgs::msg::Bool &msg) { paused_ = msg.data; });
+
   std::string frame = move_group_->getPlanningFrame();
   std::string tcp_link = move_group_->getEndEffectorLink();
   RCLCPP_INFO(get_logger(), "Sweeping in frame '%s' with TCP link '%s' at %.0f%% speed.",
@@ -201,7 +208,10 @@ bool MainSweep::setup() {
 bool MainSweep::doMovement() {
 
   if (park_joints_.size() == 6) {
-    if (!utils::moveToNearestJoints(*move_group_, get_logger(), park_joints_, "move to park position")) { return false; }
+    bool parked = withPauseRetry([this]() {
+      return utils::moveToNearestJoints(*move_group_, get_logger(), park_joints_, "move to park position");
+    }, "move to park position");
+    if (!parked) { return false; }
   }
 
   // "park" command from the webapp: just go to park, skip the sweeps.
@@ -222,16 +232,15 @@ bool MainSweep::doMovement() {
     step.pose = utils::flangePoseFromCameraPose(step.pose, camera_length_);
     last_flange_pose = step.pose;
 
-    bool ok = false;
-    if (step.type == Step::MOVE) {
-      if (step.seed.size() == 6) {
-        ok = utils::moveToPoseSeeded(*move_group_, get_logger(), step.pose, step.seed, step.label);
-      } else {
-        ok = utils::moveToPose(*move_group_, get_logger(), step.pose, step.label);
+    bool ok = withPauseRetry([this, &step]() {
+      if (step.type == Step::MOVE) {
+        if (step.seed.size() == 6) {
+          return utils::moveToPoseSeeded(*move_group_, get_logger(), step.pose, step.seed, step.label);
+        }
+        return utils::moveToPose(*move_group_, get_logger(), step.pose, step.label);
       }
-    } else {
-      ok = utils::sweepTo(*move_group_, get_logger(), eef_step_, velocity_scaling_, acceleration_scaling_, step.pose, step.label);
-    }
+      return utils::sweepTo(*move_group_, get_logger(), eef_step_, velocity_scaling_, acceleration_scaling_, step.pose, step.label);
+    }, step.label);
     if (!ok) { return false; }
     pauseAtPose(step.label);
   }
@@ -266,16 +275,50 @@ bool MainSweep::doMovement() {
     }
     if (max_delta > 3.0 && park_joints_.size() == 6) {
       RCLCPP_INFO(get_logger(), "Large joint travel to oblique (%.1f rad), going via park.", max_delta);
-      if (!utils::moveToNearestJoints(*move_group_, get_logger(), park_joints_, "via park position")) { return false; }
+      bool via_park = withPauseRetry([this]() {
+        return utils::moveToNearestJoints(*move_group_, get_logger(), park_joints_, "via park position");
+      }, "via park position");
+      if (!via_park) { return false; }
     }
 
-    if (!utils::moveToPoseSeeded(*move_group_, get_logger(), oblique_pose, oblique_view_joints_, "oblique view")) { return false; }
+    bool oblique_ok = withPauseRetry([this, &oblique_pose]() {
+      return utils::moveToPoseSeeded(*move_group_, get_logger(), oblique_pose, oblique_view_joints_, "oblique view");
+    }, "oblique view");
+    if (!oblique_ok) { return false; }
     pauseAtPose("oblique view");
   }
 
   // back to start pos
-  if (park_joints_.size() == 6) { return utils::moveToNearestJoints(*move_group_, get_logger(), park_joints_, "return to park"); }
+  if (park_joints_.size() == 6) {
+    return withPauseRetry([this]() {
+      return utils::moveToNearestJoints(*move_group_, get_logger(), park_joints_, "return to park");
+    }, "return to park");
+  }
   return true;
+}
+
+// A webapp pause cancels the active trajectory.
+bool MainSweep::withPauseRetry(const std::function<bool()> &motion, const std::string &label) {
+  while (rclcpp::ok()) {
+    waitWhilePaused();
+    if (motion()) { return true; }
+    // A pause can land in the same moment the motion reports failure.
+    rclcpp::sleep_for(std::chrono::milliseconds(300));
+    if (!paused_) { return false; }
+    RCLCPP_INFO(get_logger(), "Paused during '%s'.", label.c_str());
+  }
+  return false;
+}
+
+void MainSweep::waitWhilePaused() {
+  if (!paused_) { return; }
+  RCLCPP_INFO(get_logger(), "Holding while paused.");
+  while (paused_ && rclcpp::ok()) {
+    rclcpp::sleep_for(std::chrono::milliseconds(200));
+  }
+  if (rclcpp::ok()) {
+    RCLCPP_INFO(get_logger(), "Resuming.");
+  }
 }
 
 // Hold still at a reached pose (camera settle / capture time).

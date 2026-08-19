@@ -1,6 +1,8 @@
 #ifndef UR20_SIM_MAIN_HPP
 #define UR20_SIM_MAIN_HPP
 
+#include <atomic>
+#include <functional>
 #include <string>
 #include <thread>
 #include <vector>
@@ -8,6 +10,7 @@
 #include <geometry_msgs/msg/pose.hpp>
 #include <moveit/move_group_interface/move_group_interface.h>
 #include <rclcpp/rclcpp.hpp>
+#include <std_msgs/msg/bool.hpp>
 
 // The production sweep routine: park, top sweep, side sweep, oblique view.
 // Before moving it checks every scripted pose against the measured room
@@ -51,11 +54,18 @@ class MainSweep : public rclcpp::Node {
     bool checkAgainstRoom(const std::vector<Step> &script);
     bool doMovement();
     void pauseAtPose(const std::string &label);
+    // Runs one motion, holding and retrying while the webapp pause flag
+    // is up. On resume the motion replans from wherever the arm stopped.
+    bool withPauseRetry(const std::function<bool()> &motion, const std::string &label);
+    void waitWhilePaused();
     void stopSpinner();
 
     rclcpp::executors::SingleThreadedExecutor executor_;
     std::thread spinner_;
     std::unique_ptr<moveit::planning_interface::MoveGroupInterface> move_group_;
+    rclcpp::Subscription<std_msgs::msg::Bool>::SharedPtr pause_sub_;
+    // True while the webapp holds the routine (latched /webapp/paused).
+    std::atomic<bool> paused_{false};
 
     // Which board is being scanned: "large" or "small". Selects the
     // sweep script in buildScript().
