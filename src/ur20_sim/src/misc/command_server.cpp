@@ -32,7 +32,7 @@ CommandServer::CommandServer() : Node("command_server") {
       this, "/scaled_joint_trajectory_controller/follow_joint_trajectory");
 
   publishStatus("idle");
-  RCLCPP_INFO(get_logger(), "Command server ready: publish 'sweep', 'park', or 'stop' to /webapp/command");
+  RCLCPP_INFO(get_logger(), "Command server ready: publish 'sweep', 'small', 'park', 'rest', or 'stop' to /webapp/command");
 }
 
 CommandServer::~CommandServer() {
@@ -50,7 +50,7 @@ void CommandServer::onCommand(const std_msgs::msg::String &msg) {
     stopRoutine();
     return;
   }
-  if (command == "sweep" || command == "park") {
+  if (command == "sweep" || command == "small" || command == "park" || command == "rest") {
     startRoutine(command);
     return;
   }
@@ -71,6 +71,10 @@ void CommandServer::startRoutine(const std::string &command) {
   if (pid == 0) {
     if (command == "park") {
       execlp("ros2", "ros2", "launch", "ur20_sim", "main.launch.py", "park_only:=true", (char *)NULL);
+    } else if (command == "small") {
+      execlp("ros2", "ros2", "launch", "ur20_sim", "main.launch.py", "board_type:=small", (char *)NULL);
+    } else if (command == "rest") {
+      execlp("ros2", "ros2", "launch", "ur20_sim", "rest.launch.py", (char *)NULL);
     } else {
       execlp("ros2", "ros2", "launch", "ur20_sim", "main.launch.py", (char *)NULL);
     }

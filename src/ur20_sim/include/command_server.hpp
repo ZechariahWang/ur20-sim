@@ -12,8 +12,10 @@
 #include <std_msgs/msg/string.hpp>
 
 // Commands:
-//   "sweep" - run the full main sweep routine
+//   "sweep" - run the large board sweep routine
+//   "small" - run the small board routine (stationary views)
 //   "park"  - move to the park pose only
+//   "rest"  - fold the arm into the end of day rest pose
 //   "stop"  - abort the running routine and cancel the active trajectory
 class CommandServer : public rclcpp::Node {
 
