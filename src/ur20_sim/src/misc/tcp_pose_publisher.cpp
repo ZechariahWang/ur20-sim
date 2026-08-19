@@ -16,7 +16,7 @@ void TcpPosePublisher::publishPose() {
   try {
     transform = buffer_.lookupTransform("base", "tool0", tf2::TimePointZero);
   } catch (const tf2::TransformException &) {
-    // tf is not ready yet, try again on the next tick.
+    // tf is not ready yet, try again on the next tick. test
     return;
   }
 
