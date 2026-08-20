@@ -42,6 +42,9 @@ class CommandServer : public rclcpp::Node {
     void publishPaused(bool paused);
 
     rclcpp::Subscription<std_msgs::msg::String>::SharedPtr command_sub_;
+    // Pose markers from main_sweep, forwarded onto /webapp/status for
+    // the webapp's frame capture handshake ("pose_reached:...").
+    rclcpp::Subscription<std_msgs::msg::String>::SharedPtr pose_marker_sub_;
     rclcpp::Subscription<sensor_msgs::msg::JointState>::SharedPtr joint_sub_;
     rclcpp::Publisher<std_msgs::msg::String>::SharedPtr status_pub_;
     rclcpp::Publisher<std_msgs::msg::Bool>::SharedPtr paused_pub_;

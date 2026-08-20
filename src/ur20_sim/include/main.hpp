@@ -55,6 +55,9 @@ class MainSweep : public rclcpp::Node {
     bool checkAgainstRoom(const std::vector<Step> &script);
     bool doMovement();
     void pauseAtPose(const std::string &label, double seconds);
+    // Webapp handshake marker for a settled pose, for example
+    // "pose_reached:top" or "pose_reached:side_end".
+    std::string poseMarker(const std::string &label);
     // Runs one motion, holding and retrying while the webapp pause flag
     // is up. On resume the motion replans from wherever the arm stopped.
     bool withPauseRetry(const std::function<bool()> &motion, const std::string &label);

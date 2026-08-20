@@ -18,6 +18,12 @@ CommandServer::CommandServer() : Node("command_server") {
       "/joint_states", 10,
       [this](const sensor_msgs::msg::JointState &msg) { latest_positions_ = msg.position; });
 
+  // main_sweep publishes "pose_reached:<slug>" whenever the arm settles
+  // at a pose; forward it onto /webapp/status for the capture handshake.
+  pose_marker_sub_ = create_subscription<std_msgs::msg::String>(
+      "/webapp/pose_reached", 10,
+      [this](const std_msgs::msg::String &msg) { publishStatus(msg.data); });
+
   // Latched so the webapp sees the current status right after connecting.
   rclcpp::QoS qos(1);
   qos.transient_local();

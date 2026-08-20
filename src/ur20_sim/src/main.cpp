@@ -337,16 +337,37 @@ void MainSweep::waitWhilePaused() {
 }
 
 // Hold still at a reached pose (camera settle / capture time). Also
-// tells the webapp which pose was just reached so it can grab frames.
+// tells the webapp which pose was just reached so it can grab frames:
+// the command server forwards this marker onto /webapp/status, where
+// the webapp's capture handshake waits for the "pose_reached" substring.
 void MainSweep::pauseAtPose(const std::string &label, double seconds) {
   if (seconds <= 0.0) { return; }
 
   std_msgs::msg::String msg;
-  msg.data = "pose reached: " + label;
+  msg.data = poseMarker(label);
   pose_reached_pub_->publish(msg);
 
-  RCLCPP_INFO(get_logger(), "Pausing %.1f s at '%s'.", seconds, label.c_str());
+  RCLCPP_INFO(get_logger(), "Pausing %.1f s at '%s' (%s).", seconds, label.c_str(), msg.data.c_str());
   rclcpp::sleep_for(std::chrono::milliseconds((int)(seconds * 1000.0)));
+}
+
+std::string MainSweep::poseMarker(const std::string &label) {
+  if (label == "sweep start") { return "pose_reached:top"; }
+  if (label == "top sweep") { return "pose_reached:top_end"; }
+  if (label == "return to start (side view)") { return "pose_reached:side"; }
+  if (label == "side sweep") { return "pose_reached:side_end"; }
+  if (label == "top view") { return "pose_reached:top"; }
+  if (label == "side view") { return "pose_reached:side"; }
+  if (label == "oblique view") { return "pose_reached:oblique"; }
+  if (label == "angled sweep start") { return "pose_reached:angled"; }
+  if (label == "angled sweep") { return "pose_reached:angled_end"; }
+
+  // Unknown label: use it directly with spaces made safe.
+  std::string slug = label;
+  for (size_t i = 0; i < slug.size(); i++) {
+    if (slug[i] == ' ') { slug[i] = '_'; }
+  }
+  return "pose_reached:" + slug;
 }
 
 void MainSweep::stopSpinner() {
