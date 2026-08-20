@@ -199,6 +199,8 @@ bool MainSweep::setup() {
       "/webapp/paused", paused_qos,
       [this](const std_msgs::msg::Bool &msg) { paused_ = msg.data; });
 
+  pose_reached_pub_ = create_publisher<std_msgs::msg::String>("/webapp/pose_reached", 10);
+
   std::string frame = move_group_->getPlanningFrame();
   std::string tcp_link = move_group_->getEndEffectorLink();
   RCLCPP_INFO(get_logger(), "Sweeping in frame '%s' with TCP link '%s' at %.0f%% speed.",
@@ -334,9 +336,15 @@ void MainSweep::waitWhilePaused() {
   }
 }
 
-// Hold still at a reached pose (camera settle / capture time).
+// Hold still at a reached pose (camera settle / capture time). Also
+// tells the webapp which pose was just reached so it can grab frames.
 void MainSweep::pauseAtPose(const std::string &label, double seconds) {
   if (seconds <= 0.0) { return; }
+
+  std_msgs::msg::String msg;
+  msg.data = "pose reached: " + label;
+  pose_reached_pub_->publish(msg);
+
   RCLCPP_INFO(get_logger(), "Pausing %.1f s at '%s'.", seconds, label.c_str());
   rclcpp::sleep_for(std::chrono::milliseconds((int)(seconds * 1000.0)));
 }

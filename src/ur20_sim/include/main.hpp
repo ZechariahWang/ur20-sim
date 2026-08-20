@@ -11,6 +11,7 @@
 #include <moveit/move_group_interface/move_group_interface.h>
 #include <rclcpp/rclcpp.hpp>
 #include <std_msgs/msg/bool.hpp>
+#include <std_msgs/msg/string.hpp>
 
 // The production sweep routine: park, top sweep, side sweep, oblique view.
 // Before moving it checks every scripted pose against the measured room
@@ -66,6 +67,9 @@ class MainSweep : public rclcpp::Node {
     rclcpp::Subscription<std_msgs::msg::Bool>::SharedPtr pause_sub_;
     // True while the webapp holds the routine (latched /webapp/paused).
     std::atomic<bool> paused_{false};
+    // Tells the webapp (via rosbridge) which pose was just reached,
+    // published at the start of every hold.
+    rclcpp::Publisher<std_msgs::msg::String>::SharedPtr pose_reached_pub_;
 
     // Which board is being scanned: "large" or "small". Selects the
     // sweep script in buildScript().
